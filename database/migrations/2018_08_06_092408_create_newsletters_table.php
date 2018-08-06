@@ -18,7 +18,7 @@ class CreateNewslettersTable extends Migration
             $table->varchar('title',45);
             $table->tinyInteger('type',1);
             $table->longText('html_content');
-            $table->longText('texte_content');
+            $table->longText('text_content');
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->reference('id')->on('users');
