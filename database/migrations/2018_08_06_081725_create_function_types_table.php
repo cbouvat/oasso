@@ -15,7 +15,7 @@ class CreateFunctionTypes extends Migration
     {
         Schema::create('function_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', [20]);
+            $table->string('name', 20);
             $table->timestamps();
         });
     }
