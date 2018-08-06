@@ -13,7 +13,7 @@ class CreateFunctionTypes extends Migration
      */
     public function up()
     {
-        Schema::create('function_types', function (Blueprint $table) {
+        Schema::create('quality_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 20);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFunctionTypes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('function_types');
+        Schema::dropIfExists('quality_types');
     }
 }

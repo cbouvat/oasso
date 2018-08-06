@@ -13,10 +13,10 @@ class CreateFunctionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('functions', function (Blueprint $table) {
+        Schema::create('qualities', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('function_type_id');
-            $table->foreign('function_type_id')->references('id')->on('function_types');
+            $table->unsignedInteger('quality_type_id');
+            $table->foreign('quality_type_id')->references('id')->on('quality_types');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateFunctionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('functions');
+        Schema::dropIfExists('qualities');
     }
 }
