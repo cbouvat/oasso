@@ -17,10 +17,10 @@ class CreateRolesTable extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->reference('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
 
-            $table->unsignedInteger('type_role_id');
-            $table->foreign('type_role_id')->reference('id')->on('type_roles');
+            $table->unsignedInteger('role_type_id');
+            $table->foreign('role_type_id')->references('id')->on('role_types');
 
             $table->timestamps();
         });

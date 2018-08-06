@@ -15,13 +15,13 @@ class CreateNewslettersTable extends Migration
     {
         Schema::create('newsletters', function (Blueprint $table) {
             $table->increments('id');
-            $table->varchar('title',45);
-            $table->tinyInteger('type',1);
+            $table->string('title',45);
+            $table->tinyInteger('type');
             $table->longText('html_content');
             $table->longText('text_content');
 
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->reference('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });
