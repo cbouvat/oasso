@@ -13,7 +13,7 @@ class CreateRoleTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('role__types', function (Blueprint $table) {
+        Schema::create('role_types', function (Blueprint $table) {
             $table->increments('id');
             $table->varchar('name', 20);
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateRoleTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role__types');
+        Schema::dropIfExists('role_types');
     }
 }
