@@ -8,7 +8,7 @@
                     <h1>Faire un Don</h1>
                 </div>
                 <div class="text-center p-5 border border-success rounded">
-                    <h5>Participer d'avantage a l'Association {{config('app.name')}}</h5>
+                    <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
                         <div class="input-group">
