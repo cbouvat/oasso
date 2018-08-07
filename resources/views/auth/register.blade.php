@@ -97,21 +97,21 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="address_line_2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Address_line_2') }}</label>
+                                <label for="address_line2"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Address_line2') }}</label>
                                 <div class="col-md-6">
-                                    <input id="address_line_2" type="text"
+                                    <input id="address_line2" type="text"
                                            class="form-control"
-                                           name="address_line_2" value="{{ old('address_line_2') }}">
+                                           name="address_line2" value="{{ old('address_line2') }}">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="zip_code"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Zip code') }}</label>
+                                <label for="zipcode"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Zipcode') }}</label>
                                 <div class="col-md-6">
-                                    <input id="zip_code" type="text"
-                                           class="form-control {{ $errors->has('zip_code') ? ' is-invalid' : '' }}"
-                                           name="zip_code" value="{{ old('zip_code') }}" required autofocus>
+                                    <input id="zipcode" type="text"
+                                           class="form-control {{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
+                                           name="zipcode" value="{{ old('zipcode') }}" required autofocus>
                                 </div>
                             </div>
                             <div class="form-group row">
