@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -83,5 +84,25 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    /**
+     * Insert into Database Gift from a member
+     * @param User $user
+     */
+    public function give(Request $request){
+        $user = Auth::user();
+        $request->validate([
+            'amount' => 'required|numeric'
+        ]);
+        $inputs = $request->all();
+        dd($user->role->id);
+        dd($inputs['amount']);
+    }
+
+    public function gift(){
+        $user = Auth::user();
+        return view('users.gift',['user'=>$user]);
+
     }
 }
