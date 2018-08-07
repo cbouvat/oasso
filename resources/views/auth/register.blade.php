@@ -47,7 +47,7 @@
                             </div>
 
 
-                            <H3> Infos persos</H3>
+                            <H3>Personal Informations</H3>
 
                             <div class="form-group row">
                                 <label for="gender"
@@ -55,8 +55,8 @@
                                 <div class="col-md-6">
                                     <select id="gender" name="gender" class="custom-select">
                                         <option selected disabled>Civilité</option>
-                                        <option value=1>Monsieur</option>
-                                        <option value=2>Madame</option>
+                                        <option value=1>Mr</option>
+                                        <option value=2>Ms</option>
                                     </select>
                                 </div>
                             </div>
@@ -147,14 +147,14 @@
                                     <input class="form-check-input" type="radio" name="newspaper"
                                            id="newspaper1" value="1" checked>
                                     <label class="form-check-label" for="newspaper">
-                                        Oui
+                                        Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newspaper"
                                            id="newspaper2" value="0">
                                     <label class="form-check-label" for="newspaper">
-                                        Non
+                                        No
                                     </label>
                                 </div>
                             </div>
@@ -165,26 +165,26 @@
                                     <input class="form-check-input" type="radio" name="newsletter"
                                            id="newsletter1" value="1" checked>
                                     <label class="form-check-label" for="newsletter1">
-                                        Oui
+                                        Yes
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newsletter"
                                            id="newsletter2" value="0">
                                     <label class="form-check-label" for="newsletter2">
-                                        Non
+                                        No
                                     </label>
                                 </div>
                             </div>
 
-                            <h3>Votre conjoint (si Famille)</h3>
+                            <h3>Our Partner (if family)</h3>
                             <div class="form-group row">
                                 <label for="gender_joint"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender Partner') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value=1>Monsieur</option>
-                                        <option value=2>Madame</option>
+                                        <option value=1>Mr</option>
+                                        <option value=2>Ms</option>
                                     </select>
                                 </div>
                             </div>
