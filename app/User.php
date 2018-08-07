@@ -16,9 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gender','lastname','firstname','birthdate','password','address_line1','address_line2',
-        'zipcode','city','email','gender_joint','lastname_joint', 'firstname_joint','birthdate_joint','email_joint','phone_number_1',
-        'phone_number_2','volonteer','details_volonteer','delivery','newspaper','newsletter','mailing','comment','alert'
+        'name', 'email', 'password', 'gender', 'lastname', 'firstname', 'birthdate', 'password', 'address_line1', 'address_line2',
+        'zipcode', 'city', 'email', 'gender_joint', 'lastname_joint', 'firstname_joint', 'birthdate_joint', 'email_joint', 'phone_number_1',
+        'phone_number_2', 'volonteer', 'details_volonteer', 'delivery', 'newspaper', 'newsletter', 'mailing', 'comment', 'alert'
     ];
 
     /**
@@ -38,7 +38,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
-
 
 
     /** RELATIONS */
@@ -68,7 +67,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\Quality');
     }
 
-    public function subscription() {
+    public function subscription()
+    {
         return $this->hasOne('App\Subscription');
     }
 

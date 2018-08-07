@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
-
-
-
 @section('content')
-
     <h1>Liste des membres</h1>
     <table class="table table-striped">
         <thead>
@@ -13,7 +9,6 @@
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
             <th scope="col">Action</th>
-
         </tr>
         </thead>
         <tbody>
