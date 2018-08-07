@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -20,9 +21,7 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
-
     /**
      * Where to redirect users after registration.
      *
@@ -43,30 +42,62 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|max:191|confirmed',
+            'gender' => 'required|integer|max:2',
+            'lastname' => 'required|string|max:45',
+            'firstname' => 'required|string|max:45',
+            'birthdate' => 'required|date',
+            'address_line1' => 'required|string|max:32',
+            'address_line2' => 'string|max:32|nullable',
+            'zipcode' => 'required|string|max:5',
+            'city' => 'required|string|max:45',
+            'phone_number_1' => 'string|max:10',
+            'phone_number_2' => 'string|max:10|nullable',
+            'newspaper' => 'integer',
+            'newsletter' => 'integer',
+            'gender_joint' => 'integer|max:2|nullable',
+            'firstname_joint' => 'string|max:45|nullable',
+            'lastname_joint' => 'string|max:45|nullable',
+            'birthdate_joint' => 'date|nullable',
+            'email_joint' => 'email|max:255|nullable'
         ]);
     }
 
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
+            'birthdate' => $data['birthdate'],
+            'address_line1' => $data['address_line1'],
+            'address_line2' => $data['address_line2'],
+            'zipcode' => $data['zipcode'],
+            'city' => $data['city'],
+            'phone_number_1' => $data['phone_number_1'],
+            'phone_number_2' => $data['phone_number_2'],
+            'newspaper' => $data['newspaper'],
+            'newsletter' => $data['newsletter'],
+            'gender_joint' => $data['gender_joint'],
+            'firstname_joint' => $data['firstname_joint'],
+            'lastname_joint' => $data['lastname_joint'],
+            'birthdate_joint' => $data['birthdate_joint'],
+            'email_joint' => $data['email_joint'],
         ]);
     }
 }
