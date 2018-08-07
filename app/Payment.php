@@ -27,4 +27,11 @@ class Payment extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function paymentable()
+    {
+        return $this->morphTo();
+    }
+
+
 }
