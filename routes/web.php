@@ -23,3 +23,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('admin')->group(function() {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
 });
+Route::get('/gift', function(){
+    return view('users.gift');
+})->name('user.gift');
