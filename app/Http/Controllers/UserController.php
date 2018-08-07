@@ -15,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->orderBy('id','asc')->paginate(10);
-        return view('admin.users.list', ['users'=> $users]);
+        $users = DB::table('users')->orderBy('id', 'asc')->paginate(10);
+        return view('admin.users.list', ['users' => $users]);
     }
 
     /**
@@ -26,62 +26,65 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return view('');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\User  $user
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        //
+        return view('');
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User  $user
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        //
+        return view('user.edit');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        //
+        return view('');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\User  $user
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        //
+        return view('');
+
     }
 }
