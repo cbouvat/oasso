@@ -137,7 +137,7 @@
                                 <div class="col-md-6">
                                     <input id="phone_number_2" type="text"
                                            class="form-control"
-                                           name="phone_number_2" value="0">
+                                           name="phone_number_2">
                                 </div>
                             </div>
                             <div class="form-group row">

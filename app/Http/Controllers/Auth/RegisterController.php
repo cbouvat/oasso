@@ -55,13 +55,18 @@ class RegisterController extends Controller
             'firstname' => 'required|string|max:45',
             'birthdate' => 'required|date',
             'address_line1' => 'required|string|max:32',
-            'address_line2' => 'string|max:32',
+            'address_line2' => 'string|max:32|nullable',
             'zipcode' => 'required|string|max:5',
             'city' => 'required|string|max:45',
             'phone_number_1' => 'string|max:10',
-            'phone_number_2' => 'string|max:10',
+            'phone_number_2' => 'string|max:10|nullable',
             'newspaper' => 'integer',
             'newsletter' => 'integer',
+            'gender_joint' => 'integer|max:2|nullable',
+            'firstname_joint' => 'string|max:45|nullable',
+            'lastname_joint' => 'string|max:45|nullable',
+            'birthdate_joint' => 'date|nullable',
+            'email_joint' => 'email|max:255|nullable'
         ]);
     }
 
