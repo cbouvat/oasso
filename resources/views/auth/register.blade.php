@@ -169,7 +169,7 @@
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper"
+                                    <input class="form-check-input" type="radio" name="newsletter"
                                            id="newsletter2" value="0">
                                     <label class="form-check-label" for="newsletter2">
                                         Non
