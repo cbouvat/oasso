@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.beforeDelete', ['user' => $user]);
+        return view('admin.users.beforedelete', ['user' => $user]);
     }
 
     /**
