@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('user.gift')}}">
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>
@@ -210,7 +210,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container mt-5 pt-5">
             @yield('content')
         </div>
 
