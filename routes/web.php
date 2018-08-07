@@ -19,10 +19,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/mes-informations','UserController@index')->name('userInformations');
+
+Route::get('/informations-personnelles','UserController@edit')->name('front.user.edit');
+
+Route::post('/informations-personnelles','UserController@update')->name('front.user.update');
 
 Route::get('/search','SearchController@search')->name('search');
+
 
 Route::prefix('admin')->group(function() {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
 });
+
