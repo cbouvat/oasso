@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
         $this->call(QualitiesTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-        $this->call(PaymentsTableSeeder::class);
         $this->call(GiftsTableSeeder::class);
+        $this->call(PaymentsTableSeeder::class);
         $this->call(Template_mailsTableSeeder::class);
         $this->call(Template_newslettersTableSeeder::class);
     }
