@@ -20,9 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('firstname', 45);
             $table->date('birthdate');
             $table->string('password');
-            $table->string('address_line1',32);
-            $table->string('address_line_2', 32)->nullable();
-            $table->string('zip_code', 20);
+            $table->string('address_line1',100);
+            $table->string('address_line2', 100)->nullable();
+            $table->string('zipcode', 20);
             $table->string('city', 45);
             $table->string('email')->unique()->nullable();
             $table->tinyInteger('gender_joint')->nullable();
@@ -38,7 +38,7 @@ class CreateUsersTable extends Migration
             $table->boolean('newspaper');
             $table->boolean('newsletter');
             $table->boolean('mailing');
-            $table->tinyInteger('comment');
+            $table->text('comment');
             $table->boolean('alert');
             $table->rememberToken();
             $table->timestamps();
