@@ -23,7 +23,6 @@
 <body>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-<<<<<<< HEAD
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{config('app.name')}} </a>
 
     <form class="w-100" action={{route('search')}} method="get">
