@@ -81,7 +81,7 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link" href="{{route('user.gift')}}">
+                        <a class="nav-link" href="{{route('front.user.gift')}}">
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>
