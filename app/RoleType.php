@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class RoleType extends Model
 {
-    public function user()
+
+    /** RELATIONS */
+
+    public function role()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Role');
     }
 }
