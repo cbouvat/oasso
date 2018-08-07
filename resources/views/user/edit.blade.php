@@ -135,9 +135,10 @@
 
                     </div>
 
-                    <div class="m-5 p-5 justify-content-center">
-
-                    <button type="submit" class="btn btn-primary">Modifier</button>
+                    <div class="card m-5 p-5">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary btn-lg btn-block">Modifier</button>
+                    </div>
                     </div>
                 </form>
             </div>
