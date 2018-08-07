@@ -8,6 +8,6 @@ $factory->define(App\TemplateNewsletter::class, function (Faker $faker) {
         'type' =>$faker->numberBetween(0, 9),
         'html_content' =>$faker->randomHtml(2, 3),
         'text_content' =>$faker->text(150),
-        'user_id' =>$faker->randomNumber()
+        'user_id' =>$faker->unique()->numberBetween(1, 50)
     ];
 });

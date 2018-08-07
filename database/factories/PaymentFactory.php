@@ -8,7 +8,7 @@ $factory->define(App\Payment::class, function (Faker $faker) {
         'payment_id' =>$faker->randomNumber(),
         'amount' =>$faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 1000),
         'user_id' =>$faker->randomNumber(),
-        'payment_method_id' => $faker->numberBetween($min = 0, $max = 4)
+        'payment_method_id' => $faker->numberBetween(1, 5)
 
     ];
 });

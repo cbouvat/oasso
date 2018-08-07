@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'newspaper' => $faker->boolean,
         'newsletter' => $faker->boolean,
         'mailing' => $faker->boolean,
-        'comment' => $faker->numberBetween(0, 1),
+        'comment' => $faker->text(75),
         'alert' => $faker->boolean,
         'remember_token' => str_random(10),
     ];

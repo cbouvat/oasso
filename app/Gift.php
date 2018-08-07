@@ -10,4 +10,9 @@ class Gift extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function payments() {
+        return $this->morphMany('App\Payment', 'paymentable');
+    }
+
 }

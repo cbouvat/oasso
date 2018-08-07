@@ -13,4 +13,8 @@ class Subscription extends Model
     {
         return $this->belongsTo('App\SubscriptionType');
     }
+
+    public function payments() {
+        return $this->morphMany('App\Payment', 'paymentable');
+    }
 }
