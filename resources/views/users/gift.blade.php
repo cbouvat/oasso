@@ -11,16 +11,23 @@
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
-                        <div class="input-group">
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text">.00€</span>
+                        <form action="{{route('front.user.give')}}" method="post">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" name="amount" class="form-control text-right">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00€</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn btn-outline-success btn-block mt-3">
-                            <h2>Donner</h2>
-                        </div>
-
+                            @if($user->role->id == "1")
+                                <input type="hidden" name="from">
+                            @else
+                                <input type="text" name="from" class="form-control text-right">
+                            @endif
+                            <button type="submit" class="btn btn-outline-success btn-block mt-3">
+                                <h2>Donner</h2>
+                            </button>
+                        </form>
                     </div>
 
                 </div>
