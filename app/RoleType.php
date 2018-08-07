@@ -1,25 +1,29 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: remi
+ * Date: 06/08/18
+ * Time: 16:13
+ */
 
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Subscription extends Model
+class RoleType extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'amount','opt_out_mail','user_id','subscription_type_id'];
-
+        'name'];
 
     /** RELATIONS */
 
-    public function subscriptionType()
+    public function role()
     {
-        return $this->belongsTo('App\SubscriptionType');
+        return $this->belongsTo('App\Role');
     }
 }
