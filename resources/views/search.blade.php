@@ -26,7 +26,7 @@
                             @foreach($members as $member)
                                 <tr>
                                     <td scope="col">{{$member->id}}</td>
-                                    <td scope="col">{{$member-> firstname}}</td>
+                                    <td scope="col">{{$member->firstname}}</td>
                                     <td scope="col">{{$member->lastname}}</td>
                                     <td scope="col">{{$member->email}}</td>
                                 </tr>
