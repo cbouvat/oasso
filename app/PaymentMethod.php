@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quality extends Model
+class PaymentMethod extends Model
 {
 
     /**
@@ -13,9 +13,14 @@ class Quality extends Model
      * @var array
      */
     protected $fillable = [
-        'quality_type_id','user_id'];
+        'name'];
 
     /** RELATIONS */
+
+    public function payment()
+    {
+        return $this->hasMany('App\Payment');
+    }
 
     public function user()
     {

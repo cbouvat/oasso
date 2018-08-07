@@ -4,21 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Quality extends Model
+class RoleType extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'quality_type_id','user_id'];
+        'name'];
 
     /** RELATIONS */
 
-    public function user()
+    public function role()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Role');
     }
 }
