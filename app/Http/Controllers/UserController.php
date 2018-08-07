@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->orderBy('id', 'asc')->paginate(10);
+        $users = User::orderBy('lastname', 'asc')->paginate(10);
         return view('admin.users.list', ['users' => $users]);
     }
 
@@ -26,65 +26,82 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        return view('');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\User $user
+     * @param  \App\Admin\User  $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        return view('');
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User $user
+     * @param  \App\Admin\User  $user
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        return view('user.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin\User $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Admin\User  $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        return view('');
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Admin\User $user
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
-        return view('');
+        //
+    }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function beforeDelete($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin.users.beforeDelete', ['user' => $user]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function softDelete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users.list');
     }
 }

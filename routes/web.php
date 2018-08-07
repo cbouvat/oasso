@@ -27,7 +27,9 @@ Route::post('/informations-personnelles','UserController@update')->name('front.u
 Route::get('/search','SearchController@search')->name('search');
 
 
-Route::prefix('admin')->group(function() {
-    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
-});
 
+Route::prefix('admin')->group(function () {
+    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
+    Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+});
