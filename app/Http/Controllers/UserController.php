@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -89,14 +87,14 @@ class UserController extends Controller
 
     public function beforeDelete($id)
     {
-        $user= User::findOrFail($id);
+        $user = User::findOrFail($id);
 
         return view('admin.users.beforeDelete', ['user' => $user]);
     }
 
     public function softDelete($id)
     {
-        $user= User::findOrFail($id);
+        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('admin.users.list');
