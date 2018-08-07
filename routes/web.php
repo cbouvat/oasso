@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,3 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mes-informations','UserController@index')->name('userInformations');
+
+Route::prefix('admin')->group(function() {
+    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+});
