@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <h1 class="mt-5 pt-5">Liste des membres</h1>
-    <table class="table table-striped mt-5 pt-5">
+    <h1>Liste des membres</h1>
+    <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -22,8 +22,10 @@
                 <th scope="col">{{$user->id}}</th>
                 <td scope="col">{{$user-> firstname}}</td>
                 <td scope="col">{{$user->lastname}}</td>
-                <td scope="col"><button type="button" class="btn btn-primary">Modifier</button>
-                    <button type="button" class="btn btn-danger">Supprimer</button></td>
+                <td scope="col">
+                    <button type="button" class="btn btn-primary">Modifier</button>
+                    <a type="button" class="btn btn-danger"
+                       href="{{route('admin.users.beforeDelete', ['user' => $user->id])}}">Supprimer</a></td>
             </tr>
         @endforeach
         </tbody>

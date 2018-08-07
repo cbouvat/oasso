@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Null_;
 
 class UserController extends Controller
 {
@@ -15,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users')->orderBy('id','asc')->paginate(10);
+
+        $users = User::orderBy('lastname','asc')->paginate(10);
         return view('admin.users.list', ['users'=> $users]);
     }
 
@@ -80,8 +82,23 @@ class UserController extends Controller
      * @param  \App\Admin\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy()
     {
-        //
+      //
+    }
+
+    public function beforeDelete($id)
+    {
+        $user= User::findOrFail($id);
+
+        return view('admin.users.beforeDelete', ['user' => $user]);
+    }
+
+    public function softDelete($id)
+    {
+        $user= User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.users.list');
     }
 }
