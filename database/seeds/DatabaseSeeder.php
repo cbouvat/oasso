@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PaymentsTableSeeder::class);
         $this->call(Template_mailsTableSeeder::class);
         $this->call(NewslettersTableSeeder::class);
+        $this->call(UsersWithRoleTableSeeder::class);
     }
 }
