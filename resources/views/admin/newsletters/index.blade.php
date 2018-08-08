@@ -11,20 +11,34 @@
                     <h1>{{__('Newsletter page title')}}</h1>
                 </div>
 
-                <label></label>
-                <input id="title" class="mt-3 mb-3" type="text" name="title" placeholder="Title">
+                <div class="col-md-4 mb-3">
+                    <label></label>
+                    <input id="title" class="input-group mt-2 mb-2" type="text" name="title" placeholder="Title">
 
-                <div class="col-md-12" style="height:600px" id="editor"></div>
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect04">
+                            <option selected>Choose...</option>
+                            <@foreach($sentMessage as $sent)
+                                <option value="1">{{ $sent->title }}</option>
+                            @endforeach
 
-                <label for="html"></label>
-                <textarea id="html" name="html"></textarea>
-                <label for="text"></label>
-                <textarea id="text" name="text"></textarea>
-
-                <div class="row justify-content-around m-2">
-                    <input type="reset" class="btn btn-danger" value="Effacer">
-                    <input type="submit" class="btn btn-primary" value="Enregistrer">
+                        </select>
+                        <div class="input-group-append">
+                            <button id="copy" class="btn btn-outline-secondary" type="button">Copy</button>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-12" style="height:600px" id="editor"></div> <!-- Quill editor -->
+
+                <!--textarea used to send Quill data to the controller via the id-->
+                <label for="html"></label>
+                <textarea id="html" name="html" style="display: none"></textarea>
+                <label for="text"></label>
+                <textarea id="text" name="text" style="display: none"></textarea>
+
+                <input type="submit" class="btn btn-primary m-2" value="Enregistrer">
+
 
                 <script> // Init Quill
                     let quill = new Quill('#editor', {
@@ -52,9 +66,20 @@
                         let quillContentText = quill.getText();
                         document.getElementById('text').value = quillContentText;
 
-                        document.getElementById('title').value = 'title';
+
+                        let sentMessageCopy = document.getElementById('sentMessageCopy').value;
+                        let onCopy = document.getElementById('copy');
+                        onCopy.onclick = copy;
+
+                        function copy(){
+                            quill.setContents(sentMessageCopy); // send sentMessageCopy to editor
+                        }
                     });
                 </script>
+
+                <!--textarea used to get the choosen sentMessage for script-->
+                <label for="sentMessageCopy"></label>
+                <textarea id="sentMessageCopy" name="sentMessageCopy" style="display: none"></textarea>
             </div>
         </div>
     </form>
