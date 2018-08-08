@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Subscription;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,27 @@ class UserController extends Controller
     }
 
 
-    public function addadhesion()
+    public function beforeadhesion($id)
     {
-        return view('admin.users.addadhesion');
+        $user = User::findorfail($id);
+
+        return view('admin.users.addadhesion', ['user' => $user]);
+    }
+
+    public function addadhesion(Request $request, $userid)
+    {
+        $validateData = $request->validate([
+            'subscription_type' => 'required',
+            'amount' => 'required',
+            'payment_methods' => 'required',
+            'subscription_date' => 'required'
+        ]);
+        $user = User::where('id', $userid)
+        -> get();
+
+        Subscription::create($validateData, ['user_id' => $user->id]);
+
+        return back();
     }
 
     /**

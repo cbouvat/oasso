@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <h1>Nom du membre</h1>
+    <h1 class="container mt-5 pt-5">{{ $user->firstname}} {{ $user->lastname}}</h1>
 
-    <form>
-
+    <form method="POST" action="" aria-label="{{ __('Addadhesion') }}">
+        @csrf
         <div class="form-group row">
             <label for="subscription_type"
                    class="col-md-4 col-form-label text-md-right">{{ __('subscription_type') }}</label>
@@ -38,7 +38,7 @@
                     <option selected disabled>Type</option>
                     <option value=1>Chèque</option>
                     <option value=2>Espèces</option>
-                    <option value=2>Carte Bancaire</option>
+                    <option value=3>Carte Bancaire</option>
                 </select>
             </div>
         </div>
@@ -49,7 +49,26 @@
             <div class="col-md-6">
                 <input id="subscription_date" type="date"
                        class="form-control{{ $errors->has('subscription_date') ? ' is-invalid' : '' }}"
-                       name="Begin" value="{{ old('subscription_date') }}" required>
+                       name="subscription_date" value="{{ old('subscription_date') }}" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="newsletter"
+                   class="col-md-4 col-form-label text-md-right">{{ __('newsletter') }}</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="newsletter"
+                       id="newsletter1" value="1" checked>
+                <label class="form-check-label" for="newsletter1">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="newsletter"
+                       id="newsletter2" value="0">
+                <label class="form-check-label" for="newsletter2">
+                    No
+                </label>
             </div>
         </div>
 
