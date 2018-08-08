@@ -16,7 +16,6 @@ class CreateTemplateMailsTable extends Migration
         Schema::create('template_mails', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',45);
-            $table->tinyInteger('type');
             $table->longText('html_content');
             $table->longText('text_content');
             $table->timestamps();

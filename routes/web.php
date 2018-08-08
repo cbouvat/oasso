@@ -25,8 +25,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
     Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
 
-    Route::get('/newsletter-index', 'NewsletterController@index')->name('admin.newsletter.index');
-    Route::post('/newsletters', 'NewsletterController@submit')->name('admin.newsletters.submit');
+    Route::get('/newsletters/index', 'Admin\NewsletterController@index')->name('admin.newsletters.index');
+    Route::post('/newsletters/index', 'Admin\NewsletterController@create')->name('admin.newsletters.create');
 
 
 });
