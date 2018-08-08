@@ -11,18 +11,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class QualityType extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name'];
-
-    /** RELATIONS */
-
-    public function quality()
-    {
-        return $this->belongsTo('App\Quality');
-    }
+    //
 }
