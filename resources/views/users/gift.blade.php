@@ -16,7 +16,7 @@
                             <div class="input-group">
                                 <input type="text" name="amount" class="form-control text-right">
                                 <div class="input-group-append">
-                                    <span class="input-group-text">.00€</span>
+                                    <span class="input-group-text">€</span>
                                 </div>
                             </div>
                             @if($user->role->id == "1")
