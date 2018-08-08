@@ -101,12 +101,13 @@ class UserController extends Controller
 
         Gift::create($inputs);
         return back()->with('message', 'Votre dons à bien été accépté, merci de votre générosité ! ');
-//        dd($user->role->id);
-//        dd($inputs['amount']);
+
     }
 
     public function gift(){
         $user = Auth::user();
+        $user->load('gifts');
+
         return view('users.gift',['user'=>$user]);
 
     }

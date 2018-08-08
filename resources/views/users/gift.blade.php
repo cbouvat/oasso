@@ -50,14 +50,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <!-- @ forelse gifts as gift -->
-                        <tr>
-                            <th scope="row">gift_id</th>
-                            <td>$montant</td>
-                            <td>$date</td>
-                        </tr>
-                        <!-- @ enforelse gifts as gift -->
-                        <!-- @ empty -->
+                        @forelse($user->gifts as $gift)
+                            <tr>
+                                <td scope="row">{{$user->firstname}} {{$user->lastname}}</td>
+                                <th>{{$gift->amount}} €</th>
+                                <td>{{$gift->created_at->format('d/m/Y')}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <th></th>
+                                <th>Vous n'avez réalisé aucun don pour le moment ...</th>
+                                <td></td>
+                            </tr>
+                        @endforelse
+
                         </tbody>
                     </table>
                 </div>
