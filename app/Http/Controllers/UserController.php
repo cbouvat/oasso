@@ -72,9 +72,36 @@ class UserController extends Controller
      * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        if ($request->has(['email', 'gender', 'lastname', 'firstname', 'birthdate', 'address_line1', 'address_line2',
+            'zipcode', 'city', 'phone_number_1', 'phone_number_2', 'gender_joint',
+            'firstname_joint', 'lastname_joint', 'birthdate_joint', 'email_joint'])) {
+
+            $validateData = $request->validate([
+                'gender' => 'required|integer|max:2',
+                'firstname' => 'required|string|max:45',
+                'lastname' => 'required|string|max:45',
+                'email' => 'required|string|email|max:255|unique:users',
+                'birthdate' => 'required|date',
+                'address_line1' => 'required|string|max:32',
+                'address_line2' => 'string|max:32|nullable',
+                'city' => 'required|string|max:45',
+                'zipcode' => 'required|string|max:5',
+                'phone_number_1' => 'string|max:10',
+                'phone_number_2' => 'string|max:10|nullable',
+//                'newspaper' => 'integer',
+//                'newsletter' => 'integer',
+                'gender_joint' => 'integer|max:2|nullable',
+                'firstname_joint' => 'string|max:45|nullable',
+                'lastname_joint' => 'string|max:45|nullable',
+                'birthdate_joint' => 'date|nullable',
+                'email_joint' => 'email|max:255|nullable'
+            ]);
+
+            Auth::user()->update($validateData);
+        }
+        return redirect()->route('front.user.update');
     }
 
     /**
