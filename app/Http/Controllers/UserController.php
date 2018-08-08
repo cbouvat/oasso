@@ -87,7 +87,7 @@ class UserController extends Controller
         //
     }
 
-    /**
+    /**>
      * Insert into Database Gift from a member
      * @param User $user
      */
