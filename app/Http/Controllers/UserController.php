@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -56,9 +57,12 @@ class UserController extends Controller
      * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        //
+
+        $user = Auth::user();
+
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
@@ -68,9 +72,33 @@ class UserController extends Controller
      * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+//            dd($request);
+            $validateData = $request->validate([
+                'gender' => 'integer|max:2',
+                'firstname' => 'string|max:45',
+                'lastname' => 'string|max:45',
+                'email' => 'string|email|max:255|unique:users',
+                'birthdate' => 'date',
+                'address_line1' => 'string|max:32',
+                'address_line2' => 'string|max:32|nullable',
+                'city' => 'string|max:45',
+                'zipcode' => 'string|max:5',
+                'phone_number_1' => 'string|max:10',
+                'phone_number_2' => 'string|max:10|nullable',
+//                'newspaper' => 'integer',
+//                'newsletter' => 'integer',
+                'gender_joint' => 'max:2|nullable',
+                'firstname_joint' => 'max:45|nullable',
+                'lastname_joint' => 'max:45|nullable',
+                'birthdate_joint' => 'date|nullable',
+                'email_joint' => 'email|max:255|nullable'
+            ]);
+
+            Auth::user()->update($validateData);
+
+        return redirect()->route('front.user.update');
     }
 
     /**
@@ -103,4 +131,5 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.list');
     }
+
 }
