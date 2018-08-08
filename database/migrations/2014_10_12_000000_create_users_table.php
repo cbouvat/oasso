@@ -15,11 +15,34 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->tinyInteger('gender');
+            $table->string('lastname',45);
+            $table->string('firstname', 45);
+            $table->date('birthdate');
             $table->string('password');
+            $table->string('address_line1',100);
+            $table->string('address_line2', 100)->nullable();
+            $table->string('zipcode', 20);
+            $table->string('city', 45);
+            $table->string('email')->unique()->nullable();
+            $table->tinyInteger('gender_joint')->nullable();
+            $table->string('lastname_joint', 45)->nullable();
+            $table->string('firstname_joint', 45)->nullable();
+            $table->date('birthdate_joint')->nullable();
+            $table->string('email_joint', 45)->nullable();
+            $table->string('phone_number_1', 20)->nullable();
+            $table->string('phone_number_2', 20)->nullable();
+            $table->boolean('volonteer')->default(0);
+            $table->text('details_volonteer', 600)->nullable();
+            $table->boolean('delivery')->default(0);
+            $table->boolean('newspaper');
+            $table->boolean('newsletter');
+            $table->boolean('mailing')->default(0);
+            $table->text('comment')->nullable();
+            $table->boolean('alert')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
