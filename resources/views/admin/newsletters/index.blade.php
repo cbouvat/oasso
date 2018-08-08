@@ -16,10 +16,11 @@
                     <input id="title" class="input-group mt-2 mb-2" type="text" name="title" placeholder="Title">
 
                     <div class="input-group">
+                        <label for="inputGroupSelect04"></label>
                         <select class="custom-select" id="inputGroupSelect04">
                             <option selected>Choose...</option>
-                            <@foreach($sentMessage as $sent)
-                                <option value="1">{{ $sent->title }}</option>
+                            @foreach($sentMessage as $sent)
+                                <option value="{{$sent}}">{{ $sent->title }}</option>
                             @endforeach
 
                         </select>
@@ -29,7 +30,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12" style="height:600px" id="editor"></div> <!-- Quill editor -->
+                <div class="col-md-12" style="height:600px" id="editor">@if($newsletter){!! $newsletter->html_content !!}@endif</div> <!-- Quill editor -->
 
                 <!--textarea used to send Quill data to the controller via the id-->
                 <label for="html"></label>
@@ -39,48 +40,48 @@
 
                 <input type="submit" class="btn btn-primary m-2" value="Enregistrer">
 
-
-                <script> // Init Quill
-                    let quill = new Quill('#editor', {
-                        modules: {
-                            toolbar: [
-                                [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
-                                [{'header': [1, 2, 3, 4, 5, 6, false]}],
-                                ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
-                                [{'list': 'bullet'}],
-                                [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
-                                [{'color': []}, {'background': []}],          // dropdown with defaults from theme
-                                [{'align': []}],
-                                ['link', 'image']
-                            ]
-                        },
-                        placeholder: 'build your own newsletter',
-                        theme: 'snow'  // or 'bubble'
-                    });
-
-                    // Get Quill data and send it to the two textarea in html and text.
-                    quill.on('text-change', function () {
-                        let quillContentHtml = document.querySelector('.ql-editor').innerHTML;
-                        document.getElementById('html').value = quillContentHtml;
-
-                        let quillContentText = quill.getText();
-                        document.getElementById('text').value = quillContentText;
-
-
-                        let sentMessageCopy = document.getElementById('sentMessageCopy').value;
-                        let onCopy = document.getElementById('copy');
-                        onCopy.onclick = copy;
-
-                        function copy(){
-                            quill.setContents(sentMessageCopy); // send sentMessageCopy to editor
-                        }
-                    });
-                </script>
-
                 <!--textarea used to get the choosen sentMessage for script-->
                 <label for="sentMessageCopy"></label>
-                <textarea id="sentMessageCopy" name="sentMessageCopy" style="display: none"></textarea>
+                <textarea id="sentMessageCopy" name="sentMessageCopy" style="display: none">{{ $sent }}</textarea>
             </div>
         </div>
     </form>
+    <script> // Init Quill
+        let quill = new Quill('#editor', {
+            modules: {
+                toolbar: [
+                    [{'size': ['small', false, 'large', 'huge']}],  // custom dropdown
+                    [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                    ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
+                    [{'list': 'bullet'}],
+                    [{'indent': '-1'}, {'indent': '+1'}],          // outdent/indent
+                    [{'color': []}, {'background': []}],          // dropdown with defaults from theme
+                    [{'align': []}],
+                    ['link', 'image']
+                ]
+            },
+            placeholder: 'build your own newsletter',
+            theme: 'snow'  // or 'bubble'
+        });
+
+        // Get Quill data and send it to the two textarea in html and text.
+        quill.on('text-change', function () {
+            let quillContentHtml = document.querySelector('.ql-editor').innerHTML;
+            document.getElementById('html').value = quillContentHtml;
+
+            let quillContentText = quill.getText();
+            document.getElementById('text').value = quillContentText;
+        });
+
+        // update Quill editor with the choosen newsletter
+        let sentMessageCopy;
+        let onCopy = document.getElementById('copy');
+        onCopy.onclick = copy;
+
+        function copy() {
+            sentMessageCopy = document.getElementById('inputGroupSelect04').value;
+            console.log(sentMessageCopy);
+           quill.setContents([{ insert: sentMessageCopy}]); // send sentMessageCopy to editor
+        }
+    </script>
 @endsection

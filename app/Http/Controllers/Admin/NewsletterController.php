@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Newsletter;
-use App\TemplateNewsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,16 +16,21 @@ class NewsletterController extends Controller
 //        $this->middleware('auth');
 //    }
 
-    public function index()
+    public function index(Request $request)
     {
-        $sentMessage = TemplateNewsletter::take(12)->orderBy('created_at', 'asc')->get();
+        if($resquest->has('from')) {
+            $newsletter = Newsletter::findOrFail($from);
 
-        return view('admin.newsletters.index', [ 'sentMessage' => $sentMessage]);
+        }
+
+            $sentMessage = Newsletter::take(12)->orderBy('created_at', 'asc')->get();
+
+        return view('admin.newsletters.index', ['sentMessage' => $sentMessage]);
     }
 
     public function create(Request $request)
     {
-        TemplateNewsletter::create([
+        Newsletter::create([
             'title' => $request->title,
             'html_content' => $request->html,
             'text_content' => $request->text,
