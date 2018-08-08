@@ -46,36 +46,34 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'gender' => 'int|max:1',
-            'lastname' => 'string|max:45',
-            'firstname' => 'string|max:45',
-            'birthdate' => 'date|before:today-13years|after:today-120years',
-            'password' => 'min:6|max:191',
-            'address_line1' => 'string|max:32',
-            'address_line2' => 'string|max:32',
-            'zip_code' => 'string|max:5',
-            'city' => 'string|max:45',
-            'email' => 'email|max:255|unique:users',
-            'lastname_joint' => 'string|max:45',
-            'firstname_joint' => 'string|max:45',
-            'birthdate_joint' => 'date|before:today-18years|after:today-120years',
-            'email_joint' => 'string|email|max:45',
+            'gender' => 'required|integer',
+            'lastname' => 'required|string|max:45',
+            'firstname' => 'required|string|max:45',
+            'birthdate' => 'required|date',
+            'password' => 'string|min:6|max:191|confirmed',
+            'address_line1' => 'required|string|max:100',
+            'address_line2' => 'string|max:100|nullable',
+            'zipcode' => 'required|string|max:20',
+            'city' => 'required|string|max:45',
+            'email' => 'email|unique:users|nullable',
+            'gender_joint' => 'nullable|integer',
+            'lastname_joint' => 'string|max:45|nullable',
+            'firstname_joint' => 'string|max:45|nullable',
+            'birthdate_joint' => 'date|nullable',
+            'email_joint' => 'email|max:45|nullable',
             'phone_number_1' => 'string|max:20',
-            'phone_number_2' => 'string|max:20',
-            'volonteer' => 'boolean|max:1',
-            'details_volonteer' => 'string',
-            'delivery' => 'integer',
-            'newspaper' => 'integer',
-            'newsletter' => 'integer',
-            'mailing' => 'integer',
-            'comment' => 'string',
-            'alert' => 'integer',
+            'phone_number_2' => 'string|max:20|nullable',
+            'volonteer' => 'integer|nullable',
+            'details_volonteer' => 'string|max:600|nullable',
+            'delivery' => 'integer|nullable',
+            'newspaper' => 'integer|nullable',
+            'newsletter' => 'integer|nullable',
+            'mailing' => 'integer|nullable',
+            'comment' => 'string|nullable',
+            'alert' => 'integer|nullable',
         ]);
+        User::create($request->all());
 
-/*        User::create($request->all());*/
-
-        $user = new User($request);
-        $user->save;
         return redirect()->route('admin.member.index');
     }
 
