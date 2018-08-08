@@ -128,6 +128,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'q' => [
+            'min' => 'Your search must contain at least two characters !',
+        ],
     ],
 
     /*
@@ -141,6 +144,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'q' => 'search',
+    ],
+
 
 ];
