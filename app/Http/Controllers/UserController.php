@@ -18,6 +18,12 @@ class UserController extends Controller
         return view('admin.users.list', ['users' => $users]);
     }
 
+
+    public function addadhesion()
+    {
+        return view('admin.users.addadhesion');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
