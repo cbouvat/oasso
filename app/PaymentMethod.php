@@ -21,9 +21,4 @@ class PaymentMethod extends Model
     {
         return $this->hasMany('App\Payment');
     }
-
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-    }
 }

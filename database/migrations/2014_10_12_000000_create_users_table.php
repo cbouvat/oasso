@@ -35,8 +35,8 @@ class CreateUsersTable extends Migration
             $table->boolean('volonteer')->default(0);
             $table->text('details_volonteer', 600)->nullable();
             $table->boolean('delivery')->default(0);
-            $table->boolean('newspaper');
-            $table->boolean('newsletter');
+            $table->boolean('newspaper')->default(0);
+            $table->boolean('newsletter')->default(0);
             $table->boolean('mailing')->default(0);
             $table->text('comment')->nullable();
             $table->boolean('alert')->default(0);

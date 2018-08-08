@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Template_newslettersTableSeeder extends Seeder
+class NewslettersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class Template_newslettersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\TemplateNewsletter::class, 25)->create();
+        factory(App\Newsletter::class, 25)->create();
     }
 }
