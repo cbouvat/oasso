@@ -18,13 +18,11 @@ class GiftController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $user->load(['gifts' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }]);
-        $user->load('role');
 
-        return view('users.gift', ['user' => $user]);
+        $gifts = Gift::orderBy('created_at', 'desc')->paginate();
+        $gifts->load('user');
+
+        return view('users.giftListingAll', ['gifts' => $gifts]);
     }
 
     /**
@@ -84,7 +82,13 @@ class GiftController extends Controller
      */
     public function show($id)
     {
+        $user = User::find($id);
+        $user->load(['gifts' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }]);
+        $user->load('role');
 
+        return view('users.gift', ['user' => $user]);
     }
 
     /**
