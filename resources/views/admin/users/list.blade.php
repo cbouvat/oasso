@@ -15,8 +15,8 @@
         @foreach($users as $user)
             <tr>
                 <th scope="col">{{$user->id}}</th>
-                <td scope="col">{{$user-> firstname}}</td>
                 <td scope="col">{{$user->lastname}}</td>
+                <td scope="col">{{$user-> firstname}}</td>
                 <td scope="col">
                     <button type="button" class="btn btn-primary">Modifier</button>
                     <a type="button" class="btn btn-danger"
