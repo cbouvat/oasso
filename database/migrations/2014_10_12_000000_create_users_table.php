@@ -32,16 +32,17 @@ class CreateUsersTable extends Migration
             $table->string('email_joint', 45)->nullable();
             $table->string('phone_number_1', 20)->nullable();
             $table->string('phone_number_2', 20)->nullable();
-            $table->boolean('volonteer');
+            $table->boolean('volonteer')->default(0);
             $table->text('details_volonteer', 600)->nullable();
-            $table->boolean('delivery');
+            $table->boolean('delivery')->default(0);
             $table->boolean('newspaper');
             $table->boolean('newsletter');
-            $table->boolean('mailing');
-            $table->text('comment');
-            $table->boolean('alert');
+            $table->boolean('mailing')->default(0);
+            $table->text('comment')->nullable();
+            $table->boolean('alert')->default(0);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
