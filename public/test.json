@@ -1,0 +1,36 @@
+{
+  "type": "line",
+  "data": {
+    "labels": [
+      "Janvier",
+      "Février",
+      "Mars",
+      "Avril",
+      "Mai",
+      "Juin",
+      "Juillet",
+      "Août",
+      "Septembre",
+      "Octobre",
+      "Novembre",
+      "Décembre"
+    ],
+    "datasets": [
+      {
+        "label": ["Nombre adhésions par an"],
+        "data": [
+          12,
+          5,
+          20,
+          10,
+          30
+        ],
+        "borderColor": [
+          "rgba(0,0,0,1)"
+        ],
+        "borderWidth": 1
+      }
+    ]
+  }
+}
+

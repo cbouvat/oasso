@@ -38,7 +38,20 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-12">
-                                Ici, on aura les diagrammes!
+                                <canvas id="myChartGeneral" width="400" height="200"></canvas>
+                                @push('scripts')
+                                    <script>
+                                        $(function() {
+                                            $('myChartGeneral').ready(function() {
+                                                $.getJSON('/test.json', function(data) {
+                                                    var ctx = document.getElementById("myChartGeneral").getContext('2d');
+                                                    var myLineChart = new Chart(ctx, data);
+                                                });
+                                            });
+                                        });
+                                    </script>
+                                @endpush
+
                             </div>
                         </div>
                     </div>
