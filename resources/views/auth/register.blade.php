@@ -9,6 +9,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             @csrf
+
                             <div class="form-group row">
                                 <label for="email"
                                        class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -54,9 +55,9 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender" name="gender" class="custom-select">
-                                        <option selected disabled>Civilité</option>
-                                        <option value=1>Mr</option>
-                                        <option value=2>Ms</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>Gender</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>Mr</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>Ms</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,7 +67,7 @@
                                 <div class="col-md-6">
                                     <input id="lastname" type="text"
                                            class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
-                                           name="lastname" value="{{ old('lastname') }}" required autofocus>
+                                           name="lastname" value="{{ old('lastname') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -75,7 +76,7 @@
                                 <div class="col-md-6">
                                     <input id="firstname" type="text"
                                            class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
-                                           name="firstname" value="{{ old('firstname') }}" required autofocus>
+                                           name="firstname" value="{{ old('firstname') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -84,7 +85,7 @@
                                 <div class="col-md-6">
                                     <input id="birthdate" type="date"
                                            class="form-control{{ $errors->has('birthdate') ? ' is-invalid' : '' }}"
-                                           name="birthdate" value="{{ old('birthdate') }}" required autofocus>
+                                           name="birthdate" value="{{ old('birthdate') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -111,7 +112,7 @@
                                 <div class="col-md-6">
                                     <input id="zipcode" type="text"
                                            class="form-control {{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
-                                           name="zipcode" value="{{ old('zipcode') }}" required autofocus>
+                                           name="zipcode" value="{{ old('zipcode') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -119,7 +120,7 @@
                                 <div class="col-md-6">
                                     <input id="city" type="text"
                                            class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}"
-                                           name="city" value="{{ old('city') }}" required autofocus>
+                                           name="city" value="{{ old('city') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -128,7 +129,7 @@
                                 <div class="col-md-6">
                                     <input id="phone_number_1" type="text"
                                            class="form-control"
-                                           name="phone_number_1" value="{{ old('phone_number_1') }}">
+                                           name="phone_number_1" value="{{ old('phone_number_1') }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -180,11 +181,12 @@
                             <h3>Our Partner (if family)</h3>
                             <div class="form-group row">
                                 <label for="gender_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Gender Partner') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value=1>Mr</option>
-                                        <option value=2>Ms</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>Partner gender</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>Mr</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>Ms</option>
                                     </select>
                                 </div>
                             </div>
