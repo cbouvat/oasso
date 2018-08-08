@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gift;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -96,8 +97,12 @@ class UserController extends Controller
             'amount' => 'required|numeric'
         ]);
         $inputs = $request->all();
-        dd($user->role->id);
-        dd($inputs['amount']);
+        $inputs['user_id'] = $user->id;
+
+        Gift::create($inputs);
+        return back()->with('message', 'Votre dons à bien été accépté, merci de votre générosité ! ');
+//        dd($user->role->id);
+//        dd($inputs['amount']);
     }
 
     public function gift(){

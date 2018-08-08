@@ -22,6 +22,20 @@
 </head>
 <body>
 
+<!-- DIV POUVANT CONTENIR UN MESSAGE -->
+@if (session()->has('message'))
+    <div class="message_alert text-center">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+<!-- FIN DIC CONTENANT LE MESSAGE -->
+
+
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{config('app.name')}} </a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
