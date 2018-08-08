@@ -11,9 +11,7 @@ class GiftsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Gift::class, 20)->create([
-            'user_id' => rand(1, 50)
-        ]);
+        factory(App\Gift::class, 20)->create();
     }
 }
 

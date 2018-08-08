@@ -11,11 +11,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubscriptionType extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name','amount'];
 
     /** RELATIONS */
 
     public function subscription()
     {
-        return $this->belongsTo('App\Subscription');
+        return $this->hasMany('App\Subscription');
     }
 }

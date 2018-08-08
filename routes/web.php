@@ -21,6 +21,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
 
-Route::prefix('admin')->group(function() {
+Route::get('/search','SearchController@search')->name('search');
+
+Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
+    Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
 });

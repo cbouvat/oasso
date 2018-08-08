@@ -11,11 +11,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class QualityType extends Model
 {
-
-    /** RELATIONS */
-
-    public function quality()
-    {
-        return $this->belongsTo('App\Quality');
-    }
+    //
 }

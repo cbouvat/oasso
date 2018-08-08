@@ -4,13 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TemplateMail extends Model
+class Newsletter extends Model
 {
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title','html_content','text_content'];
+        'title','html_content','text_content','user_id'];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

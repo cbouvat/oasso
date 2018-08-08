@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'lastname' => $faker->lastName,
         'firstname' => $faker->firstName,
         'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm',
+        'password' => Hash::make('azerty123'),
         'address_line1' => $faker->address,
         'zipcode' => $faker->postcode,
         'city' => $faker->city,
