@@ -26,6 +26,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
 
     //Admin gift Crud
+    Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
     Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
     Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');

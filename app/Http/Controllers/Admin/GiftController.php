@@ -131,7 +131,7 @@ class GiftController extends Controller
 
         $gift->update($inputs);
 
-        return back()->with('message', 'Modification confirmée');
+        return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
     }
 
     /**
