@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->hasOne('App\Role');
     }
 
     public function payments()
@@ -62,14 +62,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Payment');
     }
 
-    public function quality()
-    {
-        return $this->belongsTo('App\Quality');
-    }
-
     public function subscription()
     {
-        return $this->hasOne('App\Subscription');
+        return $this->hasMany('App\Subscription');
     }
 
 }
