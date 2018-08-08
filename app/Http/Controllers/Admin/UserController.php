@@ -72,7 +72,9 @@ class UserController extends Controller
             'comment' => 'string|nullable',
             'alert' => 'integer|nullable',
         ]);
-        echo 'coucouc';
+        $password = str_random(40);
+
+        $request['password'] = $password;
         User::create($request->all());
 
         return redirect()->route('admin.member.index');
