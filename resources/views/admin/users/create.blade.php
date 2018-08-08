@@ -67,21 +67,6 @@
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label for="password"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-                <div class="col-md-6">
-                    <input id="password" type="password" name="password" class="form-control">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password-confirm"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-                <div class="col-md-6">
-                    <input id="password-confirm" type="password" name="password_confirmation" class="form-control">
-                </div>
-            </div>
 
             <div class="form-group row">
                 <label for="address_line1"
@@ -137,90 +122,6 @@
             </div>
 
             <div class="form-group row">
-                <label for="email"
-                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                <div class="col-md-6">
-                    <input id="email" type="email"
-                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                           name="email" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                        <span class="invalid-feedback" role="alert">
-                           <strong>{{ $errors->first('email') }}</strong>
-                       </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="gender_joint"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Partner gender') }}</label>
-                <div class="col-md-6">
-                    <select id="gender_joint" name="gender_joint" class="form-control">
-                        <option value="0" @if(old('gender_joint') ==0)selected @endif> {{ __('Partner gender') }}</option>
-                        <option value="1" @if(old('gender_joint') ==1)selected @endif> {{ __('Male') }}</option>
-                        <option value="2" @if(old('gender_joint') ==2)selected @endif>{{ __('Female') }}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="lastname_joint"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Lastname joint') }}</label>
-                <div class="col-md-6">
-                    <input id="lastname_joint" type="text" name="lastname_joint" value="{{ old('lastname_joint') }}"
-                           class="form-control{{ $errors->has('lastname_joint') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('lastname_joint'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('lastname_joint') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="firstname_joint"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Firstname joint') }}</label>
-                <div class="col-md-6">
-                    <input id="firstname_joint" type="text" name="firstname_joint" value="{{ old('firstname_joint') }}"
-                           class="form-control{{ $errors->has('firstname_joint') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('firstname_joint'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('firstname_joint') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="birthdate_joint"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Birthdate joint') }}</label>
-                <div class="col-md-6">
-                    <input id="birthdate_joint" type="date" name="birthdate_joint" value="{{ old('birthdate_joint') }}"
-                           class="form-control{{ $errors->has('birthdate_joint') ? ' is-invalid' : '' }}">
-                    {{--Attention le type de champ requis ne fonctionne pas sur firefox --}}
-                    @if ($errors->has('birthdate_joint'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('birthdate_joint') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="email_joint"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Email joint') }}</label>
-                <div class="col-md-6">
-                    <input id="email_joint" type="email" name="email_joint" value="{{ old('email_joint') }}"
-                           class="form-control{{ $errors->has('email_joint') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('email_joint'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('email_joint') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label for="phone_number_1"
                        class="col-md-4 col-form-label text-md-right">{{ __('Phone number 1') }}</label>
                 <div class="col-md-6">
@@ -244,6 +145,21 @@
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('phone_number_2') }}</strong>
                         </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email"
+                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <div class="col-md-6">
+                    <input id="email" type="email"
+                           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                           name="email" value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                           <strong>{{ $errors->first('email') }}</strong>
+                       </span>
                     @endif
                 </div>
             </div>
@@ -360,6 +276,76 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <h3>{{ __('Partner') }}</h3>
+            <div class="form-group row">
+                <label for="gender_joint"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
+                <div class="col-md-6">
+                    <select id="gender_joint" name="gender_joint" class="form-control">
+                        <option value="0" @if(old('gender_joint') ==0)selected @endif> {{ __('Partner Gender') }}</option>
+                        <option value="1" @if(old('gender_joint') ==1)selected @endif> {{ __('Male') }}</option>
+                        <option value="2" @if(old('gender_joint') ==2)selected @endif>{{ __('Female') }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="lastname_joint"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Lastname') }}</label>
+                <div class="col-md-6">
+                    <input id="lastname_joint" type="text" name="lastname_joint" value="{{ old('lastname_joint') }}"
+                           class="form-control{{ $errors->has('lastname_joint') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('lastname_joint'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('lastname_joint') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="firstname_joint"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Firstname') }}</label>
+                <div class="col-md-6">
+                    <input id="firstname_joint" type="text" name="firstname_joint" value="{{ old('firstname_joint') }}"
+                           class="form-control{{ $errors->has('firstname_joint') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('firstname_joint'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('firstname_joint') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="birthdate_joint"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Birthdate') }}</label>
+                <div class="col-md-6">
+                    <input id="birthdate_joint" type="date" name="birthdate_joint" value="{{ old('birthdate_joint') }}"
+                           class="form-control{{ $errors->has('birthdate_joint') ? ' is-invalid' : '' }}">
+                    {{--Attention le type de champ requis ne fonctionne pas sur firefox --}}
+                    @if ($errors->has('birthdate_joint'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('birthdate_joint') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email_joint"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Email') }}</label>
+                <div class="col-md-6">
+                    <input id="email_joint" type="email" name="email_joint" value="{{ old('email_joint') }}"
+                           class="form-control{{ $errors->has('email_joint') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('email_joint'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email_joint') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
 
