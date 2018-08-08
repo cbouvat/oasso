@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.member.create');
+        return view('admin.users.create');
     }
 
 
@@ -77,7 +77,7 @@ class UserController extends Controller
         $request['password'] = $password;
         User::create($request->all());
 
-        return redirect()->route('admin.member.index');
+        return redirect()->route('admin.users.list');
     }
 
     /**

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container mt-5">
-        <form action="{{ route('admin.member.store') }}" method="post">
+        <form action="{{ route('admin.user.store') }}" method="post">
             @csrf
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
