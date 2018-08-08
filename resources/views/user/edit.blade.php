@@ -9,7 +9,9 @@
                     @csrf
 
 
-                    <div class="card bg-light m-5 p-5">
+                    <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
+
+                        <div class="card-header mt-1 mb-5 font-weight-bold"><h4>Mes Infos</h4></div>
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Civilité</label>
@@ -81,7 +83,7 @@
                         </div>
 
 
-                        <div class="form-check">
+                        <div class="form-check mt-2">
                             <div class="form-group form-check col-6">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Newsletter</label>
@@ -92,13 +94,18 @@
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                 <label class="form-check-label" for="exampleCheck1">Journal papier</label>
                             </div>
+
                         </div>
 
+                        <div class="form-group mt-3">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Modifier</button>
+                        </div>
 
                     </div>
 
 
-                    <div class="card bg-light m-5 p-5">
+                    <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
+                        <div class="card-header mt-1 mb-5 font-weight-bold"><h4>Infos Conjoint</h4></div>
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Civilité conjoint</label>
@@ -133,12 +140,15 @@
                         </div>
 
 
+                        <div class="form-group mt-3 mb-0">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Modifier</button>
+                        </div>
                     </div>
 
                     <div class="card m-5 p-5">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Modifier</button>
-                    </div>
+                        {{--<div class="form-group">--}}
+                        {{--<button type="button" class="btn btn-primary btn-lg btn-block">Modifier</button>--}}
+                        {{--</div>--}}
                     </div>
                 </form>
             </div>
