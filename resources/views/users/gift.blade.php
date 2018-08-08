@@ -22,9 +22,13 @@
                             @if($user->role->id == "1")
                                 <input type="hidden" name="from_user_id" value="{{$user->id}}">
                             @else
-                                <input type="text" name="from_user_id" class="form-control text-right mt-2" placeholder="ID du donateur">
+                                <input type="text" name="from_user_id" class="form-control border border-info text-center mt-2" placeholder="Saisir l'id du donateur ici">
+                                <div class="text-center mt-5">
+                                    <input type="checkbox" name="from_me" value="{{$user->id}}">
+                                    <label for="from_me">De ma part, {{$user->firstname}} {{$user->lastname}}</label>
+                                </div>
                             @endif
-                            <button type="submit" class="btn btn-outline-success btn-block mt-3">
+                            <button type="submit" class="btn btn-outline-success btn-block mt-3 pt-3">
                                 <h2>Donner</h2>
                             </button>
                         </form>

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Gift;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class GiftController extends Controller
 {
@@ -26,10 +29,30 @@ class GiftController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric',
-            'from_user_id' => 'required|numeric'
+            'from_user_id' => 'nullable|numeric',
+            'from_me' => 'nullable|numeric'
         ]);
         $inputs = $request->all();
-        $inputs['user_id'] = $request['from_user_id'];
+
+        if ($request->has('from_me')) {
+            if ($request['from_me'] === Auth::user()->id) {
+                $inputs['user_id'] = $request['from_me'];
+            } else {
+                $inputs['user_id'] = Auth::user()->id;
+            }
+
+        } elseif ($request['from_user_id'] != null) {
+
+            if (User::find($request['from_user_id']) != null) {
+                $inputs['user_id'] = $request['from_user_id'];
+            } else {
+                return back()->with('error_message', 'Erreur, identifiant incorrect !');
+            }
+
+
+        } else {
+            return back()->with('error_message', 'Erreur, identifiant incorrect !');
+        }
 
         Gift::create($inputs);
         return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
@@ -38,7 +61,7 @@ class GiftController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -49,7 +72,7 @@ class GiftController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -60,7 +83,7 @@ class GiftController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -71,8 +94,8 @@ class GiftController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -83,7 +106,7 @@ class GiftController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
