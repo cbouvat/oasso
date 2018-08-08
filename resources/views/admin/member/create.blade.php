@@ -5,7 +5,9 @@
     <div class="container mt-5">
         <form action="{{ route('admin.member.store') }}" method="post">
             @csrf
-
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
             <div class="form-group row">
                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                 <div class="col-md-6">

@@ -50,7 +50,7 @@ class UserController extends Controller
             'lastname' => 'required|string|max:45',
             'firstname' => 'required|string|max:45',
             'birthdate' => 'required|date',
-            'password' => 'string|min:6|max:191|confirmed',
+            'password' => 'string|min:6|max:191|confirmed|nullable',
             'address_line1' => 'required|string|max:100',
             'address_line2' => 'string|max:100|nullable',
             'zipcode' => 'required|string|max:20',
@@ -61,7 +61,7 @@ class UserController extends Controller
             'firstname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
             'email_joint' => 'email|max:45|nullable',
-            'phone_number_1' => 'string|max:20',
+            'phone_number_1' => 'string|max:20|nullable',
             'phone_number_2' => 'string|max:20|nullable',
             'volonteer' => 'integer|nullable',
             'details_volonteer' => 'string|max:600|nullable',
@@ -72,6 +72,7 @@ class UserController extends Controller
             'comment' => 'string|nullable',
             'alert' => 'integer|nullable',
         ]);
+        echo 'coucouc';
         User::create($request->all());
 
         return redirect()->route('admin.member.index');
