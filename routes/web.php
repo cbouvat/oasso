@@ -24,11 +24,10 @@ Route::get('/search','SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/users-create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::post('/users-store', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
     Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
 });
 
-Route::get('/admin/members', 'Admin\UserController@index')->name('admin.member.index');
-Route::get('/admin/member/create', 'Admin\UserController@create')->name('admin.member.create');
-Route::post('/admin/member', 'Admin\UserController@store')->name('admin.member.store');
 
