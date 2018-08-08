@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -32,7 +32,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -43,7 +43,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\User  $user
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
@@ -54,19 +54,22 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User  $user
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        return view('user.edit');
+
+        $user = Auth::user();
+
+        return view('user.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Admin\User  $user
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -104,4 +107,5 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.list');
     }
+
 }
