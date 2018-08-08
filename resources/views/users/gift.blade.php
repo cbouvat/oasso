@@ -20,9 +20,9 @@
                                 </div>
                             </div>
                             @if($user->role->id == "1")
-                                <input type="hidden" name="from">
+                                <input type="hidden" name="from_user_id" value="{{$user->id}}">
                             @else
-                                <input type="text" name="from" class="form-control text-right">
+                                <input type="text" name="from_user_id" class="form-control text-right mt-2" placeholder="ID du donateur">
                             @endif
                             <button type="submit" class="btn btn-outline-success btn-block mt-3">
                                 <h2>Donner</h2>

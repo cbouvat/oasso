@@ -27,7 +27,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/gift', 'UserController@gift')->name('front.user.gift');
-Route::post('/gift', 'UserController@give')->name('front.user.give');
+Route::post('/gift', 'GiftController@create')->name('front.user.give');
 Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
 Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
 
