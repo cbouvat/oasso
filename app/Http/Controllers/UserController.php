@@ -101,7 +101,7 @@ class UserController extends Controller
         $inputs['user_id'] = $user->id;
 
         Gift::create($inputs);
-        return back()->with('message', 'Votre dons à bien été accépté, merci de votre générosité ! ');
+        return back()->with('message', 'Votre don a bien été accépté, merci de votre générosité ! ');
 
     }
 
