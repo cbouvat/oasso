@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         $this->call(Role_typesTableSeeder::class);
         $this->call(Subscription_typesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(QualitiesTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(GiftsTableSeeder::class);
         $this->call(PaymentsTableSeeder::class);
         $this->call(Template_mailsTableSeeder::class);
-        $this->call(Template_newslettersTableSeeder::class);
+        $this->call(NewslettersTableSeeder::class);
+        $this->call(UsersWithRoleTableSeeder::class);
     }
 }
