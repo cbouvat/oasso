@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use App\Gift;
+use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;

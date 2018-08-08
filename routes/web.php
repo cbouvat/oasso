@@ -26,13 +26,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
 
     //Admin gift Crud
-    Route::get('/gift/edit/{id}', 'GiftController@edit')->name('admin.gift.edit');
-    Route::post('/gift/update/{id}', 'GiftController@update')->name('admin.gift.update');
-    Route::get('/gift/destroy/{id}', 'GiftController@destroy')->name('admin.gift.destroy');
+    Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
+    Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
+    Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 });
 
-Route::get('/gift', 'GiftController@index')->name('front.user.gift');
-Route::post('/gift', 'GiftController@create')->name('front.user.give');
+Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
+Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
 Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
 Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
