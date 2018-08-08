@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Subscription;
 use App\SubscriptionType;
-use Illuminate\Http\Request;
-use \Auth;
 
 class membershipRenewalController extends Controller
 {
     public function display()
     {
-//        $ActualSubscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
-        $ActualSubscription = Subscription::where('user_id','9')->orderBy('created_at', 'desc')->first();
-        $ActualSubscriptionName = SubscriptionType::where('id', $ActualSubscription->subscription_type_id)->first();
+        // $ActualSubscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
+        $actualSubscription = Subscription::where('user_id', '9')->orderBy('created_at', 'desc')->first();
+        $actualSubscriptionName = SubscriptionType::where('id', $actualSubscription->subscription_type_id)->first();
+        $subscriptionTypes = SubscriptionType::all();
 
-        return view('membershipRenewal', ['ActualSubscriptionName' => $ActualSubscriptionName]);
+        return view('membershipRenewal', ['actualSubscriptionName' => $actualSubscriptionName], ['subscriptionTypes' => $subscriptionTypes]);
     }
 
 }
