@@ -48,16 +48,16 @@
                             </div>
 
 
-                            <H3>Personal Informations</H3>
+                            <H3>{{__('Personal Informations')}}</H3>
 
                             <div class="form-group row">
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender" name="gender" class="custom-select">
-                                        <option value="0" @if(old('gender') == 0) selected @endif>Gender</option>
-                                        <option value="1" @if(old('gender') == 1) selected @endif>Mr</option>
-                                        <option value="2" @if(old('gender') == 2) selected @endif>Ms</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>{{ __('Gender') }}</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -68,6 +68,11 @@
                                     <input id="lastname" type="text"
                                            class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
                                            name="lastname" value="{{ old('lastname') }}" required>
+                                    @if ($errors->has('lastname'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -77,6 +82,11 @@
                                     <input id="firstname" type="text"
                                            class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
                                            name="firstname" value="{{ old('firstname') }}" required>
+                                    @if ($errors->has('firstname'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -86,6 +96,11 @@
                                     <input id="birthdate" type="date"
                                            class="form-control{{ $errors->has('birthdate') ? ' is-invalid' : '' }}"
                                            name="birthdate" value="{{ old('birthdate') }}" required>
+                                    @if ($errors->has('birthdate'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('birthdate') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -95,6 +110,11 @@
                                     <input id="address_line1" type="text"
                                            class="form-control{{ $errors->has('address_line1') ? ' is-invalid' : '' }}"
                                            name="address_line1" value="{{ old('address_line1') }}" required>
+                                    @if ($errors->has('address_line1'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('address_line1') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -113,6 +133,11 @@
                                     <input id="zipcode" type="text"
                                            class="form-control {{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
                                            name="zipcode" value="{{ old('zipcode') }}" required>
+                                    @if ($errors->has('zipcode'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('zipcode') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -121,6 +146,11 @@
                                     <input id="city" type="text"
                                            class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}"
                                            name="city" value="{{ old('city') }}" required>
+                                    @if ($errors->has('city'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -128,8 +158,13 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Phone_number_1') }}</label>
                                 <div class="col-md-6">
                                     <input id="phone_number_1" type="text"
-                                           class="form-control"
+                                           class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}"
                                            name="phone_number_1" value="{{ old('phone_number_1') }}" required>
+                                    @if ($errors->has('phone_number_1'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number_1') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -146,16 +181,16 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('NewsPaper') }}</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper1" value="1" checked>
+                                           id="newspaper1" value="1" @if(old('newspaper') == 1) checked @endif>
                                     <label class="form-check-label" for="newspaper">
-                                        Yes
+                                        {{ __('Yes') }}
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper2" value="0">
+                                           id="newspaper2" value="0" checked @if(old('newspaper') == 0) checked @endif>
                                     <label class="form-check-label" for="newspaper">
-                                        No
+                                        {{ __('No') }}
                                     </label>
                                 </div>
                             </div>
@@ -164,29 +199,29 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter1" value="1" checked>
+                                           id="newsletter1" value="1" @if(old('newsletter') == 1) checked @endif>
                                     <label class="form-check-label" for="newsletter1">
-                                        Yes
+                                        {{ __('Yes') }}
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter2" value="0">
+                                           id="newsletter2" value="0" checked @if(old('newsletter') == 0) checked @endif>
                                     <label class="form-check-label" for="newsletter2">
-                                        No
+                                        {{ __('No') }}
                                     </label>
                                 </div>
                             </div>
 
-                            <h3>Our Partner (if family)</h3>
+                            <h3>{{__('Our Partner (if family)')}}</h3>
                             <div class="form-group row">
                                 <label for="gender_joint"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value="0" @if(old('gender') == 0) selected @endif>Partner gender</option>
-                                        <option value="1" @if(old('gender') == 1) selected @endif>Mr</option>
-                                        <option value="2" @if(old('gender') == 2) selected @endif>Ms</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
