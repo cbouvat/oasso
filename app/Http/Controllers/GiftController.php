@@ -17,7 +17,13 @@ class GiftController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $user->load(['gifts' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }]);
+        $user->load('role');
+
+        return view('users.gift', ['user' => $user]);
     }
 
     /**
@@ -77,7 +83,7 @@ class GiftController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -88,7 +94,9 @@ class GiftController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gift = Gift::findOrFail($id);
+        $gift->load('user');
+        return view('users.giftEdit', ['gift' => $gift]);
     }
 
     /**
@@ -100,7 +108,29 @@ class GiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $gift = Gift::findOrFail($id);
+        $request->validate([
+            'amount' => 'required|numeric',
+            'from_user_id' => 'nullable|numeric',
+        ]);
+        $inputs = $request->all();
+
+        if ($request['from_user_id'] != null) {
+
+            if (User::find($request['from_user_id']) != null) {
+                $inputs['user_id'] = $request['from_user_id'];
+            } else {
+                return back()->with('error_message', 'Erreur, identifiant incorrect !');
+            }
+
+
+        } else {
+            return back()->with('error_message', 'Erreur, identifiant incorrect !');
+        }
+
+        $gift->update($inputs);
+
+        return back()->with('message', 'Modification confirmée');
     }
 
     /**
@@ -111,6 +141,9 @@ class GiftController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $giftToDelete = Gift::findOrFail($id);
+        $giftToDelete->delete();
+        return back()->with('message', 'Don supprimé');
+
     }
 }
