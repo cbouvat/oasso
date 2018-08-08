@@ -20,13 +20,15 @@
 
                                 <option selected disabled>
 
-                                    @if($user->gender_joint == 0)
+                                    @if($user->gender == 0)
                                         Monsieur
-                                    @elseif($user->gender_joint == 1)
+                                    @elseif($user->gender == 1)
                                         Madame
                                     @else
                                         Selectioner votre sexe
                                     @endif</option>
+                                <option>Monsieur</option>
+                                <option>Madame</option>
 
                             </select>
                         </div>
@@ -171,7 +173,7 @@
 
 
                         <div class="form-group mt-3 mb-0">
-                            <input type="submit" class="btn btn-primary btn-lg btn-block">Modifier</input>
+                            <input type="submit" value="Modifier" class="btn btn-primary btn-lg btn-block">
                         </div>
                     </div>
 
