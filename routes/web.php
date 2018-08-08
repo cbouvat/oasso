@@ -11,6 +11,23 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/search','SearchController@search')->name('search');
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/users-create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::post('/users-store', 'Admin\UserController@store')->name('admin.user.store');
+    Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
+    Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+});
+
+
