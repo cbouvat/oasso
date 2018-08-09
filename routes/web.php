@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search','SearchController@search')->name('search');
 
+Route::get('payment', 'PaymentController@payment')->name('payment');
+
 Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
     Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
