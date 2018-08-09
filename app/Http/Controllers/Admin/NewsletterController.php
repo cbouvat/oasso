@@ -23,9 +23,9 @@ class NewsletterController extends Controller
 //
 //        }
 
-            $sentMessage = Newsletter::take(12)->orderBy('created_at', 'asc')->get();
+        $newsletters = Newsletter::find(12)->orderBy('created_at', 'asc')->get();
 
-        return view('admin.newsletters.index', ['sentMessage' => $sentMessage]);
+        return view('admin.newsletters.index', ['newsletters' => $newsletters]);
     }
 
     public function create(Request $request)
