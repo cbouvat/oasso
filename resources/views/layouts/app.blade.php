@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
     <!-- Custom styles for this template -->
@@ -142,7 +142,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('admin.newsletters.index') }}">
                             <span data-feather="layers">
                                 <i class="far fa-newspaper"></i>
                             </span>

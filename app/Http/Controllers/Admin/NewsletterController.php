@@ -7,7 +7,10 @@ use App\Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
+/**
+ * Class NewsletterController
+ * @package App\Http\Controllers\Admin
+ */
 class NewsletterController extends Controller
 {
     // uncomment Middleware when login user works
@@ -16,37 +19,104 @@ class NewsletterController extends Controller
 //        $this->middleware('auth');
 //    }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
 //        if($resquest->has('from')) {
-//            $newsletter = Newsletter::findOrFail($from);
-//
+//            $newsletter = Newsletter::findOrFail($from);    // for later.
 //        }
 
-        $newsletters = Newsletter::find(12)->orderBy('created_at', 'asc')->get();
+        $newsletters = Newsletter::orderBy('created_at', 'desc')->paginate(12);
 
         return view('admin.newsletters.index', ['newsletters' => $newsletters]);
     }
 
-    public function create(Request $request)
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
     {
-        Newsletter::create([
-            'title' => $request->title,
-            'html_content' => $request->html,
-            'text_content' => $request->text,
-            'user_id' => 1, //Auth::user()->id to write here
-        ]);
+        return view('admin.newsletters.create');
     }
 
-    public function update(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function store(Request $request)
     {
-        Newsletter::update([
-            'title' => $request->newsletterTitle,
-            'html_content' => $request->html,
-            'text_content' => $request->text,
-            'user_id' => 1, //Auth::user()->id to write here
-        ]);
+        Newsletter::Create(
+            [
+                'title' => $request->newsletterTitle,
+                'html_content' => $request->htmlContent,
+                'text_content' => $request->textContent,
+                'user_id' => 1, //Auth::user()->id to write here
+            ]);
 
-        return back();
+        return redirect(route('admin.newsletters.index'));
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function storeUpdate(Request $request, $id)
+    {
+        Newsletter::findOrFail($id)->update(
+            [
+                'title' => $request->newsletterTitle,
+                'html_content' => $request->htmlContent,
+                'text_content' => $request->textContent,
+                'user_id' => 1, //Auth::user()->id to write here
+            ]);
+
+        return redirect(route('admin.newsletters.index'));
+    }
+
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function update($id)
+    {
+        $newsletter = Newsletter::findOrFail($id);
+
+        return view('admin.newsletters.update', ['newsletter' => $newsletter]);
+    }
+
+    public function duplicate($id)
+    {
+        $newsletter = Newsletter::findOrFail($id);
+
+        return view('admin.newsletters.duplicate', ['newsletter' => $newsletter]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function beforeDelete($id)
+    {
+        $newsletterId = Newsletter::findOrFail($id);
+
+        return view('admin.newsletters.beforedelete', ['id' => $newsletterId->id]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function delete($id)
+    {
+
+        $newsletter = Newsletter::findOrfail($id);
+        $newsletter->delete();
+
+        return redirect('admin/newsletters/index');
     }
 }
