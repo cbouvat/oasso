@@ -13,7 +13,7 @@
     <table class="table table-striped mt-4">
         <thead>
         <tr>
-            <th>created_at</th>
+            <th>Date</th>
             <th>Title</th>
             <th>Action</th>
         </tr>

@@ -13,11 +13,10 @@ use Illuminate\Support\Facades\Auth;
  */
 class NewsletterController extends Controller
 {
-    // uncomment Middleware when login user works
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * @param Request $request
@@ -53,7 +52,7 @@ class NewsletterController extends Controller
                 'title' => $request->newsletterTitle,
                 'html_content' => $request->htmlContent,
                 'text_content' => $request->textContent,
-                'user_id' => 1, //Auth::user()->id to write here
+                'user_id' => Auth::user()->id,
             ]);
 
         return redirect(route('admin.newsletters.index'));
@@ -62,7 +61,7 @@ class NewsletterController extends Controller
     /**
      * @param Request $request
      * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function storeUpdate(Request $request, $id)
     {
@@ -71,7 +70,7 @@ class NewsletterController extends Controller
                 'title' => $request->newsletterTitle,
                 'html_content' => $request->htmlContent,
                 'text_content' => $request->textContent,
-                'user_id' => 1, //Auth::user()->id to write here
+                'user_id' => Auth::user()->id,
             ]);
 
         return redirect(route('admin.newsletters.index'));
@@ -110,6 +109,7 @@ class NewsletterController extends Controller
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function delete($id)
     {
