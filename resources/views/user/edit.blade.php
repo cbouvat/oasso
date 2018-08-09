@@ -19,8 +19,8 @@
                         <div class="form-group">
                             <label for="gender">Civilité</label>
                             <select class="form-control" name="gender" id="gender">
-                                <option value="0" @if($user->gender == 0) selected @endif>{{ __('Mr') }}</option>
-                                <option value="1" @if($user->gender == 1) selected @endif>{{ __('Ms') }}</option>
+                                <option value="1" @if($user->gender == 1) selected @endif>{{ __('Mr') }}</option>
+                                <option value="0" @if($user->gender == 0) selected @endif>{{ __('Ms') }}</option>
                             </select>
                         </div>
 
@@ -115,8 +115,8 @@
                         <div class="form-group">
                             <label for="gender_joint">Civilité conjoint</label>
                             <select class="form-control" name="gender_joint" id="gender_joint">
-                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('Mr') }}</option>
-                                <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('Ms') }}</option>
+                                <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('Mr') }}</option>
+                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('Ms') }}</option>
                             </select>
                         </div>
 
