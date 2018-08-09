@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
     <!-- Custom styles for this template -->
@@ -22,6 +22,20 @@
 
 </head>
 <body>
+
+<!-- DIV POUVANT CONTENIR UN MESSAGE -->
+@if (session()->has('message'))
+    <div class="message_alert text-center">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+<!-- FIN DIC CONTENANT LE MESSAGE -->
+
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{config('app.name')}} </a>
@@ -86,7 +100,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+
+                        <a class="nav-link" href="{{route('front.user.gift')}}">
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>
@@ -226,7 +241,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container mt-5 pt-5">
             @yield('content')
         </div>
 
