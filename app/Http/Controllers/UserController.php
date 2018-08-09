@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Subscription;
+use App\Payment;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -20,27 +21,66 @@ class UserController extends Controller
     }
 
 
-    public function beforeadhesion($id)
+    public function beforeAdhesion($id)
     {
         $user = User::findorfail($id);
 
         return view('admin.users.addadhesion', ['user' => $user]);
     }
 
-    public function addadhesion(Request $request, $userid)
+    public function validatorAdhesion(Request $request, $userid)
     {
-        $validateData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'subscription_type' => 'required',
             'amount' => 'required',
             'payment_methods' => 'required',
-            'subscription_date' => 'required'
+            'subscription_date' => 'required',
+            'opt_out_mail' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return view('addadhesion')
+                ->withErrors($validator);
+        }
+
         $user = User::where('id', $userid)
-        -> get();
+            ->get();
 
-        Subscription::create($validateData, ['user_id' => $user->id]);
+        return view('admin.users.addadhesion', ['user' => $user]);
 
-        return back();
+    }
+
+    public function createSubscription(Request $request, $userid)
+    {
+        $sub = Subscription::create([
+            'amount' => $request['amount'],
+            'opt_out_mail' => '0',
+            'subscription_date' => $request['subscription_date'],
+            'user_id' => $userid,
+            'subscription_type' => $request['subscription_type']
+        ]);
+
+        return view('admin.users.addadhesion', ['sub' => $sub]);
+    }
+
+    public function createPayment(Request $request, $userid, $sub)
+    {
+        Payment::create([
+            'payment_type' => 'subscription',
+            'payment_id' => $sub->id,
+            'amount' => $request['amount'],
+            'user_id' => $userid,
+            'payment_methods' => $request['payment_methods']
+        ]);
+    }
+
+    public function addadhesion($validator, $user)
+    {
+
+        Subscription::create($validator, ['user_id' => $user->id]);
+
+        return view('admin.users.addadhesion', ['user' => $user]);
+
     }
 
     /**
