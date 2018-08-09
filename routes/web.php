@@ -20,10 +20,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Membership renewal
 Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
-Route::post('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewalCreate');
+// route to payment will have to be inserted
+Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 
-Route::get('/search','SearchController@search')->name('search');
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
