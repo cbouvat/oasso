@@ -31,4 +31,12 @@ Route::get('/search','SearchController@search')->name('search');
 Route::prefix('admin')->group(function () {
     Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
     Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+
 });
+
+Route::get('/gift', 'UserController@gift')->name('front.user.gift');
+Route::post('/gift', 'UserController@give')->name('front.user.give');
+Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
+Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+
