@@ -65,13 +65,12 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
         $authUser = Auth::user();
-        $validateData = $this->$request->validate([
+        $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'string|max:45|nullable',
             'lastname' => 'string|max:45|nullable',
@@ -122,7 +121,8 @@ class UserController extends Controller
 
     /**>
      * Insert into Database Gift from a member
-     * @param User $user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function give(Request $request)
     {
