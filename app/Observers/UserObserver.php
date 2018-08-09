@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Notifications\Welcome;
 use App\Role;
 use App\User;
 
@@ -19,6 +20,8 @@ class UserObserver
             'user_id' => $user->id,
             'role_type_id' => 1
         ]);
+
+      $user->notify(new Welcome());
     }
 
     /**
