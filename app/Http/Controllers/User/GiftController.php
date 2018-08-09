@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\DocBlock\Tags\Author;
 
 class GiftController extends Controller
 {
@@ -35,7 +34,7 @@ class GiftController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|gte:0',
             'from_user_id' => 'nullable|numeric',
             'from_me' => 'nullable|numeric'
         ]);
