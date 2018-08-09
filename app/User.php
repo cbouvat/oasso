@@ -39,6 +39,12 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+
 
     /** RELATIONS */
 
