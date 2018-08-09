@@ -18,10 +18,10 @@ class NewsletterController extends Controller
 
     public function index(Request $request)
     {
-        if($resquest->has('from')) {
-            $newsletter = Newsletter::findOrFail($from);
-
-        }
+//        if($resquest->has('from')) {
+//            $newsletter = Newsletter::findOrFail($from);
+//
+//        }
 
             $sentMessage = Newsletter::take(12)->orderBy('created_at', 'asc')->get();
 
@@ -36,5 +36,17 @@ class NewsletterController extends Controller
             'text_content' => $request->text,
             'user_id' => 1, //Auth::user()->id to write here
         ]);
+    }
+
+    public function update(Request $request)
+    {
+        Newsletter::update([
+            'title' => $request->newsletterTitle,
+            'html_content' => $request->html,
+            'text_content' => $request->text,
+            'user_id' => 1, //Auth::user()->id to write here
+        ]);
+
+        return back();
     }
 }
