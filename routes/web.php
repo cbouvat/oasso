@@ -19,7 +19,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
+Route::post('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewalCreate');
 
 Route::get('/search','SearchController@search')->name('search');
 

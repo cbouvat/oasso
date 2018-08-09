@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Membership Renewal') }}</div>
 
                     <div class="card-body">
-                        <form method="post" action="{{ route('login') }}">
+                        <form method="post" action="{{ route('membershipRenewalCreate') }}">
                             @csrf
 
                             <div class="form-group row">
@@ -25,10 +25,10 @@
 
                                 <div class="col-md-6">
 
-                                    <select id="selectedType" name="subscriptionType" class="custom-select" onchange='on(subscriptionType)'>
+                                    <select id="selectedType" name="subscriptionType" class="custom-select" onchange='catchSelection(value)'>
 
                                         @foreach($subscriptionTypes as $subscriptionType)
-                                            <option id="choice" selected>{{$subscriptionType->name}}</option>
+                                            <option id="choice" value="{{$subscriptionType->amount}}" selected>{{$subscriptionType->name}}</option>
                                         @endforeach
 
                                     </select>
@@ -40,7 +40,7 @@
 
                                 <div class="col-md-6">
 
-                                    <p id="subscriptionPrice"><strong>{{'amount'}}</strong></p>
+                                    <p id="subscriptionPrice"></p>
                                 </div>
                             </div>
 
@@ -64,17 +64,12 @@
     </div>
 
     <script>
-        // $('subscriptionType').change(function () {
-        //     var xxx = $.get(choice.value);
-        //     console.log(xxx);
-        //     // choice.map()
-        //
-        // });
-
-        function on(subscriptionType){
-            alert(subscriptionType); //This gives me selected value
-            console.log(subscriptionType);
+        function catchSelection(value){
+            document.getElementById('subscriptionPrice').innerHTML = value;
         };
+        $(document).ready(function () {
+            catchSelection($("#selectedType option:selected").val());
+        })
 
     </script>
 @endsection

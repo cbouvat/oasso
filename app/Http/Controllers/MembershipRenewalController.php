@@ -17,4 +17,12 @@ class membershipRenewalController extends Controller
         return view('membershipRenewal', ['actualSubscriptionName' => $actualSubscriptionName], ['subscriptionTypes' => $subscriptionTypes]);
     }
 
+    public function create()
+    {
+        // $ActualSubscription = Subscription::where('user_id', Auth::id())->orderBy('created_at', 'desc')->first();
+
+
+        return view('home');
+    }
+
 }
