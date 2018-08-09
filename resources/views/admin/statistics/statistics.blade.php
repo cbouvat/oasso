@@ -15,15 +15,15 @@
                 </div>
             </div>
             <div class="col-9">
-                <ul class="nav justify-content-center">
+                <ul class="nav justify-content-center nav nav-pills"  role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mois</a>
+                        <a class="nav-link" id="month" data-toggle="pill">Mois</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Année</a>
+                        <a class="nav-link" id="year" data-toggle="pill">Année</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Personnalisé</a>
+                        <a class="nav-link" id="personalized" data-toggle="pill">Personnalisé</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="v-pills-tabContent">
@@ -42,6 +42,29 @@
                                 @push('scripts')
                                     <script>
                                         $(function() {
+
+                                            $('#month').click(function() {
+                                                $.getJSON('/test.json', function(data) {
+                                                    var ctx = document.getElementById("myChartGeneral").getContext('2d');
+                                                    var myLineChart = new Chart(ctx, data);
+                                                });
+                                            });
+
+                                            $('#year').click(function() {
+                                                $.getJSON('/testYears.json', function(data) {
+                                                    var ctx = document.getElementById("myChartGeneral").getContext('2d');
+                                                    var myLineChart = new Chart(ctx, data);
+                                                });
+                                            });
+
+                                            $('#personalized').click(function() {
+                                                $.getJSON('/testYears.json', function(data) {
+                                                    var ctx = document.getElementById("myChartGeneral").getContext('2d');
+                                                    var myLineChart = new Chart(ctx, data);
+                                                });
+                                            });
+
+
                                             $('myChartGeneral').ready(function() {
                                                 $.getJSON('/test.json', function(data) {
                                                     var ctx = document.getElementById("myChartGeneral").getContext('2d');

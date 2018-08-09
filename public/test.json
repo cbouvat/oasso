@@ -17,7 +17,7 @@
     ],
     "datasets": [
       {
-        "label": ["Nombre adhésions par an"],
+        "label": ["Nombre adhésions par mois"],
         "data": [
           12,
           5,
