@@ -34,6 +34,16 @@
         </div>
     </div>
 @endif
+@if (session()->has('error_message'))
+    <div class="message_alert text-center">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('error_message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
 <!-- FIN DIC CONTENANT LE MESSAGE -->
 
 
@@ -101,7 +111,7 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link" href="{{route('front.user.gift')}}">
+                        <a class="nav-link" href="{{route('user.gift.index')}}">
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>
@@ -166,7 +176,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.gift.index')}}">
                             <span data-feather="layers">
                                 <i class="fas fa-gift"></i>
                             </span>

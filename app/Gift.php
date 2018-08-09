@@ -23,4 +23,6 @@ class Gift extends Model
         return $this->morphMany('App\Payment', 'paymentable');
     }
 
+
+
 }
