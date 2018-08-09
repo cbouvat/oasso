@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('front.user.edit') }}">
+                        <a class="nav-link" href="{{ route('user.edit') }}">
                             <span data-feather="shopping-cart">
                                 <i class="fas fa-users"></i>
                             </span>
