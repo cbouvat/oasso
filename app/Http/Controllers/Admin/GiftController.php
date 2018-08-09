@@ -127,7 +127,7 @@ class GiftController extends Controller
         $gift = Gift::findOrFail($id);
         $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'from_user_id' => 'nullable|numeric',
+            'from_user_id' => 'required|numeric',
         ]);
         $inputs = $request->all();
 
