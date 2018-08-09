@@ -140,7 +140,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->load(['gifts' => function ($query) {
-            $this->$query->orderBy('created_at', 'desc');
+            $query->orderBy('created_at', 'desc');
         }]);
         $user->load('role');
 
