@@ -38,7 +38,7 @@ class GiftController extends Controller
     public function create(Request $request)
     {
         $inputs = $request->validate([
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:0|max:999999',
             'from_user_id' => 'nullable|numeric',
             'from_me' => 'nullable|numeric',
             'payment_methods' => 'required'
@@ -146,7 +146,7 @@ class GiftController extends Controller
 
         $gift->update($inputs);
 
-        return back()->with('message', 'Modification confirmée');
+        return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
     }
 
     /**

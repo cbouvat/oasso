@@ -11,7 +11,7 @@
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
-                        <form action="{{route('user.gift.create')}}" method="post">
+                        <form action="{{route('admin.gift.create')}}" method="post">
                             @csrf
                             <div class="input-group">
                                 <input type="text" name="amount" class="form-control text-right">

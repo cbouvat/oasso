@@ -9,7 +9,6 @@ use App\PaymentMethod;
 use Auth;
 use Illuminate\Http\Request;
 
-
 class GiftController extends Controller
 {
     function __construct()
@@ -40,9 +39,10 @@ class GiftController extends Controller
     public function create(Request $request)
     {
         $inputs = $request->validate([
-            'amount' => 'required|numeric',
+            'amount' => 'required|numeric|min:0|max:999999',
             'payment_methods' => 'required'
         ]);
+
 
         $inputs['user_id'] = Auth::user()->id;
 
