@@ -1,6 +1,5 @@
 @extends('layouts.app')
 <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
-<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
 @section('content')
 
     <form method="post" action="{{ route('admin.newsletters.create') }}">
@@ -11,41 +10,52 @@
                     <h1>{{__('Newsletter page title')}}</h1>
                 </div>
 
-                <div class="col-md-4 mb-3">
-                    <label></label>
-                    <input id="title" class="input-group mt-2 mb-2" type="text" name="title" placeholder="Title">
-
+                <div class="row col-md-6 mb-3">
+                    <label>Title</label>
+                    <input id="newsletterTitle" class="input-group mb-2" type="text" name="newsletterTitle">
+                    @if ($errors->has('newsletterTitle'))
+                        <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('newsletterTitle') }}</strong>
+                                    </span>
+                    @endif
                     <div class="input-group">
-                        <label for="inputGroupSelect04"></label>
-                        <select class="custom-select" id="inputGroupSelect04">
-                            <option selected>Choose...</option>
-                            @foreach($sentMessage as $sent)
-                                <option value="{{$sent}}">{{ $sent->title }}</option>
+                        <label for="inputGroupSelect"></label>
+                        <select class="custom-select" id="inputGroupSelect">
+                            <option selected disabled value="">Choose an old newsletter or write a new one</option>
+                            @foreach($newsletters as $newsletter)
+                                <option value="{{$newsletter->html_content}}">{{$newsletter->title}}</option>
                             @endforeach
 
                         </select>
                         <div class="input-group-append">
-                            <button id="copy" class="btn btn-outline-secondary" type="button">Copy</button>
+                            <input type="reset" id="new" style="display: none" class="btn btn-outline-secondary"
+                                   value="new">
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12" style="height:600px" id="editor">@if($newsletter){!! $newsletter->html_content !!}@endif</div> <!-- Quill editor -->
+                <div class="col-md-12" style="height:600px" id="editor"></div> <!-- Quill editor -->
+            {{--@if ($errors->has('content'))--}}
+            {{--<span class="invalid-feedback">--}}
+            {{--<strong>{{ $errors->first('content') }}</strong>--}}
+            {{--</span>--}}
+            {{--@endif--}}
 
-                <!--textarea used to send Quill data to the controller via the id-->
-                <label for="html"></label>
+            <!--textarea used to send Quill data to the controller via the id-->
+
                 <textarea id="html" name="html" style="display: none"></textarea>
-                <label for="text"></label>
+
                 <textarea id="text" name="text" style="display: none"></textarea>
 
                 <input type="submit" class="btn btn-primary m-2" value="Enregistrer">
 
                 <!--textarea used to get the choosen sentMessage for script-->
                 <label for="sentMessageCopy"></label>
-                <textarea id="sentMessageCopy" name="sentMessageCopy" style="display: none">{{ $sent }}</textarea>
+                {{--<textarea id="sentMessageCopy" name="sentMessageCopy" style="display: none">{{ $sent }}</textarea>--}}
             </div>
         </div>
     </form>
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
     <script> // Init Quill
         let quill = new Quill('#editor', {
             modules: {
@@ -66,22 +76,32 @@
 
         // Get Quill data and send it to the two textarea in html and text.
         quill.on('text-change', function () {
-            let quillContentHtml = document.querySelector('.ql-editor').innerHTML;
-            document.getElementById('html').value = quillContentHtml;
+            $('#html').val(quill.root.innerHTML);
 
-            let quillContentText = quill.getText();
-            document.getElementById('text').value = quillContentText;
+            $('#text').val(quill.getText());
         });
 
-        // update Quill editor with the choosen newsletter
-        let sentMessageCopy;
-        let onCopy = document.getElementById('copy');
-        onCopy.onclick = copy;
 
-        function copy() {
-            sentMessageCopy = document.getElementById('inputGroupSelect04').value;
-            console.log(sentMessageCopy);
-           quill.setContents([{ insert: sentMessageCopy}]); // send sentMessageCopy to editor
-        }
+        //watch select change and update Quill editor with the chosen newsletter
+        $('#inputGroupSelect').change(function () {
+            quill.root.innerHTML = $('#inputGroupSelect').val(); // send newsletter to editor
+
+            $('#newsletterTitle').val($('#inputGroupSelect option:selected').text());
+
+            $('#new').css("display", "block");
+        });
+
+        //Reset form and quill content
+        $('#new').click(function () {
+            quill.setContents([]);
+            $('#new').css("display", "none");
+        });
+
+        //error return
+
+        {{--quill.setContents([--}}
+        {{--{insert: "{{ strip_tags(old('content')) }}"}--}}
+        {{--]);--}}
+
     </script>
 @endsection
