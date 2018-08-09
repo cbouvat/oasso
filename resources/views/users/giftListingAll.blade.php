@@ -29,7 +29,7 @@
                             <td>
                                 <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
                                    class="btn btn-warning"><span
-                                            class="fas fa-trash-alt"></span></a>
+                                            class="fas fa-edit"></span></a>
                             </td>
                             <td>
                                 <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"
