@@ -41,7 +41,7 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * @param User $user
      */
     public function show(User $user)
     {
@@ -121,6 +121,8 @@ class UserController extends Controller
 
     /**>
      * Insert into Database Gift from a member
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function give(Request $request)
     {
