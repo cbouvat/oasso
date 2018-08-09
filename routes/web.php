@@ -26,6 +26,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
     Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
     Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+
     Route::get('/{user}/adhesion', 'UserController@beforeAdhesion')->name('admin.users.addadhesion');
     Route::post('/{user}/adhesion', 'UserController@validatorAdhesion')->name('admin.users.validadhesion');
+    Route::post('/{user}/adhesion/create', 'UserController@createSubscription')->name('admin.users.create');
+
 });

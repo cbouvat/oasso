@@ -4,14 +4,14 @@
 
     <h1 class="container mt-5 pt-5 text-center">{{ $user->firstname}} {{ $user->lastname}}</h1>
 
-    <form method="POST" action="{{route('admin.users.validadhesion', ['userid' => $user->id])}}"
+    <form method="POST" action="{{route('admin.users.validadhesion', ['user' => $user->id])}}"
           aria-label="{{ __('Addadhesion') }}">
         @csrf
         <div class="form-group row">
             <label for="subscription_type"
                    class="col-md-4 col-form-label text-md-right">{{ __('subscription_type') }}</label>
             <div class="col-md-6">
-                <select id="subscription_type" name="subscription_type" class="custom-select">
+                <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                     <option selected disabled>Type</option>
                     <option value=1>Chômeur</option>
                     <option value=2>Famille</option>
@@ -27,11 +27,13 @@
             <div class="col-md-6">
                 <input id="amount" type="text"
                        class="form-control{{ $errors->has('amount') ? 'is-invalid' : '' }}"
-                       name="amount" value="{{ old('amount') ? '' : '0'}}" required autofocus>
+                       name="amount" value="{{ old('amount') ? '' : ''}}">
             </div>
         </div>
 
-        <div class="form-group row">
+        <!-- adding payment_methods for V2 -->
+
+        <!--<div class="form-group row">
             <label for="payment_methods"
                    class="col-md-4 col-form-label text-md-right">{{ __('payment_methods') }}</label>
             <div class="col-md-6">
@@ -42,15 +44,16 @@
                     <option value=3>Carte Bancaire</option>
                 </select>
             </div>
-        </div>
+        </div>-->
+
 
         <div class="form-group row">
-            <label for="datepicker"
+            <label for="subscription_date"
                    class="col-md-4 col-form-label text-md-right">{{ __('subscription_date') }}</label>
             <div class="col-md-6">
-                <input id="datepicker" type="date"
+                <input id="subscription_date" type="date"
                        class="form-control{{ $errors->has('subscription_date') ? ' is-invalid' : '' }}"
-                       name="datepicker" value="{{  old('subscription_date') ? '' : date('Y-m-d')}}" required>
+                       name="subscription_date" value="{{  old('subscription_date') ? '' : date('Y-m-d')}}">
             </div>
         </div>
 
@@ -64,6 +67,10 @@
 
 
     </form>
-
+    @if ($errors->has('subscription_date'))
+        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('subscription_date') }}</strong>
+                                    </span>
+    @endif
 
 @endsection
