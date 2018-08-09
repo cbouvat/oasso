@@ -14,6 +14,11 @@
                         <form action="{{route('user.gift.create')}}" method="post">
                             @csrf
                             <div class="input-group">
+                                @if ($errors->has('amount'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('amount') }}</strong>
+                                    </span>
+                                @endif
                                 <input type="text" name="amount" class="form-control text-right">
                                 <div class="input-group-append">
                                     <span class="input-group-text">€</span>
@@ -30,9 +35,7 @@
                                     <label for="from_me">De ma part, {{$user->firstname}} {{$user->lastname}}</label>
                                 </div>
                             @endif
-                            <button type="submit" class="btn btn-outline-success btn-block mt-3 pt-3">
-                                <h2>Donner</h2>
-                            </button>
+                            <input value="Donner" type="submit" class="btn btn-outline-success btn-block pt-2 mt-2">
                         </form>
                     </div>
 
@@ -67,10 +70,12 @@
                                 <td>{{$gift->created_at->format('d/m/Y')}}</td>
                                 @if($user->role->id != 1)
                                     <td>
-                                        <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}" class="btn btn-warning"><span class="fas fa-trash-alt"></span></a>
+                                        <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
+                                           class="btn btn-warning"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                     <td>
-                                        <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}" class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
+                                        <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"
+                                           class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
                                     </td>
                                 @endif
                             </tr>

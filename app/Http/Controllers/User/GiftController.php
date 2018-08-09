@@ -33,12 +33,11 @@ class GiftController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'amount' => 'required|numeric|gte:0',
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:0|max:999999',
             'from_user_id' => 'nullable|numeric',
             'from_me' => 'nullable|numeric'
         ]);
-        $inputs = $request->all();
 
         if ($request->has('from_me')) {
             if ($request['from_me'] === Auth::user()->id) {
