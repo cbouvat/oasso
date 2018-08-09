@@ -4,11 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
-                <form action="{{ route('front.user.update') }}" method="post">
+                <form action="{{ URL::route('user.update') }}" method="post">
                     @csrf
-                    @method('PUT')
-
-                    {{--@dd($user)--}}
+                    {{--@method('PUT')--}}
 
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -20,22 +18,22 @@
 
                         <div class="form-group">
                             <label for="gender">Civilité</label>
-                                <select class="form-control" name="gender" id="gender">
-                                    <option value="1" @if($user->gender == 0) selected @endif>{{ __('Mr') }}</option>
-                                    <option value="2" @if($user->gender == 1) selected @endif>{{ __('Ms') }}</option>
-                                </select>
+                            <select class="form-control" name="gender" id="gender">
+                                <option value="0" @if($user->gender == 0) selected @endif>{{ __('Mr') }}</option>
+                                <option value="1" @if($user->gender == 1) selected @endif>{{ __('Ms') }}</option>
+                            </select>
                         </div>
-
 
                         <div class="form-group">
                             <label for="firstname">Prénom</label>
-                            <input type="text" name="firstname" class="form-control" id="firstname" value="{{ $user->firstname }}">
+                            <input type="text" name="firstname" class="form-control" id="firstname"
+                                   value="{{ $user->firstname }}">
                         </div>
-
 
                         <div class="form-group">
                             <label for="lastname">Nom</label>
-                            <input type="text" name="lastname" class="form-control" id="lastname" value="{{ $user->lastname }}">
+                            <input type="text" name="lastname" class="form-control" id="lastname"
+                                   value="{{ $user->lastname }}">
                         </div>
 
 
@@ -44,22 +42,24 @@
                             <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
                         </div>
 
-
                         <div class="form-group">
                             <label for="birthdate">Date de naissance</label>
-                            <input type="date" name="birthdate" class="form-control" id="birthdate" value="{{ $user->birthdate }}">
+                            <input type="date" name="birthdate" class="form-control" id="birthdate"
+                                   value="{{ $user->birthdate }}">
                         </div>
 
 
                         <div class="form-group">
                             <label for="address_line1">Adresse</label>
-                            <input type="text" name="address_line1" class="form-control" id="address_line1" value="{{ $user->address_line1}}">
+                            <input type="text" name="address_line1" class="form-control" id="address_line1"
+                                   value="{{ $user->address_line1}}">
                         </div>
 
 
                         <div class="form-group">
                             <label for="address_line2">Complément d'adresse</label>
-                            <input type="text" name="address_line2" class="form-control" id="address_line2" value="{{ $user->address_line2}}">
+                            <input type="text" name="address_line2" class="form-control" id="address_line2"
+                                   value="{{ $user->address_line2}}">
                         </div>
 
 
@@ -71,7 +71,8 @@
 
                         <div class="form-group">
                             <label for="zipcode">Code Postal</label>
-                            <input type="text" name="zipcode" class="form-control" id="zipcode" value="{{ $user->zipcode}}">
+                            <input type="text" name="zipcode" class="form-control" id="zipcode"
+                                   value="{{ $user->zipcode}}">
                         </div>
 
 
@@ -89,19 +90,17 @@
                         </div>
 
 
-                        <div class="form-check mt-2">
-                            <div class="form-group form-check col-6">
-                                <input type="checkbox" name="newsletter" class="form-check-input" id="newsletter">
-                                <label class="form-check-label" for="newsletter">Newsletter</label>
-                            </div>
-
-
-                            <div class="form-group form-check col-6">
-                                <input type="checkbox" name="newspaper" class="form-check-input" id="newspaper">
-                                <label class="form-check-label" for="newspaper">Journal papier</label>
-                            </div>
+                        <div class="form-group form-check col-6">
+                            <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" {{$user->newspaper == "1" ? "checked" : ""}}>
+                            <label class="form-check-label" for="newspaper">Newspaper</label>
 
                         </div>
+
+                        <div class="form-group form-check col-6">
+                            <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter"{{$user->newsletter == "1" ? "checked" : ""}}>
+                            <label class="form-check-label" for="newsletter">Newsletter</label>
+                        </div>
+
 
                         <div class="form-group mt-3">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Edit') }}</button>
@@ -123,14 +122,14 @@
 
                         <div class="form-group">
                             <label for="lastname_joint">Nom</label>
-                            <input type="text" name="" class="form-control" id="lastname_joint"
+                            <input type="text" name="lastname_joint" class="form-control" id="lastname_joint"
                                    value="{{ $user->lastname_joint }}">
                         </div>
 
 
                         <div class="form-group">
                             <label for="firstname_joint">Prénom</label>
-                            <input type="text" name="" class="form-control" id="firstname_joint"
+                            <input type="text" name="firstname_joint" class="form-control" id="firstname_joint"
                                    value="{{ $user->firstname_joint }}">
                         </div>
 
@@ -144,7 +143,7 @@
 
                         <div class="form-group">
                             <label for="email_joint">Email conjoint</label>
-                            <input type="email_joint" class="form-control" id="email_joint"
+                            <input type="email" name="email_joint" class="form-control" id="email_joint"
                                    value="{{ $user->email_joint}}">
                         </div>
 
@@ -154,8 +153,6 @@
                         </div>
                     </div>
 
-                    <div class="card m-5 p-5">
-                    </div>
                 </form>
             </div>
         </div>
