@@ -23,7 +23,6 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -34,7 +33,6 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -44,8 +42,6 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\User $user
-     * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
@@ -55,7 +51,6 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function edit()
@@ -70,14 +65,12 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-//            dd($request);
         $authUser = Auth::user();
-        $validateData = $request->validate([
+        $validateData = $this->$request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'string|max:45|nullable',
             'lastname' => 'string|max:45|nullable',
@@ -120,8 +113,6 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\User $user
-     * @return \Illuminate\Http\Response
      */
     public function destroy()
     {
@@ -130,12 +121,11 @@ class UserController extends Controller
 
     /**>
      * Insert into Database Gift from a member
-     * @param User $user
      */
     public function give(Request $request)
     {
         $user = Auth::user();
-        $request->validate([
+        $this->$request->validate([
             'amount' => 'required|numeric'
         ]);
         $inputs = $request->all();
@@ -150,7 +140,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         $user->load(['gifts' => function ($query) {
-            $query->orderBy('created_at', 'desc');
+            $this->$query->orderBy('created_at', 'desc');
         }]);
         $user->load('role');
 
@@ -169,6 +159,7 @@ class UserController extends Controller
     }
 
     /**
+     * @throws
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
