@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Events\UserCreated;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,10 +44,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-
-    protected $dispatchesEvents = [
-        'created' => UserCreated::class,
-    ];
 
 
     /** RELATIONS */
