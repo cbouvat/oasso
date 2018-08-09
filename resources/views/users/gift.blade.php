@@ -18,18 +18,14 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text">€</span>
                                 </div>
+                                <select class="form-control text-center ml-3" name="payment_methods">
+                                    @foreach($payments_methods as $payment_method)
+                                        <option value="{{ $payment_method->id }}">
+                                            {{ $payment_method->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
-                            @if($user->role->id == "1")
-                                <input type="hidden" name="from_user_id" value="{{$user->id}}">
-                            @else
-                                <input type="text" name="from_user_id"
-                                       class="form-control border border-info text-center mt-2"
-                                       placeholder="Saisir l'id du donateur ici">
-                                <div class="text-center mt-5">
-                                    <input type="checkbox" name="from_me" value="{{$user->id}}">
-                                    <label for="from_me">De ma part, {{$user->firstname}} {{$user->lastname}}</label>
-                                </div>
-                            @endif
                             <button type="submit" class="btn btn-outline-success btn-block mt-3 pt-3">
                                 <h2>Donner</h2>
                             </button>
@@ -53,31 +49,22 @@
                             <th scope="col">Donateur</th>
                             <th scope="col">Montant</th>
                             <th scope="col">Date</th>
-                            @if($user->role->id != 1)
-                                <th>Editer</th>
-                                <th>Supprimer</th>
-                            @endif
+                            <th scope="col">Methode de paiement</th>
                         </tr>
                         </thead>
                         <tbody>
                         @forelse($user->gifts as $gift)
                             <tr>
                                 <td scope="row">{{$user->firstname}} {{$user->lastname}}</td>
-                                <th>{{$gift->amount}} €</th>
-                                <td>{{$gift->created_at->format('d/m/Y')}}</td>
-                                @if($user->role->id != 1)
-                                    <td>
-                                        <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}" class="btn btn-warning"><span class="fas fa-trash-alt"></span></a>
-                                    </td>
-                                    <td>
-                                        <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}" class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
-                                    </td>
-                                @endif
+                                <th>{{ $gift->amount }} €</th>
+                                <td>{{ $gift->created_at->format('d/m/Y') }}</td>
+                                <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
                             </tr>
                         @empty
                             <tr>
                                 <th></th>
                                 <th>Vous n'avez réalisé aucun don pour le moment ...</th>
+                                <td></td>
                                 <td></td>
                             </tr>
                         @endforelse
