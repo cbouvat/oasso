@@ -75,30 +75,45 @@ class UserController extends Controller
     public function update(Request $request)
     {
 //            dd($request);
-            $validateData = $request->validate([
-                'gender' => 'integer|max:2',
-                'firstname' => 'string|max:45',
-                'lastname' => 'string|max:45',
-                'email' => 'string|email|max:255|unique:users',
-                'birthdate' => 'date',
-                'address_line1' => 'string|max:32',
-                'address_line2' => 'string|max:32|nullable',
-                'city' => 'string|max:45',
-                'zipcode' => 'string|max:5',
-                'phone_number_1' => 'string|max:10',
-                'phone_number_2' => 'string|max:10|nullable',
-//                'newspaper' => 'integer',
-//                'newsletter' => 'integer',
-                'gender_joint' => 'max:2|nullable',
-                'firstname_joint' => 'max:45|nullable',
-                'lastname_joint' => 'max:45|nullable',
-                'birthdate_joint' => 'date|nullable',
-                'email_joint' => 'email|max:255|nullable'
-            ]);
+        $authUser = Auth::user();
+        $validateData = $request->validate([
+            'gender' => 'integer|max:2|nullable',
+            'firstname' => 'string|max:45|nullable',
+            'lastname' => 'string|max:45|nullable',
+            'email' => 'string|email|max:255|unique:users,email,' . $authUser->id,
+            'birthdate' => 'date|nullable',
+            'address_line1' => 'string|max:32|nullable',
+            'address_line2' => 'string|max:32|nullable',
+            'city' => 'string|max:45|nullable',
+            'zipcode' => 'string|max:5|nullable',
+            'phone_number_1' => 'string|max:10|nullable',
+            'phone_number_2' => 'string|max:10|nullable',
+            'newspaper' => '',
+            'newsletter' => '',
+            'gender_joint' => 'max:2|nullable',
+            'firstname_joint' => 'max:45|nullable',
+            'lastname_joint' => 'max:45|nullable',
+            'birthdate_joint' => 'date|nullable',
+            'email_joint' => 'email|max:255|nullable'
+        ]);
 
-            Auth::user()->update($validateData);
+        if ($request['newspaper'] == "on") {
+            $validateData['newspaper'] = "1";
 
-        return redirect()->route('front.user.update');
+        } else {
+            $validateData['newspaper'] = "0";
+        }
+        if ($request['newsletter'] == "on") {
+            $validateData['newsletter'] = "1";
+
+        } else {
+            $validateData['newsletter'] = "0";
+        }
+
+        $authUser->update($validateData);
+        $authUser->save();
+//        return view('user.edit',['authUser' => $authUser, 'user' => $authUser]);
+        return redirect()->route('user.edit');
     }
 
     /**

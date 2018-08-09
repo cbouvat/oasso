@@ -20,9 +20,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/informations-personnelles','UserController@edit')->name('front.user.edit');
+Route::get('/informations-personnelles','UserController@edit')->name('user.edit');
 
-Route::post('/informations-personnelles','UserController@update')->name('front.user.update');
+Route::post('/informations-personnelles','UserController@update')->name('user.update');
 
 Route::get('/search','SearchController@search')->name('search');
 
