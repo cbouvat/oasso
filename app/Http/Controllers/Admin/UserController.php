@@ -50,7 +50,7 @@ class UserController extends Controller
             'lastname' => 'required|string|max:45',
             'firstname' => 'required|string|max:45',
             'birthdate' => 'required|date',
-            'password' => 'string|min:6|max:191|confirmed|nullable',
+            'password' => 'string|min:6|max:191',
             'address_line1' => 'required|string|max:100',
             'address_line2' => 'string|max:100|nullable',
             'zipcode' => 'required|string|max:20',
