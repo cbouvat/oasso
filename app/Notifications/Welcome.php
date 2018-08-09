@@ -43,17 +43,16 @@ class Welcome extends Notification implements ShouldQueue
   public function toMail($notifiable)
   {
     //$mail = TemplateMail::find(1)->html_content;
-    $view = View::make('welcomeMail', ['data' => 'toto']);
-    dd($view);
+    //$view = View::make('welcomeMail', ['data' => 'toto']);
 
 //    return (new MailMessage)
 //      ->greeting('Hello!')
 //      ->line('One of your invoices has been paid!')
 //      ->line('Thank you for using our application!');
 
-    return (new MailMessage)->view(
-      'welcomeMail', ['notif' => $notifiable]
-    );
+//    return (new MailMessage)->view(
+//      'welcomeMail', ['notif' => $notifiable]
+//    );
   }
 
   /**

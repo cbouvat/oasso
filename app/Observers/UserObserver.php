@@ -21,7 +21,7 @@ class UserObserver
             'role_type_id' => 1
         ]);
 
-      $user->notify(new Welcome());
+      //$user->notify(new Welcome());
     }
 
     /**
