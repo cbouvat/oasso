@@ -168,8 +168,8 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
-                            <input class="form-check-input"
-                                   type="checkbox" name="volonteer" id="volonteer" value="1" class="form-control"
+                            <input type='hidden' value='0' name='volonteer'>
+                            <input class="form-check-input" type="checkbox" name="volonteer" id="volonteer" value="1"
                                    @if(old('volonteer') ==1)checked @endif>
                             <label class="form-check-label" for="volonteer">
                                 {{ __('Volonteer') }}
@@ -197,6 +197,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
+                            <input type='hidden' value='0' name='delivery'>
                             <input class="form-check-input" type="checkbox" name="delivery" id="delivery" value="1"
                                    @if(old('delivery') ==1)checked @endif>
                             <label class="form-check-label" for="delivery">
@@ -211,6 +212,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
+                            <input type='hidden' value='0' name='newspaper'>
                             <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
                                    @if(old('newspaper') ==1)checked @endif>
                             <label class="form-check-label" for="newspaper">
@@ -225,6 +227,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
+                            <input type='hidden' value='0' name='newsletter'>
                             <input class="form-check-input"
                                    type="checkbox" name="newsletter" id="newsletter" value="1"
                                    @if(old('newsletter') ==1)checked @endif>
@@ -240,6 +243,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
+                            <input type='hidden' value='0' name='mailing'>
                             <input class="form-check-input"
                                    type="checkbox" name="mailing" id="mailing" value="1"
                                    @if(old('mailing') ==1)checked @endif>
@@ -268,6 +272,7 @@
                 <div class="row">
                     <div class="col-md-6 offset-md-4">
                         <div class="form-check">
+                            <input type='hidden' value='0' name='alert'>
                             <input class="form-check-input"
                                    type="checkbox" name="alert" id="alert" value="1"
                                    @if(old('alert') ==1)checked @endif>
