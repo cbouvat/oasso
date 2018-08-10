@@ -19,18 +19,18 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.users.list', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
     * Display an adhesion adding for admin
      * required click on 'Modifier' in the users-list
     */
-    public function beforeAdhesion($id)
+    public function beforeSubscription($id)
     {
         $user = User::findorfail($id);
 
-        return view('admin.users.addadhesion', ['user' => $user]);
+        return view('admin.user.addsubscription', ['user' => $user]);
     }
 
     /**
@@ -39,7 +39,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      *
      */
-    public function validatorAdhesion(Request $request, $userid)
+    public function validatorSubscription(Request $request, $userid)
     {
         $user = User::where('id', $userid)->firstOrFail();
 
@@ -57,7 +57,8 @@ class UserController extends Controller
         }
 **/
         $this->createSubscription($validator, $user);
-        return redirect()->route('admin.users.list');
+        /** todo modifier la route pour qu'elle renvoie vers la gestion des adhésions */
+        // return redirect()->route('admin.user.index');
 
     }
 
@@ -169,7 +170,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.beforedelete', ['user' => $user]);
+        return view('admin.user.beforedelete', ['user' => $user]);
     }
 
     /**
@@ -181,6 +182,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.list');
+        return redirect()->route('admin.user.index');
     }
 }

@@ -6,8 +6,8 @@
 
     <h3 class="container mt-5 mb-4 text-center">Membre: {{ $user->firstname}} {{ $user->lastname}}</h3>
 
-    <form method="POST" action="{{route('admin.users.validadhesion', ['user' => $user->id])}}"
-          aria-label="{{ __('Addadhesion') }}">
+    <form method="POST" action="{{route('admin.user.validsubscription', ['user' => $user->id])}}"
+          aria-label="{{ __('Subscription') }}">
         @csrf
         <div class="form-group row">
             <label for="subscription_type"
