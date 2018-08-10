@@ -20,9 +20,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/informations-personnelles', 'UserController@edit')->name('user.edit');
+Route::prefix('user')->group(function () {
+//User edit / update
+    Route::get('/edit', 'UserController@edit')->name('user.edit');
+    Route::post('/update', 'UserController@update')->name('user.update');
 
-Route::post('/informations-personnelles', 'UserController@update')->name('user.update');
+});
+
 
 Route::get('/search', 'SearchController@search')->name('search');
 Route::get('/search', 'SearchController@search')->name('search');
