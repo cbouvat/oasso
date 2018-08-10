@@ -32,12 +32,15 @@ Route::prefix('admin')->group(function () {
 
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
+    Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');
+    Route::get('/gift/add', 'Admin\GiftController@show')->name('admin.gift.show');
     Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
     Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
     Route::get('/gift/before-delete/{id}','Admin\GiftController@beforeDelete')->name('admin.gift.beforeDelete');
 });
 
+//User Gift Route
 Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
 Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
