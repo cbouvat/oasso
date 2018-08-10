@@ -150,4 +150,10 @@ class GiftController extends Controller
         return back()->with('message', 'Don supprimé');
 
     }
+
+    public function beforeDelete($id)
+    {
+
+        return view('admin.giftBeforeDelete',[ 'idGift' => $id]);
+    }
 }

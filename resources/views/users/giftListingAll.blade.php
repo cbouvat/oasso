@@ -32,7 +32,7 @@
                                             class="fas fa-trash-alt"></span></a>
                             </td>
                             <td>
-                                <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"
+                                <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
                                    class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
                             </td>
                         </tr>
