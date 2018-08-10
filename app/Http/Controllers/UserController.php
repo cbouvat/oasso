@@ -82,8 +82,8 @@ class UserController extends Controller
             'zipcode' => 'digits:5|numeric',
             'phone_number_1' => 'numeric|nullable',
             'phone_number_2' => 'numeric|nullable',
-            'newspaper' => '',
-            'newsletter' => '',
+            'newspaper' => 'boolean',
+            'newsletter' => 'boolean',
             'gender_joint' => 'max:2|nullable',
             'firstname_joint' => 'alpha|max:45|nullable',
             'lastname_joint' => 'alpha|max:45|nullable',
@@ -92,16 +92,10 @@ class UserController extends Controller
         ]);
 
 
-        if ($request['newspaper'] == "on") {
-            $validateData['newspaper'] = 1;
-
-        } else {
+        if ($request['newspaper'] == null ) {
             $validateData['newspaper'] = 0;
         }
-        if ($request['newsletter'] == "on") {
-            $validateData['newsletter'] = 1;
-
-        } else {
+        if ($request['newsletter'] == null) {
             $validateData['newsletter'] = 0;
         }
 

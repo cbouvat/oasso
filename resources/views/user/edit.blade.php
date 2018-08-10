@@ -9,7 +9,7 @@
                     {{--@method('PUT')--}}
 
                     {{--@foreach ($errors->all() as $error)--}}
-                        {{--<li>{{ $error }}</li>--}}
+                    {{--<li>{{ $error }}</li>--}}
                     {{--@endforeach--}}
 
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
@@ -181,7 +181,9 @@
                             <input class="form-check-input"
                                    type="checkbox"
                                    name="newspaper"
-                                   id="newspaper" {{$user->newspaper == 1 ? "checked" : ""}}>
+                                   id="newspaper" {{$user->newspaper == 1 ? "checked" : ""}}
+                                   value="1"
+                            >
                             <label class="form-check-label" for="newspaper">Newspaper</label>
 
                         </div>
@@ -190,7 +192,9 @@
                             <input class="form-check-input"
                                    type="checkbox"
                                    name="newsletter"
-                                   id="newsletter"{{$user->newsletter == 1 ? "checked" : ""}}>
+                                   id="newsletter"{{$user->newsletter == 1 ? "checked" : ""}}
+                                   value="1"
+                            >
                             <label class="form-check-label" for="newsletter">Newsletter</label>
                         </div>
 
@@ -203,7 +207,8 @@
 
 
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
-                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Infos Conjoint</h4></div>
+                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Infos Conjoint</h4>
+                        </div>
 
                         <div class="form-group">
                             <label for="gender_joint">Civilité conjoint</label>
