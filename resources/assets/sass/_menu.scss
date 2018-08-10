@@ -1,0 +1,37 @@
+//Nav
+.sidebar li{
+  padding:5px 10px;
+  border-bottom: 1px solid #eeeeee ;
+}
+
+//Icon Menu
+i{
+  font-size: 1.5em;
+  padding-right: 15px;
+  color: #455A64;
+}
+
+//Button Logout
+#logout-form{
+  background-color: snow;
+  border-radius: 2px;
+  padding: 8px;
+}
+
+#logout-form:hover{
+  background-color: lightcoral;
+  color:#f4f4f4;
+}
+
+//Input Search Bar
+#search-bar{
+  border-radius: 2px;
+  margin: 0px 10px;
+}
+
+//NavBar Name App + Name User
+#app-link-name{
+  color:#e5e5e5;
+  font-weight: bold;
+
+}
