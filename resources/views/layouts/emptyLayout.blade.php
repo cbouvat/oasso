@@ -7,9 +7,6 @@
 
     <title>{{config('app.name')}}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
-
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="container">
@@ -19,5 +16,8 @@
 <div class="text-center">
 @yield('content')
 </div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+@stack('scripts')
 </body>
 </html>

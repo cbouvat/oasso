@@ -24,7 +24,7 @@
 
                                 <div class="col-md-6">
 
-                                    <select id="selected-type" name="type" class="custom-select">
+                                    <select id="selected-type" name="type" class="custom-select" >
                                         @foreach($subscriptionTypes as $subscriptionType)
                                             <option value="{{$subscriptionType->id}}" data-amount="{{$subscriptionType->amount}}">
                                                     {{$subscriptionType->name}}
@@ -60,10 +60,13 @@
     </div>
     @push('scripts')
     <script>
-        $('#selected-type').change(function () {
+        function selectedtype() {
             var amount = $('#selected-type option:selected').data('amount');
             $('#subscription-amount').text(amount + ' €');
-        })
+        }
+
+        $('#selected-type').change(selectedtype);
+        selectedtype();
     </script>
     @endpush
 @endsection
