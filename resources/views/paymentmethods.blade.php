@@ -1,22 +1,77 @@
-@extends('layouts.emptyLayout')
+<html>
+<head>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
 
-@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form action="payment.php" class="ui form" id="payment_form" method="post">
+                <div class="field">
 
-    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">payment1</div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">payment2</div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">payment3</div>
+                    <input type="text" name="name" placeholder="Name" required>
+
+                </div>
+                <div class="field">
+
+                    <input type="text" name="email" placeholder="your@email.fr" required>
+
+                </div>
+                <div class="field">
+
+                    <input type="text" placeholder="16 Numbers of CreditCard" data-stripe="number">
+
+                </div>
+                <div class="field">
+
+                    <input type="text" placeholder="MM" data-stripe="exp_month">
+
+                </div>
+                <div class="field">
+
+                    <input type="text" placeholder="YY" data-stripe="exp_year">
+
+                </div>
+                <div class="field">
+
+                    <input type="text" placeholder="CVC" data-stripe="cvc">
+
+                </div>
+
+                <p>
+
+                    <button class="ui button" type="submit">Purchase</button>
+
+                </p>
+            </form>
+        </div>
+        <div class="col-3"></div>
     </div>
+</div>
 
-@endsection
+</body>
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script>
+    Stripe.setPublishableKey('pk_test_jAEtHrRKRj8QyQ55tzAz8001');
+
+    var $form = $('#payment_form');
+
+    $form.submit(function (e){
+
+        e.preventDefault();
+        Stripe.card.createToken($form, function (status, response){
+            if (response.error){
+                $form.find('.message').remove();
+                $form.prepend('<div class="ui negative message"><p>' + reponse.error.message + '</p></div>');
+            } else {
+                var token = reponse.id;
+                $form.append($('<input type="hidden" name="stripeToken">').val(token));
+                $form.get(0).submit();
+            }
+        })
+    })
+</script>
+</html>

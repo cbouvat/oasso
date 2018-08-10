@@ -10,4 +10,19 @@ class PaymentController extends Controller
     {
         return view('paymentmethods');
     }
+
+    public function Customer()
+    {
+        //
+    }
+
+    public function paymentProcess()
+    {
+        //
+    }
+
+    public function invoicePayment()
+    {
+        //
+    }
 }
