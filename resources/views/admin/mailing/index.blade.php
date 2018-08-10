@@ -9,7 +9,6 @@
             <th>Titre</th>
             <th>Date</th>
             <th>Modifier</th>
-            <th>Supprimer</th>
         </tr>
         </thead>
         <tbody>
@@ -19,9 +18,6 @@
                 <td>{{ $mailing->created_at->format('d/m/Y') }}</td>
                 <td>
                     <a type="button" class="btn btn-primary" href="{{ route('admin.mailing.edit', ['id' => $mailing->id]) }}">Modifier</a>
-                </td>
-                <td>
-                    <a type="button" class="btn btn-danger" href="{{ route('admin.mailing.beforedelete', ['id' => $mailing->id]) }}">Supprimer</a>
                 </td>
             </tr>
         @endforeach

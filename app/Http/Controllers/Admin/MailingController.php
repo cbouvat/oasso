@@ -85,24 +85,4 @@ class MailingController extends Controller
         return redirect()->route('admin.mailing.index')->with('message', 'Modification confirmée');
     }
 
-
-    public function beforeDelete($id)
-    {
-        $mailing = TemplateMail::findOrFail($id);
-        return view('admin.mailing.beforeDelete', ['mailing' => $mailing]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Mailing  $mailing
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $mailing = TemplateMail::findOrFail($id);
-        $mailing->delete();
-
-        return redirect()->route('admin.mailing.index')->with('message', 'Mail supprimé');
-    }
 }
