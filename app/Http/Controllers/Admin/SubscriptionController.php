@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Payment;
 use App\PaymentMethod;
 use App\Subscription;
 use App\SubscriptionType;
@@ -22,10 +23,8 @@ class SubscriptionController extends Controller
             ->with('user')
             ->with('payment')
             ->orderBy('subscription_date', 'desc')
-            ->paginate()
-        ;
+            ->paginate();
 
-        //dd($subscriptions->first());
 
         return view('admin.subscription.index', ['subscriptions' => $subscriptions]);
     }
@@ -37,7 +36,15 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        //
+
+        $payments_methods = PaymentMethod::all();
+        $subscription_type = SubscriptionType::all();
+
+        return view('admin.subscription.create', [
+            'payments_methods' => $payments_methods,
+            'subscription_type' => $subscription_type
+        ]);
+
     }
 
     /**
@@ -48,7 +55,30 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validator = $request->validate([
+            'subscription_type_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'payment_methods' => 'required',
+            'subscription_date' => 'required|date|after_or_equal:today',
+            'user_id' => ''
+        ]);
+
+
+        $validator['opt_out_mail'] = 0;
+        $validator['subscription_source'] = 0;
+
+        $subscription = Subscription::create($validator);
+
+        $validator['payment_id'] = $subscription->id;
+        $validator['payment_type'] = "App\Subscription";
+        $validator['payment_method_id'] = $request->payment_methods;
+
+        Payment::create($validator);
+
+
+        return redirect()->route('admin.subscription.index');
+
     }
 
     /**
@@ -72,12 +102,13 @@ class SubscriptionController extends Controller
     {
         $payments_methods = PaymentMethod::all();
         $subscription_type = SubscriptionType::all();
+        $subscription = Subscription::with('payment')->findOrFail($id);
 
 
-        return view('admin.subscription.edit', ['subscription' => Subscription::findOrFail($id),
+        return view('admin.subscription.edit', ['subscription' => $subscription,
             'payments_methods' => $payments_methods,
             'subscription_type' => $subscription_type
-            ]);
+        ]);
     }
 
     /**
@@ -89,7 +120,42 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validator = $request->validate([
+            'subscription_type_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'payment_methods' => 'required',
+            'subscription_date' => 'required|date|after_or_equal:today',
+            'user_id' => ''
+        ]);
+
+
+        $validator['opt_out_mail'] = 0;
+        $validator['subscription_source'] = 0;
+
+        $subscription = Subscription::findOrFail($id);
+
+        $subscription->update($validator);
+
+
+        $validator['payment_id'] = $subscription->id;
+        $validator['payment_type'] = "App\Subscription";
+        $validator['payment_method_id'] = $request->payment_methods;
+
+        $payment = Payment::where([
+            ['payment_id', $subscription->id],
+            ['payment_type', 'App\Subscription']
+        ]);
+
+        $payment->update([
+            'amount' => $validator['amount'],
+            'user_id' => $validator['user_id'],
+            'payment_method_id' => $validator['payment_method_id']
+        ]);
+
+
+        return back()->with('message', 'Mise a jour effectuée');
+
     }
 
     /**
@@ -100,6 +166,8 @@ class SubscriptionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subscriptionToDelete = Subscription::findOrFail($id);
+        $subscriptionToDelete->delete();
+        return back()->with('message', 'Don supprimé');
     }
 }

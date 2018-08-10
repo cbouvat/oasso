@@ -9,7 +9,7 @@
                     Gestion des Adhérants
                 </h1>
                 <div class="text-right">
-                    <a class="btn btn-outline-success mb-3" href="#">Ajouter un Adhérant</a>
+                    <a class="btn btn-outline-success mb-3" href="{{route('admin.subscription.create')}}">Ajouter un Adhérant</a>
                 </div>
             </div>
             <div class="text-center p-5 border border-success rounded">
@@ -40,7 +40,7 @@
                                             class="fas fa-edit"></span></a>
                             </td>
                             <td>
-                                <a href="#"
+                                <a href="{{route('admin.subscription.destroy', $subscription->id)}}"
                                    class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
                             </td>
                         </tr>

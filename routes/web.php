@@ -30,15 +30,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
     Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
 
-    //Sub
-    Route::get('/{user}/subscription', 'UserController@beforeSubscription')->name('admin.user.addsubscription');
-    Route::post('/{user}/subscription', 'UserController@validatorSubscription')->name('admin.user.validsubscription');
-    Route::post('/{user}/subscription/create', 'UserController@createSubscription')->name('admin.user.create');
-
     //Subscribers
     Route::get('/subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');
-    Route::post('/subscription', 'Admin\SubscriptionController@create')->name('admin.subscription.create');
-    Route::get('/subscription/add', 'Admin\SubscriptionController@show')->name('admin.subscription.show');
+    Route::get('/subscription/create', 'Admin\SubscriptionController@create')->name('admin.subscription.create');
+    Route::post('/subscription/store', 'Admin\SubscriptionController@store')->name('admin.subscription.store');
     Route::get('/subscription/edit/{subscription}', 'Admin\SubscriptionController@edit')->name('admin.subscription.edit');
     Route::post('/subscription/update/{id}', 'Admin\SubscriptionController@update')->name('admin.subscription.update');
     Route::get('/subscription/destroy/{id}', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');

@@ -19,7 +19,7 @@
                             <label for="subscription_type"
                                    class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
                             <div class="col-md-6">
-                                <input type="text" name="from_user_id"
+                                <input type="text" name="user_id"
                                        class="form-control text-right"
                                        placeholder="Saisir l'id du donateur ici" value="{{$subscription->user_id}}">
                             </div>
@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                                     @foreach($subscription_type as $subscription_type_id)
-                                        <option value="{{ $subscription_type_id->id }}">
+                                        <option value="{{ $subscription_type_id->id }}" {{$subscription_type_id->id == $subscription->subscription_type_id ? 'selected' : ''}}>
                                             {{ $subscription_type_id->name}}
                                         </option>
                                     @endforeach
@@ -60,8 +60,9 @@
                             <div class="col-md-6">
                                 <select id="payment_methods" name="payment_methods" class="custom-select">
                                     @foreach($payments_methods as $payment_method)
-                                        <option value="{{ $payment_method->id }}">
-                                            {{ $payment_method->name}}
+                                        <option value="{{ $payment_method->id }}" {{$payment_method->id == $subscription->payment->payment_method_id ? 'selected' : ''}}>
+
+                                        {{ $payment_method->name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -76,7 +77,7 @@
                                 <input id="subscription_date" type="date"
                                        class="form-control{{ $errors->has('subscription_date') ? ' is-invalid' : '' }}"
                                        name="subscription_date"
-                                       value="{{  old('subscription_date') ? '' : $subscription->subscription_date}}">
+                                       value="{{  old('subscription_date') ?  old('subscription_date') : $subscription->subscription_date}}">
                             </div>
                         </div>
 
