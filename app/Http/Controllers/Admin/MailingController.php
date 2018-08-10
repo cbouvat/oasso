@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Mailing;
+use App\TemplateMail;
 use Illuminate\Http\Request;
 
 class MailingController extends Controller
@@ -14,7 +16,8 @@ class MailingController extends Controller
      */
     public function index()
     {
-        //
+        $mailings = TemplateMail::latest()->paginate();
+        return view('admin.mailing.index', ['mailings' => $mailings]);
     }
 
     /**
@@ -55,9 +58,10 @@ class MailingController extends Controller
      * @param  \App\Mailing  $mailing
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mailing $mailing)
+    public function edit($id)
     {
-        //
+        $mailing = TemplateMail::findOrFail($id);
+        return view('admin.mailing.edit', ['mailing' => $mailing]);
     }
 
     /**
@@ -67,9 +71,25 @@ class MailingController extends Controller
      * @param  \App\Mailing  $mailing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mailing $mailing)
+    public function update(Request $request, $id)
     {
-        //
+        $mailing = TemplateMail::findOrFail($id);
+
+        $validator = $request->validate([
+            'title' => 'required',
+            'text_content' => 'required',
+        ]);
+
+        $mailing->update($validator);
+
+        return redirect()->route('admin.mailing.index')->with('message', 'Modification confirmée');
+    }
+
+
+    public function beforeDelete($id)
+    {
+        $mailing = TemplateMail::findOrFail($id);
+        return view('admin.mailing.beforeDelete', ['mailing' => $mailing]);
     }
 
     /**
@@ -78,8 +98,11 @@ class MailingController extends Controller
      * @param  \App\Mailing  $mailing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mailing $mailing)
+    public function destroy($id)
     {
-        //
+        $mailing = TemplateMail::findOrFail($id);
+        $mailing->delete();
+
+        return redirect()->route('admin.mailing.index')->with('message', 'Mail supprimé');
     }
 }

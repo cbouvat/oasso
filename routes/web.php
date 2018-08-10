@@ -37,6 +37,13 @@ Route::prefix('admin')->group(function () {
     Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
+    //Admin Mailing
+    Route::get('/mailing','Admin\MailingController@index')->name('admin.mailing.index');
+    Route::get('/mailing/edit/{id}','Admin\MailingController@edit')->name('admin.mailing.edit');
+    Route::post('/mailing/update/{id}','Admin\MailingController@update')->name('admin.mailing.update');
+    Route::get('/mailing/beforeDelete/{id}', 'Admin\MailingController@beforeDelete')->name('admin.mailing.beforedelete');
+    Route::get('/mailing/destroy/{id}','Admin\MailingController@destroy')->name('admin.mailing.destroy');
+
 });
 
 //User Gift Route
