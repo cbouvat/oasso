@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.users.list', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.beforedelete', ['user' => $user]);
+        return view('admin.user.beforedelete', ['user' => $user]);
     }
 
     /**
@@ -107,6 +107,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.list');
+        return redirect()->route('admin.user.index');
     }
 }

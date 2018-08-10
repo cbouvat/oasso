@@ -6,7 +6,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -40,29 +39,41 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
-
-    /** RELATIONS */
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function newsletters()
     {
         return $this->hasMany('App\Newsletter');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function gifts()
     {
         return $this->hasMany('App\Gift');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function role()
     {
         return $this->hasOne('App\Role');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function payments()
     {
         return $this->hasMany('App\Payment');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function subscription()
     {
         return $this->hasMany('App\Subscription');

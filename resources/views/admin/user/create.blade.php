@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container mt-5">
+    <div class="container">
         <form action="{{ route('admin.user.store') }}" method="post">
             @csrf
             @foreach ($errors->all() as $error)
@@ -11,7 +11,8 @@
             <div class="form-group row">
                 <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                 <div class="col-md-6">
-                    <select id="gender" name="gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
+                    <select id="gender" name="gender"
+                            class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
                         <option>{{ __('Civility') }}</option>
                         <option value="1" @if(old('gender') ==1)selected @endif> {{ __('Male') }}</option>
                         <option value="2" @if(old('gender') ==2)selected @endif>{{ __('Female') }}</option>
@@ -27,7 +28,8 @@
             <div class="form-group row">
                 <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
                 <div class="col-md-6">
-                    <input id="lastname" type="text" name="lastname" value="{{ old('lastname') }}" class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}">
+                    <input id="lastname" type="text" name="lastname" value="{{ old('lastname') }}"
+                           class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}">
                     @if ($errors->has('lastname'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('lastname') }}</strong>
@@ -100,7 +102,8 @@
                 <label for="zipcode"
                        class="col-md-4 col-form-label text-md-right">{{ __('Zip code') }}</label>
                 <div class="col-md-6">
-                    <input id="zipcode" type="text" name="zipcode" value="{{ old('zipcode') }}" class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}">
+                    <input id="zipcode" type="text" name="zipcode" value="{{ old('zipcode') }}"
+                           class="form-control{{ $errors->has('zipcode') ? ' is-invalid' : '' }}">
                     @if ($errors->has('zipcode'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('zipcode') }}</strong>
@@ -112,7 +115,8 @@
             <div class="form-group row">
                 <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
                 <div class="col-md-6">
-                    <input id="city" type="text" name="city" value="{{ old('city') }}" class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}">
+                    <input id="city" type="text" name="city" value="{{ old('city') }}"
+                           class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}">
                     @if ($errors->has('city'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('city') }}</strong>
@@ -183,7 +187,8 @@
                 <label for="details_volonteer"
                        class="col-md-4 col-form-label text-md-right">{{ __('Details volonteer') }}</label>
                 <div class="col-md-6">
-                    <input id="details_volonteer" type="text" name="details_volonteer" value="{{ old('details_volonteer') }}"
+                    <input id="details_volonteer" type="text" name="details_volonteer"
+                           value="{{ old('details_volonteer') }}"
                            class="form-control{{ $errors->has('details_volonteer') ? ' is-invalid' : '' }}">
                     @if ($errors->has('details_volonteer'))
                         <span class="invalid-feedback" role="alert">
@@ -259,7 +264,8 @@
                 <label for="comment"
                        class="col-md-4 col-form-label text-md-right">{{ __('Comment') }}</label>
                 <div class="col-md-6">
-                    <input id="comment" type="text" name="comment" value="{{ old('comment') }}" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}">
+                    <input id="comment" type="text" name="comment" value="{{ old('comment') }}"
+                           class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}">
                     @if ($errors->has('comment'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('comment') }}</strong>
@@ -290,7 +296,8 @@
                        class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                 <div class="col-md-6">
                     <select id="gender_joint" name="gender_joint" class="form-control">
-                        <option value="0" @if(old('gender_joint') ==0)selected @endif> {{ __('Partner Gender') }}</option>
+                        <option value="0"
+                                @if(old('gender_joint') ==0)selected @endif> {{ __('Partner Gender') }}</option>
                         <option value="1" @if(old('gender_joint') ==1)selected @endif> {{ __('Male') }}</option>
                         <option value="2" @if(old('gender_joint') ==2)selected @endif>{{ __('Female') }}</option>
                     </select>
@@ -361,7 +368,6 @@
                     </button>
                 </div>
             </div>
-
         </form>
     </div>
 @endsection

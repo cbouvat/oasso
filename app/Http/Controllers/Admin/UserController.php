@@ -9,21 +9,13 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
-     * UserController constructor.
-     */
-    /*    public function __construct()
-        {
-            $this->middleware('auth');
-        }*/
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('admin.member.index');
+        return view('admin.user.index');
     }
 
     /**
@@ -33,9 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('admin.user.create');
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -77,7 +68,7 @@ class UserController extends Controller
 
         User::create($inputs);
 
-        return redirect()->route('admin.users.list');
+        return redirect()->route('admin.user.index');
     }
 
     /**
