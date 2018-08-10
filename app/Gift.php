@@ -12,7 +12,8 @@ class Gift extends Model
      * @var array
      */
     protected $fillable = [
-        'amount','user_id'];
+        'amount', 'user_id'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -22,10 +23,9 @@ class Gift extends Model
         return $this->belongsTo('App\User');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function payments() {
-        return $this->morphMany('App\Payment', 'paymentable');
+
+    public function payment()
+    {
+        return $this->morphOne('App\Payment', 'payment');
     }
 }
