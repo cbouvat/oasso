@@ -5,19 +5,19 @@
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Voir</th>
-            <th>Modifier</th>
-            <th>Supprimer</th>
+            <th scope="col">Id</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prénom</th>
+            <th scope="col">Voir</th>
+            <th scope="col">Modifier</th>
+            <th scope="col">Supprimer</th>
         </tr>
         </thead>
         <tbody>
         @foreach($users as $user)
             <tr>
 
-                <th>{{ $user->id }}</th>
+                <th scope="row">{{ $user->id }}</th>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
                 <td>
