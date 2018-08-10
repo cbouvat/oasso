@@ -2,23 +2,30 @@
 
 @section('content')
 
-    <h1 class="container">Gestion Adhésion</h1>
+    <h1 class="container">Ajout d'une Adhésion</h1>
 
-    <h3 class="container mt-5 mb-4 text-center">Membre: {{ $user->firstname}} {{ $user->lastname}}</h3>
-
-    <form method="POST" action="{{route('admin.user.validsubscription', ['user' => $user->id])}}"
+    <form method="POST" action="{{route('admin.subscription.store')}}"
           aria-label="{{ __('Subscription') }}">
         @csrf
         <div class="form-group row">
             <label for="subscription_type"
-                   class="col-md-4 col-form-label text-md-right">{{ __('subscription_type') }}</label>
+                   class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
+            <div class="col-md-6">
+                <input type="text" name="user_id"
+                       class="form-control text-right"
+                       placeholder="Saisir l'id du donateur ici">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="subscription_type"
+                   class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
             <div class="col-md-6">
                 <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
-                    <option selected disabled>Type</option>
-                    <option value=1>Chômeur</option>
-                    <option value=2>Famille</option>
-                    <option value=3>Individuel</option>
-                    <option value=4>Etudiant</option>
+                    @foreach($subscription_type as $subscription_type_id)
+                        <option value="{{ $subscription_type_id->id }}">
+                            {{ $subscription_type_id->name}}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -33,21 +40,20 @@
             </div>
         </div>
 
-        <!-- adding payment_methods for V2 -->
 
-        <!--<div class="form-group row">
+        <div class="form-group row">
             <label for="payment_methods"
-                   class="col-md-4 col-form-label text-md-right">{{ __('payment_methods') }}</label>
+                   class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
             <div class="col-md-6">
                 <select id="payment_methods" name="payment_methods" class="custom-select">
-                    <option selected disabled>Type</option>
-                    <option value=1>Chèque</option>
-                    <option value=2>Espèces</option>
-                    <option value=3>Carte Bancaire</option>
+                    @foreach($payments_methods as $payment_method)
+                        <option value="{{ $payment_method->id }}">
+                            {{ $payment_method->name}}
+                        </option>
+                    @endforeach
                 </select>
             </div>
-        </div>-->
-
+        </div>
 
         <div class="form-group row">
             <label for="subscription_date"
