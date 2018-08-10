@@ -4,12 +4,21 @@ namespace App\Http\Controllers\User;
 
 use App\Gift;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Payment;
+use App\PaymentMethod;
+
 use Auth;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -18,12 +27,11 @@ class GiftController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $user->load(['gifts' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }]);
-        $user->load('role');
+        $user->load('gifts.payment.paymentMethod');
+        $payments_methods = PaymentMethod::all();
 
-        return view('users.gift', ['user' => $user]);
+        return view('users.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
+
     }
 
     /**
@@ -33,35 +41,24 @@ class GiftController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'amount' => 'required|numeric',
-            'from_user_id' => 'nullable|numeric',
-            'from_me' => 'nullable|numeric'
+
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:0|max:999999',
+            'payment_methods' => 'required'
         ]);
-        $inputs = $request->all();
-
-        if ($request->has('from_me')) {
-            if ($request['from_me'] === Auth::user()->id) {
-                $inputs['user_id'] = $request['from_me'];
-            } else {
-                $inputs['user_id'] = Auth::user()->id;
-            }
-
-        } elseif ($request['from_user_id'] != null) {
-
-            if (User::find($request['from_user_id']) != null) {
-                $inputs['user_id'] = $request['from_user_id'];
-            } else {
-                return back()->with('error_message', 'Erreur, identifiant incorrect !');
-            }
 
 
-        } else {
-            return back()->with('error_message', 'Erreur, identifiant incorrect !');
-        }
+        $inputs['user_id'] = Auth::user()->id;
 
-        Gift::create($inputs);
-        return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
+        $gift = Gift::create($inputs);
+
+        $inputs['payment_id'] = $gift->id;
+        $inputs['payment_type'] = "App\gift";
+        $inputs['payment_method_id'] = $request->payment_methods;
+
+        Payment::create($inputs);
+
+        return back()->with('message', 'Le don a bien été ajouté !');
     }
 
     /**
