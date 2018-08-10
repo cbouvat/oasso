@@ -144,7 +144,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.subscription.index')}}">
                             <span data-feather="shopping-cart">
                                 <i class="fas fa-users"></i>
                             </span>

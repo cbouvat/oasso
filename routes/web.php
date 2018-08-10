@@ -28,8 +28,18 @@ Route::prefix('admin')->group(function () {
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
     Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
-  
-    //Admin gift Crud
+
+
+    //Subscribers
+    Route::get('/subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');
+    Route::post('/subscription', 'Admin\SubscriptionController@create')->name('admin.subscription.create');
+    Route::get('/subscription/add', 'Admin\SubscriptionController@show')->name('admin.subscription.show');
+    Route::get('/subscription/edit/{subscription}', 'Admin\SubscriptionController@edit')->name('admin.subscription.edit');
+    Route::post('/subscription/update/{id}', 'Admin\SubscriptionController@update')->name('admin.subscription.update');
+    Route::get('/subscription/destroy/{id}', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
+
+
+    //Gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
     Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');
     Route::get('/gift/add', 'Admin\GiftController@show')->name('admin.gift.show');
