@@ -21,7 +21,7 @@
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
                 <td>
-                    <a href="" class="btn btn-success"><span class="fas fa-arrow-right"></span></a>
+                    <a href="{{route('admin.user.show')}}" class="btn btn-success"><span class="fas fa-arrow-right"></span></a>
                 </td>
                 <td>
                     <a class="btn btn-primary" href="#"><span class="fas fa-pencil-alt"></span></a>
