@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use function Faker\Provider\pt_BR\check_digit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -106,5 +110,38 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.user.index');
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function editPassword()
+    {
+        return view('users.password');
+    }
+
+
+    public function updatePassword(Request $request)
+    {
+        $authUser = Auth::user();
+
+        if (!Hash::check($request->input('actual-password'), $authUser->password)) {
+            return back()
+                ->withErrors(['actual-password' => 'Mot de passe incorrect'])
+                ->withInput();
+
+
+        } else {
+
+            $validateRequest = $request->validate([
+                'actual-password' => 'required|string|min:6|max:191',
+                'password' => 'required|string|min:6|max:191|confirmed',
+            ]);
+
+            $authUser->password = Hash::make($validateRequest['password']);
+            $authUser->save();
+
+            return view('home');
+        }
     }
 }
