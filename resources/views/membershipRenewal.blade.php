@@ -52,7 +52,7 @@
                                 <div class="col-md-8 offset-md-3">
                                     <input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">
 
-                                    <a href="/home" type="button" class="btn btn-primary">Cancel</a>
+                                    <a href="{{Route('home')}}" type="button" class="btn btn-primary">Cancel</a>
 
                                 </div>
                             </div>
