@@ -13,6 +13,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
@@ -24,16 +25,19 @@
 
 
 <nav class="navbar navbar-light fixed-top bg-secondary flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name" href="{{route('home')}}">{{config('app.name')}} - {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
+    <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name"
+       href="{{route('home')}}">{{config('app.name')}} - {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
 
     <form class="w-100" action={{route('search')}} method="get">
-        <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search" aria-label="Search" name="q">
+        <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search"
+               aria-label="Search" name="q">
     </form>
 
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             @auth
-                <a class="nav-link" id="logout-form" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="nav-link" id="logout-form" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Déconnexion
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -46,10 +50,14 @@
 
 <div class="container-fluid">
     <div class="row">
-        @include('layouts.menu');
+        <div class="col-md-2 d-none d-md-block bg-light sidebar">
+            @include('layouts.menu');
+        </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            @yield('content')
+        </main>
     </div>
 </div>
-
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- For add script for ur page, look Laravel Documentation Stacks (push method) -->
