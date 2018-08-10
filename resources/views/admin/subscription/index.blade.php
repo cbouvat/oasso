@@ -40,7 +40,7 @@
                                             class="fas fa-edit"></span></a>
                             </td>
                             <td>
-                                <a href="{{route('admin.subscription.destroy', $subscription->id)}}"
+                                <a href="{{route('admin.subscription.beforeDelete', $subscription)}}"
                                    class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
                             </td>
                         </tr>

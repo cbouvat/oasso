@@ -158,6 +158,11 @@ class SubscriptionController extends Controller
 
     }
 
+    public function beforeDelete(Subscription $subscription)
+    {
+        return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -168,6 +173,6 @@ class SubscriptionController extends Controller
     {
         $subscriptionToDelete = Subscription::findOrFail($id);
         $subscriptionToDelete->delete();
-        return back()->with('message', 'Don supprimé');
+        return redirect()->route('admin.subscription.index')->with('message', 'Adhésion supprimée');
     }
 }
