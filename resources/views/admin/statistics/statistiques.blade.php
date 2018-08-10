@@ -7,9 +7,10 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form class="form-row align-items-center">
+                <form class="form-row" id="statsForm">
                     <div class=" col-3">
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <label for="statsType"> Type </label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect statsType">
                             <option selected>Choisir...</option>
                             <option value="general">Général</option>
                             <option value="subscriptions">Adhésions</option>
@@ -17,24 +18,39 @@
                             <option value="receipts">Recettes</option>
                         </select>
                     </div>
-                    <div class="col-1">
-                    <label for="daterange1" class="col-3" > Date de début </label>
-            </div>
-
                     <div class=" align-items-center col-3">
-
-                            <input type="date" id="daterange1" value="" class="form-control"/>
+                        <label for="daterange1"> Date de début </label>
+                        <input type="date" id="daterange1" value="" class="form-control"/>
                     </div>
-                        <label for="daterange2" class="col-3"> Date de fin </label>
-                        <div class="col-3">
-                            <input type="date" id="daterange2" value="" class="form-control" />
-                        </div>
-                        <div class="col-1">
-                            <button class="btn btn-primary" id="btnGeneralPersonalized" type="submit">Envoyer</button>
-                        </div>
-
-
+                    <div class="col-3">
+                        <label for="daterange2"> Date de fin </label>
+                        <input type="date" id="daterange2" value="" class="form-control" />
+                    </div>
+                    <div class="col-3">
+                        <label for="visibilityType"> Visibilité </label>
+                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect visibilityType">
+                            <option selected>Choisir...</option>
+                            <option value="days">Jour</option>
+                            <option value="months">Mois</option>
+                            <option value="years">Année</option>
+                            <option value="personalized">Personnalisé</option>
+                        </select>
+                    </div>
+                    <div class="col-3 mt-4 pt-1">
+                        <button class="btn btn-primary" id="btnGeneralPersonalized" onclick="handleForm()" type="submit">Envoyer</button>
+                    </div>
                 </form>
+            </div>
+            <div class="col-12">
+                <canvas id="myChartGeneral" width="400" height="200"></canvas>
+                @push('scripts')
+                    <script>
+                        function handleForm(){
+                            var result = document.getElementById('statsForm').value;
+                            console.log('Le résultat est '+ result);
+                        }
+                    </script>
+                @endpush
             </div>
         </div>
 
