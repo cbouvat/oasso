@@ -62,11 +62,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Payment')->latest();
     }
 
-    public function quality()
-    {
-        return $this->belongsTo('App\Quality');
-    }
-
     public function subscription()
     {
         return $this->hasOne('App\Subscription')->latest();
