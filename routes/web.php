@@ -23,12 +23,17 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
+
     Route::get('/user', 'UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
     Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
 
+    //Sub
+    Route::get('/{user}/subscription', 'UserController@beforeSubscription')->name('admin.user.addsubscription');
+    Route::post('/{user}/subscription', 'UserController@validatorSubscription')->name('admin.user.validsubscription');
+    Route::post('/{user}/subscription/create', 'UserController@createSubscription')->name('admin.user.create');
 
     //Subscribers
     Route::get('/subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');

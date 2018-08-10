@@ -12,8 +12,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'amount', 'opt_out_mail', 'user_id', 'subscription_type_id', 'subscription_date', 'subscription_source',
-    ];
+        'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'];
 
 
     protected $morphClass = 'subscription';
