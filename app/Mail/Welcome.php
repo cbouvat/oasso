@@ -32,12 +32,13 @@ class Welcome extends Mailable
      */
     public function build()
     {
-        $templateMail = TemplateMail::where('title', 'welcome')->get();
+        $templateMail = TemplateMail::where('title', 'Et ratione corporis eius.')->first();
+
         $html = $templateMail->html_content;
         $text = $templateMail->text_content;
 
-        return $this->view($html)
-                    ->$this->text($text);
+
+        return $this->view('vendor.notifications.email');
 
     }
 }

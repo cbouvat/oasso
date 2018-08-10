@@ -1,5 +1,6 @@
 <?php
 
+use App\Observers\UserObserver;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
