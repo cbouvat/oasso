@@ -2,9 +2,10 @@
 
 namespace App\Observers;
 
-use App\Notifications\Welcome;
+use App\Mail\Welcome;
 use App\Role;
 use App\User;
+use Illuminate\Support\Facades\Mail;
 
 class UserObserver
 {
@@ -21,7 +22,7 @@ class UserObserver
             'role_type_id' => 1
         ]);
 
-      //$user->notify(new Welcome());
+        Mail::to($user)->send(new Welcome($user));
     }
 
     /**
