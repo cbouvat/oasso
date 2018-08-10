@@ -7,9 +7,6 @@
                 <div class="card">
                     <div class="card-header">{{ __('Membership Renewal') }}</div>
                     <div class="card-body">
-                        <form method="get" action="{{ route('home') }}">
-                            @csrf
-
                             <div class="form-group row justify-content-center">
                                 <label class="col-form-label">
                                     {{ __('Your ')  }} {{$subType->name}} {{__(' membership has been renewed until the ') }} {{$sub->subscription_date}}
@@ -21,12 +18,11 @@
                             </div>
 
                             <div class="form-group row justify-content-center">
-                                <button type="submit" class="btn btn-primary">
+                                <a type="button" class="btn btn-primary" href={{Route('home')}}>
                                     {{ __('Back to home page') }}
-                                </button>
+                                </a>
                             </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
