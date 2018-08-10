@@ -5,7 +5,12 @@
     <div class="row pt-5">
         <div class="col-12">
             <div>
-                <h1>Gestion des Adhérants</h1>
+                <h1>
+                    Gestion des Adhérants
+                </h1>
+                <div class="text-right">
+                    <a class="btn btn-outline-success mb-3" href="#">Ajouter un Adhérant</a>
+                </div>
             </div>
             <div class="text-center p-5 border border-success rounded">
                 <table class="table">

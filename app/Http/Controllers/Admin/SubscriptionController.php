@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\PaymentMethod;
 use App\Subscription;
+use App\SubscriptionType;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -68,7 +70,14 @@ class SubscriptionController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.subscription.edit', ['subscription' => Subscription::findOrFail($id)]);
+        $payments_methods = PaymentMethod::all();
+        $subscription_type = SubscriptionType::all();
+
+
+        return view('admin.subscription.edit', ['subscription' => Subscription::findOrFail($id),
+            'payments_methods' => $payments_methods,
+            'subscription_type' => $subscription_type
+            ]);
     }
 
     /**
