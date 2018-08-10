@@ -17,6 +17,7 @@ class GiftController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +27,7 @@ class GiftController extends Controller
     {
         $gifts = Gift::with('user')->latest()->paginate();
 
-        return view('admin.giftListingAll', ['gifts' => $gifts]);
+        return view('admin.gift.index', ['gifts' => $gifts]);
     }
 
     /**
@@ -68,7 +69,7 @@ class GiftController extends Controller
         $gift = Gift::create($inputs);
 
         $inputs['payment_id'] = $gift->id;
-        $inputs['payment_type'] = "App\gift";
+        $inputs['payment_type'] = 'App\Gift';
         $inputs['payment_method_id'] = $request->payment_methods;
 
         Payment::create($inputs);
@@ -102,7 +103,7 @@ class GiftController extends Controller
 
         $payments_methods = PaymentMethod::all();
 
-        return view('admin.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
+        return view('admin.gift.show', ['user' => $user, 'payments_methods' => $payments_methods]);
 
     }
 
@@ -117,7 +118,7 @@ class GiftController extends Controller
         $gift = Gift::findOrFail($id);
         $gift->load('user');
 
-        return view('admin.giftEdit', ['gift' => $gift]);
+        return view('admin.gift.edit', ['gift' => $gift]);
 
     }
 

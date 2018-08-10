@@ -28,3 +28,4 @@ class Gift extends Model
     {
         return $this->morphOne('App\Payment', 'payment');
     }
+}
