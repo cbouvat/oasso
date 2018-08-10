@@ -33,7 +33,7 @@
                                class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                         <div class="col-md-6">
                             <select id="subscription_type_id" onchange="setAmount()" name="subscription_type_id"
-                                    class="custom-select">
+                                    class="custom-select text-right">
                                 @foreach($subscription_types as $subscription_type)
                                     <option id="subscription_type" name="{{$subscription_type->amount}}"
                                             value="{{ $subscription_type->id }}">
@@ -55,7 +55,7 @@
                         <div class="col-md-6">
                             <input id="amount" type="text"
                                    class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}"
-                                   name="amount" value="{{ old('amount') ? old('amount') : ''}}">
+                                   name="amount" value="{{ old('amount') ? old('amount') : '0.00'}}">
                             @if ($errors->has('amount'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('amount') }}</strong>
