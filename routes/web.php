@@ -20,19 +20,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/search','SearchController@search')->name('search');
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
-    Route::get('/users-create', 'Admin\UserController@create')->name('admin.user.create');
-    Route::post('/users-store', 'Admin\UserController@store')->name('admin.user.store');
-    Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
-    Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+    Route::get('/users', 'UserController@index')->name('admin.users.list');
+    Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
+    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.users.softdelete');
+    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+  
+    //Admin gift Crud
+    Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
+    Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
+    Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
+    Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
+
 });
 
-Route::get('/gift', 'UserController@gift')->name('front.user.gift');
-Route::post('/gift', 'UserController@give')->name('front.user.give');
-Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
-Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
+Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
 

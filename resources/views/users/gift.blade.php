@@ -11,7 +11,7 @@
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
-                        <form action="{{route('front.user.give')}}" method="post">
+                        <form action="{{route('user.gift.create')}}" method="post">
                             @csrf
                             <div class="input-group">
                                 <input type="text" name="amount" class="form-control text-right">
@@ -20,11 +20,17 @@
                                 </div>
                             </div>
                             @if($user->role->id == "1")
-                                <input type="hidden" name="from">
+                                <input type="hidden" name="from_user_id" value="{{$user->id}}">
                             @else
-                                <input type="text" name="from" class="form-control text-right">
+                                <input type="text" name="from_user_id"
+                                       class="form-control border border-info text-center mt-2"
+                                       placeholder="Saisir l'id du donateur ici">
+                                <div class="text-center mt-5">
+                                    <input type="checkbox" name="from_me" value="{{$user->id}}">
+                                    <label for="from_me">De ma part, {{$user->firstname}} {{$user->lastname}}</label>
+                                </div>
                             @endif
-                            <button type="submit" class="btn btn-outline-success btn-block mt-3">
+                            <button type="submit" class="btn btn-outline-success btn-block mt-3 pt-3">
                                 <h2>Donner</h2>
                             </button>
                         </form>
@@ -44,9 +50,13 @@
                     <table class="table">
                         <thead class="bg-success text-white">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Donateur</th>
                             <th scope="col">Montant</th>
                             <th scope="col">Date</th>
+                            @if($user->role->id != 1)
+                                <th>Editer</th>
+                                <th>Supprimer</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -55,6 +65,14 @@
                                 <td scope="row">{{$user->firstname}} {{$user->lastname}}</td>
                                 <th>{{$gift->amount}} €</th>
                                 <td>{{$gift->created_at->format('d/m/Y')}}</td>
+                                @if($user->role->id != 1)
+                                    <td>
+                                        <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}" class="btn btn-warning"><span class="fas fa-trash-alt"></span></a>
+                                    </td>
+                                    <td>
+                                        <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}" class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
+                                    </td>
+                                @endif
                             </tr>
                         @empty
                             <tr>
