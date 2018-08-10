@@ -6,6 +6,7 @@ use App\Gift;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class UserController extends Controller
 {
@@ -69,44 +70,44 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+
         $authUser = Auth::user();
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
-            'firstname' => 'string|max:45|nullable',
-            'lastname' => 'string|max:45|nullable',
-            'email' => 'string|email|max:255|unique:users,email,' . $authUser->id,
-            'birthdate' => 'date|nullable',
-            'address_line1' => 'string|max:32|nullable',
+            'firstname' => 'required|alpha|string|max:45|min:2',
+            'lastname' => 'required|alpha|string|max:45|min:2',
+            'email' => 'string|required|email|max:255|unique:users,email,' . $authUser->id,
+            'birthdate' => '|date|before:today-13years|after:today-120years',
+            'address_line1' => 'string|max:32|',
             'address_line2' => 'string|max:32|nullable',
-            'city' => 'string|max:45|nullable',
-            'zipcode' => 'string|max:5|nullable',
-            'phone_number_1' => 'string|max:10|nullable',
-            'phone_number_2' => 'string|max:10|nullable',
+            'city' => 'required|alpha|string|max:45|',
+            'zipcode' => '|string|max:20 |regex:/^\d{5}(?:[-\s]\d{4})?$/',
+            'phone_number_1' => 'string|numeric|nullable',
+            'phone_number_2' => 'string|numeric|nullable',
             'newspaper' => '',
             'newsletter' => '',
             'gender_joint' => 'max:2|nullable',
-            'firstname_joint' => 'max:45|nullable',
-            'lastname_joint' => 'max:45|nullable',
-            'birthdate_joint' => 'date|nullable',
-            'email_joint' => 'email|max:255|nullable'
+            'firstname_joint' => 'alpha|max:45|nullable',
+            'lastname_joint' => 'alpha|max:45|nullable',
+            'birthdate_joint' => 'date|before:today-13years|after:today-120years|nullable',
+            'email_joint' => 'email|max:45|nullable',
         ]);
 
+
         if ($request['newspaper'] == "on") {
-            $validateData['newspaper'] = "1";
+            $validateData['newspaper'] = 1;
 
         } else {
-            $validateData['newspaper'] = "0";
+            $validateData['newspaper'] = 0;
         }
         if ($request['newsletter'] == "on") {
-            $validateData['newsletter'] = "1";
+            $validateData['newsletter'] = 1;
 
         } else {
-            $validateData['newsletter'] = "0";
+            $validateData['newsletter'] = 0;
         }
 
         $authUser->update($validateData);
-        $authUser->save();
-//        return view('user.edit',['authUser' => $authUser, 'user' => $authUser]);
         return redirect()->route('user.edit');
     }
 
