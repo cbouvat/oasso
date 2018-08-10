@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'phone_number_2' => 'string|max:10|nullable',
             'newspaper' => 'integer',
             'newsletter' => 'integer',
-            'gender_joint' => 'integer|min:0|max:2|nullable',
+            'gender_joint' => 'integer|min:1|max:2|nullable',
             'firstname_joint' => 'string|max:45|nullable',
             'lastname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
