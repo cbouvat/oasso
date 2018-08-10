@@ -25,10 +25,15 @@ Route::get('/informations-personnelles', 'UserController@edit')->name('user.edit
 Route::post('/informations-personnelles', 'UserController@update')->name('user.update');
 
 Route::get('/search', 'SearchController@search')->name('search');
+
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/user', 'UserController@index')->name('admin.user.index');
+    Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
+    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
+    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
 
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');

@@ -27,7 +27,7 @@ class GiftController extends Controller
     {
         $gifts = Gift::with('user')->latest()->paginate();
 
-        return view('admin.giftListingAll', ['gifts' => $gifts]);
+        return view('admin.gift.index', ['gifts' => $gifts]);
     }
 
     /**
@@ -44,6 +44,7 @@ class GiftController extends Controller
             'payment_methods' => 'required'
 
         ]);
+
 
         if ($request->has('from_me')) {
             if ($request['from_me'] === Auth::user()->id) {
@@ -64,13 +65,15 @@ class GiftController extends Controller
         } else {
             return back()->with('error_message', 'Erreur, identifiant incorrect !');
         }
+
         $gift = Gift::create($inputs);
 
         $inputs['payment_id'] = $gift->id;
-        $inputs['payment_type'] = "App\gift";
+        $inputs['payment_type'] = 'App\Gift';
         $inputs['payment_method_id'] = $request->payment_methods;
 
         Payment::create($inputs);
+
 
         return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
     }
@@ -92,6 +95,7 @@ class GiftController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+
     public function show()
     {
         $user = Auth::user();
@@ -99,7 +103,8 @@ class GiftController extends Controller
 
         $payments_methods = PaymentMethod::all();
 
-        return view('admin.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
+        return view('admin.gift.show', ['user' => $user, 'payments_methods' => $payments_methods]);
+
     }
 
     /**
@@ -112,7 +117,9 @@ class GiftController extends Controller
     {
         $gift = Gift::findOrFail($id);
         $gift->load('user');
-        return view('admin.giftEdit', ['gift' => $gift]);
+
+        return view('admin.gift.edit', ['gift' => $gift]);
+
     }
 
     /**
@@ -126,8 +133,10 @@ class GiftController extends Controller
     {
         $gift = Gift::findOrFail($id);
         $request->validate([
+
             'amount' => 'required|numeric|min:0|max:999999',
             'from_user_id' => 'required|numeric',
+
         ]);
         $inputs = $request->all();
 
@@ -147,6 +156,7 @@ class GiftController extends Controller
         $gift->update($inputs);
 
         return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
+
     }
 
     /**

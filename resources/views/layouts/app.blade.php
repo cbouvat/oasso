@@ -112,6 +112,7 @@
                     <li class="nav-item">
 
                         <a class="nav-link" href="{{ Auth::user()->role->role_type_id == 1 ? route('user.gift.index') : route('admin.gift.show')}}">
+
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>

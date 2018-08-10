@@ -15,10 +15,14 @@ class Gift extends Model
         'amount', 'user_id'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
+
 
     public function payment()
     {
