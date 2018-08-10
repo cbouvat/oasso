@@ -14,10 +14,9 @@
                         <th scope="col">Donateur</th>
                         <th scope="col">Montant</th>
                         <th scope="col">Date</th>
-                        @if(Auth::user()->role->id != 1)
-                            <th>Editer</th>
-                            <th>Supprimer</th>
-                        @endif
+                        <th scope="col">Methode de paiement</th>
+                        <th scope="col">Editer</th>
+                        <th scope="col">Supprimer</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,10 +25,12 @@
                             <td scope="row">{{$gift->user->firstname}} {{$gift->user->lastname}}</td>
                             <th>{{$gift->amount}} €</th>
                             <td>{{$gift->created_at->format('d/m/Y')}}</td>
+                            <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
+
                             <td>
                                 <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
                                    class="btn btn-warning"><span
-                                            class="fas fa-trash-alt"></span></a>
+                                            class="fas fa-edit"></span></a>
                             </td>
                             <td>
                                 <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"

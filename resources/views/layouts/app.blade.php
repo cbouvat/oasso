@@ -94,7 +94,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.edit') }}">
+                        <a class="nav-link" href="{{ route('user.edit', ['user' => Auth::user()]) }}">
                             <span data-feather="shopping-cart">
                                 <i class="fas fa-users"></i>
                             </span>
@@ -111,7 +111,8 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link" href="{{route('user.gift.index')}}">
+                        <a class="nav-link" href="{{ Auth::user()->role->role_type_id == 1 ? route('user.gift.index') : route('admin.gift.show')}}">
+
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>

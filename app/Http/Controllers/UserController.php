@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.users.list', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
@@ -52,10 +51,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(User $user)
     {
-
-        $user = Auth::user();
 
         return view('user.edit', ['user' => $user]);
     }
@@ -64,17 +61,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
 
-        $authUser = Auth::user();
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
             'lastname' => 'required|alpha|string|max:45|min:2',
-            'email' => 'string|required|email|max:255|unique:users,email,' . $authUser->id,
+            'email' => 'string|required|email|max:255|unique:users,email,' . $user->id,
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => 'string|max:32|',
             'address_line2' => 'string|max:32|nullable',
@@ -99,8 +96,8 @@ class UserController extends Controller
             $validateData['newsletter'] = 0;
         }
 
-        $authUser->update($validateData);
-        return redirect()->route('user.edit');
+        $user->update($validateData);
+        return redirect()->route('user.edit', ['user'=>$user]);
     }
 
     /**
@@ -120,7 +117,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('admin.users.beforedelete', ['user' => $user]);
+        return view('admin.user.beforedelete', ['user' => $user]);
     }
 
     /**
@@ -133,7 +130,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.users.list');
+        return redirect()->route('admin.user.index');
     }
 
 }

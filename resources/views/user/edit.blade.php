@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
-                <form action="{{ URL::route('user.update') }}" method="post">
+                <form action="{{ URL::route('user.update', ['user'=> $user]) }}" method="post">
                     @csrf
                     {{--@method('PUT')--}}
 
@@ -135,7 +135,7 @@
                                    name="zipcode"
                                    class="form-control {{$errors->has('zipcode') ? 'is-invalid':''}}"
                                    id="zipcode"
-                                   value="{{ $user->zipcode}}">
+                                   value="{{ old('zipcode') ? old('zipcode')  : $user->zipcode}}">
 
                             @if ($errors->has('zipcode'))
                                 <span class="invalid-feedback" role="alert">
