@@ -17,7 +17,8 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 </head>
 <body>
@@ -80,7 +81,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
 
-                            <span data-feather="home">@ if User->role == User</span>
+                        <span data-feather="home">@ if User->role == User</span>
 
                     </li>
 
@@ -110,7 +111,8 @@
                     </li>
                     <li class="nav-item">
 
-                        <a class="nav-link" href="{{ Auth::user()->role->role_type_id == 1 ? route('user.gift.index') : route('admin.gift.show')}}">
+                        <a class="nav-link"
+                           href="{{ Auth::user()->role->role_type_id == 1 ? route('user.gift.index') : route('admin.gift.show')}}">
 
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
@@ -128,11 +130,11 @@
                     </li>
                 </ul>
 
-                    <!--ADMIN //COMMERCIAL SIDE NAV -->
+                <!--ADMIN //COMMERCIAL SIDE NAV -->
                 <ul class="nav flex-column">
                     <li class="nav-item">
 
-                            <span data-feather="home">@ if user->role == Admin or Commercial</span>
+                        <span data-feather="home">@ if user->role == Admin or Commercial</span>
 
                     </li>
                     <li class="nav-item">
@@ -144,11 +146,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.subscription.index')}}">
+                        <a class="nav-link" href="{{route('admin.user.index')}}">
                             <span data-feather="shopping-cart">
                                 <i class="fas fa-users"></i>
                             </span>
-                            Gestion Adherents
+                            Membres
                         </a>
                     </li>
                     <li class="nav-item">
@@ -194,7 +196,7 @@
                     <!-- SUPPLEMENT ADMIN KETCHUP TOMATE OIGNONS-->
                     <li class="nav-item">
 
-                            <span data-feather="home">@ if user->role == Admin</span>
+                        <span data-feather="home">@ if user->role == Admin</span>
 
                     </li>
                     <li class="nav-item">
@@ -217,36 +219,36 @@
 
 
                 {{--<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">--}}
-                    {{--<span>Saved reports</span>--}}
-                    {{--<a class="d-flex align-items-center text-muted" href="#">--}}
-                        {{--<span data-feather="plus-circle"></span>--}}
-                    {{--</a>--}}
+                {{--<span>Saved reports</span>--}}
+                {{--<a class="d-flex align-items-center text-muted" href="#">--}}
+                {{--<span data-feather="plus-circle"></span>--}}
+                {{--</a>--}}
                 {{--</h6>--}}
                 {{--<ul class="nav flex-column mb-2">--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="#">--}}
-                            {{--<span data-feather="file-text"></span>--}}
-                            {{--Title 1--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="#">--}}
-                            {{--<span data-feather="file-text"></span>--}}
-                            {{--Title 2--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="#">--}}
-                            {{--<span data-feather="file-text"></span>--}}
-                            {{--Title 3--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link" href="#">--}}
-                            {{--<span data-feather="file-text"></span>--}}
-                            {{--Title 4--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="#">--}}
+                {{--<span data-feather="file-text"></span>--}}
+                {{--Title 1--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="#">--}}
+                {{--<span data-feather="file-text"></span>--}}
+                {{--Title 2--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="#">--}}
+                {{--<span data-feather="file-text"></span>--}}
+                {{--Title 3--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<li class="nav-item">--}}
+                {{--<a class="nav-link" href="#">--}}
+                {{--<span data-feather="file-text"></span>--}}
+                {{--Title 4--}}
+                {{--</a>--}}
+                {{--</li>--}}
                 {{--</ul>--}}
             </div>
         </nav>
