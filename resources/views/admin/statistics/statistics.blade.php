@@ -28,7 +28,7 @@
                 </ul>
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <div class="row mt-5">
+                        <div class="row mt-5" id="testdate">
                             <div class="col-6">
                                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                             </div>
@@ -42,7 +42,6 @@
                                 @push('scripts')
                                     <script>
                                         $(function() {
-
                                             $('#month').click(function() {
                                                 $.getJSON('/test.json', function(data) {
                                                     var ctx = document.getElementById("myChartGeneral").getContext('2d');
@@ -58,6 +57,9 @@
                                             });
 
                                             $('#personalized').click(function() {
+                                                $('#testdate').load('/test.html', function () {
+                                                    console.log('it is working !');
+                                                });
                                                 $.getJSON('/testYears.json', function(data) {
                                                     var ctx = document.getElementById("myChartGeneral").getContext('2d');
                                                     var myLineChart = new Chart(ctx, data);
@@ -78,116 +80,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </div>
-                            <div class="col-6">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                Ici, on aura les diagrammes!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                        <div class="row mt-5 justify-content-center">
-                            <table class="table table-striped table-dark" style="max-width: 70%;">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Villes</th>
-                                    <th scope="col">Pourcentage adhérents</th>
-                                    <th scope="col">Nombre adhérents</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row mt-5">
-                            Ici, on aura les diagrammes!
-
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <div class="row mt-5">
-                            <div class="col-6">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </div>
-                            <div class="col-6">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <div class="col-12">
-                                <canvas id="myChart" width="400" height="200"></canvas>
-                                @push('scripts')
-                                    <script>
-                                        var ctx = document.getElementById("myChart").getContext('2d');
-                                        var myChart = new Chart(ctx, {
-                                            type: 'bar',
-                                            data: {
-                                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-                                                datasets: [{
-                                                    label: '# of Votes',
-                                                    data: [12, 19, 3, 5, 2, 3],
-                                                    backgroundColor: [
-                                                        'rgba(255, 99, 132, 0.2)',
-                                                        'rgba(54, 162, 235, 0.2)',
-                                                        'rgba(255, 206, 86, 0.2)',
-                                                        'rgba(75, 192, 192, 0.2)',
-                                                        'rgba(153, 102, 255, 0.2)',
-                                                        'rgba(255, 159, 64, 0.2)'
-                                                    ],
-                                                    borderColor: [
-                                                        'rgba(255,99,132,1)',
-                                                        'rgba(54, 162, 235, 1)',
-                                                        'rgba(255, 206, 86, 1)',
-                                                        'rgba(75, 192, 192, 1)',
-                                                        'rgba(153, 102, 255, 1)',
-                                                        'rgba(255, 159, 64, 1)'
-                                                    ],
-                                                    borderWidth: 1
-                                                }]
-                                            },
-                                            options: {
-                                                scales: {
-                                                    yAxes: [{
-                                                        ticks: {
-                                                            beginAtZero:true
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        });
-                                    </script>
-                                @endpush
-                            </div>
-                        </div>
-                    </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
 
