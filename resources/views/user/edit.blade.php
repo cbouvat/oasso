@@ -30,7 +30,7 @@
                                    class="form-control {{$errors->has('lastname') ? 'is-invalid':''}}"
                                    name="lastname"
                                    id="lastname"
-                                   value="{{ $user->lastname }}">
+                                   value="{{ old('lastname') ? old('lastname')  : $user->lastname}}">
 
                             @if ($errors->has('lastname'))
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,8 @@
                             <label for="firstname">Prénom</label>
                             <input type="text" name="firstname"
                                    class="form-control {{$errors->has('firstname') ? 'is-invalid':''}}" id="firstname"
-                                   value="{{ $user->firstname }}">
+                                   value="{{ old('firstname') ? old('firstname')  : $user->firstname}}">
+
                             @if ($errors->has('firstname'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('firstname') }}</strong>
@@ -57,7 +58,7 @@
                                    name="email"
                                    id="email"
                                    class="form-control {{$errors->has('email') ? 'is-invalid':''}}"
-                                   value="{{ $user->email }}">
+                                   value="{{ old('email') ? old('email')  : $user->email}}">
 
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -72,7 +73,7 @@
                                    name="birthdate"
                                    class="form-control {{$errors->has('birthdate') ? 'is-invalid':''}}"
                                    id="birthdate"
-                                   value="{{ $user->birthdate }}">
+                                   value="{{ old('birthdate') ? old('birthdate')  : $user->birthdate}}">
 
                             @if ($errors->has('birthdate'))
                                 <span class="invalid-feedback" role="alert">
@@ -87,7 +88,7 @@
                             <input type="text" name="address_line1"
                                    class="form-control {{$errors->has('address_line1') ? 'is-invalid':''}}"
                                    id="address_line1"
-                                   value="{{ $user->address_line1}}">
+                                   value="{{ old('address_line1') ? old('address_line1')  : $user->address_line1}}">
 
                             @if ($errors->has('address_line1'))
                                 <span class="invalid-feedback" role="alert">
@@ -103,7 +104,7 @@
                                    name="address_line2"
                                    class="form-control {{$errors->has('address_line2') ? 'is-invalid':''}}"
                                    id="address_line2"
-                                   value="{{ $user->address_line2}}">
+                                   value="{{ old('address_line2') ? old('address_line2')  : $user->address_line2}}">
 
                             @if ($errors->has('address_line2'))
                                 <span class="invalid-feedback" role="alert">
@@ -119,7 +120,7 @@
                                    name="city"
                                    class="form-control {{$errors->has('city') ? 'is-invalid':''}}"
                                    id="city"
-                                   value="{{ $user->city}}">
+                                   value="{{ old('city') ? old('city')  : $user->city}}">
 
                             @if ($errors->has('city'))
                                 <span class="invalid-feedback" role="alert">
@@ -151,7 +152,7 @@
                                    name="phone_number_1"
                                    class="form-control {{$errors->has('phone_number_1') ? 'is-invalid':''}}"
                                    id="phone_number_1"
-                                   value="{{ $user->phone_number_1}}">
+                                   value="{{ old('phone_number_1') ? old('phone_number_1')  : $user->phone_number_1}}">
 
                             @if ($errors->has('phone_number_1'))
                                 <span class="invalid-feedback" role="alert">
@@ -167,7 +168,7 @@
                                    name="phone_number_2"
                                    class="form-control {{$errors->has('phone_number_2') ? 'is-invalid':''}}"
                                    id="phone_number_2"
-                                   value="{{ $user->phone_number_2}}">
+                                   value="{{ old('phone_number_2') ? old('phone_number_2')  : $user->phone_number_2}}">
 
                             @if ($errors->has('phone_number_2'))
                                 <span class="invalid-feedback" role="alert">
@@ -192,7 +193,7 @@
                             <input class="form-check-input"
                                    type="checkbox"
                                    name="newsletter"
-                                   id="newsletter"{{$user->newsletter == 1 ? "checked" : ""}}
+                                   id="newsletter" {{$user->newsletter == 1 ? "checked" : ""}}
                                    value="1"
                             >
                             <label class="form-check-label" for="newsletter">Newsletter</label>
@@ -224,7 +225,8 @@
                                    name="lastname_joint"
                                    class="form-control {{$errors->has('lastname_joint') ? 'is-invalid' : ''}}"
                                    id="lastname_joint"
-                                   value="{{ $user->lastname_joint }}">
+                                   value="{{ old('lastname_joint') ? old('lastname_joint')  : $user->lastname_joint}}">
+
                             @if($errors->has('lastname_joint'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('lastname_joint') }}</strong>
@@ -240,7 +242,7 @@
                                    name="firstname_joint"
                                    class="form-control {{$errors->has('firstname_joint') ? 'is-invalid' : ''}}"
                                    id="firstname_joint"
-                                   value="{{ $user->firstname_joint }}">
+                                   value="{{ old('firstname_joint') ? old('firstname_joint')  : $user->firstname_joint}}">
 
                             @if($errors->has('firstname_joint'))
                                 <span class="invalid-feedback" role="alert">
@@ -257,7 +259,7 @@
                                    name="birthdate_joint"
                                    class="form-control  {{$errors->has('birthdate_joint') ? 'is-invalid' : ''}}"
                                    id="birthdate_joint"
-                                   value="{{ $user->birthdate_joint }}">
+                                   value="{{ old('birthdate_joint') ? old('birthdate_joint')  : $user->birthdate_joint}}">
 
                             @if($errors->has('birthdate_joint'))
                                 <span class="invalid-feedback" role="alert">
@@ -274,11 +276,11 @@
                                    name="email_joint"
                                    class="form-control {{$errors->has('email_joint') ? 'is-invalid' : ''}}"
                                    id="email_joint"
-                                   value="{{ $user->email_joint}}">
+                                   value="{{ old('email_joint') ? old('email_joint')  : $user->email_joint}}">
 
                             @if($errors->has('birthdate_joint'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('birthdate_joint') }}</strong>
+                                        <strong>{{ $errors->first('email_joint') }}</strong>
                                 </span>
                             @endif
 
