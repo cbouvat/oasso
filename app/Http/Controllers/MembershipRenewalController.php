@@ -22,24 +22,24 @@ class membershipRenewalController extends Controller
 
     public function create(Request $request)
     {
-        $priceType = $request->input('subscriptionTypePrice');
+        $type = $request->input('type');
 
-        $price = explode("/", $priceType)[0];
-        $type = explode("/", $priceType)[1];
+        $subscriptionType = SubscriptionType::findOrFail($type);
+
 
         $sub = Subscription::create([
-            'amount' => $price,
+            'amount' => $subscriptionType->amount,
             'opt_out_mail' => 0,
-            'subscription_date' => $request->input('subscriptionDate'),
+            'subscription_date' => date('Y').'-12-31',
             'subscription_source' => 1,
             'user_id' => Auth::id(),
-            'subscription_type_id' => $type,
+            'subscription_type_id' => $subscriptionType->id,
         ]);
 
         Payment::create([
-            'payment_type' => "subscription",
+            'payment_type' => "App\Subscription",
             'payment_id' => $sub->id,
-            'amount' => $price,
+            'amount' => $sub->amount,
             'user_id' => Auth::id(),
             'payment_method_id' => 2,
         ]);

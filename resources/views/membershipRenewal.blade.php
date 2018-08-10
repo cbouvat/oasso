@@ -24,27 +24,23 @@
 
                                 <div class="col-md-6">
 
-                                    <select id="selectedType" name="subscriptionTypePrice" class="custom-select"
-                                            onchange='catchSelection(value)'>
+                                    <select id="selected-type" name="type" class="custom-select">
                                         @foreach($subscriptionTypes as $subscriptionType)
-                                            {{--We are putting both fields as value with a / separator so that we can use both information later--}}
-                                            <option value="{{$subscriptionType->amount}}/{{$subscriptionType->id}}"
-                                                    selected>{{$subscriptionType->name}}</option>
+                                            <option value="{{$subscriptionType->id}}" data-amount="{{$subscriptionType->amount}}">
+                                                    {{$subscriptionType->name}}
+                                            </option>
                                         @endforeach
 
                                     </select>
                                 </div>
-                            </div>
 
-                            <input type="hidden" name="subscriptionDate" value="{{date('Y').'-12-31'}}">
+                            </div>
 
                             <div class="form-group row">
                                 <label class="col-sm-4 col-form-label text-md-right">{{ __('Price :') }}</label>
 
                                 <div class="col-md-6">
-
-                                    <p id="subscriptionPrice"></p>
-
+                                    <p id="subscription-amount"></p>
                                 </div>
                             </div>
 
@@ -62,16 +58,12 @@
             </div>
         </div>
     </div>
-
+    @push('scripts')
     <script>
-        // This script is made to display the price automatically when subscription type is changed
-        function catchSelection(value) {
-            var price = value.split("/", 2)[0];
-            document.getElementById('subscriptionPrice').innerHTML = price;
-        };
-        $(document).ready(function () {
-            catchSelection($("#selectedType option:selected").val());
+        $('#selected-type').change(function () {
+            var amount = $('#selected-type option:selected').data('amount');
+            $('#subscription-amount').text(amount + ' €');
         })
-
     </script>
+    @endpush
 @endsection
