@@ -75,7 +75,7 @@ class UserController extends Controller
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => '|string|max:32|',
             'address_line2' => '|string|max:32|nullable',
-            'city' => 'required|alpha|string|max:45|',
+            'city' => 'required|string|max:45|',
             'zipcode' => 'digits:5|numeric',
             'phone_number_1' => 'numeric|nullable',
             'phone_number_2' => 'numeric|nullable',
