@@ -168,7 +168,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.newsletters.index') }}">
+                        <a class="nav-link" href="{{ route('admin.newsletter.index') }}">
                             <span data-feather="layers">
                                 <i class="far fa-newspaper"></i>
                             </span>

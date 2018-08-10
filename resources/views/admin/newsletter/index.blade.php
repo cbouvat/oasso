@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="row justify-content-center mt-5">
+    <div class="row justify-content-center">
 
-        <div class="col-lg-10 mt-4">
+        <div class="col-lg-10">
             <h1>{{__('Newsletter page title')}}</h1>
         </div>
-        <div class="col-lg-2 mt-5">
-            <a href="{{route('admin.newsletters.create')}}" class="btn btn-success">New newsletter</a>
+        <div class="col-lg-2 mt-4">
+            <a href="{{route('admin.newsletter.create')}}" class="btn btn-success mb-1">New newsletter</a>
         </div>
     </div>
-    <table class="table table-striped mt-4">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th>Date</th>
@@ -25,11 +25,11 @@
                 <td scope="col">{{$newsletter->title}}</td>
                 <td scope="col">
                     <a type="button-primary" class="btn btn-primary btn-sm"
-                       href="{{route('admin.newsletters.edit', ['newsletter' => $newsletter])}}">Modifier</a>
+                       href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}">Modifier</a>
                     <a type="button-primary" class="btn btn-danger ml-2 mr-2 btn-sm"
-                       href="{{route('admin.newsletters.beforedelete', ['id' => $newsletter->id])}}">Supprimer</a>
+                       href="{{route('admin.newsletter.beforedelete', ['id' => $newsletter->id])}}">Supprimer</a>
                     <a type="button-primary" class="btn btn-info btn-sm"
-                       href="{{route('admin.newsletters.duplicate', ['id' => $newsletter->id])}}">Dupliquer</a>
+                       href="{{route('admin.newsletter.duplicate', ['id' => $newsletter->id])}}">Dupliquer</a>
                 </td>
             </tr>
         @endforeach
