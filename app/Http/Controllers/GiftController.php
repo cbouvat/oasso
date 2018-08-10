@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class GiftController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.user.index', ['users' => $users]);
+        //
     }
 
     /**
@@ -31,7 +29,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -42,10 +40,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Admin\User $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin\User $user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,35 +74,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\User $user
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
         //
-    }
-
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function beforeDelete($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function softDelete($id)
-    {
-        $user = User::findOrFail($id);
-        $user->delete();
-
-        return redirect()->route('admin.user.index');
     }
 }

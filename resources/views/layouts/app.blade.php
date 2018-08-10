@@ -22,6 +22,30 @@
 </head>
 <body>
 
+<!-- DIV POUVANT CONTENIR UN MESSAGE -->
+@if (session()->has('message'))
+    <div class="message_alert text-center">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+@if (session()->has('error_message'))
+    <div class="message_alert text-center">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('error_message') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+@endif
+<!-- FIN DIC CONTENANT LE MESSAGE -->
+
+
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{config('app.name')}} </a>
 
@@ -85,7 +109,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+
+                        <a class="nav-link" href="{{ Auth::user()->role->role_type_id == 1 ? route('user.gift.index') : route('admin.gift.show')}}">
+
                             <span data-feather="bar-chart-2">
                                 <i class="fas fa-gift"></i>
                             </span>
@@ -150,7 +176,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{route('admin.gift.index')}}">
                             <span data-feather="layers">
                                 <i class="fas fa-gift"></i>
                             </span>
@@ -225,7 +251,7 @@
             </div>
         </nav>
 
-        <div class="container">
+        <div class="container mt-5 pt-5">
             @yield('content')
         </div>
 
