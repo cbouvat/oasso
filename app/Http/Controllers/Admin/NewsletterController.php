@@ -22,11 +22,8 @@ class NewsletterController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
-//        if($resquest->has('from')) {
-//            $newsletter = Newsletter::findOrFail($from);    // for later.
-//        }
 
         $newsletters = Newsletter::orderBy('created_at', 'desc')->paginate(12);
 
@@ -47,45 +44,46 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-        Newsletter::Create(
-            [
-                'title' => $request->newsletterTitle,
-                'html_content' => $request->htmlContent,
-                'text_content' => $request->textContent,
-                'user_id' => Auth::user()->id,
-            ]);
+
+        $validateRequest = $request->validate([
+            'title' => 'string|max:150|required',
+            'html_content' => 'required',
+            'text_content' => 'required'
+        ]);
+        $validateRequest['user_id'] = Auth::user()->id;
+
+
+        Newsletter::Create($validateRequest);
 
         return redirect(route('admin.newsletters.index'));
     }
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function storeUpdate(Request $request, $id)
+
+
+    public function edit(Newsletter $newsletter)
     {
-        Newsletter::findOrFail($id)->update(
-            [
-                'title' => $request->newsletterTitle,
-                'html_content' => $request->htmlContent,
-                'text_content' => $request->textContent,
-                'user_id' => Auth::user()->id,
-            ]);
 
-        return redirect(route('admin.newsletters.index'));
+        return view('admin.newsletters.update', ['newsletter' => $newsletter]);
     }
-
 
     /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function update($id)
+    public function update(Request $request, Newsletter $newsletter)
     {
-        $newsletter = Newsletter::findOrFail($id);
+        $validateRequest = $request->validate([
+            'title' => 'string|max:150|required',
+            'html_content' => 'required',
+            'text_content' => 'required'
+        ]);
+        $validateRequest['user_id'] = Auth::user()->id;
 
-        return view('admin.newsletters.update', ['newsletter' => $newsletter]);
+
+
+        $newsletter->update($validateRequest);
+
+        return redirect(route('admin.newsletters.index'));
     }
 
     public function duplicate($id)

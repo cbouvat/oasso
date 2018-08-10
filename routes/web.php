@@ -43,8 +43,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletters.beforedelete');
         Route::get('/create', 'Admin\NewsletterController@create')->name('admin.newsletters.create');
         Route::post('/store', 'Admin\NewsletterController@store')->name('admin.newsletters.store');
-        Route::post('/{id}/store-update', 'Admin\NewsletterController@storeUpdate')->name('admin.newsletters.storeUpdate');
-        Route::get('/{id}/update', 'Admin\NewsletterController@update')->name('admin.newsletters.update');
+        Route::post('/{newsletter}/update', 'Admin\NewsletterController@update')->name('admin.newsletters.update');
+        Route::get('/{newsletter}/edit', 'Admin\NewsletterController@edit')->name('admin.newsletters.edit');
         Route::get('/{id}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletters.duplicate');
         Route::get('/{id}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletters.delete');
     });

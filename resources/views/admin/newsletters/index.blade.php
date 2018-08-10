@@ -25,7 +25,7 @@
                 <td scope="col">{{$newsletter->title}}</td>
                 <td scope="col">
                     <a type="button-primary" class="btn btn-primary btn-sm"
-                       href="{{route('admin.newsletters.update', ['id' => $newsletter->id])}}">Modifier</a>
+                       href="{{route('admin.newsletters.edit', ['newsletter' => $newsletter])}}">Modifier</a>
                     <a type="button-primary" class="btn btn-danger ml-2 mr-2 btn-sm"
                        href="{{route('admin.newsletters.beforedelete', ['id' => $newsletter->id])}}">Supprimer</a>
                     <a type="button-primary" class="btn btn-info btn-sm"

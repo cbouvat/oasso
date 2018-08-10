@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form method="post" action="{{ route('admin.newsletters.storeUpdate', ['id'=> $newsletter->id]) }}">
+    <form method="post" action="{{ route('admin.newsletters.update', ['newsletter'=> $newsletter]) }}">
         @csrf
         <div class="row justify-content-center mt-5">
             <div class=" col-md-12 ">

@@ -2,11 +2,11 @@
 
     <label>Title</label>
     @isset($newsletter)
-        <input id="newsletterTitle" class="input-group mb-2" type="text" name="newsletterTitle"
+        <input id="newsletterTitle" class="input-group mb-2" type="text" name="title"
                value="{{ $newsletter->title }}">
     @endisset
     @empty($newsletter)
-        <input id="newsletterTitle" class="input-group mb-2" type="text" name="newsletterTitle">
+        <input id="newsletterTitle" class="input-group mb-2" type="text" name="title">
     @endempty
 
     @if ($errors->has('newsletterTitle'))
@@ -27,12 +27,12 @@
 
 <!--textarea used to send Quill data to the controller via the id-->
 @isset($newsletter)
-    <textarea id="htmlContent" name="htmlContent" style="display: none">{{ $newsletter->html_content }}</textarea>
-    <textarea id="textContent" name="textContent" style="display: none"></textarea>
+    <textarea id="htmlContent" name="html_content" style="display: none">{{ $newsletter->html_content }}</textarea>
+    <textarea id="textContent" name="text_content" style="display: none"></textarea>
 @endisset
 @empty($newsletter)
-    <textarea id="htmlContent" name="htmlContent" style="display: none"></textarea>
-    <textarea id="textContent" name="textContent" style="display: none"></textarea>
+    <textarea id="htmlContent" name="html_content" style="display: none"></textarea>
+    <textarea id="textContent" name="text_content" style="display: none"></textarea>
 @endempty
 
 <link rel="stylesheet" href="//cdn.quilljs.com/1.3.6/quill.snow.css">
