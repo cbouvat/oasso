@@ -39,37 +39,45 @@ class User extends Authenticatable
      */
     protected $dates = ['deleted_at'];
 
-
-    /** RELATIONS */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
 
     public function newsletters()
     {
-        return $this->hasMany('App\Newsletter');
+        return $this->hasMany('App\Newsletter')->latest();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function gifts()
     {
-        return $this->hasMany('App\Gift');
+        return $this->hasMany('App\Gift')->latest();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->hasOne('App\Role');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('App\Payment')->latest();
     }
 
-    public function quality()
-    {
-        return $this->belongsTo('App\Quality');
-    }
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function subscription()
     {
-        return $this->hasOne('App\Subscription');
+        return $this->hasOne('App\Subscription')->latest();
     }
 
 }

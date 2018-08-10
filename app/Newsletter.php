@@ -14,7 +14,7 @@ class Newsletter extends Model
      * @var array
      */
     protected $fillable = [
-        'title','type','html_content','text_content','user_id'];
+        'title','html_content','text_content','user_id'];
 
     public function user()
     {

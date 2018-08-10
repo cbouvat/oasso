@@ -9,6 +9,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                             @csrf
+
                             <div class="form-group row">
                                 <label for="email"
                                        class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -47,16 +48,16 @@
                             </div>
 
 
-                            <H3>Personal Informations</H3>
+                            <H3>{{__('Personal Informations')}}</H3>
 
                             <div class="form-group row">
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender" name="gender" class="custom-select">
-                                        <option selected disabled>Civilité</option>
-                                        <option value=1>Mr</option>
-                                        <option value=2>Ms</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>{{ __('Gender') }}</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -66,7 +67,12 @@
                                 <div class="col-md-6">
                                     <input id="lastname" type="text"
                                            class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
-                                           name="lastname" value="{{ old('lastname') }}" required autofocus>
+                                           name="lastname" value="{{ old('lastname') }}" required>
+                                    @if ($errors->has('lastname'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -75,7 +81,12 @@
                                 <div class="col-md-6">
                                     <input id="firstname" type="text"
                                            class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
-                                           name="firstname" value="{{ old('firstname') }}" required autofocus>
+                                           name="firstname" value="{{ old('firstname') }}" required>
+                                    @if ($errors->has('firstname'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -84,7 +95,12 @@
                                 <div class="col-md-6">
                                     <input id="birthdate" type="date"
                                            class="form-control{{ $errors->has('birthdate') ? ' is-invalid' : '' }}"
-                                           name="birthdate" value="{{ old('birthdate') }}" required autofocus>
+                                           name="birthdate" value="{{ old('birthdate') }}" required>
+                                    @if ($errors->has('birthdate'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('birthdate') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -94,6 +110,11 @@
                                     <input id="address_line1" type="text"
                                            class="form-control{{ $errors->has('address_line1') ? ' is-invalid' : '' }}"
                                            name="address_line1" value="{{ old('address_line1') }}" required>
+                                    @if ($errors->has('address_line1'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('address_line1') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -111,7 +132,12 @@
                                 <div class="col-md-6">
                                     <input id="zipcode" type="text"
                                            class="form-control {{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
-                                           name="zipcode" value="{{ old('zipcode') }}" required autofocus>
+                                           name="zipcode" value="{{ old('zipcode') }}" required>
+                                    @if ($errors->has('zipcode'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('zipcode') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -119,7 +145,12 @@
                                 <div class="col-md-6">
                                     <input id="city" type="text"
                                            class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}"
-                                           name="city" value="{{ old('city') }}" required autofocus>
+                                           name="city" value="{{ old('city') }}" required>
+                                    @if ($errors->has('city'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -127,8 +158,13 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Phone_number_1') }}</label>
                                 <div class="col-md-6">
                                     <input id="phone_number_1" type="text"
-                                           class="form-control"
-                                           name="phone_number_1" value="{{ old('phone_number_1') }}">
+                                           class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}"
+                                           name="phone_number_1" value="{{ old('phone_number_1') }}" required>
+                                    @if ($errors->has('phone_number_1'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone_number_1') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -144,47 +180,26 @@
                                 <label for="newspaper"
                                        class="col-md-4 col-form-label text-md-right">{{ __('NewsPaper') }}</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper1" value="1" checked>
-                                    <label class="form-check-label" for="newspaper">
-                                        Yes
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper2" value="0">
-                                    <label class="form-check-label" for="newspaper">
-                                        No
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1" @if(old('newspaper') == 1) checked @endif>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="newsletter"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter1" value="1" checked>
-                                    <label class="form-check-label" for="newsletter1">
-                                        Yes
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter2" value="0">
-                                    <label class="form-check-label" for="newsletter2">
-                                        No
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1" @if(old('newsletter') == 1) checked @endif>
                                 </div>
                             </div>
 
-                            <h3>Our Partner (if family)</h3>
+                            <h3>{{__('Our Partner (if family)')}}</h3>
                             <div class="form-group row">
                                 <label for="gender_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Gender Partner') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value=1>Mr</option>
-                                        <option value=2>Ms</option>
+                                        <option value="0" @if(old('gender_joint') == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                        <option value="1" @if(old('gender_joint') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender_joint') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
