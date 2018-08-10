@@ -78,13 +78,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['newspaper'] == null) {
+        if(!isset($data['newspaper'])) {
             $newspaper = 0;
         } else {
             $newspaper = 1;
         }
 
-        if($data['newsletter'] == null) {
+        if(!isset($data['newsletter'])) {
             $newsletter= 0;
         } else {
             $newsletter = 1;
