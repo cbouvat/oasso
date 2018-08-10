@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Subscription;
 use App\Payment;
+use App\Gift;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -150,11 +152,15 @@ class UserController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
+     * @param  \App\Admin\User $user
+     * @return \Illuminate\Http\Response
      */
     public function destroy()
     {
         //
     }
+
 
     /**
      * @param $id

@@ -20,7 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/search','SearchController@search')->name('search');
+Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
     Route::get('/users-list', 'UserController@index')->name('admin.users.list');
@@ -31,4 +31,16 @@ Route::prefix('admin')->group(function () {
     Route::post('/{user}/adhesion', 'UserController@validatorAdhesion')->name('admin.users.validadhesion');
     Route::post('/{user}/adhesion/create', 'UserController@createSubscription')->name('admin.users.create');
 
+    //Admin gift Crud
+    Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
+    Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
+    Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
+    Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 });
+
+Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
+Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
+
+Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
+Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+
