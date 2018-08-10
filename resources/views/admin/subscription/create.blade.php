@@ -35,7 +35,7 @@
                             <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                                 @foreach($subscription_type as $subscription_type_id)
                                     <option value="{{ $subscription_type_id->id }}">
-                                        {{ $subscription_type_id->name}}
+                                        {{ ucfirst($subscription_type_id->name)}} ({{$subscription_type_id->amount}}€)
                                     </option>
                                 @endforeach
                             </select>
@@ -84,7 +84,7 @@
 
                     <div class="form-group row">
                         <label for="subscription_date"
-                               class="col-md-4 col-form-label text-md-right">{{ __('subscription_date') }}</label>
+                               class="col-md-4 col-form-label text-md-right">Date de début</label>
                         <div class="col-md-6">
                             <input id="subscription_date" type="date"
                                    class="form-control{{ $errors->has('subscription_date') ? ' is-invalid' : '' }}"

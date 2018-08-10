@@ -39,7 +39,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/subscription/beforedelete/{subscription}', 'Admin\SubscriptionController@beforeDelete')->name('admin.subscription.beforeDelete');
     Route::get('/subscription/destroy/{id}', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
 
-
     //Gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
     Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');

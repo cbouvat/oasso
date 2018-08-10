@@ -8,7 +8,7 @@
                 <h1>Modification de l'Adhésion</h1>
             </div>
             <div class="text-center p-5 border border-success rounded">
-                <h5>Don de {{$subscription->user->firstname}} {{$subscription->user->lastname}}</h5>
+                <h5>{{$subscription->user->firstname}} {{$subscription->user->lastname}}</h5>
 
                 <div class="col-12 col-md-8 offset-md-2 mt-5">
                     <form action="{{route('admin.subscription.update', ['id' => $subscription->id])}}" method="post">
@@ -31,7 +31,7 @@
                                 <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                                     @foreach($subscription_type as $subscription_type_id)
                                         <option value="{{ $subscription_type_id->id }}" {{$subscription_type_id->id == $subscription->subscription_type_id ? 'selected' : ''}}>
-                                            {{ $subscription_type_id->name}}
+                                            {{ ucfirst($subscription_type_id->name)}} ({{$subscription_type_id->amount}})
                                         </option>
                                     @endforeach
                                 </select>
@@ -45,7 +45,7 @@
                                 <div class="input-group">
                                     <input id="amount" type="text"
                                            class="form-control text-right {{ $errors->has('amount') ? 'is-invalid' : '' }}"
-                                           name="amount" value="{{ old('amount') ? '' : $subscription->amount }}">
+                                           name="amount" value="{{ old('amount') ? old('amount') : $subscription->amount }}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">€</span>
                                     </div>
