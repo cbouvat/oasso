@@ -6,15 +6,18 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
+
 use Auth;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
+
     function __construct()
     {
         $this->middleware('auth');
     }
+
 
     /**
      * Display a listing of the resource.
@@ -25,10 +28,10 @@ class GiftController extends Controller
     {
         $user = Auth::user();
         $user->load('gifts.payment.paymentMethod');
-
         $payments_methods = PaymentMethod::all();
 
         return view('users.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
+
     }
 
     /**
@@ -38,6 +41,7 @@ class GiftController extends Controller
      */
     public function create(Request $request)
     {
+
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
             'payment_methods' => 'required'
@@ -54,7 +58,7 @@ class GiftController extends Controller
 
         Payment::create($inputs);
 
-        return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
+        return back()->with('message', 'Le don a bien été ajouté !');
     }
 
     /**

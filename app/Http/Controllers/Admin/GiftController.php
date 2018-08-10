@@ -17,7 +17,6 @@ class GiftController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -45,6 +44,7 @@ class GiftController extends Controller
 
         ]);
 
+
         if ($request->has('from_me')) {
             if ($request['from_me'] === Auth::user()->id) {
                 $inputs['user_id'] = $request['from_me'];
@@ -64,6 +64,7 @@ class GiftController extends Controller
         } else {
             return back()->with('error_message', 'Erreur, identifiant incorrect !');
         }
+
         $gift = Gift::create($inputs);
 
         $inputs['payment_id'] = $gift->id;
@@ -71,6 +72,7 @@ class GiftController extends Controller
         $inputs['payment_method_id'] = $request->payment_methods;
 
         Payment::create($inputs);
+
 
         return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
     }
@@ -92,6 +94,7 @@ class GiftController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
+
     public function show()
     {
         $user = Auth::user();
@@ -100,6 +103,7 @@ class GiftController extends Controller
         $payments_methods = PaymentMethod::all();
 
         return view('admin.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
+
     }
 
     /**
@@ -112,7 +116,9 @@ class GiftController extends Controller
     {
         $gift = Gift::findOrFail($id);
         $gift->load('user');
+
         return view('admin.giftEdit', ['gift' => $gift]);
+
     }
 
     /**
@@ -126,8 +132,10 @@ class GiftController extends Controller
     {
         $gift = Gift::findOrFail($id);
         $request->validate([
+
             'amount' => 'required|numeric|min:0|max:999999',
             'from_user_id' => 'required|numeric',
+
         ]);
         $inputs = $request->all();
 
@@ -147,6 +155,7 @@ class GiftController extends Controller
         $gift->update($inputs);
 
         return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
+
     }
 
     /**

@@ -57,7 +57,6 @@
                                 <th>{{ $gift->amount }} €</th>
                                 <td>{{ $gift->created_at->format('d/m/Y') }}</td>
                                 <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
-
                             </tr>
                         @empty
                             <tr>
