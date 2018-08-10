@@ -84,18 +84,6 @@ class UserController extends Controller
         //
     }
 
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function beforeDelete($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
-
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse

@@ -26,10 +26,10 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/user', 'UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
-    Route::get('/user/show', 'Admin\UserController@show')->name('admin.user.show');
+    Route::get('/user/show/{user}', 'Admin\UserController@show')->name('admin.user.show');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
-    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
+    Route::get('/user/{user}/before', 'Admin\UserController@beforeDelete')->name('admin.user.beforedelete');
 
     //Subscribers
     Route::get('/subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');

@@ -32,10 +32,12 @@
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                         <div class="col-md-6">
-                            <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
-                                @foreach($subscription_type as $subscription_type_id)
-                                    <option value="{{ $subscription_type_id->id }}">
-                                        {{ ucfirst($subscription_type_id->name)}} ({{$subscription_type_id->amount}}€)
+                            <select id="subscription_type_id" onchange="setAmount()" name="subscription_type_id"
+                                    class="custom-select">
+                                @foreach($subscription_types as $subscription_type)
+                                    <option id="subscription_type" name="{{$subscription_type->amount}}"
+                                            value="{{ $subscription_type->id }}">
+                                        {{ ucfirst($subscription_type->name)}} ({{$subscription_type->amount}}€)
                                     </option>
                                 @endforeach
                             </select>
@@ -113,5 +115,9 @@
             </div>
         </div>
     </div>
-
+    <script>
+        function setAmount() {
+            $('#amount').val($("#subscription_type_id option:selected").attr('name'));
+        }
+    </script>
 @endsection

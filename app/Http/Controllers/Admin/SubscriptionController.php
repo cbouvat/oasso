@@ -21,7 +21,7 @@ class SubscriptionController extends Controller
     {
         $subscriptions = Subscription::with('subscriptionType')
             ->with('user')
-            ->with('payment')
+            ->with('payment.paymentMethod')
             ->orderBy('subscription_date', 'desc')
             ->paginate();
 
@@ -42,7 +42,7 @@ class SubscriptionController extends Controller
 
         return view('admin.subscription.create', [
             'payments_methods' => $payments_methods,
-            'subscription_type' => $subscription_type
+            'subscription_types' => $subscription_type
         ]);
 
     }
@@ -137,7 +137,6 @@ class SubscriptionController extends Controller
 
         $subscription->update($validator);
 
-
         $validator['payment_id'] = $subscription->id;
         $validator['payment_type'] = "App\Subscription";
         $validator['payment_method_id'] = $request->payment_methods;
@@ -147,11 +146,7 @@ class SubscriptionController extends Controller
             ['payment_type', 'App\Subscription']
         ]);
 
-        $payment->update([
-            'amount' => $validator['amount'],
-            'user_id' => $validator['user_id'],
-            'payment_method_id' => $validator['payment_method_id']
-        ]);
+        $payment->update($validator);
 
 
         return back()->with('message', 'Mise a jour effectuée');

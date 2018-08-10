@@ -26,6 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     @forelse($subscriptions as $subscription)
                         <tr>
                             <td scope="row">{{$subscription->user->firstname}} {{$subscription->user->lastname}}</td>
