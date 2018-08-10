@@ -60,9 +60,9 @@ class RegisterController extends Controller
             'city' => 'required|string|max:45',
             'phone_number_1' => 'required|string|max:10',
             'phone_number_2' => 'string|max:10|nullable',
-            'newspaper' => 'integer',
-            'newsletter' => 'integer',
-            'gender_joint' => 'integer|min:1|max:2|nullable',
+            'newspaper' => 'integer|nullable',
+            'newsletter' => 'integer|nullable',
+            'gender_joint' => 'integer|min:0|max:2|nullable',
             'firstname_joint' => 'string|max:45|nullable',
             'lastname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
@@ -78,6 +78,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if($data['newspaper'] == null) {
+            $newspaper = 0;
+        } else {
+            $newspaper = 1;
+        }
+
+        if($data['newsletter'] == null) {
+            $newsletter= 0;
+        } else {
+            $newsletter = 1;
+        }
+
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -91,8 +103,8 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'phone_number_1' => $data['phone_number_1'],
             'phone_number_2' => $data['phone_number_2'],
-            'newspaper' => $data['newspaper'],
-            'newsletter' => $data['newsletter'],
+            'newspaper' => $newspaper,
+            'newsletter' => $newsletter,
             'gender_joint' => $data['gender_joint'],
             'firstname_joint' => $data['firstname_joint'],
             'lastname_joint' => $data['lastname_joint'],
