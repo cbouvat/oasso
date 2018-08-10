@@ -17,8 +17,15 @@
                                class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
                         <div class="col-md-6">
                             <input type="text" name="user_id"
-                                   class="form-control text-right"
-                                   placeholder="Saisir l'id du donateur ici">
+                                   class="form-control{{ $errors->has('user_id') ? ' is-invalid' : '' }} text-right"
+                                   placeholder="Saisir l'id du donateur ici"
+                                   value="{{ old('user_id') ? old('user_id') : ''}}"
+                            >
+                            @if ($errors->has('user_id'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('user_id') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
@@ -32,6 +39,11 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('subscription_type_id'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('subscription_type_id') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -40,8 +52,13 @@
                                class="col-md-4 col-form-label text-md-right">{{ __('amount') }}</label>
                         <div class="col-md-6">
                             <input id="amount" type="text"
-                                   class="form-control{{ $errors->has('amount') ? 'is-invalid' : '' }}"
-                                   name="amount" value="{{ old('amount') ? '' : ''}}">
+                                   class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}"
+                                   name="amount" value="{{ old('amount') ? old('amount') : ''}}">
+                            @if ($errors->has('amount'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('amount') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -57,6 +74,11 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('payment_methods'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('payment_methods') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -66,7 +88,13 @@
                         <div class="col-md-6">
                             <input id="subscription_date" type="date"
                                    class="form-control{{ $errors->has('subscription_date') ? ' is-invalid' : '' }}"
-                                   name="subscription_date" value="{{  old('subscription_date') ? '' : date('Y-m-d')}}">
+                                   name="subscription_date"
+                                   value="{{  date('Y-m-d')}}">
+                            @if ($errors->has('subscription_date'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('subscription_date') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
@@ -80,11 +108,7 @@
 
 
                 </form>
-                @if ($errors->has('subscription_date'))
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('subscription_date') }}</strong>
-                                    </span>
-                @endif
+
 
             </div>
         </div>
