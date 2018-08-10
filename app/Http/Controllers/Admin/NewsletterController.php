@@ -27,7 +27,7 @@ class NewsletterController extends Controller
 
         $newsletters = Newsletter::orderBy('created_at', 'desc')->paginate(12);
 
-        return view('admin.newsletters.index', ['newsletters' => $newsletters]);
+        return view('admin.newsletter.index', ['newsletters' => $newsletters]);
     }
 
     /**
@@ -35,7 +35,7 @@ class NewsletterController extends Controller
      */
     public function create()
     {
-        return view('admin.newsletters.create');
+        return view('admin.newsletter.create');
     }
 
     /**
@@ -55,7 +55,7 @@ class NewsletterController extends Controller
 
         Newsletter::Create($validateRequest);
 
-        return redirect(route('admin.newsletters.index'));
+        return redirect(route('admin.newsletter.index'));
     }
 
 
@@ -63,7 +63,7 @@ class NewsletterController extends Controller
     public function edit(Newsletter $newsletter)
     {
 
-        return view('admin.newsletters.update', ['newsletter' => $newsletter]);
+        return view('admin.newsletter.update', ['newsletter' => $newsletter]);
     }
 
     /**
@@ -83,14 +83,14 @@ class NewsletterController extends Controller
 
         $newsletter->update($validateRequest);
 
-        return redirect(route('admin.newsletters.index'));
+        return redirect(route('admin.newsletter.index'));
     }
 
     public function duplicate($id)
     {
         $newsletter = Newsletter::findOrFail($id);
 
-        return view('admin.newsletters.duplicate', ['newsletter' => $newsletter]);
+        return view('admin.newsletter.duplicate', ['newsletter' => $newsletter]);
     }
 
     /**
@@ -101,7 +101,7 @@ class NewsletterController extends Controller
     {
         $newsletterId = Newsletter::findOrFail($id);
 
-        return view('admin.newsletters.beforedelete', ['id' => $newsletterId->id]);
+        return view('admin.newsletter.beforedelete', ['id' => $newsletterId->id]);
     }
 
     /**
@@ -115,6 +115,6 @@ class NewsletterController extends Controller
         $newsletter = Newsletter::findOrfail($id);
         $newsletter->delete();
 
-        return redirect('admin/newsletters/index');
+        return redirect('admin/newsletter/index');
     }
 }
