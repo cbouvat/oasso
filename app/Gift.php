@@ -12,15 +12,20 @@ class Gift extends Model
      * @var array
      */
     protected $fillable = [
-        'amount','user_id'];
+        'amount', 'user_id'
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
     }
 
-    public function payments() {
-        return $this->morphMany('App\Payment', 'paymentable');
-    }
 
+    public function payment()
+    {
+        return $this->morphOne('App\Payment', 'payment');
+    }
 }

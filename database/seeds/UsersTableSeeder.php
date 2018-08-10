@@ -1,6 +1,5 @@
 <?php
 
-use App\Subscription;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -18,7 +17,5 @@ class UsersTableSeeder extends Seeder
                 $user->subscription()->save(factory(App\Subscription::class)->make());
 
             });
-
-
     }
 }
