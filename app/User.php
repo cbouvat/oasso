@@ -44,12 +44,12 @@ class User extends Authenticatable
 
     public function newsletters()
     {
-        return $this->hasMany('App\Newsletter');
+        return $this->hasMany('App\Newsletter')->latest();
     }
 
     public function gifts()
     {
-        return $this->hasMany('App\Gift');
+        return $this->hasMany('App\Gift')->latest();
     }
 
     public function role()
@@ -59,12 +59,12 @@ class User extends Authenticatable
 
     public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('App\Payment')->latest();
     }
 
     public function subscription()
     {
-        return $this->hasMany('App\Subscription');
+        return $this->hasOne('App\Subscription')->latest();
     }
 
 }

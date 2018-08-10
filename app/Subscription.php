@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -16,6 +15,8 @@ class Subscription extends Model
         'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'];
 
 
+    protected $morphClass = 'subscription';
+
     /** RELATIONS */
 
     public function subscriptionType()
@@ -23,7 +24,8 @@ class Subscription extends Model
         return $this->belongsTo('App\SubscriptionType');
     }
 
-    public function payments() {
-        return $this->morphMany('App\Payment', 'paymentable');
+    public function payment()
+    {
+        return $this->morphOne('App\Payment', 'payment');
     }
 }
