@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'address_line2' => 'string|max:32|nullable',
             'zipcode' => 'required|string|max:5',
             'city' => 'required|string|max:45',
-            'phone_number_1' => 'string|max:10',
+            'phone_number_1' => 'required|string|max:10',
             'phone_number_2' => 'string|max:10|nullable',
             'newspaper' => 'integer',
             'newsletter' => 'integer',
