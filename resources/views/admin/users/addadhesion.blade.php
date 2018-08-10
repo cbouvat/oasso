@@ -2,7 +2,9 @@
 
 @section('content')
 
-    <h1 class="container mt-5 pt-5 text-center">{{ $user->firstname}} {{ $user->lastname}}</h1>
+    <h1 class="container">Gestion Adhésion</h1>
+
+    <h3 class="container mt-5 mb-4 text-center">Membre: {{ $user->firstname}} {{ $user->lastname}}</h3>
 
     <form method="POST" action="{{route('admin.users.validadhesion', ['user' => $user->id])}}"
           aria-label="{{ __('Addadhesion') }}">
