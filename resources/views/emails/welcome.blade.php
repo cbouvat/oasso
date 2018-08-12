@@ -1,15 +1,16 @@
 @component('mail::message')
 
-    <h4>Bonjour , {{ $user->firstname }}</h4>
-    <h5>Vous faites maintenant partie de la communauté<span><strong>REVV</strong></span> !</h5>
+
+    <h2>Bonjour, {{ $user->firstname }}</h2><p><br></p><h3>Vous faites maintenant partie de la communauté <strong
+                style="color: rgb(102, 163, 224);">REVV</strong> !</h3>
 
 
 
-@component('mail::button', ['url' => config('app.url').'/user/edit/'.$user->id, 'color' => 'green'])
+    @component('mail::button', ['url' => config('app.url'), 'color' => 'green'])
 
-    Connectez-vous !
+        Connectez-vous !
 
-@endcomponent
+    @endcomponent
 
-Force et Honneur
+    Force et Honneur
 @endcomponent
