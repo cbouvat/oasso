@@ -44,9 +44,6 @@
                         </table>
                     </td>
                 </tr>
-                @isset($button)
-                    @include('layouts.mail.button')
-                @endisset
 
 
                 {{ $footer ?? '' }}

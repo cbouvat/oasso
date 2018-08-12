@@ -14,8 +14,9 @@ class Welcome extends Mailable
   use Queueable, SerializesModels;
 
   public $user,
-         $template,
-         $button;
+    $template,
+    $button,
+    $slot;
 
   /**
    * Create a new message instance.
@@ -34,14 +35,14 @@ class Welcome extends Mailable
    */
   public function build()
   {
-    $this->template = TemplateMail::where('type', 0)->first();
-    $this->button['url'] = 'http://www.google.fr';
-    $this->button['type'] = 'success';
-    $this->button['textButton'] = 'Connectez-vous !';
+      $this->template = TemplateMail::where('type', 0)->first();
+      $this->slot = $this->template->html_content;
 
-    return $this->view('layouts.mail.layout', [$this->template->html_content, $this->button])
-      ->subject($this->template->title . ' ' . $this->user->firstname);
+    return $this->markdown('emails.welcome')
+                ->subject($this->template->title . ' ' . $this->user->firstname);
 
-
+    //return $this->view('layouts.mail.layout', [$this->template->html_content, $this->button])
   }
 }
+
+
