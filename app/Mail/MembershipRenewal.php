@@ -2,28 +2,26 @@
 
 namespace App\Mail;
 
-use App\User;
+use App\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendPwdByPhone extends Mailable
+class MembershipRenewal extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $user;
-  private $password;
+    public $subscription;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, $password)
+    public function __construct(Subscription $subscription)
     {
-        $this->user = $user;
-        $this->password = $password;
+        $this->subscription = $subscription;
     }
 
     /**
@@ -33,6 +31,7 @@ class SendPwdByPhone extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+      return $this->markdown('emails.membership.renewal')
+        ->subject('Un an de plus chez '.config('app.name').' !');
     }
 }

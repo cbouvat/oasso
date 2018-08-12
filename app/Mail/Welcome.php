@@ -9,14 +9,11 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Welcome extends Mailable
+class Welcome extends Mailable implements ShouldQueue
 {
   use Queueable, SerializesModels;
 
-  public $user,
-    $template,
-    $button,
-    $slot;
+  public $user;
 
   /**
    * Create a new message instance.
@@ -35,13 +32,10 @@ class Welcome extends Mailable
    */
   public function build()
   {
-      $this->template = TemplateMail::where('type', 0)->first();
-      $this->slot = $this->template->html_content;
 
     return $this->markdown('emails.welcome')
-                ->subject($this->template->title . ' ' . $this->user->firstname);
+      ->subject('Inscription sur '.config('app.name'));
 
-    //return $this->view('layouts.mail.layout', [$this->template->html_content, $this->button])
   }
 }
 

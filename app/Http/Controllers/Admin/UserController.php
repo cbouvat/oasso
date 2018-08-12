@@ -72,27 +72,8 @@ class UserController extends Controller
     $str_random = str_random(8);
     $inputs['password'] = Hash::make($str_random);
 
-    $user = User::create($inputs);
+    User::create($inputs);
 
-    //Regex for validate the cellphone number
-    $regex = "/^0[67][0-9]{8}$/";
-
-
-    if ($request['email'] != null) {
-
-      if ($request['sendPwdByEmail'] == 1) {
-
-        Mail::to($user)->send(new SendPwdByEmail($user, $str_random));
-
-
-
-      } if ($request['sendPwdByCellphone'] == 1 and preg_match($regex, $inputs['cellphone'])) {
-
-        Mail::to($user)->send(new SendPwdByPhone($user, $str_random));
-
-      }
-
-    }
 
     return redirect()->route('admin.user.index');
   }

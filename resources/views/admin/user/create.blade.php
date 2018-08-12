@@ -140,16 +140,6 @@
                 </div>
             </div>
 
-            <div id="pwdByEmail" class="form-group row col-md-6 offset-4" style="display: none">
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="sendPwdByEmail" id="sendPwdByEmail" value="1"
-                           @if(old('sendPwdByEmail') == 1) checked @endif>
-                </div>
-                <label for="sendPwdByEmail" style="color: seagreen;"
-                       class="col-form-label text-md-right">{{ __('Send password by email') }}</label>
-            </div>
-
             <div class="form-group row">
                 <label for="cellphone"
                        class="col-md-4 col-form-label text-md-right">{{ __('Cellphone') }}</label>
@@ -162,17 +152,6 @@
                         </span>
                     @endif
                 </div>
-            </div>
-
-            <div id="pwdByCellphone" class="form-group row col-md-6 offset-4" style="display: none">
-
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="sendPwdByCellphone" id="sendPwdByCellphone"
-                           value="1"
-                           @if(old('sendPwdByCellphone') == 1) checked @endif>
-                </div>
-                <label for="sendPwdByCellphone" style="color: seagreen;"
-                       class="col-form-label text-md-right">{{ __('Send password on this phone') }}</label>
             </div>
 
             <div class="form-group row">
@@ -343,41 +322,4 @@
             </div>
         </form>
     </div>
-
-    <script>
-
-        //Script for dynamic checkbox send by email and phone
-        $('#email').on('blur keypress', function () {
-            if ($(this).val()) {
-                $('#pwdByEmail').css('display', 'block');
-                if ($('#cellphone').val()) {
-                    $('#pwdByCellphone').css('display', 'block');
-                }
-            } else {
-                $('#pwdByEmail').css('display', 'none');
-                $('#pwdByCellphone').css('display', 'none');
-            }
-        });
-
-        $('#cellphone').on('blur keypress', function () {
-            if ($('#email').val()) {
-                if ($(this).val()) {
-                    $('#pwdByCellphone').css('display', 'block');
-                } else {
-                    $('#pwdByCellphone').css('display', 'none');
-                }
-            }
-        });
-
-        //refresh display block on validate errors
-        $(document).ready(function () {
-            if (($('#sendPwdByEmail')).prop('checked')) {
-                $('#pwdByEmail').css('display', 'block');
-            }
-            if (($('#sendPwdByCellphone')).prop('checked')) {
-                $('#pwdByCellphone').css('display', 'block');
-            }
-        });
-
-    </script>
 @endsection

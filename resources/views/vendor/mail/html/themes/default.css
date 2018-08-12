@@ -285,3 +285,9 @@ img {
     font-size: 15px;
     text-align: center;
 }
+
+/* CSS for {{config('app.name')}} */
+.appName strong {
+
+    color: rgb(59, 160, 53);
+}
