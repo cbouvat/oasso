@@ -154,26 +154,31 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="phone_number_1"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone_number_1') }}</label>
+                                <label for="cellphone"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Cellphone') }}</label>
                                 <div class="col-md-6">
-                                    <input id="phone_number_1" type="text"
-                                           class="form-control {{ $errors->has('city') ? ' is-invalid' : '' }}"
-                                           name="phone_number_1" value="{{ old('phone_number_1') }}" required>
-                                    @if ($errors->has('phone_number_1'))
+                                    <input id="cellphone" type="text"
+                                           class="form-control {{ $errors->has('cellphone') ? ' is-invalid' : '' }}"
+                                           name="cellphone" value="{{ old('cellphone') }}">
+                                    @if ($errors->has('cellphone'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number_1') }}</strong>
+                                        <strong>{{ $errors->first('cellphone') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="phone_number_2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone_number_2') }}</label>
+                                <label for="phone"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
                                 <div class="col-md-6">
-                                    <input id="phone_number_2" type="text"
-                                           class="form-control"
-                                           name="phone_number_2">
+                                    <input id="phone" type="text"
+                                           class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                           name="phone" value="{{ old('phone') }}">
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group row">

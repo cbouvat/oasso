@@ -26,7 +26,7 @@ class UsersWithRoleTableSeeder extends Seeder
         $member->address_line1 = 'rue des members';
         $member->zipcode = '26000';
         $member->city = 'dtc';
-        $member->phone_number_1 = '1111111111';
+        $member->cellphone = '1111111111';
         $member->newspaper = 0;
         $member->newsletter = 0;
         $member->comment = 'Je suis un member';
@@ -48,7 +48,7 @@ class UsersWithRoleTableSeeder extends Seeder
         $admin->address_line1 = 'rue des admins';
         $admin->zipcode = '26000';
         $admin->city = 'dtc';
-        $admin->phone_number_1 = '2222222222';
+        $admin->cellphone = '2222222222';
         $admin->newspaper = 0;
         $admin->newsletter = 0;
         $admin->comment = 'Je suis un admin';
@@ -71,7 +71,7 @@ class UsersWithRoleTableSeeder extends Seeder
         $superadmin->address_line1 = 'rue des superAdmin';
         $superadmin->zipcode = '26000';
         $superadmin->city = 'dtc';
-        $superadmin->phone_number_1 = '3333333333';
+        $superadmin->cellphone = '3333333333';
         $superadmin->newspaper = 0;
         $superadmin->newsletter = 0;
         $superadmin->comment = 'Je suis un superAdmin';

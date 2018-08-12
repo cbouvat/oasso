@@ -30,8 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('firstname_joint', 45)->nullable();
             $table->date('birthdate_joint')->nullable();
             $table->string('email_joint', 45)->nullable();
-            $table->string('phone_number_1', 20)->nullable();
-            $table->string('phone_number_2', 20)->nullable();
+            $table->string('cellphone', 20)->nullable();
+            $table->string('phone', 20)->nullable();
             $table->boolean('volonteer')->default(0);
             $table->text('details_volonteer', 600)->nullable();
             $table->boolean('delivery')->default(0);

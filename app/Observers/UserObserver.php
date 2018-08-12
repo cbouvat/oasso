@@ -22,7 +22,7 @@ class UserObserver
             'role_type_id' => 1
         ]);
 
-        Mail::to($user)->send(new Welcome($user));
+        //Mail::to($user)->send(new Welcome($user));
     }
 
     /**

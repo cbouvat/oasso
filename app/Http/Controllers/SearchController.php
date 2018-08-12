@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\User;
-use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SearchController extends Controller
 {

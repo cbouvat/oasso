@@ -11,34 +11,37 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Welcome extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
-    public $user;
+  public $user,
+         $template,
+         $button;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+  /**
+   * Create a new message instance.
+   *
+   * @return void
+   */
+  public function __construct(User $user)
+  {
+    $this->user = $user;
+  }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        $templateMail = TemplateMail::where('title', 'Et ratione corporis eius.')->first();
+  /**
+   * Build the message.
+   *
+   * @return $this
+   */
+  public function build()
+  {
+    $this->template = TemplateMail::where('type', 0)->first();
+    $this->button['url'] = 'http://www.google.fr';
+    $this->button['type'] = 'success';
+    $this->button['textButton'] = 'Connectez-vous !';
 
-        $html = $templateMail->html_content;
-        $text = $templateMail->text_content;
+    return $this->view('layouts.mail.layout', [$this->template->html_content, $this->button])
+      ->subject($this->template->title . ' ' . $this->user->firstname);
 
 
-        return $this->view('vendor.notifications.email');
-
-    }
+  }
 }

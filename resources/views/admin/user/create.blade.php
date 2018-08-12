@@ -126,34 +126,6 @@
             </div>
 
             <div class="form-group row">
-                <label for="phone_number_1"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Phone number 1') }}</label>
-                <div class="col-md-6">
-                    <input id="phone_number_1" type="text" name="phone_number_1" value="{{ old('phone_number_1') }}"
-                           class="form-control{{ $errors->has('phone_number_1') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('phone_number_1'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('phone_number_1') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="phone_number_2"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Phone number 2') }}</label>
-                <div class="col-md-6">
-                    <input id="phone_number_2" type="text" name="phone_number_2" value="{{ old('phone_number_2') }}"
-                           class="form-control{{ $errors->has('phone_number_2') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('phone_number_2'))
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('phone_number_2') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label for="email"
                        class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                 <div class="col-md-6">
@@ -168,18 +140,61 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='volonteer'>
-                            <input class="form-check-input" type="checkbox" name="volonteer" id="volonteer" value="1"
-                                   @if(old('volonteer') ==1)checked @endif>
-                            <label class="form-check-label" for="volonteer">
-                                {{ __('Volonteer') }}
-                            </label>
-                        </div>
-                    </div>
+            <div id="pwdByEmail" class="form-group row col-md-6 offset-4" style="display: none">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="sendPwdByEmail" id="sendPwdByEmail" value="1"
+                           @if(old('sendPwdByEmail') == 1) checked @endif>
+                </div>
+                <label for="sendPwdByEmail" style="color: seagreen;"
+                       class="col-form-label text-md-right">{{ __('Send password by email') }}</label>
+            </div>
+
+            <div class="form-group row">
+                <label for="cellphone"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Cellphone') }}</label>
+                <div class="col-md-6">
+                    <input id="cellphone" type="text" name="cellphone" value="{{ old('cellphone') }}"
+                           class="form-control{{ $errors->has('cellphone') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('cellphone'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('cellphone') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div id="pwdByCellphone" class="form-group row col-md-6 offset-4" style="display: none">
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="sendPwdByCellphone" id="sendPwdByCellphone"
+                           value="1"
+                           @if(old('sendPwdByCellphone') == 1) checked @endif>
+                </div>
+                <label for="sendPwdByCellphone" style="color: seagreen;"
+                       class="col-form-label text-md-right">{{ __('Send password on this phone') }}</label>
+            </div>
+
+            <div class="form-group row">
+                <label for="phone"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                <div class="col-md-6">
+                    <input id="phone" type="text" name="phone" value="{{ old('phone') }}"
+                           class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('phone'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="volonteer"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Volonteer') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="volonteer" id="volonteer" value="1"
+                           @if(old('volonteer') == 1) checked @endif>
                 </div>
             </div>
 
@@ -198,65 +213,30 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='delivery'>
-                            <input class="form-check-input" type="checkbox" name="delivery" id="delivery" value="1"
-                                   @if(old('delivery') ==1)checked @endif>
-                            <label class="form-check-label" for="delivery">
-                                {{ __('Delivery') }}
-                            </label>
-                        </div>
-                    </div>
+            <div class="form-group row">
+                <label for="delivery"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Delivery') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="delivery" id="delivery" value="1"
+                           @if(old('delivery') == 1) checked @endif>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='newspaper'>
-                            <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
-                                   @if(old('newspaper') ==1)checked @endif>
-                            <label class="form-check-label" for="newspaper">
-                                {{ __('Newspaper') }}
-                            </label>
-                        </div>
-                    </div>
+            <div class="form-group row">
+                <label for="newspaper"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Newspaper') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
+                           @if(old('newspaper') == 1) checked @endif>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='newsletter'>
-                            <input class="form-check-input"
-                                   type="checkbox" name="newsletter" id="newsletter" value="1"
-                                   @if(old('newsletter') ==1)checked @endif>
-                            <label class="form-check-label" for="newsletter">
-                                {{ __('Newsletter') }}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='mailing'>
-                            <input class="form-check-input"
-                                   type="checkbox" name="mailing" id="mailing" value="1"
-                                   @if(old('mailing') ==1)checked @endif>
-                            <label class="form-check-label" for="mailing">
-                                {{ __('Mailing') }}
-                            </label>
-                        </div>
-                    </div>
+            <div class="form-group row">
+                <label for="newsletter"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1"
+                           @if(old('newsletter') == 1) checked @endif>
                 </div>
             </div>
 
@@ -274,19 +254,12 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input type='hidden' value='0' name='alert'>
-                            <input class="form-check-input"
-                                   type="checkbox" name="alert" id="alert" value="1"
-                                   @if(old('alert') ==1)checked @endif>
-                            <label class="form-check-label" for="alert">
-                                {{ __('Alert') }}
-                            </label>
-                        </div>
-                    </div>
+            <div class="form-group row">
+                <label for="alert"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Alert') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="alert" id="alert" value="1"
+                           @if(old('alert') == 1) checked @endif>
                 </div>
             </div>
 
@@ -370,4 +343,41 @@
             </div>
         </form>
     </div>
+
+    <script>
+
+        //Script for dynamic checkbox send by email and phone
+        $('#email').on('blur keypress', function () {
+            if ($(this).val()) {
+                $('#pwdByEmail').css('display', 'block');
+                if ($('#cellphone').val()) {
+                    $('#pwdByCellphone').css('display', 'block');
+                }
+            } else {
+                $('#pwdByEmail').css('display', 'none');
+                $('#pwdByCellphone').css('display', 'none');
+            }
+        });
+
+        $('#cellphone').on('blur keypress', function () {
+            if ($('#email').val()) {
+                if ($(this).val()) {
+                    $('#pwdByCellphone').css('display', 'block');
+                } else {
+                    $('#pwdByCellphone').css('display', 'none');
+                }
+            }
+        });
+
+        //refresh display block on validate errors
+        $(document).ready(function () {
+            if (($('#sendPwdByEmail')).prop('checked')) {
+                $('#pwdByEmail').css('display', 'block');
+            }
+            if (($('#sendPwdByCellphone')).prop('checked')) {
+                $('#pwdByCellphone').css('display', 'block');
+            }
+        });
+
+    </script>
 @endsection
