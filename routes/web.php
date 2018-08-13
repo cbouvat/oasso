@@ -29,7 +29,6 @@ Route::prefix('user')->group(function () {
 //User edit / update
     Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
     Route::post('/update/{user}', 'UserController@update')->name('user.update');
-
 });
 
 //User Gift Route
@@ -63,9 +62,3 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
 });
-
-//User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
-
-
