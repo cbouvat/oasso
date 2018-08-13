@@ -33,7 +33,6 @@
                 </li>
             @endif
         </ul>
-
         @if(Auth::user()->role->role_type_id === 2 || Auth::user()->role->role_type_id === 3)
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -57,7 +56,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('admin.gift.index') }}">
                         <i class="fas fa-gift"></i> Gestion des Dons
                     </a>
                 </li>
