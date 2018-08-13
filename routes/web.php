@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('admin')->group(function () {
+
+    //User
     Route::get('/user', 'Admin\UserController@index')->name('admin.user.index');
     Route::post('/user', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
