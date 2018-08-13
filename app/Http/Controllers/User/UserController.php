@@ -5,10 +5,22 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\User;
 use Auth;
+use Hash;
 use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +67,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
         return view('user.edit', ['user' => $user]);
     }
 
@@ -68,7 +79,6 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
@@ -117,6 +127,7 @@ class UserController extends Controller
     public function beforeDelete($id)
     {
         $user = User::findOrFail($id);
+
         return view('admin.user.beforedelete', ['user' => $user]);
     }
 
@@ -142,4 +153,36 @@ class UserController extends Controller
         return view('user.history.index', ['user' => $user]);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function passwordEdit()
+    {
+        return view('users.password');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function passwordUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!Hash::check($request->input('password'), $user->password)) {
+            return back()
+                ->withErrors(['password' => 'Mot de passe incorrect'])
+                ->withInput();
+        } else {
+            $validateRequest = $request->validate([
+                'password' => 'required|string|min:6|max:191',
+                'new_password' => 'required|string|min:6|max:191|confirmed',
+            ]);
+
+            $user->password = Hash::make($validateRequest['new_password']);
+            $user->save();
+
+            return redirect()->route('home');
+        }
+    }
 }

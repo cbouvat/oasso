@@ -15,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-
         $users = User::orderBy('lastname', 'asc')->paginate(10);
+
         return view('admin.user.index', ['users' => $users]);
     }
 
@@ -81,7 +81,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-
         $user->load('subscriptions.subscriptionType')
             ->load('gifts');
 
@@ -109,7 +108,6 @@ class UserController extends Controller
     {
         //
     }
-
 
     /**
      * @param $id

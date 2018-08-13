@@ -7,20 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subscription extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'];
-
-
-    protected $morphClass = 'subscription';
-
-    use SoftDeletes;
-
-    /** RELATIONS */
+        'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

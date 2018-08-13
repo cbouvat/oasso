@@ -6,18 +6,18 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-
 use Auth;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-
+    /**
+     * GiftController constructor.
+     */
     function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Display a listing of the resource.
@@ -26,8 +26,7 @@ class GiftController extends Controller
      */
     public function index()
     {
-
-
+        //
     }
 
     /**
@@ -57,7 +56,6 @@ class GiftController extends Controller
             'payment_methods' => 'required'
         ]);
 
-
         $inputs['user_id'] = Auth::user()->id;
 
         $gift = Gift::create($inputs);
@@ -79,7 +77,7 @@ class GiftController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -90,7 +88,7 @@ class GiftController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -102,7 +100,7 @@ class GiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -113,7 +111,6 @@ class GiftController extends Controller
      */
     public function destroy($id)
     {
-
-
+        //
     }
 }
