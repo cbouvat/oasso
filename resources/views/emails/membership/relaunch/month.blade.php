@@ -12,10 +12,10 @@
 
         @endcomponent
 
-        <h3>Si vous avez oublié votre mot de passe, vous pouvez le changer en cliquant sur : <strong
+        <h3>Si vous avez oublié votre mot de passe, vous pouvez le changer en cliquant sur <strong
                     style="color: rgb(103,212,224);">Mot de passe oublié</strong></h3>
 
-        @component('mail::button', ['url' => config('app.url'), 'color' => 'blue'])
+        @component('mail::button', ['url' => config('app.url').'/password/reset', 'color' => 'blue'])
 
             Mot de passe oublié
 
