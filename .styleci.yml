@@ -1,0 +1,5 @@
+preset: laravel
+finder:
+  not-path:
+  - "_ide_helper.php"
+  - ".phpstorm.meta.php"
