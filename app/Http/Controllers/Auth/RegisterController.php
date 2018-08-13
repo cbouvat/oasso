@@ -78,6 +78,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(!isset($data['newspaper'])) {
+            $newspaper = 0;
+        } else {
+            $newspaper = 1;
+        }
+
+        if(!isset($data['newsletter'])) {
+            $newsletter= 0;
+        } else {
+            $newsletter = 1;
+        }
+
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -91,8 +103,8 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'phone_number_1' => $data['phone_number_1'],
             'phone_number_2' => $data['phone_number_2'],
-            'newspaper' => $data['newspaper'],
-            'newsletter' => $data['newsletter'],
+            'newspaper' => $newspaper,
+            'newsletter' => $newsletter,
             'gender_joint' => $data['gender_joint'],
             'firstname_joint' => $data['firstname_joint'],
             'lastname_joint' => $data['lastname_joint'],

@@ -28,7 +28,11 @@ Route::get('/search', 'SearchController@search')->name('search');
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/users-list', 'UserController@index')->name('admin.users.list');
+    Route::get('/user', 'UserController@index')->name('admin.user.index');
+    Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
+    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
+    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
 
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
@@ -46,4 +50,5 @@ Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
 Route::get('/{user}/soft-delete', 'UserController@softDelete')->name('admin.users.softdelete');
 Route::get('/{user}/before-delete', 'UserController@beforeDelete')->name('admin.users.beforedelete');
+
 
