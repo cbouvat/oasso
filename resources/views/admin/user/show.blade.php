@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="offset-2">
+    <div class="">
         <div class="row d-flex justify-content-between mb-3">
             <a href="{{route('admin.subscription.create')}}" class="btn btn-outline-success">Ajouter une Adhésion</a>
             <a href="#" class="btn btn-outline-primary">Modifer</a>
