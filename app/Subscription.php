@@ -12,7 +12,7 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'amount', 'opt_out_mail', 'user_id', 'subscription_type_id', 'date_start', 'date_end', 'subscription_source'
+        'amount', 'opt_out_mail', 'user_id', 'subscription_type_id', 'date_start', 'date_end', 'subscription_source',
     ];
 
     /**
@@ -20,7 +20,7 @@ class Subscription extends Model
      */
     public function user()
     {
-      return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User');
     }
 
     /**

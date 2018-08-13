@@ -12,6 +12,6 @@ class TemplateMail extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'type', 'html_content', 'text_content'
+        'title', 'type', 'html_content', 'text_content',
     ];
 }

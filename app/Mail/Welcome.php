@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\TemplateMail;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -33,9 +32,7 @@ class Welcome extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.welcome')
-            ->subject('Inscription sur ' . config('app.name'))
+            ->subject('Inscription sur '.config('app.name'))
             ->text('emails.welcome_plain');
     }
 }
-
-
