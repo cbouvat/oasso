@@ -59,10 +59,11 @@ Route::prefix('admin')->group(function () {
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
     Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');
-    Route::get('/gift/add', 'Admin\GiftController@show')->name('admin.gift.show');
-    Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
-    Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
-    Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
+    Route::get('/gift/create', 'Admin\GiftController@show')->name('admin.gift.show');
+    Route::get('/gift/{gift}', 'Admin\GiftController@edit')->name('admin.gift.edit');
+    Route::post('/gift/{gift}', 'Admin\GiftController@update')->name('admin.gift.update');
+    Route::get('/gift/{gift}/destroy', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
+    Route::get('/gift/{gift}/before-delete','Admin\GiftController@beforeDelete')->name('admin.gift.beforeDelete');
 
     // Newsletter
     Route::prefix('newsletter')->group(function () {
