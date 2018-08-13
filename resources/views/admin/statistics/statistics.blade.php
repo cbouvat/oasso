@@ -48,7 +48,7 @@
                             event.preventDefault();
                             var param = $(this).serialize();
 
-                            $.getJSON('/test.json?' + param, function(data) {
+                            $.getJSON('/api/stat?' + param, function(data) {
                                 var ctx = document.getElementById("myChartGeneral").getContext('2d');
                                 var myLineChart = new Chart(ctx, data);
                             });
