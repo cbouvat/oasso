@@ -38,7 +38,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
     //Statistics
-    Route::get('/statistiques', 'StatisticsController@index')->name('admin.statistics.index');
+    Route::get('/statistics', 'StatisticsController@index')->name('admin.statistics.index');
 });
 
 //User Gift Route
