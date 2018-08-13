@@ -3,10 +3,8 @@
     <div class="appName">
         <h2>Bravo {{ $user->firstname }}</h2>
         <p><br></p>
-        <h3>Vous vous êtes inscrit sur <strong
-            >{{config('app.name')}}</strong>
+        <h3>Vous vous êtes inscrit sur <strong>{{config('app.name')}}</strong>
             ! Vous pouvez suivre le lien ci-dessous pour payer votre adhésion.</h3>
-
 
         @component('mail::button', ['url' => config('app.url'), 'color' => 'green'])
 

@@ -11,33 +11,31 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Welcome extends Mailable implements ShouldQueue
 {
-  use Queueable, SerializesModels;
+    use Queueable, SerializesModels;
 
-  public $user;
+    public $user;
 
-  /**
-   * Create a new message instance.
-   *
-   * @return void
-   */
-  public function __construct(User $user)
-  {
-    $this->user = $user;
-  }
+    /**
+     * Create a new message instance.
+     *
+     * @param User $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
 
-  /**
-   * Build the message.
-   *
-   * @return $this
-   */
-  public function build()
-  {
-
-    return $this->markdown('emails.welcome')
-      ->subject('Inscription sur '.config('app.name'))
-      ->text('emails.welcome_plain');
-
-  }
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->markdown('emails.welcome')
+            ->subject('Inscription sur ' . config('app.name'))
+            ->text('emails.welcome_plain');
+    }
 }
 
 

@@ -17,7 +17,7 @@ class MembershipRenewal extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Subscription $subscription
      */
     public function __construct(Subscription $subscription)
     {
@@ -31,7 +31,7 @@ class MembershipRenewal extends Mailable implements ShouldQueue
      */
     public function build()
     {
-      return $this->markdown('emails.membership.renewal')
-        ->subject('Un an de plus chez '.config('app.name').' !');
+        return $this->markdown('emails.membership.renewal')
+            ->subject('Un an de plus chez ' . config('app.name') . ' !');
     }
 }

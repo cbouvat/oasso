@@ -12,13 +12,13 @@ class PasswordSending extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $user,
-           $password;
+    public $user, $password;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param User $user
+     * @param $password
      */
     public function __construct(User $user, $password)
     {
