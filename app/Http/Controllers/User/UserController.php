@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\SubscriptionType;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -18,10 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $subscriptionTypes = SubscriptionType::all();
-
-
-        return view('user.user.index', ['user' => $user, 'subscriptionTypes' => $subscriptionTypes]);
+        return view('user.user.index', ['user' => $user]);
     }
 
     /**

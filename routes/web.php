@@ -31,19 +31,13 @@ Route::prefix('user')->group(function () {
     Route::post('/update/{user}', 'UserController@update')->name('user.update');
 });
 
-//User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
-
-Route::get('/search', 'SearchController@search')->name('search');
-
 Route::prefix('admin')->group(function () {
 
     Route::get('/user', 'Admin\UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
     Route::get('/user/show/{user}', 'Admin\UserController@show')->name('admin.user.show');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
-    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
+    Route::get('/user/{user}/delete', 'Admin\UserController@softDelete')->name('admin.user.softdelete');
     Route::get('/user/{user}/before', 'Admin\UserController@beforeDelete')->name('admin.user.beforedelete');
 
     //Subscribers
@@ -64,13 +58,19 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
 });
+
+//User Gift Route
+
+Route::get('/search', 'SearchController@search')->name('search');
+
+
 Route::get('/user', 'User\UserController@index')->name('user.user.index');
-Route::get('/user/beforedelete/{subscription}', 'User\UserController@beforeDelete')->name('user.user.beforedelete');
-Route::get('/user/destroy/{id}', 'User\GiftController@destroy')->name('user.user.destroy');
+Route::get('/user/beforedelete/{id}', 'User\UserController@beforeDelete')->name('user.user.beforedelete');
+Route::get('/user/softdelete/{id}', 'User\UsertController@softDelete')->name('user.user.softdelete');
 
 //subscription
 Route::get('/subscription/create', 'User\SubscriptionController@create')->name('user.subscription.create');
-Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.user.store');
+Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.subscription.store');
 
 //User Gift Route
 Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');

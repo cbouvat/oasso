@@ -4,7 +4,7 @@
         <!--Default menu for all users -->
         <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.user.index')}}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
