@@ -11,12 +11,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-
-
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -26,7 +23,6 @@
 
 <!-- Include message Alert -->
 @include('layouts.message');
-
 
 <nav class="navbar navbar-light fixed-top bg-secondary flex-md-nowrap p-0 shadow">
     <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name"
@@ -65,8 +61,6 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<!-- For add script for ur page, look Laravel Documentation Stacks (push method) -->
 @stack('scripts')
-
 </body>
 </html>

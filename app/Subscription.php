@@ -22,17 +22,27 @@ class Subscription extends Model
 
     /** RELATIONS */
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function subscriptionType()
     {
         return $this->belongsTo('App\SubscriptionType');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
     public function payment()
     {
         return $this->morphOne('App\Payment', 'payment');
     }
 
-    public function user(){
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 }

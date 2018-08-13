@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.emptyLayout')
 
 @section('content')
     <div class="container">
@@ -26,7 +26,7 @@
                                     <select id="selected-type" name="type" class="custom-select" >
                                         @foreach($subscriptionTypes as $subscriptionType)
                                             <option value="{{ $subscriptionType->id }}" data-amount="{{ $subscriptionType->amount }}">
-                                                {{ $subscriptionType->name }}
+                                                    {{ $subscriptionType->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -57,15 +57,15 @@
     </div>
 
     @push('scripts')
-        <script>
-            function selectedtype() {
-                var amount = $('#selected-type option:selected').data('amount');
-                $('#subscription-amount').text(amount + ' €');
-            }
+    <script>
+        function selectedtype() {
+            var amount = $('#selected-type option:selected').data('amount');
+            $('#subscription-amount').text(amount + ' €');
+        }
 
-            $('#selected-type').change(selectedtype);
-            selectedtype();
-        </script>
+        $('#selected-type').change(selectedtype);
+        selectedtype();
+    </script>
     @endpush
 
 @endsection

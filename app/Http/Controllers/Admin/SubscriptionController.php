@@ -7,7 +7,6 @@ use App\Payment;
 use App\PaymentMethod;
 use App\Subscription;
 use App\SubscriptionType;
-use App\User;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
@@ -36,7 +35,6 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-
         $payments_methods = PaymentMethod::all();
         $subscription_type = SubscriptionType::all();
 
@@ -44,7 +42,6 @@ class SubscriptionController extends Controller
             'payments_methods' => $payments_methods,
             'subscription_types' => $subscription_type
         ]);
-
     }
 
     /**
@@ -55,7 +52,6 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-
         $validator = $request->validate([
             'user_id' => 'required|numeric',
             'subscription_type_id' => 'required|integer',
@@ -78,7 +74,6 @@ class SubscriptionController extends Controller
 
 
         return redirect()->route('admin.subscription.index');
-
     }
 
     /**
@@ -120,7 +115,6 @@ class SubscriptionController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $validator = $request->validate([
             'user_id' => 'required|numeric',
             'subscription_type_id' => 'required|integer',
@@ -150,7 +144,6 @@ class SubscriptionController extends Controller
 
 
         return back()->with('message', 'Mise a jour effectuée');
-
     }
 
     public function beforeDelete(Subscription $subscription)
