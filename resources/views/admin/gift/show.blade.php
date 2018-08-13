@@ -20,9 +20,9 @@
                                 </div>
 
                                 <select class="form-control text-center ml-3" name="payment_methods">
-                                    @foreach($payments_methods as $payment_method)
-                                        <option value="{{ $payment_method->id }}">
-                                            {{ $payment_method->name}}
+                                    @foreach($paymentsMethods as $paymentMethod)
+                                        <option value="{{ $paymentMethod->id }}">
+                                            {{ $paymentMethod->name}}
                                         </option>
                                     @endforeach
                                 </select>

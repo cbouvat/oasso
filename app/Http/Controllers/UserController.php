@@ -6,6 +6,7 @@ use App\Gift;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -17,13 +18,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -34,7 +34,6 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -53,14 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Admin\User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(User $user)
     {
-
-        $user = Auth::user();
-
         return view('user.edit', ['user' => $user]);
     }
 
@@ -68,57 +63,46 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Admin\User $user
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-        $authUser = Auth::user();
-        $validateData = $this->$request->validate([
+        $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
-            'firstname' => 'string|max:45|nullable',
-            'lastname' => 'string|max:45|nullable',
-            'email' => 'string|email|max:255|unique:users,email,' . $authUser->id,
-            'birthdate' => 'date|nullable',
-            'address_line1' => 'string|max:32|nullable',
-            'address_line2' => 'string|max:32|nullable',
-            'city' => 'string|max:45|nullable',
-            'zipcode' => 'string|max:5|nullable',
-            'phone_number_1' => 'string|max:10|nullable',
-            'phone_number_2' => 'string|max:10|nullable',
-            'newspaper' => '',
-            'newsletter' => '',
+            'firstname' => 'required|alpha|string|max:45|min:2',
+            'lastname' => 'required|alpha|string|max:45|min:2',
+            'email' => 'string|required|email|max:255|unique:users,email,' . $user->id,
+            'birthdate' => '|date|before:today-13years|after:today-120years',
+            'address_line1' => '|string|max:32|',
+            'address_line2' => '|string|max:32|nullable',
+            'city' => 'required|string|max:45|',
+            'zipcode' => 'digits:5|numeric',
+            'phone_number_1' => 'numeric|nullable',
+            'phone_number_2' => 'numeric|nullable',
+            'newspaper' => 'boolean',
+            'newsletter' => 'boolean',
             'gender_joint' => 'max:2|nullable',
-            'firstname_joint' => 'max:45|nullable',
-            'lastname_joint' => 'max:45|nullable',
-            'birthdate_joint' => 'date|nullable',
-            'email_joint' => 'email|max:255|nullable'
+            'firstname_joint' => 'alpha|max:45|nullable',
+            'lastname_joint' => 'alpha|max:45|nullable',
+            'birthdate_joint' => 'date|before:today-13years|after:today-120years|nullable',
+            'email_joint' => 'email|max:45|nullable',
         ]);
 
-        if ($request['newspaper'] == "on") {
-            $validateData['newspaper'] = "1";
-
-        } else {
-            $validateData['newspaper'] = "0";
+        if ($request['newspaper'] == null ) {
+            $validateData['newspaper'] = 0;
         }
-        if ($request['newsletter'] == "on") {
-            $validateData['newsletter'] = "1";
-
-        } else {
-            $validateData['newsletter'] = "0";
+        if ($request['newsletter'] == null) {
+            $validateData['newsletter'] = 0;
         }
 
-        $authUser->update($validateData);
-        $authUser->save();
-//        return view('user.edit',['authUser' => $authUser, 'user' => $authUser]);
-        return redirect()->route('user.edit');
+        $user->update($validateData);
+        return redirect()->route('user.edit', ['user'=>$user]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Admin\User $user
-     * @return \Illuminate\Http\Response
      */
     public function destroy()
     {
@@ -127,7 +111,8 @@ class UserController extends Controller
 
     /**>
      * Insert into Database Gift from a member
-     * @param User $user
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function give(Request $request)
     {
@@ -139,16 +124,14 @@ class UserController extends Controller
         $inputs['user_id'] = $user->id;
 
         Gift::create($inputs);
-        return back()->with('message', 'Votre don a bien été accepté, merci de votre générosité !');
 
+        return back()->with('message', 'Votre don a bien été accepté, merci de votre générosité !');
     }
 
     public function gift()
     {
         $user = Auth::user();
-        $user->load(['gifts' => function ($query) {
-            $query->orderBy('created_at', 'desc');
-        }]);
+        $user->load('gifts');
         $user->load('role');
 
         return view('users.gift', ['user' => $user]);
@@ -178,4 +161,36 @@ class UserController extends Controller
         return redirect()->route('admin.user.index');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function passwordEdit()
+    {
+        return view('users.password');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function passwordUpdate(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!Hash::check($request->input('password'), $user->password)) {
+            return back()
+                ->withErrors(['password' => 'Mot de passe incorrect'])
+                ->withInput();
+        } else {
+            $validateRequest = $request->validate([
+                'password' => 'required|string|min:6|max:191',
+                'new_password' => 'required|string|min:6|max:191|confirmed',
+            ]);
+
+            $user->password = Hash::make($validateRequest['new_password']);
+            $user->save();
+
+            return redirect()->route('home');
+        }
+    }
 }
