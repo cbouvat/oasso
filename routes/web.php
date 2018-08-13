@@ -25,6 +25,7 @@ Route::get('/informations-personnelles', 'UserController@edit')->name('user.edit
 Route::post('/informations-personnelles', 'UserController@update')->name('user.update');
 
 Route::get('/search', 'SearchController@search')->name('search');
+
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
