@@ -7,19 +7,17 @@
 
     <title>{{config('app.name')}}</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 <body class="container">
 <div class="text-center m-5 p-5">
-    <h1 class="display-1">{{config('app.name')}}</h1>
+    <h1 class="display-1">{{ config('app.name') }}</h1>
 </div>
 <div class="text-center">
 @yield('content')
-
 </div>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+@stack('scripts')
 </body>
 </html>
