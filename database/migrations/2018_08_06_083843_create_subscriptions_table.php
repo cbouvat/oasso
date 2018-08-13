@@ -24,6 +24,7 @@ class CreateSubscriptionsTable extends Migration
             $table->timestamps();
             $table->foreign('subscription_type_id')->references('id')->on('subscription_types');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
         });
     }
 

@@ -4,7 +4,7 @@
         <!--Default menu for all users -->
         <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">
+                    <a class="nav-link" href="{{route('user.user.index')}}">
                         <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.gift.index')}}">
+                    <a class="nav-link" href="{{route('user.gift.create')}}">
                         <i class="fas fa-gift"></i> Dons
                     </a>
                 </li>

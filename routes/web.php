@@ -24,7 +24,7 @@ Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
 
-    Route::get('/user', 'UserController@index')->name('admin.user.index');
+    Route::get('/user', 'Admin\UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
     Route::get('/user/show/{user}', 'Admin\UserController@show')->name('admin.user.show');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
@@ -49,9 +49,16 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
 });
+Route::get('/user', 'User\UserController@index')->name('user.user.index');
+Route::get('/user/beforedelete/{subscription}', 'User\UserController@beforeDelete')->name('user.user.beforedelete');
+Route::get('/user/destroy/{id}', 'User\GiftController@destroy')->name('user.user.destroy');
+
+//subscription
+Route::get('/subscription/create', 'User\SubscriptionController@create')->name('user.subscription.create');
+Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.user.store');
 
 //User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
+Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');
+Route::post('/gift', 'User\GiftController@store')->name('user.gift.store');
 
 

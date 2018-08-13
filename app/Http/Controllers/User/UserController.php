@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,8 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.user.index', ['users' => $users]);
+        $user = Auth::user();
+        return view('user.user.index', ['user' => $user]);
     }
 
     /**
@@ -86,6 +88,16 @@ class UserController extends Controller
 
     /**
      * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function beforeDelete($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.user.beforedelete', ['user' => $user]);
+    }
+
+    /**
+     * @param $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function softDelete($id)
@@ -93,6 +105,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('home');
     }
 }

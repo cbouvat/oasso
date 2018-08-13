@@ -26,11 +26,7 @@ class GiftController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $user->load('gifts.payment.paymentMethod');
-        $payments_methods = PaymentMethod::all();
 
-        return view('users.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
 
     }
 
@@ -39,9 +35,23 @@ class GiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
+        $user = Auth::user();
+        $user->load('gifts.payment.paymentMethod');
+        $payments_methods = PaymentMethod::all();
 
+        return view('user.gift.create', ['user' => $user, 'payments_methods' => $payments_methods]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
             'payment_methods' => 'required'
@@ -59,17 +69,6 @@ class GiftController extends Controller
         Payment::create($inputs);
 
         return back()->with('message', 'Le don a bien été ajouté !');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

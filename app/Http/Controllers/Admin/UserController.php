@@ -84,6 +84,7 @@ class UserController extends Controller
 
         $user->load('subscriptions.subscriptionType')
             ->load('gifts');
+
         return view('admin.user.show', ['user' => $user]);
     }
 
@@ -121,6 +122,18 @@ class UserController extends Controller
         return view('admin.user.beforedelete', ['user' => $user]);
     }
 
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function softDelete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('admin.user.index')->with('message', $user->firstname.' supprimé !');
+    }
     /**
      * Remove the specified resource from storage.
      *
