@@ -62,14 +62,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
     // Newsletter
-    Route::prefix('newsletters')->group(function () {
-        Route::get('/index', 'Admin\NewsletterController@index')->name('admin.newsletter.index');
-        Route::get('/{id}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
+    Route::prefix('newsletter')->group(function () {
+        Route::get('/', 'Admin\NewsletterController@index')->name('admin.newsletter.index');
+        Route::post('/', 'Admin\NewsletterController@store')->name('admin.newsletter.store');
         Route::get('/create', 'Admin\NewsletterController@create')->name('admin.newsletter.create');
-        Route::post('/store', 'Admin\NewsletterController@store')->name('admin.newsletter.store');
-        Route::post('/{newsletter}/update', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
-        Route::get('/{newsletter}/edit', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
-        Route::get('/{id}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
-        Route::get('/{id}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
+        Route::get('/{newsletter}', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
+        Route::post('/{newsletter}', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
+        Route::get('/{newsletter}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
+        Route::get('/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
+        Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
     });
 });

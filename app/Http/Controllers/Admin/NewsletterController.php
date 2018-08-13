@@ -7,25 +7,22 @@ use App\Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class NewsletterController
- * @package App\Http\Controllers\Admin
- */
 class NewsletterController extends Controller
 {
+    /**
+     * NewsletterController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-
-        $newsletters = Newsletter::orderBy('created_at', 'desc')->paginate(12);
+        $newsletters = Newsletter::latest()->paginate(20);
 
         return view('admin.newsletter.index', ['newsletters' => $newsletters]);
     }
@@ -44,14 +41,13 @@ class NewsletterController extends Controller
      */
     public function store(Request $request)
     {
-
         $validateRequest = $request->validate([
             'title' => 'string|max:150|required',
             'html_content' => 'required',
             'text_content' => 'required'
         ]);
-        $validateRequest['user_id'] = Auth::user()->id;
 
+        $validateRequest['user_id'] = Auth::user()->id;
 
         Newsletter::Create($validateRequest);
 
@@ -59,15 +55,18 @@ class NewsletterController extends Controller
     }
 
 
-
+    /**
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Newsletter $newsletter)
     {
-
         return view('admin.newsletter.update', ['newsletter' => $newsletter]);
     }
 
     /**
-     * @param $id
+     * @param Request $request
+     * @param Newsletter $newsletter
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update(Request $request, Newsletter $newsletter)
@@ -77,42 +76,39 @@ class NewsletterController extends Controller
             'html_content' => 'required',
             'text_content' => 'required'
         ]);
+
         $validateRequest['user_id'] = Auth::user()->id;
-
-
 
         $newsletter->update($validateRequest);
 
         return redirect(route('admin.newsletter.index'));
     }
 
-    public function duplicate($id)
+    /**
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function duplicate(Newsletter $newsletter)
     {
-        $newsletter = Newsletter::findOrFail($id);
-
         return view('admin.newsletter.duplicate', ['newsletter' => $newsletter]);
     }
 
     /**
-     * @param $id
+     * @param Newsletter $newsletter
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function beforeDelete($id)
+    public function beforeDelete(Newsletter $newsletter)
     {
-        $newsletterId = Newsletter::findOrFail($id);
-
-        return view('admin.newsletter.beforedelete', ['id' => $newsletterId->id]);
+        return view('admin.newsletter.beforedelete', ['id' => $newsletter->id]);
     }
 
     /**
-     * @param $id
+     * @param Newsletter $newsletter
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
-    public function delete($id)
+    public function delete(Newsletter $newsletter)
     {
-
-        $newsletter = Newsletter::findOrfail($id);
         $newsletter->delete();
 
         return redirect('admin/newsletter/index');
