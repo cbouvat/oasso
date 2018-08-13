@@ -125,7 +125,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date|after_or_equal:today'
+            'subscription_date' => 'required|date'
         ]);
 
 
