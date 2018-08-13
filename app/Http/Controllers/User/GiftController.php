@@ -6,18 +6,18 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-
 use Auth;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-
+    /**
+     * GiftController constructor.
+     */
     function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Display a listing of the resource.
@@ -26,12 +26,7 @@ class GiftController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $user->load('gifts.payment.paymentMethod');
-        $payments_methods = PaymentMethod::all();
-
-        return view('users.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
-
+        //
     }
 
     /**
@@ -39,14 +34,27 @@ class GiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
+        $user = Auth::user();
+        $user->load('gifts.payment.paymentMethod');
+        $payments_methods = PaymentMethod::all();
 
+        return view('user.gift.create', ['user' => $user, 'payments_methods' => $payments_methods]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
             'payment_methods' => 'required'
         ]);
-
 
         $inputs['user_id'] = Auth::user()->id;
 
@@ -62,17 +70,6 @@ class GiftController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int $id
@@ -80,7 +77,7 @@ class GiftController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -91,7 +88,7 @@ class GiftController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -103,7 +100,7 @@ class GiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -114,7 +111,6 @@ class GiftController extends Controller
      */
     public function destroy($id)
     {
-
-
+        //
     }
 }

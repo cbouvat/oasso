@@ -4,12 +4,12 @@
         <!--Default menu for all users -->
         <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}">
+                    <a class="nav-link" href="#">
                         <i class="fas fa-home"></i> Accueil
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('user.user.index')}}">
                         <i class="fas fa-users"></i> Mon compte
                     </a>
                 </li>
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.gift.index')}}">
+                    <a class="nav-link" href="{{route('user.gift.create')}}">
                         <i class="fas fa-gift"></i> Dons
                     </a>
                 </li>
@@ -27,7 +27,7 @@
 
             @if(Auth::user()->role->role_type_id === 1)
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ route('history') }}">
                         <i class="fas fa-signal"></i> Historique
                     </a>
                 </li>
@@ -36,8 +36,8 @@
         @if(Auth::user()->role->role_type_id === 2 || Auth::user()->role->role_type_id === 3)
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-users"></i> Gestion Adherents
+                    <a class="nav-link" href="{{route('admin.user.index')}}">
+                        <i class="fas fa-users"></i> Membres
                     </a>
                 </li>
                 <li class="nav-item">

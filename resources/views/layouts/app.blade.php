@@ -15,9 +15,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
 </head>
 <body>
 
@@ -36,13 +36,9 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             @auth
-                <a class="nav-link" id="logout-form" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="nav-link" id="logout-form" href="{{ route('logout') }}">
                     Déconnexion
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             @endauth
         </li>
     </ul>

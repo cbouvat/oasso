@@ -1,15 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Gift;
+use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +28,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.user.index', ['users' => $users]);
+        $user = Auth::user();
+        return view('user.user.index', ['user' => $user]);
     }
 
     /**
@@ -89,7 +100,7 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-        if ($request['newspaper'] == null ) {
+        if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }
         if ($request['newsletter'] == null) {
@@ -97,7 +108,7 @@ class UserController extends Controller
         }
 
         $user->update($validateData);
-        return redirect()->route('user.edit', ['user'=>$user]);
+        return redirect()->route('user.edit', ['user' => $user]);
     }
 
     /**
@@ -107,34 +118,6 @@ class UserController extends Controller
     public function destroy()
     {
         //
-    }
-
-    /**>
-     * Insert into Database Gift from a member
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function give(Request $request)
-    {
-        $user = Auth::user();
-        $request->validate([
-            'amount' => 'required|numeric'
-        ]);
-        $inputs = $request->all();
-        $inputs['user_id'] = $user->id;
-
-        Gift::create($inputs);
-
-        return back()->with('message', 'Votre don a bien été accepté, merci de votre générosité !');
-    }
-
-    public function gift()
-    {
-        $user = Auth::user();
-        $user->load('gifts');
-        $user->load('role');
-
-        return view('users.gift', ['user' => $user]);
     }
 
     /**
@@ -158,7 +141,16 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('admin.user.index');
+        return redirect()->route('home');
+    }
+
+    public function history(){
+
+        $user = Auth::user();
+        $user->load('gifts');
+        $user->load('subscriptions');
+
+        return view('user.history.index', ['user' => $user]);
     }
 
     /**
