@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ShipNewsletter;
 use App\Newsletter;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class NewsletterController extends Controller
 {
@@ -33,6 +36,30 @@ class NewsletterController extends Controller
     public function create()
     {
         return view('admin.newsletter.create');
+    }
+
+    /**
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Newsletter $newsletter)
+    {
+        return view('admin.newsletter.show', ['newsletter' => $newsletter]);
+    }
+
+    /**
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function ship(Newsletter $newsletter)
+    {
+        $users = User::where('newsletter', '1')->get();
+
+        foreach ($users as $user) {
+            Mail::to($user)->send(new ShipNewsletter($newsletter)); //add in queue with ShipNewsletter Model
+        }
+
+        return redirect()->route('admin.newsletter.index')->with('message', 'Newsletter sent !');
     }
 
     /**
@@ -111,6 +138,6 @@ class NewsletterController extends Controller
     {
         $newsletter->delete();
 
-        return redirect('admin/newsletter/index');
+        return redirect()->route('admin.newsletter.index');
     }
 }

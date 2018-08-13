@@ -1,0 +1,1 @@
+{!! $newsletter->html_content !!}

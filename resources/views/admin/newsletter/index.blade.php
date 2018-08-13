@@ -27,9 +27,15 @@
                     <a type="button-primary" class="btn btn-primary btn-sm"
                        href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}">Modifier</a>
                     <a type="button-primary" class="btn btn-danger ml-2 mr-2 btn-sm"
-                       href="{{route('admin.newsletter.beforedelete', ['id' => $newsletter->id])}}">Supprimer</a>
+                       href="{{route('admin.newsletter.beforedelete', ['newsletter' => $newsletter])}}">Supprimer</a>
                     <a type="button-primary" class="btn btn-info btn-sm"
-                       href="{{route('admin.newsletter.duplicate', ['id' => $newsletter->id])}}">Dupliquer</a>
+                       href="{{route('admin.newsletter.duplicate', ['newsletter' => $newsletter])}}">Dupliquer</a>
+                    <a type="button-primary" class="btn btn-info btn-sm ml-2 mr-2"
+                       href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}">Display</a>
+                    <button type="button" class="btn btn-info btn-sm ml-2 mr-2"
+                       href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}">
+                        Sent <span class="badge badge-light">{{counter}}</span>
+                    </button>
                 </td>
             </tr>
         @endforeach

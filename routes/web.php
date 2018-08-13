@@ -69,6 +69,8 @@ Route::prefix('admin')->group(function () {
         Route::get('/{newsletter}', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
         Route::post('/{newsletter}', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
         Route::get('/{newsletter}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
+        Route::get('/{newsletter}/show', 'Admin\NewsletterController@show')->name('admin.newsletter.show');
+        Route::get('/{newsletter}/ship', 'Admin\NewsletterController@ship')->name('admin.newsletter.ship');
         Route::get('/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
         Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
     });
