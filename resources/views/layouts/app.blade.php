@@ -11,22 +11,18 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-
-
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
     <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
+
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
           integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
 </head>
 <body>
 
 <!-- Include message Alert -->
 @include('layouts.message');
-
 
 <nav class="navbar navbar-light fixed-top bg-secondary flex-md-nowrap p-0 shadow">
     <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name"
@@ -44,7 +40,6 @@
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Déconnexion
                 </a>
-
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
@@ -56,7 +51,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 d-none d-md-block bg-light sidebar">
-            @include('layouts.menu');
+            @include('layouts.menu')
         </div>
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             @yield('content')
@@ -65,8 +60,6 @@
 </div>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<!-- For add script for ur page, look Laravel Documentation Stacks (push method) -->
 @stack('scripts')
-
 </body>
 </html>

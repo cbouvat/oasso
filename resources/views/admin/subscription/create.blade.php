@@ -6,12 +6,11 @@
             <div>
                 <h1>Modification de l'Adhésion</h1>
             </div>
-
             <div class="col-12 col-md-8 offset-md-2 mt-5">
-
                 <form method="POST" action="{{route('admin.subscription.store')}}"
                       aria-label="{{ __('Subscription') }}">
                     @csrf
+
                     <div class="form-group row">
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
@@ -28,16 +27,15 @@
                             @endif
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                         <div class="col-md-6">
-                            <select id="subscription_type_id" onchange="setAmount()" name="subscription_type_id"
-                                    class="custom-select text-right">
+                            <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                                 @foreach($subscription_types as $subscription_type)
-                                    <option id="subscription_type" name="{{$subscription_type->amount}}"
-                                            value="{{ $subscription_type->id }}">
-                                        {{ ucfirst($subscription_type->name)}} ({{$subscription_type->amount}}€)
+                                    <option value="{{ $subscription_type->id }}" data-amount="{{ $subscription_type->amount }}">
+                                        {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
                                     </option>
                                 @endforeach
                             </select>
@@ -63,7 +61,6 @@
                             @endif
                         </div>
                     </div>
-
 
                     <div class="form-group row">
                         <label for="payment_methods"
@@ -108,16 +105,19 @@
                         </div>
                     </div>
 
-
                 </form>
-
-
             </div>
         </div>
     </div>
-    <script>
-        function setAmount() {
-            $('#amount').val($("#subscription_type_id option:selected").attr('name'));
-        }
-    </script>
+    @push('scripts')
+        <script>
+          function selectedtype() {
+            let amount = $('#subscription_type_id option:selected').data('amount');
+            $('#amount').val(amount);
+          }
+
+          $('#subscription_type_id').change(selectedtype);
+          selectedtype();
+        </script>
+    @endpush
 @endsection

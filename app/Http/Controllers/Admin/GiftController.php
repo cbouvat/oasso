@@ -6,14 +6,15 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-use App\SubscriptionType;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
 class GiftController extends Controller
 {
-
+    /**
+     * GiftController constructor.
+     */
     function __construct()
     {
         $this->middleware('auth');
@@ -34,6 +35,7 @@ class GiftController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function create(Request $request)
@@ -46,23 +48,18 @@ class GiftController extends Controller
 
         ]);
 
-
         if ($request->has('from_me')) {
             if ($request['from_me'] === Auth::user()->id) {
                 $inputs['user_id'] = $request['from_me'];
             } else {
                 $inputs['user_id'] = Auth::user()->id;
             }
-
         } elseif ($request['from_user_id'] != null) {
-
             if (User::find($request['from_user_id']) != null) {
                 $inputs['user_id'] = $request['from_user_id'];
             } else {
                 return back()->with('error_message', 'Erreur, identifiant incorrect !');
             }
-
-
         } else {
             return back()->with('error_message', 'Erreur, identifiant incorrect !');
         }
@@ -75,7 +72,6 @@ class GiftController extends Controller
 
         Payment::create($inputs);
 
-
         return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
     }
 
@@ -83,7 +79,7 @@ class GiftController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -102,37 +98,34 @@ class GiftController extends Controller
         $user = Auth::user();
         $user->load('gifts.payment.paymentMethod');
 
-        $payments_methods = PaymentMethod::all();
+        $paymentsMethods = PaymentMethod::all();
 
-        return view('admin.gift.show', ['user' => $user, 'payments_methods' => $payments_methods]);
+        return view('admin.gift.show', ['user' => $user, 'paymentsMethods' => $paymentsMethods]);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Gift $gift
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Gift $gift)
     {
-        $gift = Gift::findOrFail($id);
         $gift->load('user');
 
         return view('admin.gift.edit', ['gift' => $gift]);
-
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param Gift $gift
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Gift $gift)
     {
-        $gift = Gift::findOrFail($id);
         $request->validate([
 
             'amount' => 'required|numeric|min:0|max:999999',
@@ -157,20 +150,23 @@ class GiftController extends Controller
         $gift->update($inputs);
 
         return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Gift $gift
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Gift $gift)
     {
-        $giftToDelete = Gift::findOrFail($id);
-        $giftToDelete->delete();
-        return back()->with('message', 'Don supprimé');
+        $gift->delete();
+        return redirect()->route('admin.gift.index')->with('message', 'Don supprimé');
+    }
 
+    public function beforeDelete(Gift $gift)
+    {
+        return view('admin.giftBeforeDelete', ['gift' => $gift]);
     }
 }
