@@ -180,36 +180,14 @@
                                 <label for="newspaper"
                                        class="col-md-4 col-form-label text-md-right">{{ __('NewsPaper') }}</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper1" value="1" @if(old('newspaper') == 1) checked @endif>
-                                    <label class="form-check-label" for="newspaper">
-                                        {{ __('Yes') }}
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper"
-                                           id="newspaper2" value="0" checked @if(old('newspaper') == 0) checked @endif>
-                                    <label class="form-check-label" for="newspaper">
-                                        {{ __('No') }}
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1" @if(old('newspaper') == 1) checked @endif>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="newsletter"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter1" value="1" @if(old('newsletter') == 1) checked @endif>
-                                    <label class="form-check-label" for="newsletter1">
-                                        {{ __('Yes') }}
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter2" value="0" checked @if(old('newsletter') == 0) checked @endif>
-                                    <label class="form-check-label" for="newsletter2">
-                                        {{ __('No') }}
-                                    </label>
+                                    <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1" @if(old('newsletter') == 1) checked @endif>
                                 </div>
                             </div>
 
