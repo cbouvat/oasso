@@ -16,32 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user/password', 'UserController@passwordEdit')->name('user.password.edit');
-Route::post('/user/password', 'UserController@passwordUpdate')->name('user.password.update');
-
-// Membership renewal
-Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
-// route to payment will have to be inserted
-Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
-
-Route::prefix('user')->group(function () {
-// User edit / update
-    Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
-    Route::post('/update/{user}', 'UserController@update')->name('user.update');
-});
-
-// User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
-
-Route::get('/search', 'SearchController@search')->name('search');
-
 Route::prefix('admin')->group(function () {
-    Route::get('/user', 'UserController@index')->name('admin.user.index');
+    Route::get('/user', 'Admin\UserController@index')->name('admin.user.index');
     Route::post('/user', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
     Route::get('/user/{user}', 'Admin\UserController@show')->name('admin.user.show');
@@ -84,3 +62,36 @@ Route::prefix('admin')->group(function () {
     Route::post('/mailing/update/{id}','Admin\MailingController@update')->name('admin.mailing.update');
 });
 
+//User Gift Route
+
+Route::get('/search', 'SearchController@search')->name('search');
+Route::get('/history', 'User\UserController@history')->name('history');
+
+Route::prefix('user')->group(function () {
+// User edit / update
+    Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
+    Route::post('/update/{user}', 'UserController@update')->name('user.update');
+});
+
+Route::get('/user', 'User\UserController@index')->name('user.user.index');
+Route::get('/user/password', 'UserController@passwordEdit')->name('user.password.edit');
+Route::post('/user/password', 'UserController@passwordUpdate')->name('user.password.update');
+Route::get('/user/beforedelete/{id}', 'User\UserController@beforeDelete')->name('user.user.beforedelete');
+Route::get('/user/softdelete/{id}', 'User\UsertController@softDelete')->name('user.user.softdelete');
+
+//subscription
+Route::get('/subscription/create', 'User\SubscriptionController@create')->name('user.subscription.create');
+Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.subscription.store');
+
+// Membership renewal
+Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
+Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
+
+//User Gift Route
+Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');
+Route::post('/gift', 'User\GiftController@store')->name('user.gift.store');
+
+//logout fix
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+
+Auth::routes();

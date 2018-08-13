@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: remi
- * Date: 06/08/18
- * Time: 16:18
- */
+
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,10 +12,12 @@ class SubscriptionType extends Model
      * @var array
      */
     protected $fillable = [
-        'name','amount'];
+        'name','amount'
+    ];
 
-    /** RELATIONS */
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function subscription()
     {
         return $this->hasMany('App\Subscription');

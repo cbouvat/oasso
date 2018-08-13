@@ -21,15 +21,15 @@ class SearchController extends Controller
             'q' => 'min:2'
         ]);
 
-        $members = User::where('lastname','LIKE','%'.$request->q.'%')
-                        ->orwhere('firstname', 'LIKE','%'.$request->q.'%')
-                        ->get();
+        $members = User::where('lastname', 'LIKE', '%' . $request->q . '%')
+            ->orwhere('firstname', 'LIKE', '%' . $request->q . '%')
+            ->paginate();
         // dd($members);
         if ($validator->fails()) {
             return view('search')
                 ->withErrors($validator);
         }
 
-        return view('search', ['members' => $members]);
+        return view('admin.user.index', ['users' => $members]);
     }
 }

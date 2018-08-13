@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Liste des membres</h1>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">Id</th>

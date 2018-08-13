@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <div>
-                <h1>Modification de l'Adhésion</h1>
+                <h1>Creation d'Adhésion</h1>
             </div>
             <div class="col-12 col-md-8 offset-md-2 mt-5">
                 <form method="POST" action="{{route('admin.subscription.store')}}"
