@@ -126,12 +126,11 @@ class GiftController extends Controller
      */
     public function update(Request $request, Gift $gift)
     {
-        $validator = $request->validate([
-
+        $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
         ]);
 
-        $gift->update($validator);
+        $gift->update($inputs);
 
         return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
     }
@@ -146,6 +145,7 @@ class GiftController extends Controller
     public function destroy(Gift $gift)
     {
         $gift->delete();
+
         return redirect()->route('admin.gift.index')->with('message', 'Don supprimé');
     }
 
