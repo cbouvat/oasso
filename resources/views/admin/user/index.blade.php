@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Liste des membres</h1>
-    <table class="table table-striped table-hover">
+    <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -16,8 +16,7 @@
         <tbody>
         @foreach($users as $user)
             <tr>
-
-                <th scope="row">{{ $user->id }}</th>
+                <th>{{ $user->id }}</th>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
                 <td>
@@ -32,7 +31,6 @@
                                 class="far fa-trash-alt"></span></a>
                 </td>
             </tr>
-
         @endforeach
         </tbody>
     </table>
