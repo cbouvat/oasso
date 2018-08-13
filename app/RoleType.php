@@ -12,10 +12,9 @@ class RoleType extends Model
      * @var array
      */
     protected $fillable = [
-        'name'];
+        'name', ];
 
     /** RELATIONS */
-
     public function role()
     {
         return $this->belongsTo('App\Role');

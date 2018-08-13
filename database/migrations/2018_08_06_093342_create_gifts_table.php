@@ -15,7 +15,7 @@ class CreateGiftsTable extends Migration
     {
         Schema::create('gifts', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('amount', 8,2);
+            $table->decimal('amount', 8, 2);
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

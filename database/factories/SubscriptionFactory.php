@@ -10,7 +10,7 @@ $factory->define(App\Subscription::class, function (Faker $faker) {
         'date_start' => $faker->date(),
         'date_end' => $faker->date(),
         'subscription_source' => $faker->numberBetween(0, 1),
-        'subscription_type_id' => $faker->numberBetween(1, 4)
+        'subscription_type_id' => $faker->numberBetween(1, 4),
 
     ];
 });

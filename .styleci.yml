@@ -1,6 +1,5 @@
 preset: laravel
-
 finder:
-  exclude:
+  not-path:
   - "_ide_helper.php"
   - ".phpstorm.meta.php"

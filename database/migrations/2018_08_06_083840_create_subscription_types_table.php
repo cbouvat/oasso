@@ -15,8 +15,8 @@ class CreateSubscriptionTypesTable extends Migration
     {
         Schema::create('subscription_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',45);
-            $table->decimal('amount',8,2);
+            $table->string('name', 45);
+            $table->decimal('amount', 8, 2);
             $table->timestamps();
         });
     }

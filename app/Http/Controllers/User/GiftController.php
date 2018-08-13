@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
+use Auth;
 use App\Gift;
-use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GiftController extends Controller
 {
     /**
      * GiftController constructor.
      */
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -53,7 +53,7 @@ class GiftController extends Controller
     {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'payment_methods' => 'required'
+            'payment_methods' => 'required',
         ]);
 
         $inputs['user_id'] = Auth::user()->id;
