@@ -9,7 +9,7 @@
                     <div class="card-body">
                             <div class="form-group row justify-content-center">
                                 <label class="col-form-label">
-                                    {{ __('Your ')  }} {{$subType->name}} {{__(' membership has been renewed until the ') }} {{$sub->subscription_date}}
+                                    {{ __('Your')  }} {{ $subType->name }} {{ __(' membership has been renewed until the ') }} {{ $sub->subscription_date }}
                                 </label>
                             </div>
 
@@ -18,7 +18,7 @@
                             </div>
 
                             <div class="form-group row justify-content-center">
-                                <a type="button" class="btn btn-primary" href={{Route('home')}}>
+                                <a type="button" class="btn btn-primary" href={{ route('home') }}>
                                     {{ __('Back to home page') }}
                                 </a>
                             </div>

@@ -10,9 +10,8 @@
                     <div class="card-body">
                         <form method="post" action="{{ route('renewalConfirmation') }}">
                             @csrf
-
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-md-right">{{ __('For Year :') }}</label>
+                                <label class="col-sm-4 col-form-label text-md-right">{{ __('For Year') }}</label>
 
                                 <div class="col-md-6">
                                     <p><strong>{{date('Y')}}</strong></p>
@@ -20,24 +19,22 @@
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-md-right">{{ __('Subscription type :') }}</label>
+                                <label class="col-sm-4 col-form-label text-md-right">{{ __('Subscription type') }}</label>
 
                                 <div class="col-md-6">
 
                                     <select id="selected-type" name="type" class="custom-select" >
                                         @foreach($subscriptionTypes as $subscriptionType)
-                                            <option value="{{$subscriptionType->id}}" data-amount="{{$subscriptionType->amount}}">
-                                                    {{$subscriptionType->name}}
+                                            <option value="{{ $subscriptionType->id }}" data-amount="{{ $subscriptionType->amount }}">
+                                                    {{ $subscriptionType->name }}
                                             </option>
                                         @endforeach
-
                                     </select>
                                 </div>
-
                             </div>
 
                             <div class="form-group row">
-                                <label class="col-sm-4 col-form-label text-md-right">{{ __('Price :') }}</label>
+                                <label class="col-sm-4 col-form-label text-md-right">{{ __('Price') }}</label>
 
                                 <div class="col-md-6">
                                     <p id="subscription-amount"></p>
@@ -58,6 +55,7 @@
             </div>
         </div>
     </div>
+
     @push('scripts')
     <script>
         function selectedtype() {
@@ -69,4 +67,5 @@
         selectedtype();
     </script>
     @endpush
+
 @endsection
