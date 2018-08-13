@@ -54,16 +54,22 @@
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
-                                    <select id="gender" name="gender" class="custom-select">
-                                        <option value="0"
-                                                @if(old('gender') == 0) selected @endif>{{ __('Gender') }}</option>
+                                    <select id="gender" name="gender"
+                                            class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
+                                        <option value="0">  {{ __('Choose gender') }}</option>
                                         <option value="1"
-                                                @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
+                                                @if(old('gender') ==1)selected @endif> {{ __('Male') }}</option>
                                         <option value="2"
-                                                @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
+                                                @if(old('gender') ==2)selected @endif>{{ __('Female') }}</option>
                                     </select>
+                                    @if ($errors->has('gender'))
+                                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('gender') }}</strong>
+                        </span>
+                                    @endif
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="lastname"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
@@ -189,9 +195,7 @@
                             <div class="form-group row">
                                 <div class="col-md-8 offset-2">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="newsletter"
-                                               id="newsletter"
-                                               value="1"
+                                        <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1"
                                                @if(old('newsletter') == 1) checked @endif>
                                         <label for="newsletter"
                                                class="col-form-label text-md-right">{{ __('Subscribe to the newsletter') }}</label>
@@ -202,8 +206,7 @@
                             <div class="form-group row">
                                 <div class="col-md-8 offset-2">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper"
-                                               value="1"
+                                        <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
                                                @if(old('newspaper') == 1) checked @endif>
                                         <label for="newspaper"
                                                class="col-form-label text-md-right">{{ __('Subscribe to the newspaper') }}</label>

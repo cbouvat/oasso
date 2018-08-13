@@ -24,12 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('address_line2', 100)->nullable();
             $table->string('zipcode', 20);
             $table->string('city', 45);
-            $table->string('email')->unique()->nullable();
+            $table->string('email', 60)->unique()->nullable();
             $table->tinyInteger('gender_joint')->nullable();
             $table->string('lastname_joint', 45)->nullable();
             $table->string('firstname_joint', 45)->nullable();
             $table->date('birthdate_joint')->nullable();
-            $table->string('email_joint', 45)->nullable();
+            $table->string('email_joint', 60)->nullable();
             $table->string('phone_1', 10)->nullable();
             $table->string('phone_2', 10)->nullable();
             $table->boolean('volonteer')->default(0);
