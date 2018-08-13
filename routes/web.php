@@ -46,7 +46,6 @@ Route::prefix('user')->group(function () {
     Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 });
 
-
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     // User
     Route::get('/user', 'UserController@index')->name('user.index');
