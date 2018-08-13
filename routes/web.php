@@ -20,6 +20,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/user/password', 'UserController@passwordEdit')->name('user.password.edit');
+Route::post('/user/password', 'UserController@passwordUpdate')->name('user.password.update');
+
 // Membership renewal
 Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
 // route to payment will have to be inserted
@@ -73,3 +76,4 @@ Route::prefix('admin')->group(function () {
         Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
     });
 });
+
