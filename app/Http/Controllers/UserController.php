@@ -7,7 +7,6 @@ use function Faker\Provider\pt_BR\check_digit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -120,7 +119,10 @@ class UserController extends Controller
         return view('users.password');
     }
 
-
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function updatePassword(Request $request)
     {
         $authUser = Auth::user();

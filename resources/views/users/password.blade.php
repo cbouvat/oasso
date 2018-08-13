@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-
-
-    <h1>Modifier votre mot de passe</h1>
+    <h1>{{ __('Change your password') }}</h1>
 
     <div class="row justify-content-center m-5">
-
-
         <div class="card-body">
             <form method="POST" action="{{ route('user.updatepassword') }}">
                 @csrf
@@ -42,12 +38,13 @@
                         @endif
                     </div>
                 </div>
+
                 <div class="form-group row">
-                    <label for="password-confirm"
-                           class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                    <label for="password_confirmation"
+                           class="col-md-4 col-form-label text-md-right">{{ __('Password confirmation') }}</label>
                     <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control"
-                               name="password-confirmation" required>
+                        <input id="password_confirmation" type="password" class="form-control"
+                               name="password_confirmation" required>
                     </div>
                 </div>
 
@@ -58,12 +55,7 @@
                         </button>
                     </div>
                 </div>
-
-        </form>
+            </form>
         </div>
     </div>
-
-
-
-
 @endsection
