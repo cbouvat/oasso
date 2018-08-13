@@ -27,12 +27,13 @@ Route::prefix('user')->group(function () {
 
 });
 
+//User Gift Route
+Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
+Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
-Route::get('/search', 'SearchController@search')->name('search');
 Route::get('/search', 'SearchController@search')->name('search');
 
 Route::prefix('admin')->group(function () {
-
     Route::get('/user', 'UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
@@ -57,9 +58,3 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
 });
-
-//User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
-
-

@@ -55,9 +55,9 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender" name="gender" class="custom-select">
-                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Gender') }}</option>
-                                        <option value="1" @if(old('gender') == 1)  @endif>{{ __('Mr') }}</option>
-                                        <option value="0" @if(old('gender') == 0)  @endif>{{ __('Ms') }}</option>
+                                        <option value="0" @if(old('gender') == 0) selected @endif>{{ __('Gender') }}</option>
+                                        <option value="1" @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -218,9 +218,9 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value="2" @if(old('gender_joint') == 2) selected @endif>{{ __('Partner Gender') }}</option>
-                                        <option value="1" @if(old('gender_joint') == 1)  @endif>{{ __('Mr') }}</option>
-                                        <option value="0" @if(old('gender_joint') == 0)  @endif>{{ __('Ms') }}</option>
+                                        <option value="0" @if(old('gender_joint') == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                        <option value="1" @if(old('gender_joint') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2" @if(old('gender_joint') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>

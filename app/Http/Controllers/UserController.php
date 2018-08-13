@@ -88,7 +88,6 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-
         if ($request['newspaper'] == null ) {
             $validateData['newspaper'] = 0;
         }

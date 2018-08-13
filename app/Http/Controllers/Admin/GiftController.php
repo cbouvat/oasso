@@ -6,7 +6,6 @@ use App\Gift;
 use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-use App\SubscriptionType;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;

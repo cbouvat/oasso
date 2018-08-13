@@ -12,23 +12,28 @@ class Subscription extends Model
      * @var array
      */
     protected $fillable = [
-        'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'];
+        'amount','opt_out_mail','user_id','subscription_type_id', 'subscription_date', 'subscription_source'
+    ];
 
-
-    protected $morphClass = 'subscription';
-
-    /** RELATIONS */
-
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function subscriptionType()
     {
         return $this->belongsTo('App\SubscriptionType');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
     public function payment()
     {
         return $this->morphOne('App\Payment', 'payment');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user(){
         return $this->belongsTo('App\User');
     }
