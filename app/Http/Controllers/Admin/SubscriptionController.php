@@ -7,7 +7,6 @@ use App\Payment;
 use App\PaymentMethod;
 use App\Subscription;
 use App\SubscriptionType;
-use App\User;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
