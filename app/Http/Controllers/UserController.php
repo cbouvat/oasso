@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use function Faker\Provider\pt_BR\check_digit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -114,7 +113,7 @@ class UserController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function editPassword()
+    public function passwordEdit()
     {
         return view('users.password');
     }
@@ -123,27 +122,24 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function updatePassword(Request $request)
+    public function passwordUpdate(Request $request)
     {
-        $authUser = Auth::user();
+        $user = Auth::user();
 
-        if (!Hash::check($request->input('actual-password'), $authUser->password)) {
+        if (!Hash::check($request->input('password'), $user->password)) {
             return back()
-                ->withErrors(['actual-password' => 'Mot de passe incorrect'])
+                ->withErrors(['password' => 'Mot de passe incorrect'])
                 ->withInput();
-
-
         } else {
-
             $validateRequest = $request->validate([
-                'actual-password' => 'required|string|min:6|max:191',
-                'password' => 'required|string|min:6|max:191|confirmed',
+                'password' => 'required|string|min:6|max:191',
+                'new_password' => 'required|string|min:6|max:191|confirmed',
             ]);
 
-            $authUser->password = Hash::make($validateRequest['password']);
-            $authUser->save();
+            $user->password = Hash::make($validateRequest['new_password']);
+            $user->save();
 
-            return view('home');
+            return redirect()->route('home');
         }
     }
 }

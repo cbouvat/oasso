@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.editPassword')}}">
+                    <a class="nav-link" href="{{route('user.password.edit')}}">
                         <i class="fas fa-lock"></i> Mot de passe
                     </a>
                 </li>

@@ -43,7 +43,7 @@ Route::prefix('admin')->group(function () {
 Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
 Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
-Route::get('/users/password', 'UserController@editPassword')->name('user.editPassword');
-Route::post('/users/password', 'UserController@updatePassword')->name('user.updatepassword');
+Route::get('/user/password', 'UserController@passwordEdit')->name('user.password.edit');
+Route::post('/user/password', 'UserController@passwordUpdate')->name('user.password.update');
 
 
