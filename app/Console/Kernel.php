@@ -25,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+      // Schedule Relaunch subscriptions
+        $schedule->command('relaunch:month')->dailyAt('11:00');
+        $schedule->command('relaunch:week')->dailyAt('12:00');
+        $schedule->command('relaunch:day')->dailyAt('13:00');
     }
 
     /**

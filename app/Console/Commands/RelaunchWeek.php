@@ -41,7 +41,7 @@ class RelaunchWeek extends Command
      */
     public function handle()
     {
-        $subscriptions = Subscription::where('date_end', Carbon::now()->subWeek())
+        $subscriptions = Subscription::where('date_end', Carbon::now()->addWeek())
             ->with('user')
             ->get();
 

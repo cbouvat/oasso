@@ -34,6 +34,7 @@ class PasswordSending extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.password.sending')
-            ->subject('Votre mot de passe pour ' . config('app.name'));
+            ->subject('Votre mot de passe pour ' . config('app.name'))
+          ->text('emails.password.sending');
     }
 }
