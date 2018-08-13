@@ -7,6 +7,7 @@ use App\Payment;
 use App\PaymentMethod;
 use App\Subscription;
 use App\SubscriptionType;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -155,12 +156,20 @@ class SubscriptionController extends Controller
         return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
     }
 
-    public function optOut(Subscription $subscription)
+    public function optOut($subId, $userId)
     {
-        $subscription->opt_out_mail = 1;
-        $subscription->save();
+        $subscription = Subscription::with('user')->findOrFail($subId);
+        $user = User::findOrFail($userId);
 
-        return view('optOutMail');
+        if ($subscription->user->id === $user->id) {
+            $subscription->opt_out_mail = 1;
+            $subscription->save();
+
+            return view('optOutMail');
+        } else {
+            return abort(404);
+        }
+
     }
 
     /**

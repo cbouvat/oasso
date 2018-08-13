@@ -21,7 +21,9 @@
 
         @endcomponent
 
-        <p>Si vous ne souhaitez plus recevoir de relance de la part de REVV, <a href="{{route('user.subscription.optOut', ['subscription' => $subscription])}}">cliquez ici</a></p>
+        <p>Si vous ne souhaitez plus recevoir de relance de la part de REVV, <a
+                    href="{{route('user.subscription.optOut', ['subscription' => $subscription->id, 'user' => $subscription->user->id])}}">cliquez
+                ici</a></p>
 
     </div>
 @endcomponent

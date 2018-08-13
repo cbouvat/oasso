@@ -19,7 +19,7 @@
 </div>
 <div class="text-center">
 
-    <h2 style="color: dodgerblue;">Votre demande a été prise en compte.</h2>
+    <h2 style="color: dodgerblue;">Votre demande a bien été prise en compte.</h2>
 
 </div>
 </body>
