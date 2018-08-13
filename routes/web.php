@@ -20,6 +20,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// Membership renewal
+Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
+// route to payment will have to be inserted
+Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
+
 Route::prefix('user')->group(function () {
 //User edit / update
     Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
@@ -58,3 +63,9 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
 });
+
+//User Gift Route
+Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
+Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
+
+
