@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\User;
 use Auth;
 use Hash;
+use App\User;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -29,12 +28,12 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
+
         return view('user.user.index', ['user' => $user]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      */
     public function create()
     {
@@ -83,7 +82,7 @@ class UserController extends Controller
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
             'lastname' => 'required|alpha|string|max:45|min:2',
-            'email' => 'string|required|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'string|required|email|max:255|unique:users,email,'.$user->id,
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => '|string|max:32|',
             'address_line2' => '|string|max:32|nullable',
@@ -108,12 +107,12 @@ class UserController extends Controller
         }
 
         $user->update($validateData);
+
         return redirect()->route('user.edit', ['user' => $user]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      */
     public function destroy()
     {
@@ -144,8 +143,8 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
-    public function history(){
-
+    public function history()
+    {
         $user = Auth::user();
         $user->load('gifts');
         $user->load('subscriptions');
@@ -169,7 +168,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if (!Hash::check($request->input('password'), $user->password)) {
+        if (! Hash::check($request->input('password'), $user->password)) {
             return back()
                 ->withErrors(['password' => 'Mot de passe incorrect'])
                 ->withInput();

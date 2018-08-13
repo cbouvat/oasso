@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Payment;
-use App\PaymentMethod;
 use App\Subscription;
+use App\PaymentMethod;
 use App\SubscriptionType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
@@ -54,7 +54,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date'
+            'subscription_date' => 'required|date',
         ]);
 
         $validator['opt_out_mail'] = 0;
@@ -116,7 +116,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date'
+            'subscription_date' => 'required|date',
         ]);
 
         $validator['opt_out_mail'] = 0;
@@ -130,13 +130,13 @@ class SubscriptionController extends Controller
 
         $payment = Payment::where([
             ['payment_id', $subscription->id],
-            ['payment_type', 'App\Subscription']
+            ['payment_type', 'App\Subscription'],
         ]);
 
         $payment->update([
             'amount' => $validator['amount'],
             'user_id' => $validator['user_id'],
-            'payment_method_id' => $validator['payment_method_id']
+            'payment_method_id' => $validator['payment_method_id'],
         ]);
 
         return back()->with('message', 'Mise a jour effectuée');

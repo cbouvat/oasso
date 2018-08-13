@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Payment;
-use App\PaymentMethod;
-use App\Subscription;
-use App\SubscriptionType;
 use Auth;
+use App\Payment;
+use App\Subscription;
+use App\PaymentMethod;
+use App\SubscriptionType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
@@ -33,13 +33,12 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-
         $user = Auth::user();
         $subscriptionTypes = SubscriptionType::all();
 
         return view('user.subscription.create', [
             'user' => $user,
-            'subscriptionTypes' => $subscriptionTypes
+            'subscriptionTypes' => $subscriptionTypes,
         ]);
     }
 
@@ -51,11 +50,9 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-
         $type = $request->input('type');
 
         $subscriptionType = SubscriptionType::findOrFail($type);
-
 
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
@@ -77,7 +74,6 @@ class SubscriptionController extends Controller
         $subType = SubscriptionType::where('id', $type)->first();
 
         return view('user.user.index', ['user' => Auth::user()]);
-
     }
 
     /**
@@ -103,10 +99,9 @@ class SubscriptionController extends Controller
         $subscription_type = SubscriptionType::all();
         $subscription = Subscription::with('payment')->findOrFail($id);
 
-
         return view('admin.subscription.edit', ['subscription' => $subscription,
             'payments_methods' => $payments_methods,
-            'subscription_type' => $subscription_type
+            'subscription_type' => $subscription_type,
         ]);
     }
 
@@ -124,9 +119,8 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date|after_or_equal:today'
+            'subscription_date' => 'required|date|after_or_equal:today',
         ]);
-
 
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
@@ -141,11 +135,10 @@ class SubscriptionController extends Controller
 
         $payment = Payment::where([
             ['payment_id', $subscription->id],
-            ['payment_type', 'App\Subscription']
+            ['payment_type', 'App\Subscription'],
         ]);
 
         $payment->update($validator);
-
 
         return back()->with('message', 'Mise a jour effectuée');
     }
@@ -165,6 +158,7 @@ class SubscriptionController extends Controller
     {
         $subscriptionToDelete = Subscription::findOrFail($id);
         $subscriptionToDelete->delete();
+
         return redirect()->route('admin.subscription.index')->with('message', 'Adhésion supprimée');
     }
 }
