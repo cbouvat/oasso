@@ -3,7 +3,13 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Fontawesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+// Quill
+@import "~quill/dist/quill.snow.css";
+
 
 body {
   font-size: .875rem;
