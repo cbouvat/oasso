@@ -20,7 +20,7 @@ class SubscriptionObserver
     $subscription->load('user', 'type');
     $user = $subscription->user;
 
-    if (Subscription::withTrashed()->where('user_id', $user->id)->count() === 1) {
+    if (Subscription::where('user_id', $user->id)->count() === 1) {
 
       Mail::to($user)->send(new MembershipNew($subscription));
 

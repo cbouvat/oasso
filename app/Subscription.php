@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Subscription extends Model
@@ -16,8 +15,6 @@ class Subscription extends Model
     protected $fillable = [
         'amount', 'opt_out_mail', 'user_id', 'subscription_type_id'
     ];
-
-  use SoftDeletes;
 
 
     protected $morphClass = 'subscription';

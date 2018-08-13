@@ -25,5 +25,7 @@
 
         @endcomponent
 
+        <a href="">Si vous ne souhaitez plus recevoir de relance de la part de REVV, cliquez ici.</a>
+
     </div>
 @endcomponent

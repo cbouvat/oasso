@@ -140,29 +140,38 @@
                 </div>
             </div>
 
+            <div id="pwdByEmail" class="form-group row" style="display: none">
+                <label for="pwdByEmail"
+                       class="col-md-4 col-form-label text-md-right" style="color: #0294c1;">{{ __('Envoyer le mot de passe par email') }}</label>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="sendPwdByEmail" id="sendPwdByEmail" value="1"
+                           @if(old('sendPwdByEmail') == 1) checked @endif>
+                </div>
+            </div>
+
             <div class="form-group row">
-                <label for="cellphone"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Cellphone') }}</label>
+                <label for="phone_1"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Phone 1') }}</label>
                 <div class="col-md-6">
-                    <input id="cellphone" type="text" name="cellphone" value="{{ old('cellphone') }}"
-                           class="form-control{{ $errors->has('cellphone') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('cellphone'))
+                    <input id="phone_1" type="text" name="phone_1" value="{{ old('phone_1') }}"
+                           class="form-control{{ $errors->has('phone_1') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('phone_1'))
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('cellphone') }}</strong>
+                            <strong>{{ $errors->first('phone_1') }}</strong>
                         </span>
                     @endif
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="phone"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                <label for="phone_2"
+                       class="col-md-4 col-form-label text-md-right">{{ __('Phone 2') }}</label>
                 <div class="col-md-6">
-                    <input id="phone" type="text" name="phone" value="{{ old('phone') }}"
-                           class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}">
-                    @if ($errors->has('phone'))
+                    <input id="phone_2" type="text" name="phone_2" value="{{ old('phone_2') }}"
+                           class="form-control{{ $errors->has('phone_2') ? ' is-invalid' : '' }}">
+                    @if ($errors->has('phone_2'))
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $errors->first('phone') }}</strong>
+                            <strong>{{ $errors->first('phone_2') }}</strong>
                         </span>
                     @endif
                 </div>
@@ -322,4 +331,16 @@
             </div>
         </form>
     </div>
+
+    <script>
+
+        $('#email').on('blur keypress', function () {
+            if ($(this).val()) {
+                $('#pwdByEmail').css('display', 'block');
+            } else {
+                $('#pwdByEmail').css('display', 'none');
+            }
+        })
+
+    </script>
 @endsection
