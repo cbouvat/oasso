@@ -26,12 +26,12 @@ Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('m
 Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 
 Route::prefix('user')->group(function () {
-//User edit / update
+// User edit / update
     Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
     Route::post('/update/{user}', 'UserController@update')->name('user.update');
 });
 
-//User Gift Route
+// User Gift Route
 Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
 Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
 
@@ -53,7 +53,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/subscription/beforedelete/{subscription}', 'Admin\SubscriptionController@beforeDelete')->name('admin.subscription.beforeDelete');
     Route::get('/subscription/destroy/{id}', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
 
-    //Gift Crud
+    //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
     Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');
     Route::get('/gift/add', 'Admin\GiftController@show')->name('admin.gift.show');
@@ -61,4 +61,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
 
+    // Newsletter
+    Route::prefix('newsletter')->group(function () {
+        Route::get('/', 'Admin\NewsletterController@index')->name('admin.newsletter.index');
+        Route::post('/', 'Admin\NewsletterController@store')->name('admin.newsletter.store');
+        Route::get('/create', 'Admin\NewsletterController@create')->name('admin.newsletter.create');
+        Route::get('/{newsletter}', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
+        Route::post('/{newsletter}', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
+        Route::get('/{newsletter}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
+        Route::get('/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
+        Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
+    });
 });
