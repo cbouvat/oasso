@@ -42,6 +42,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
     public function newsletters()
     {
         return $this->hasMany('App\Newsletter')->latest();
