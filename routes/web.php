@@ -77,6 +77,7 @@ Route::prefix('user')->group(function () {
     //SubscriptionController
     Route::get('/subscription/create', 'User\SubscriptionController@create')->name('user.subscription.create');
     Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.subscription.store');
+    Route::get('/subscription/optOut/{subscription}', 'User\SubscriptionController@optOut')->name('user.subscription.optOut');
 
     //GiftController
     Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');

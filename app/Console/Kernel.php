@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\RelaunchMonth',
         'App\Console\Commands\RelaunchWeek',
+        'App\Console\Commands\RelaunchDay',
     ];
 
     /**

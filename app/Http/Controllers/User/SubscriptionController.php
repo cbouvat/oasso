@@ -155,6 +155,14 @@ class SubscriptionController extends Controller
         return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
     }
 
+    public function optOut(Subscription $subscription)
+    {
+        $subscription->opt_out_mail = 1;
+        $subscription->save();
+
+        return view('optOutMail');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
