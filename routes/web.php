@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -44,7 +43,6 @@ Route::prefix('user')->group(function () {
     Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
     Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 });
-
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     // User
@@ -94,4 +92,3 @@ Auth::routes();
 
 // Logout
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-

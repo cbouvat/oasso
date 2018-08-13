@@ -16,7 +16,7 @@ class RolesTableSeeder extends Seeder
 
         foreach ($users as $user) {
             factory(App\Role::class)->create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
             ]);
         }
     }
