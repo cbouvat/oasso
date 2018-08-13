@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('admin.mailing.index')}}">
                         <i class="fas fa-envelope"></i> Mailing
                     </a>
                 </li>

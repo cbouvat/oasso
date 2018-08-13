@@ -76,5 +76,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
         Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
     });
+
+    //Admin Mailing
+    Route::get('/mailing','Admin\MailingController@index')->name('admin.mailing.index');
+    Route::get('/mailing/edit/{id}','Admin\MailingController@edit')->name('admin.mailing.edit');
+    Route::post('/mailing/update/{id}','Admin\MailingController@update')->name('admin.mailing.update');
 });
 
