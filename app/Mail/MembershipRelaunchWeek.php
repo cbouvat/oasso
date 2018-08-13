@@ -32,6 +32,6 @@ class MembershipRelaunchWeek extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.membership.relaunch.week')
-            ->subject('Votre adhésion chez ' . config("app.name") . 'expire dans 1 semaine');
+            ->subject('Votre adhésion chez '.config('app.name').'expire dans 1 semaine');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Mailing;
 use App\TemplateMail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MailingController extends Controller
 {
@@ -17,6 +17,7 @@ class MailingController extends Controller
     public function index()
     {
         $mailings = TemplateMail::latest()->paginate();
+
         return view('admin.mailing.index', ['mailings' => $mailings]);
     }
 
@@ -61,6 +62,7 @@ class MailingController extends Controller
     public function edit($id)
     {
         $mailing = TemplateMail::findOrFail($id);
+
         return view('admin.mailing.edit', ['mailing' => $mailing]);
     }
 
@@ -84,5 +86,4 @@ class MailingController extends Controller
 
         return redirect()->route('admin.mailing.index')->with('message', 'Modification confirmée');
     }
-
 }

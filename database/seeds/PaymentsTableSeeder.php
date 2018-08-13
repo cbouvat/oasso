@@ -20,7 +20,7 @@ class PaymentsTableSeeder extends Seeder
                 'payment_type' => 'App\Subscription',
                 'payment_id' => $sub->id,
                 'amount' => $sub->amount,
-                'user_id' => $sub->user_id
+                'user_id' => $sub->user_id,
             ]);
         }
 
@@ -31,7 +31,7 @@ class PaymentsTableSeeder extends Seeder
                 'payment_type' => 'App\Gift',
                 'payment_id' => $gift->id,
                 'amount' => $gift->amount,
-                'user_id' => $gift->user_id
+                'user_id' => $gift->user_id,
             ]);
         }
     }
