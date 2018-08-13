@@ -23,6 +23,5 @@
 
     @endcomponent
 
-    Force et Honneur
     </div>
 @endcomponent

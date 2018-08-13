@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,14 +12,16 @@ class MembershipRelaunchMonth extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $subdcription;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Subscription $subscription)
     {
-        //
+        $this->subdcription = $subscription;
     }
 
     /**
@@ -28,6 +31,7 @@ class MembershipRelaunchMonth extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.membership.relaunch.month');
+      return $this->markdown('emails.membership.relaunch.month')
+        ->subject('Votre adhésion chez '.config("app.name").'expire dans 1 mois');
     }
 }
