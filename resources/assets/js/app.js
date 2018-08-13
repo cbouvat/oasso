@@ -5,9 +5,13 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+// Bootstrap + Jquery + Axios + Lodash ...
 require('./bootstrap');
-window.Vue = require('quill');
 
+// Quill
+window.Quill = require('quill');
+
+// Vue JS
 window.Vue = require('vue');
 
 /**
