@@ -51,11 +51,11 @@
             </tbody>
         </table>
     </div>
-    <div class="row d-flex justify-content-between mb-3">
-        <a href="{{route('user.subscription.create')}}" class="btn btn-outline-success">Ajouter une Adhésion</a>
+    <div class="row d-flex justify-content-end mb-3">
+        <a href="{{route('user.subscription.create')}}" class="mr-auto btn btn-outline-success">Ajouter une Adhésion</a>
+
         <a href="#" class="btn btn-outline-primary">Modifer</a>
-        <a href="{{route('user.user.beforedelete', ['user' => $user])}}"
-           class="btn btn-outline-danger">Supprimer</a>
+        <a href="{{route('user.user.beforedelete', ['user' => $user])}}" class="btn btn-outline-danger">Supprimer</a>
     </div>
 
 @endsection
