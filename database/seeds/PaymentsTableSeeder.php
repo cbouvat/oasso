@@ -17,7 +17,7 @@ class PaymentsTableSeeder extends Seeder
 
         foreach ($subs as $sub) {
             factory(App\Payment::class)->create([
-                'payment_type' => 'subscription',
+                'payment_type' => 'App\Subscription',
                 'payment_id' => $sub->id,
                 'amount' => $sub->amount,
                 'user_id' => $sub->user_id
@@ -28,7 +28,7 @@ class PaymentsTableSeeder extends Seeder
 
         foreach ($gifts as $gift) {
             factory(App\Payment::class)->create([
-                'payment_type' => 'gift',
+                'payment_type' => 'App\Gift',
                 'payment_id' => $gift->id,
                 'amount' => $gift->amount,
                 'user_id' => $gift->user_id
