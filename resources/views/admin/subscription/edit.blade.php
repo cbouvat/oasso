@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -12,8 +11,6 @@
             <div class="col-12 col-md-8 offset-md-2 mt-5">
                 <form action="{{route('admin.subscription.update', ['id' => $subscription->id])}}" method="post">
                     @csrf
-
-
                     <div class="form-group row">
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
@@ -53,7 +50,6 @@
                         </div>
                     </div>
 
-
                     <div class="form-group row">
                         <label for="payment_methods"
                                class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
@@ -68,7 +64,6 @@
                             </select>
                         </div>
                     </div>
-
 
                     <div class="form-group row">
                         <label for="subscription_date"

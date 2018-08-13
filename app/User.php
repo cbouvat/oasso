@@ -75,9 +75,9 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subscription()
+    public function subscriptions()
     {
-        return $this->hasOne('App\Subscription')->latest();
+        return $this->hasMany('App\Subscription')->latest();
     }
 
 }

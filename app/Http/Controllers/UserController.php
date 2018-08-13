@@ -109,33 +109,6 @@ class UserController extends Controller
         //
     }
 
-    /**>
-     * Insert into Database Gift from a member
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function give(Request $request)
-    {
-        $user = Auth::user();
-        $request->validate([
-            'amount' => 'required|numeric'
-        ]);
-        $inputs = $request->all();
-        $inputs['user_id'] = $user->id;
-
-        Gift::create($inputs);
-
-        return back()->with('message', 'Votre don a bien été accepté, merci de votre générosité !');
-    }
-
-    public function gift()
-    {
-        $user = Auth::user();
-        $user->load('gifts');
-        $user->load('role');
-
-        return view('users.gift', ['user' => $user]);
-    }
 
     /**
      * @param $id

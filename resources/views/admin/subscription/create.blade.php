@@ -6,12 +6,11 @@
             <div>
                 <h1>Modification de l'Adhésion</h1>
             </div>
-
             <div class="col-12 col-md-8 offset-md-2 mt-5">
-
                 <form method="POST" action="{{route('admin.subscription.store')}}"
                       aria-label="{{ __('Subscription') }}">
                     @csrf
+
                     <div class="form-group row">
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Identifiant de l'Adhérant</label>
@@ -28,13 +27,14 @@
                             @endif
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label for="subscription_type"
                                class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                         <div class="col-md-6">
                             <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
                                 @foreach($subscription_types as $subscription_type)
-                                    <option value="{{ $subscription_type->id }}">
+                                    <option value="{{ $subscription_type->id }}" data-amount="{{ $subscription_type->amount }}">
                                         {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
                                     </option>
                                 @endforeach
@@ -53,7 +53,7 @@
                         <div class="col-md-6">
                             <input id="amount" type="text"
                                    class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }}"
-                                   name="amount" value="{{ old('amount') ? old('amount') : ''}}">
+                                   name="amount" value="{{ old('amount') ? old('amount') : '0.00'}}">
                             @if ($errors->has('amount'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('amount') }}</strong>
@@ -61,7 +61,6 @@
                             @endif
                         </div>
                     </div>
-
 
                     <div class="form-group row">
                         <label for="payment_methods"
@@ -106,12 +105,19 @@
                         </div>
                     </div>
 
-
                 </form>
-
-
             </div>
         </div>
     </div>
+    @push('scripts')
+        <script>
+          function selectedtype() {
+            let amount = $('#subscription_type_id option:selected').data('amount');
+            $('#amount').val(amount);
+          }
 
+          $('#subscription_type_id').change(selectedtype);
+          selectedtype();
+        </script>
+    @endpush
 @endsection

@@ -37,8 +37,8 @@
         @if(Auth::user()->role->role_type_id === 2 || Auth::user()->role->role_type_id === 3)
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-users"></i> Gestion Adherents
+                    <a class="nav-link" href="{{route('admin.user.index')}}">
+                        <i class="fas fa-users"></i> Membres
                     </a>
                 </li>
                 <li class="nav-item">

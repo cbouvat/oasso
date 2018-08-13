@@ -15,7 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        $users = User::orderBy('lastname', 'asc')->paginate(10);
+
+        return view('admin.user.index', ['users' => $users]);
     }
 
     /**
@@ -74,11 +76,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
+        $user->load('subscriptions.subscriptionType')
+            ->load('gifts');
+
         return view('admin.user.show', ['user' => $user]);
     }
 
@@ -86,7 +91,7 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function edit($id)
     {
@@ -98,7 +103,6 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
@@ -106,10 +110,20 @@ class UserController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function beforeDelete($id)
+    {
+        $user = User::findOrFail($id);
+
+        return view('admin.user.beforedelete', ['user' => $user]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
