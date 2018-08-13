@@ -126,26 +126,9 @@ class GiftController extends Controller
      */
     public function update(Request $request, Gift $gift)
     {
-        $request->validate([
-
+        $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'from_user_id' => 'required|numeric',
-
         ]);
-        $inputs = $request->all();
-
-        if ($request['from_user_id'] != null) {
-
-            if (User::find($request['from_user_id']) != null) {
-                $inputs['user_id'] = $request['from_user_id'];
-            } else {
-                return back()->with('error_message', 'Erreur, identifiant incorrect !');
-            }
-
-
-        } else {
-            return back()->with('error_message', 'Erreur, identifiant incorrect !');
-        }
 
         $gift->update($inputs);
 
@@ -162,6 +145,7 @@ class GiftController extends Controller
     public function destroy(Gift $gift)
     {
         $gift->delete();
+
         return redirect()->route('admin.gift.index')->with('message', 'Don supprimé');
     }
 
