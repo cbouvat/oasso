@@ -5,10 +5,10 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col"></th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>

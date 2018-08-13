@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Observers\SubscriptionObserver;
 use App\Observers\UserObserver;
+use App\Subscription;
 use App\User;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         User::observe(UserObserver::class);
+        Subscription::observe(SubscriptionObserver::class);
     }
 
     /**
