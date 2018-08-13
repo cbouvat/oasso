@@ -20,7 +20,7 @@
                 <td>
                     <button type="button" class="btn btn-primary">Modifier</button>
                     <a type="button" class="btn btn-danger"
-                       href="{{ route('admin.users.beforedelete', ['user' => $user->id]) }}">Supprimer</a>
+                       href="{{ route('admin.user.beforedelete', ['user' => $user->id]) }}">Supprimer</a>
                 </td>
             </tr>
         @endforeach
