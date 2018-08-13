@@ -78,11 +78,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (!array_key_exists('newsletter', $data)) {
+        if (! array_key_exists('newsletter', $data)) {
             $data['newsletter'] = 0;
         }
 
-        if (!array_key_exists('newspaper', $data)) {
+        if (! array_key_exists('newspaper', $data)) {
             $data['newspaper'] = 0;
         }
 
