@@ -133,4 +133,13 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
+    public function history(){
+
+        $user = Auth::user();
+        $user->load('gifts');
+        $user->load('subscriptions');
+
+        return view('user.history.index', ['user' => $user]);
+    }
+
 }

@@ -36,14 +36,9 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             @auth
-                <a class="nav-link" id="logout-form" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a class="nav-link" id="logout-form" href="{{ route('logout') }}">
                     Déconnexion
                 </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
             @endauth
         </li>
     </ul>

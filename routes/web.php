@@ -11,12 +11,12 @@
 |
 */
 
+Auth::routes();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -62,6 +62,7 @@ Route::prefix('admin')->group(function () {
 //User Gift Route
 
 Route::get('/search', 'SearchController@search')->name('search');
+Route::get('/history', 'User\UserController@history')->name('history');
 
 
 Route::get('/user', 'User\UserController@index')->name('user.user.index');
@@ -76,4 +77,7 @@ Route::post('/subscription/store', 'User\SubscriptionController@store')->name('u
 Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');
 Route::post('/gift', 'User\GiftController@store')->name('user.gift.store');
 
+
+//logout fix
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
