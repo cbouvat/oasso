@@ -34,7 +34,8 @@ class Welcome extends Mailable implements ShouldQueue
   {
 
     return $this->markdown('emails.welcome')
-      ->subject('Inscription sur '.config('app.name'));
+      ->subject('Inscription sur '.config('app.name'))
+      ->text('emails.welcome_plain');
 
   }
 }
