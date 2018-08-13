@@ -43,18 +43,19 @@ Route::get('/search', 'SearchController@search')->name('search');
 Route::prefix('admin')->group(function () {
     Route::get('/user', 'UserController@index')->name('admin.user.index');
     Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
+    Route::get('/user/show', 'Admin\UserController@show')->name('admin.user.show');
     Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
     Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
     Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
 
     //Subscribers
     Route::get('/subscription', 'Admin\SubscriptionController@index')->name('admin.subscription.index');
+    Route::post('/subscription', 'Admin\SubscriptionController@store')->name('admin.subscription.store');
     Route::get('/subscription/create', 'Admin\SubscriptionController@create')->name('admin.subscription.create');
-    Route::post('/subscription/store', 'Admin\SubscriptionController@store')->name('admin.subscription.store');
-    Route::get('/subscription/edit/{subscription}', 'Admin\SubscriptionController@edit')->name('admin.subscription.edit');
-    Route::post('/subscription/update/{id}', 'Admin\SubscriptionController@update')->name('admin.subscription.update');
-    Route::get('/subscription/beforedelete/{subscription}', 'Admin\SubscriptionController@beforeDelete')->name('admin.subscription.beforeDelete');
-    Route::get('/subscription/destroy/{id}', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
+    Route::get('/subscription/{subscription}', 'Admin\SubscriptionController@edit')->name('admin.subscription.edit');
+    Route::post('/subscription/{subscription}', 'Admin\SubscriptionController@update')->name('admin.subscription.update');
+    Route::get('/subscription/{subscription}/beforedelete', 'Admin\SubscriptionController@beforeDelete')->name('admin.subscription.beforedelete');
+    Route::get('/subscription/{subscription}/destroy/', 'Admin\SubscriptionController@destroy')->name('admin.subscription.destroy');
 
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');

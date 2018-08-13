@@ -33,9 +33,9 @@
                                class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                         <div class="col-md-6">
                             <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
-                                @foreach($subscription_type as $subscription_type_id)
-                                    <option value="{{ $subscription_type_id->id }}">
-                                        {{ ucfirst($subscription_type_id->name)}} ({{$subscription_type_id->amount}}€)
+                                @foreach($subscription_types as $subscription_type)
+                                    <option value="{{ $subscription_type->id }}">
+                                        {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
                                     </option>
                                 @endforeach
                             </select>
