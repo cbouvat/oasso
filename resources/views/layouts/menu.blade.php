@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('user.editPassword')}}">
                         <i class="fas fa-lock"></i> Mot de passe
                     </a>
                 </li>
@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('admin.newsletter.index')}}">
                         <i class="far fa-newspaper"></i> NewsLetter
                     </a>
                 </li>
