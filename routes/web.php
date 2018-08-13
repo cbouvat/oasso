@@ -45,14 +45,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/{gift}/before-delete', 'Admin\GiftController@beforeDelete')->name('admin.gift.beforeDelete');
 
     //NewsletterController
-    Route::get('/', 'Admin\NewsletterController@index')->name('admin.newsletter.index');
-    Route::post('/', 'Admin\NewsletterController@store')->name('admin.newsletter.store');
-    Route::get('/create', 'Admin\NewsletterController@create')->name('admin.newsletter.create');
-    Route::get('/{newsletter}', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
-    Route::post('/{newsletter}', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
-    Route::get('/{newsletter}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
-    Route::get('/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
-    Route::get('/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
+    Route::get('/newsletter', 'Admin\NewsletterController@index')->name('admin.newsletter.index');
+    Route::post('/newsletter', 'Admin\NewsletterController@store')->name('admin.newsletter.store');
+    Route::get('/newsletter/create', 'Admin\NewsletterController@create')->name('admin.newsletter.create');
+    Route::get('/newsletter/{newsletter}', 'Admin\NewsletterController@edit')->name('admin.newsletter.edit');
+    Route::post('/newsletter/{newsletter}', 'Admin\NewsletterController@update')->name('admin.newsletter.update');
+    Route::get('/newsletter/{newsletter}/duplicate', 'Admin\NewsletterController@duplicate')->name('admin.newsletter.duplicate');
+    Route::get('/newsletter/{newsletter}/before-delete', 'Admin\NewsletterController@beforeDelete')->name('admin.newsletter.beforedelete');
+    Route::get('/newsletter/{newsletter}/delete', 'Admin\NewsletterController@delete')->name('admin.newsletter.delete');
 
     //MailingController
     Route::get('/mailing', 'Admin\MailingController@index')->name('admin.mailing.index');
