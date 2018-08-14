@@ -9,54 +9,46 @@
             </ol>
         </nav>
     </div>
-    <div class="row pt-5">
-        <div class="col-12">
-            <div>
-                <h1>Gestion des Dons</h1>
-            </div>
-            <div class="text-center p-5 border border-success rounded">
-                <table class="table">
-                    <thead class="bg-success text-white">
-                    <tr>
-                        <th scope="col">Donateur</th>
-                        <th scope="col">Montant</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Methode de paiement</th>
-                        <th scope="col">Editer</th>
-                        <th scope="col">Supprimer</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @forelse($gifts as $gift)
-                        <tr>
-                            <td>@if($gift->user){{$gift->user->firstname.' '.$gift->user->lastname}}@else<strike>Deleted User</strike>@endif</td>
-                            <th>{{ $gift->amount }} €</th>
-                            <td>{{ $gift->created_at->format('d/m/Y') }}</td>
-                            <td>{{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
-
-                            <td>
-                                <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
-                                   class="btn btn-warning"><span
-                                            class="fas fa-edit"></span></a>
-                            </td>
-                            <td>
-                                <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
-                                   class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <th></th>
-                            <th>Aucun don n'a été realisé</th>
-                            <td></td>
-                        </tr>
-                    @endforelse
-
-                    </tbody>
-                </table>
-            </div>
-
+    <div class="col-12">
+        <div>
+            <h1>Gestion des Dons</h1>
         </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Donateur</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Date</th>
+                <th scope="col">Methode de paiement</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            @forelse($gifts as $gift)
+                <tr>
+                    <td>@if($gift->user){{$gift->user->firstname.' '.$gift->user->lastname}}@else<strike>Deleted
+                            User</strike>@endif</td>
+                    <th>{{ $gift->amount }} €</th>
+                    <td>{{ $gift->created_at->format('d/m/Y') }}</td>
+                    <td>{{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
+
+                    <td class="text-right">
+                        <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
+                           class="btn btn-primary btn-sm"><span class="fas fa-edit"></span> Editer</a>
+                        <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
+                           class="btn btn-danger btn-sm"><span class="fas fa-trash-alt"></span> Supprimer</a>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <th></th>
+                    <th>Aucun don n'a été realisé</th>
+                    <td></td>
+                </tr>
+            @endforelse
+
+            </tbody>
+        </table>
     </div>
     <div class="row justify-content-center mt-5">
         {{ $gifts->links() }}
