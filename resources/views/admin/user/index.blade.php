@@ -26,10 +26,11 @@
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
                 <td class="text-right">
-                    <a href="{{route('admin.user.show', $user)}}" class="btn btn-sm btn-primary"><span class="fas fa-pencil-alt"></span></a>
+                    <a href="{{route('admin.user.show', $user)}}" class="btn btn-sm btn-primary"><span
+                                class="fas fa-pencil-alt"></span> Modifier</a>
                     <a class="btn btn-sm btn-danger"
                        href="{{ route('admin.user.beforedelete', ['user' => $user->id]) }}"><span
-                                class="far fa-trash-alt"></span></a>
+                                class="far fa-trash-alt"></span> Supprimer</a>
                 </td>
             </tr>
         @endforeach
