@@ -91,7 +91,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('subscriptions.subscriptionType')
+        $user->load('subscriptions.type')
             ->load('gifts');
 
         return view('admin.user.show', ['user' => $user]);
@@ -133,22 +133,31 @@ class UserController extends Controller
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function softDelete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if ($user->id != \Auth::user()->id) {
+            \DB::statement("SET foreign_key_checks=0");
+            \DB::delete('delete from users where id=' . $user->id);
+            \DB::statement("SET foreign_key_checks=1");
+        } else {
+            return redirect()->route('admin.user.index')->with('message', $user->firstname . ' can not be deleted !');
+        }
+        return redirect()->route('admin.user.index')->with('message', $user->firstname . ' deleted !');
     }
 }
