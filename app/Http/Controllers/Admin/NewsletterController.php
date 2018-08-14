@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Jobs\SendNewsletterJob;
 use App\Newsletter;
 use Illuminate\Http\Request;
+use App\Jobs\SendNewsletterJob;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class NewsletterController extends Controller
