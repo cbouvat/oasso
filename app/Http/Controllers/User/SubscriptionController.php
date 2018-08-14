@@ -61,7 +61,7 @@ class SubscriptionController extends Controller
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
             'opt_out_mail' => 0,
-            'subscription_date' => date('Y').'-12-31',
+            'subscription_date' => date('Y') . '-12-31',
             'subscription_source' => 1,
             'user_id' => Auth::id(),
             'subscription_type_id' => $subscriptionType->id,
@@ -156,12 +156,18 @@ class SubscriptionController extends Controller
         return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
     }
 
+    /**
+     * @todo
+     *
+     * Use Hashids
+     *
+     **/
     public function optOut($subId, $userId)
     {
-        $subscription = Subscription::with('user')->findOrFail($subId);
+        $subscription = Subscription::findOrFail($subId);
         $user = User::findOrFail($userId);
 
-        if ($subscription->user->id === $user->id) {
+        if ($subscription->user_id === $user->id) {
             $subscription->opt_out_mail = 1;
             $subscription->save();
 
@@ -169,14 +175,13 @@ class SubscriptionController extends Controller
         } else {
             return abort(404);
         }
-
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {

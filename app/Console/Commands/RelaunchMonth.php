@@ -41,7 +41,7 @@ class RelaunchMonth extends Command
      */
     public function handle()
     {
-        $subscriptions = Subscription::where('date_end', Carbon::now()->addMonth()->format('Y-m-d'))
+        $subscriptions = Subscription::where('date_end', Carbon::now()->addMonth()->toDateString())
             ->with('user')
             ->get();
 

@@ -41,7 +41,7 @@ class RelaunchDay extends Command
      */
     public function handle()
     {
-      $subscriptions = Subscription::where('date_end', Carbon::now()->format('Y-m-d'))
+      $subscriptions = Subscription::where('date_end', Carbon::now()->toDateString())
         ->with('user')
         ->get();
 
