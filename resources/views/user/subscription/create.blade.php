@@ -4,17 +4,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1>{{ __('Membership Renewal') }}</h1>
+                <h1>{{ __('Membership Subscription') }}</h1>
 
                 <form method="post" action="{{ route('user.subscription.store') }}">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label text-md-right">{{ __('For Year') }}</label>
-
+                        <label class="col-sm-4 col-form-label text-md-right">{{ __('Start date') }}</label>
                         <div class="col-md-6">
-                            <p><strong>{{date('Y')}}</strong></p>
+                            <p><strong>{{ $startDate->format('d-m-Y') }}</strong></p>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label text-md-right">{{ __('End date') }}</label>
+                        <div class="col-md-6">
+                            <p><strong>{{ $endDate->format('d-m-Y') }}</strong></p>
+                        </div>
+                    </div>
+
 
                     <div class="form-group row">
                         <label for="selected-type" class="col-sm-4 col-form-label text-md-right">{{ __('Subscription type') }}</label>
@@ -22,11 +28,20 @@
                         <div class="col-md-6">
 
                             <select id="selected-type" name="type" class="custom-select">
+
                                 @foreach($subscriptionTypes as $subscriptionType)
-                                    <option value="{{ $subscriptionType->id }}"
+                                    @if ($subscriptionType->name == $actualSubscriptionTypeName)
+                                    <option  selected value="{{ $subscriptionType->id }}"
                                             data-amount="{{ $subscriptionType->amount }}">
                                         {{ $subscriptionType->name }}
                                     </option>
+                                    @else
+                                        <option value="{{ $subscriptionType->id }}"
+                                        data-amount="{{ $subscriptionType->amount }}">
+                                        {{ $subscriptionType->name }}
+                                        </option>
+                                    @endif
+
                                 @endforeach
                             </select>
                         </div>

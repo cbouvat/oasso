@@ -7,6 +7,7 @@ use App\Payment;
 use App\Subscription;
 use App\PaymentMethod;
 use App\SubscriptionType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -34,11 +35,32 @@ class SubscriptionController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $subscriptionTypes = SubscriptionType::all();
+        $lastSubscription = Subscription::where('user_id', $user->id)->orderBy('date_end', 'desc')->orderBy('created_at', 'desc')->first();
 
+        if (!empty($lastSubscription->date_end)) {
+            $actualEndDate = $lastSubscription->date_end;
+        }
+
+        $newStartDate = Carbon::now();
+        if (isset($actualEndDate)){
+            $newStartDate = Carbon::parse($actualEndDate)->addDay();
+        }
+
+        $newEndDate = Carbon::parse($newStartDate)->addYear();
+
+        $actualSubscriptionTypeId = 3;
+        if (!empty($lastSubscription->subscription_type_id)) {
+            $actualSubscriptionTypeId = $lastSubscription->subscription_type_id;
+        }
+        $temp = SubscriptionType::where('id', $actualSubscriptionTypeId)->first();
+        $actualSubscriptionTypeName = $temp->name;
+        $subscriptionTypes = SubscriptionType::all();
         return view('user.subscription.create', [
             'user' => $user,
             'subscriptionTypes' => $subscriptionTypes,
+            'startDate' => $newStartDate,
+            'endDate' => $newEndDate,
+            'actualSubscriptionTypeName' => $actualSubscriptionTypeName,
         ]);
     }
 
@@ -50,14 +72,28 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
         $type = $request->input('type');
 
         $subscriptionType = SubscriptionType::findOrFail($type);
 
+        $lastSubscription = $user->load(['subscriptions' => function ($query){
+            $query->orderBy('date_end', 'desc')->first();
+        }]);
+        if (!empty($lastSubscription->date_end)) {
+            $actualEndDate = $lastSubscription->date_end;
+        }
+        $newStartDate = Carbon::now();
+        if (isset($actualEndDate)){
+            $newStartDate = Carbon::parse($actualEndDate)->addDay();
+        }
+        $newEndDate = Carbon::parse($newStartDate)->addYear();
+
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
             'opt_out_mail' => 0,
-            'subscription_date' => date('Y').'-12-31',
+            'date_start' => $newStartDate,//->format('d-m-Y'),
+            'date_end' => $newEndDate,//->format('d-m-Y'),
             'subscription_source' => 1,
             'user_id' => Auth::id(),
             'subscription_type_id' => $subscriptionType->id,
@@ -73,7 +109,7 @@ class SubscriptionController extends Controller
 
         $subType = SubscriptionType::where('id', $type)->first();
 
-        return view('user.user.index', ['user' => Auth::user()]);
+        return view('user.user.index', ['user' => Auth::user()])->with('message', 'Abonnement Confirmé !');
     }
 
     /**
