@@ -88,8 +88,8 @@ class UserController extends Controller
             'address_line2' => '|string|max:32|nullable',
             'city' => 'required|string|max:45|',
             'zipcode' => 'digits:5|numeric',
-            'phone_number_1' => 'numeric|nullable',
-            'phone_number_2' => 'numeric|nullable',
+            'phone_1' => 'numeric|nullable',
+            'phone_2' => 'numeric|nullable',
             'newspaper' => 'boolean',
             'newsletter' => 'boolean',
             'gender_joint' => 'max:2|nullable',
@@ -98,7 +98,14 @@ class UserController extends Controller
             'birthdate_joint' => 'date|before:today-13years|after:today-120years|nullable',
             'email_joint' => 'email|max:45|nullable',
         ]);
+        if ($request->has('role_type_id')){
+            $role_type_id = $request->validate([
+                'role_type_id' => 'integer',
+            ]);
 
+            $role = $user->role();
+            $role->update($role_type_id);
+        }
         if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }

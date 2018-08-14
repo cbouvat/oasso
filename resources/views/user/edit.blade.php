@@ -15,6 +15,8 @@
             <div class="col-md-8 mt-3">
                 <form action="{{ URL::route('user.update', ['user'=> $user]) }}" method="post">
                     @csrf
+
+
                     {{--@method('PUT')--}}
 
                     {{--@foreach ($errors->all() as $error)--}}
@@ -24,7 +26,16 @@
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
 
                         <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Mes Infos</h4></div>
-
+                        @if(Auth::user()->role()->first()->role_type_id === 3)
+                            <div class="form-group">
+                                <label for="role_type" class="text-danger font-weight-bold">Role</label>
+                                <select name="role_type_id" id="role_type" class="form-control">
+                                    <option value="1" @if($user->role()->first()->role_type_id == 1) selected @endif>Member</option>
+                                    <option value="2" @if($user->role()->first()->role_type_id == 2) selected @endif>Admin</option>
+                                    <option value="3" @if($user->role()->first()->role_type_id == 3) selected @endif>SuperAdmin</option>
+                                </select>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="gender">Civilité</label>
                             <select class="form-control" name="gender" id="gender">
@@ -159,14 +170,14 @@
                         <div class="form-group">
                             <label for="phone_number_1">Téléphone 1</label>
                             <input type="text"
-                                   name="phone_number_1"
-                                   class="form-control {{$errors->has('phone_number_1') ? 'is-invalid':''}}"
+                                   name="phone_1"
+                                   class="form-control {{$errors->has('phone_1') ? 'is-invalid':''}}"
                                    id="phone_number_1"
-                                   value="{{ old('phone_number_1') ? old('phone_number_1')  : $user->phone_number_1}}">
+                                   value="{{ old('phone_1') ? old('phone_1')  : $user->phone_1}}">
 
-                            @if ($errors->has('phone_number_1'))
+                            @if ($errors->has('phone_1'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number_1') }}</strong>
+                                        <strong>{{ $errors->first('phone_1') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -175,14 +186,14 @@
                         <div class="form-group">
                             <label for="phone_number_2">Téléphone 2</label>
                             <input type="text"
-                                   name="phone_number_2"
-                                   class="form-control {{$errors->has('phone_number_2') ? 'is-invalid':''}}"
+                                   name="phone_2"
+                                   class="form-control {{$errors->has('phone_2') ? 'is-invalid':''}}"
                                    id="phone_number_2"
-                                   value="{{ old('phone_number_2') ? old('phone_number_2')  : $user->phone_number_2}}">
+                                   value="{{ old('phone_2') ? old('phone_2')  : $user->phone_2}}">
 
-                            @if ($errors->has('phone_number_2'))
+                            @if ($errors->has('phone_2'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number_2') }}</strong>
+                                        <strong>{{ $errors->first('phone_2') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -224,7 +235,8 @@
                         <div class="form-group">
                             <label for="gender_joint">Civilité conjoint</label>
                             <select class="form-control" name="gender_joint" id="gender_joint">
-                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                <option value="0"
+                                        @if($user->gender_joint == 0) selected @endif>{{ __('Partner Gender') }}</option>
                                 <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('Mr') }}</option>
                                 <option value="2" @if($user->gender_joint == 2) selected @endif>{{ __('Ms') }}</option>
                             </select>
