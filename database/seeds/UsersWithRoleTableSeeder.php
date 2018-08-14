@@ -1,6 +1,5 @@
 <?php
 
-use App\Role;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -26,15 +25,13 @@ class UsersWithRoleTableSeeder extends Seeder
         $member->address_line1 = 'rue des members';
         $member->zipcode = '26000';
         $member->city = 'dtc';
-        $member->phone_number_1 = '1111111111';
+        $member->phone_1 = '1111111111';
         $member->newspaper = 0;
         $member->newsletter = 0;
         $member->comment = 'Je suis un member';
         $member->save();
 
-        $roleMember = new Role();
-        $roleMember->role_type_id = 1;
-        $roleMember->user_id = $member->id;
+        $member->role()->update(['role_type_id' => 1]);
 
         //Admin
 
@@ -48,16 +45,13 @@ class UsersWithRoleTableSeeder extends Seeder
         $admin->address_line1 = 'rue des admins';
         $admin->zipcode = '26000';
         $admin->city = 'dtc';
-        $admin->phone_number_1 = '2222222222';
+        $admin->phone_1 = '2222222222';
         $admin->newspaper = 0;
         $admin->newsletter = 0;
         $admin->comment = 'Je suis un admin';
         $admin->save();
 
-        $roleAdmin = new Role();
-        $roleAdmin->role_type_id = 2;
-        $roleAdmin->user_id = $admin->id;
-        $roleAdmin->save();
+        $admin->role()->update(['role_type_id' => 2]);
 
         //SuperAdmin
 
@@ -71,15 +65,12 @@ class UsersWithRoleTableSeeder extends Seeder
         $superadmin->address_line1 = 'rue des superAdmin';
         $superadmin->zipcode = '26000';
         $superadmin->city = 'dtc';
-        $superadmin->phone_number_1 = '3333333333';
+        $superadmin->phone_1 = '3333333333';
         $superadmin->newspaper = 0;
         $superadmin->newsletter = 0;
         $superadmin->comment = 'Je suis un superAdmin';
         $superadmin->save();
 
-        $roleSuperAdmin = new Role();
-        $roleSuperAdmin->role_type_id = 3;
-        $roleSuperAdmin->user_id = $superadmin->id;
-        $roleSuperAdmin->save();
+        $superadmin->role()->update(['role_type_id' => 3]);
     }
 }

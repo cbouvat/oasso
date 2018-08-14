@@ -13,19 +13,23 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\RelaunchMonth',
+        'App\Console\Commands\RelaunchWeek',
+        'App\Console\Commands\RelaunchDay',
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // Schedule Relaunch subscriptions
+        $schedule->command('relaunch:month')->dailyAt('10:00');
+        $schedule->command('relaunch:week')->dailyAt('12:00');
+        $schedule->command('relaunch:day')->dailyAt('8:00');
     }
 
     /**

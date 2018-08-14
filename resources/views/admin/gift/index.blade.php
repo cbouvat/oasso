@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Gestion des dons</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row pt-5">
         <div class="col-12">
             <div>
@@ -33,7 +40,7 @@
                                             class="fas fa-edit"></span></a>
                             </td>
                             <td>
-                                <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"
+                                <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
                                    class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
                             </td>
                         </tr>

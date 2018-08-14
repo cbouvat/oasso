@@ -14,7 +14,6 @@
     <h1 class="display-1">{{ config('app.name') }}</h1>
 </div>
 <div class="text-center">
-
 @yield('content')
 </div>
 <script src="{{ asset('js/app.js') }}" defer></script>
