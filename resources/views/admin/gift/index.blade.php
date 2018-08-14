@@ -13,7 +13,7 @@
         <div>
             <h1>Gestion des Dons</h1>
         </div>
-        <table class="table">
+        <table class="table table-hove">
             <thead>
             <tr>
                 <th scope="col">Donateur</th>
