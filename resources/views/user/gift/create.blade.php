@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
+                <li class="breadcrumb-item">Dons</li>
+            </ol>
+        </nav>
+    </div>
     <div>
         <div class="row">
             <div class="col-12">

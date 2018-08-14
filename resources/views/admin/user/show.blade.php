@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ '/admin/user' }}">Membres</a></li>
+                <li class="breadcrumb-item">Informations utilisateur</li>
+            </ol>
+        </nav>
+    </div>
     <div class="">
         <div class="row d-flex justify-content-between mb-3">
             <a href="{{route('admin.subscription.create')}}" class="btn btn-outline-success">Ajouter une Adhésion</a>

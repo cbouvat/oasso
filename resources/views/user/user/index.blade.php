@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
-
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
+                <li class="breadcrumb-item">Mon compte</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row ">
         <div>
             <h1>Mon Compte</h1>
@@ -54,7 +60,7 @@
     <div class="row d-flex justify-content-end mb-3">
         <a href="{{route('user.subscription.create')}}" class="mr-auto btn btn-outline-success">Ajouter une Adhésion</a>
 
-        <a href="#" class="btn btn-outline-primary">Modifer</a>
+        <a href="{{route('user.edit', ['user' => $user]) }}" class="btn btn-outline-primary">Modifer</a>
         <a href="{{route('user.user.beforedelete', ['user' => $user])}}" class="btn btn-outline-danger">Supprimer</a>
     </div>
 

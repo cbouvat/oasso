@@ -2,6 +2,15 @@
 
 
 @section('content')
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ '/admin/gift' }}">Gestion des dons</a></li>
+                <li class="breadcrumb-item">Modification du dons</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row">
         <div class="col-12">
             <div>

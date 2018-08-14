@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
+                <li class="breadcrumb-item">Membres</li>
+            </ol>
+        </nav>
+    </div>
     <h1>Liste des membres</h1>
     <table class="table table-hover">
         <thead>
