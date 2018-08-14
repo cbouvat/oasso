@@ -45,7 +45,7 @@ class SendNewsletterJob implements ShouldQueue
             $users = User::where('role.role_type_id', '2')->get();
         } else {
             $users = User::where('newsletter', '1')->get();
-        };
+        }
 
         foreach ($users as $user) {
             Mail::to($user)->send(new SendNewsletter($this->newsletter));
