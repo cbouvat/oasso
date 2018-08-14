@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\GiftsExport;
+use App\Exports\UsersExport;
+use Illuminate\Http\Request;
 use App\Exports\PaymentsExport;
 use App\Exports\SubscriptionsExport;
-use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-
-
 
 class ExportController extends Controller
 {
@@ -24,7 +22,6 @@ class ExportController extends Controller
         return view('admin.export.index');
     }
 
-
     public function export(Request $request)
     {
         $validate = $request->validate([
@@ -36,13 +33,13 @@ class ExportController extends Controller
 
         switch ($validate['export_file']) {
             case 'users':
-                return Excel::download(new UsersExport,$extension);
+                return Excel::download(new UsersExport, $extension);
             case 'gifts':
-                return Excel::download(new GiftsExport,$extension);
+                return Excel::download(new GiftsExport, $extension);
             case 'payments':
-                return Excel::download(new PaymentsExport,$extension);
+                return Excel::download(new PaymentsExport, $extension);
             case 'subscriptions':
-                return Excel::download(new SubscriptionsExport,$extension);
+                return Excel::download(new SubscriptionsExport, $extension);
         }
     }
 }

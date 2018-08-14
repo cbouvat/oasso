@@ -3,9 +3,9 @@
 namespace App\Exports;
 
 use App\Subscription;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
 {
@@ -37,13 +37,13 @@ class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
     {
         $subs = $sub->toArray();
         foreach ($subs as $key => $value) {
-            if (is_integer($value) && $key == 'subscription_source') {
+            if (is_int($value) && $key == 'subscription_source') {
                 if ($value === 0) {
-                    $subs[$key] = "Agence";
+                    $subs[$key] = 'Agence';
                 } else {
-                    $subs[$key] = "Application Web";
+                    $subs[$key] = 'Application Web';
                 }
-            } elseif (is_integer($value) && $key == 'subscription_type_id') {
+            } elseif (is_int($value) && $key == 'subscription_type_id') {
                 if ($value === 1) {
                     $subs[$key] = 'Chomeur';
                 } elseif ($value === 2) {

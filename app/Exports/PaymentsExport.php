@@ -3,9 +3,9 @@
 namespace App\Exports;
 
 use App\Payment;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class PaymentsExport implements FromCollection, WithMapping, WithHeadings
 {
@@ -42,7 +42,7 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
                     $payments[$key] = 'Donnation';
                 }
             }
-            if (is_integer($value) && $key == 'payment_method_id') {
+            if (is_int($value) && $key == 'payment_method_id') {
                 if ($value === 1) {
                     $payments[$key] = 'Paypal';
                 } elseif ($value === 2) {

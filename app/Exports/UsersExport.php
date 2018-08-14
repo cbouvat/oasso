@@ -3,15 +3,15 @@
 namespace App\Exports;
 
 use App\User;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
 class UsersExport implements FromCollection, WithHeadings, WithMapping
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return User::all();
@@ -54,14 +54,14 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
     public function map($user): array
     {
         $users = $user->toArray();
-        foreach($users as $key => $value) {
-            if(is_integer($value) && ($key == 'gender' || $key == 'gender_joint')) {
-                if($value === 1) {
-                    $users[$key] = "Masculin";
-                } elseif($value === 2) {
-                    $users[$key] = "Feminin";
-                }else{
-                    $users[$key] = "Indéfini";
+        foreach ($users as $key => $value) {
+            if (is_int($value) && ($key == 'gender' || $key == 'gender_joint')) {
+                if ($value === 1) {
+                    $users[$key] = 'Masculin';
+                } elseif ($value === 2) {
+                    $users[$key] = 'Feminin';
+                } else {
+                    $users[$key] = 'Indéfini';
                 }
             }
         }
