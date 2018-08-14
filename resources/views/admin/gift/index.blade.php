@@ -29,10 +29,10 @@
                     <tbody>
                     @forelse($gifts as $gift)
                         <tr>
-                            <td scope="row">{{$gift->user->firstname}} {{$gift->user->lastname}}</td>
-                            <th>{{$gift->amount}} €</th>
-                            <td>{{$gift->created_at->format('d/m/Y')}}</td>
-                            <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
+                            <td>@if($gift->user){{$gift->user->firstname.' '.$gift->user->lastname}}@else<strike>Deleted User</strike>@endif</td>
+                            <th>{{ $gift->amount }} €</th>
+                            <td>{{ $gift->created_at->format('d/m/Y') }}</td>
+                            <td>{{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
 
                             <td>
                                 <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
