@@ -30,9 +30,9 @@
                             <div class="form-group">
                                 <label for="role_type" class="text-danger font-weight-bold">Role</label>
                                 <select name="role_type_id" id="role_type" class="form-control">
-                                    <option value="1" @if($user->role()->first()->role_type_id == 1) selected @endif>Member</option>
-                                    <option value="2" @if($user->role()->first()->role_type_id == 2) selected @endif>Admin</option>
-                                    <option value="3" @if($user->role()->first()->role_type_id == 3) selected @endif>SuperAdmin</option>
+                                    <option value="1" @if($user->role->role_type_id == 1) selected @endif>Member</option>
+                                    <option value="2" @if($user->role->role_type_id == 2) selected @endif>Admin</option>
+                                    <option value="3" @if($user->role->role_type_id == 3) selected @endif>SuperAdmin</option>
                                 </select>
                             </div>
                         @endif
