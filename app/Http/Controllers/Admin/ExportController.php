@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exports\GiftsExport;
 use App\Exports\UsersExport;
+use App\SubscriptionType;
+use App\User;
 use Illuminate\Http\Request;
 use App\Exports\PaymentsExport;
 use App\Exports\SubscriptionsExport;
@@ -19,21 +21,46 @@ class ExportController extends Controller
      */
     public function index()
     {
-        return view('admin.export.index');
+        $subTypes = SubscriptionType::all();
+
+        $cities = User::pluck('city', 'zipcode')->all();
+
+        return view('admin.export.index', ['subTypes' => $subTypes, 'cities' => $cities]);
     }
 
     public function export(Request $request)
     {
         $validate = $request->validate([
-            'export_file' => 'required',
-            'export_format' => 'required',
+            'exportFile' => 'required',
+            'exportFormat' => 'required',
+            'state' => 'string|nullable',
+            'type' => 'integer|nullable',
+            'startDate' => 'date|before:today-13years|after:today-120years|nullable',
+            'endDate' => 'date|before:today-13years|after:today-120years|nullable',
+            'volonteer' => 'integer|nullable',
+            'delivery' => 'integer|nullable',
+            'newspaper' => 'integer|nullable',
+            'newsletter' => 'integer|nullable',
+            'city' => 'string|nullable',
+            'ageOperator' => 'string|nullable',
+            'ageNumber' => 'integer|nullable',
+            'phone' => 'string|nullable',
+            'gift' => 'integer|nullable',
+            'gender' => 'integer|nullable',
         ]);
 
-        $extension = $validate['export_file'].'.'.$validate['export_format'];
+        //Get extension for file
+        $extension = $validate['exportFile'] . '.' . $validate['exportFormat'];
 
-        switch ($validate['export_file']) {
+        //Build $settings for Query Builder in UsersExport
+
+
+
+
+
+        switch ($validate['exportFile']) {
             case 'users':
-                return Excel::download(new UsersExport, $extension);
+                return (new UsersExport($validate))->download($extension);
             case 'gifts':
                 return Excel::download(new GiftsExport, $extension);
             case 'payments':

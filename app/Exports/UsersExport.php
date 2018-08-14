@@ -3,12 +3,26 @@
 namespace App\Exports;
 
 use App\User;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class UsersExport implements FromCollection, WithHeadings, WithMapping
 {
+    use Exportable;
+    private $settings;
+
+    public function __construct($validate)
+    {
+        $this->settings = $validate;
+    }
+
+    public function query()
+    {
+        //
+    }
+
     /**
      * @return \Illuminate\Support\Collection
      */
