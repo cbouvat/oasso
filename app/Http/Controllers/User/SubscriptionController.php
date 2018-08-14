@@ -37,17 +37,23 @@ class SubscriptionController extends Controller
         $user = Auth::user();
         $lastSubscription = Subscription::where('user_id', $user->id)->orderBy('date_end', 'desc')->orderBy('created_at', 'desc')->first();
 
+        // This part is looking if the user already have subscriptions created.
+        // If yes, it catches the one with the greatest "end date, and then if its end date is greater than today.
+        // If yes, the system will use the found "end date" as the starting date of the new subscription.
+        // If no, the starting date will be today.
         if (!empty($lastSubscription->date_end)) {
             $actualEndDate = $lastSubscription->date_end;
         }
-
         $newStartDate = Carbon::now();
         if (isset($actualEndDate)){
+            if($actualEndDate>Carbon::now())
             $newStartDate = Carbon::parse($actualEndDate)->addDay();
         }
-
         $newEndDate = Carbon::parse($newStartDate)->addYear();
 
+        // This part is looking if the user already have subscriptions created.
+        // If yes, it catches the one with the greatest "end date, and catch the subscription type.
+        // This subscription type will use to set the default selection. If none found, the default value will be "individual".
         $actualSubscriptionTypeId = 3;
         if (!empty($lastSubscription->subscription_type_id)) {
             $actualSubscriptionTypeId = $lastSubscription->subscription_type_id;
@@ -77,14 +83,14 @@ class SubscriptionController extends Controller
 
         $subscriptionType = SubscriptionType::findOrFail($type);
 
-        $lastSubscription = $user->load(['subscriptions' => function ($query){
-            $query->orderBy('date_end', 'desc')->first();
-        }]);
+        $lastSubscription = Subscription::where('user_id', $user->id)->orderBy('date_end', 'desc')->orderBy('created_at', 'desc')->first();
+
         if (!empty($lastSubscription->date_end)) {
             $actualEndDate = $lastSubscription->date_end;
         }
         $newStartDate = Carbon::now();
         if (isset($actualEndDate)){
+            if($actualEndDate>Carbon::now())
             $newStartDate = Carbon::parse($actualEndDate)->addDay();
         }
         $newEndDate = Carbon::parse($newStartDate)->addYear();
