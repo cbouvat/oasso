@@ -51,7 +51,6 @@ class NewsletterController extends Controller
      */
     public function send(Newsletter $newsletter)
     {
-
         SendNewsletterJob::dispatch($newsletter);
 
         return redirect()->route('admin.newsletter.index');
