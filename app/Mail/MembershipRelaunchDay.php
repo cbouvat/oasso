@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MembershipRelaunchMonth extends Mailable
+class MembershipRelaunchDay extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,7 +16,7 @@ class MembershipRelaunchMonth extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param Subscription $subscription
+     * @return void
      */
     public function __construct(Subscription $subscription)
     {
@@ -30,8 +30,8 @@ class MembershipRelaunchMonth extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.membership.relaunch.month')
-            ->subject('Votre adhésion chez '.config('app.name').' expire dans 1 mois')
-          ->text('emails.membership.relaunch.month');
+        return $this->markdown('emails.membership.relaunch.day')
+            ->subject('Votre adhésion chez '.config('app.name').' expire aujourd\'hui !')
+            ->text('emails.membership.relaunch.day');
     }
 }

@@ -11,7 +11,3 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/users', function () {
-    return \App\User::all();
-});
