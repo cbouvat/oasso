@@ -17,74 +17,84 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Search
-Route::get('/search', 'SearchController@search')->name('search');
-
-Route::prefix('user')->group(function () {
+Route::prefix('user')->middleware('auth')->namespace('User')->name('user.')->group(function () {
     // User
-    Route::get('/', 'User\UserController@index')->name('user.user.index');
-    Route::get('/history', 'User\UserController@history')->name('history');
-    Route::get('/{user}/edit', 'User\UserController@edit')->name('user.edit');
-    Route::post('/{user}/update/', 'User\UserController@update')->name('user.update');
-    Route::get('/password', 'User\UserController@passwordEdit')->name('user.password.edit');
-    Route::post('/password', 'User\UserController@passwordUpdate')->name('user.password.update');
-    Route::get('/{id}/beforedelete', 'User\UserController@beforeDelete')->name('user.user.beforedelete');
-    Route::get('/{id}/softdelete', 'User\UserController@softDelete')->name('user.user.softdelete');
+    Route::get('/', 'UserController@index')->name('user.index');
+    Route::get('/history', 'UserController@history')->name('history');
+    Route::get('/{user}/edit', 'UserController@edit')->name('edit');
+    Route::post('/{user}/update/', 'UserController@update')->name('update');
+    Route::get('/password', 'UserController@passwordEdit')->name('password.edit');
+    Route::post('/password', 'UserController@passwordUpdate')->name('password.update');
+    Route::get('/{id}/beforedelete', 'UserController@beforeDelete')->name('user.beforedelete');
+    Route::get('/{id}/softdelete', 'UserController@softDelete')->name('user.softdelete');
 
     // Subscription
-    Route::get('/subscription/create', 'User\SubscriptionController@create')->name('user.subscription.create');
-    Route::post('/subscription/store', 'User\SubscriptionController@store')->name('user.subscription.store');
+    Route::prefix('/subscription')->name('subscription.')->group(function () {
+        Route::post('/', 'SubscriptionController@store')->name('store');
+        Route::get('/create', 'SubscriptionController@create')->name('create');
+    });
 
     // Gift
-    Route::get('/gift', 'User\GiftController@create')->name('user.gift.create');
-    Route::post('/gift', 'User\GiftController@store')->name('user.gift.store');
-
-    // Membership renewal
-    Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
-    Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
+    Route::prefix('/gift')->name('gift.')->group(function () {
+        Route::post('/', 'GiftController@store')->name('store');
+        Route::get('/create', 'GiftController@create')->name('create');
+    });
 });
 
-Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('admin.')->group(function () {
     // User
-    Route::get('/user', 'UserController@index')->name('user.index');
-    Route::post('/user', 'UserController@store')->name('user.store');
-    Route::get('/user/create', 'UserController@create')->name('user.create');
-    Route::get('/user/{user}', 'UserController@show')->name('user.show');
-    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('user.softdelete');
-    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('user.beforedelete');
+    Route::prefix('user')->name('user.')->group(function () {
+        Route::get('/', 'UserController@index')->name('index');
+        Route::post('/', 'UserController@store')->name('store');
+        Route::get('/create', 'UserController@create')->name('create');
+        Route::get('/{user}', 'UserController@show')->name('show');
+        Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
+        Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+    });
 
     // Subscription
-    Route::get('/subscription', 'SubscriptionController@index')->name('subscription.index');
-    Route::post('/subscription', 'SubscriptionController@store')->name('subscription.store');
-    Route::get('/subscription/create', 'SubscriptionController@create')->name('subscription.create');
-    Route::get('/subscription/{subscription}', 'SubscriptionController@edit')->name('subscription.edit');
-    Route::post('/subscription/{subscription}', 'SubscriptionController@update')->name('subscription.update');
-    Route::get('/subscription/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('subscription.beforedelete');
-    Route::get('/subscription/{subscription}/destroy/', 'SubscriptionController@destroy')->name('subscription.destroy');
+    Route::prefix('subscription')->name('subscription.')->group(function () {
+        Route::get('/', 'SubscriptionController@index')->name('index');
+        Route::post('/', 'SubscriptionController@store')->name('store');
+        Route::get('/create', 'SubscriptionController@create')->name('create');
+        Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
+        Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
+        Route::get('/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('beforedelete');
+        Route::get('/{subscription}/destroy/', 'SubscriptionController@destroy')->name('destroy');
+    });
 
     // Gift
-    Route::get('/gift', 'GiftController@index')->name('gift.index');
-    Route::post('/gift', 'GiftController@create')->name('gift.create');
-    Route::get('/gift/create', 'GiftController@show')->name('gift.show');
-    Route::get('/gift/{gift}', 'GiftController@edit')->name('gift.edit');
-    Route::post('/gift/{gift}', 'GiftController@update')->name('gift.update');
-    Route::get('/gift/{gift}/destroy', 'GiftController@destroy')->name('gift.destroy');
-    Route::get('/gift/{gift}/before-delete', 'GiftController@beforeDelete')->name('gift.beforeDelete');
+    Route::prefix('gift')->name('gift.')->group(function () {
+        Route::get('/', 'GiftController@index')->name('index');
+        Route::post('/', 'GiftController@create')->name('create');
+        Route::get('/create', 'GiftController@show')->name('show');
+        Route::get('/{gift}', 'GiftController@edit')->name('edit');
+        Route::post('/{gift}', 'GiftController@update')->name('update');
+        Route::get('/{gift}/destroy', 'GiftController@destroy')->name('destroy');
+        Route::get('/{gift}/before-delete', 'GiftController@beforeDelete')->name('beforeDelete');
+    });
 
     // Newsletter
-    Route::get('/newsletter', 'NewsletterController@index')->name('newsletter.index');
-    Route::post('/newsletter', 'NewsletterController@store')->name('newsletter.store');
-    Route::get('/newsletter/create', 'NewsletterController@create')->name('newsletter.create');
-    Route::get('/newsletter/{newsletter}', 'NewsletterController@edit')->name('newsletter.edit');
-    Route::post('/newsletter/{newsletter}', 'NewsletterController@update')->name('newsletter.update');
-    Route::get('/newsletter/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('newsletter.duplicate');
-    Route::get('/newsletter/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('newsletter.beforedelete');
-    Route::get('/newsletter/{newsletter}/delete', 'NewsletterController@delete')->name('newsletter.delete');
+    Route::prefix('newsletter')->name('newsletter.')->group(function () {
+        Route::get('/', 'NewsletterController@index')->name('index');
+        Route::post('/', 'NewsletterController@store')->name('store');
+        Route::get('/create', 'NewsletterController@create')->name('create');
+        Route::get('/{newsletter}', 'NewsletterController@edit')->name('edit');
+        Route::post('/{newsletter}', 'NewsletterController@update')->name('update');
+        Route::get('/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('duplicate');
+        Route::get('/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('beforedelete');
+        Route::get('/{newsletter}/delete', 'NewsletterController@delete')->name('delete');
+    });
 
     // Mailing
-    Route::get('/mailing', 'MailingController@index')->name('mailing.index');
-    Route::get('/mailing/{id}', 'MailingController@edit')->name('mailing.edit');
-    Route::post('/mailing/{id}', 'MailingController@update')->name('mailing.update');
+    Route::prefix('mailing')->name('mailing.')->group(function () {
+        Route::get('/', 'MailingController@index')->name('index');
+        Route::get('/{id}', 'MailingController@edit')->name('edit');
+        Route::post('/{id}', 'MailingController@update')->name('update');
+    });
+
+    // Search
+    Route::get('/search', 'SearchController@search')->name('search');
 });
 
 // Auth
