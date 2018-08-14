@@ -32,6 +32,7 @@ Route::prefix('user')->middleware('auth')->namespace('User')->name('user.')->gro
     Route::prefix('/subscription')->name('subscription.')->group(function () {
         Route::post('/', 'SubscriptionController@store')->name('store');
         Route::get('/create', 'SubscriptionController@create')->name('create');
+        Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optOut')->name('optout');
     });
 
     // Gift
