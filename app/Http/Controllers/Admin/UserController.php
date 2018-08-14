@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Mail\PasswordSending;
-use App\Mail\SendPwdByEmail;
-use App\Mail\SendPwdByPhone;
 use App\User;
+use App\Mail\SendPwdByEmail;
 use Illuminate\Http\Request;
+use App\Mail\PasswordSending;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -44,7 +42,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $inputs = $request->validate([
             'gender' => 'required|integer',
             'lastname' => 'required|alpha|string|max:45|min:2',
@@ -79,14 +76,11 @@ class UserController extends Controller
 
         if ($inputs['email']) {
             if ($request['sendPwdByEmail']) {
-
                 Mail::to($user)->send(new PasswordSending($user, $str_random));
             }
         }
 
-
         return redirect()->route('admin.user.index');
-
     }
 
     /**
@@ -136,7 +130,6 @@ class UserController extends Controller
         return view('admin.user.beforedelete', ['user' => $user]);
     }
 
-
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
@@ -148,6 +141,7 @@ class UserController extends Controller
 
         return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
     }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -12,7 +12,7 @@
 |
 */
 
-Route::get('/users', function(){
+Route::get('/users', function () {
     return \App\User::all();
 });
 
