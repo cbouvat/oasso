@@ -42,9 +42,6 @@ Route::prefix('user')->name('User')->namespace('user.')->group(function () {
     });
 
 });
-// Membership renewal
-Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('membershipRenewal');
-Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     // User
