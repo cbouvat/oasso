@@ -3,11 +3,30 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Fontawesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+
+// Quill
+@import "~quill/dist/quill.snow.css";
+
 
 body {
   font-size: .875rem;
+  background-color: #fAfAfA;
 }
+
+.message_alert{
+  position:absolute;
+  width: 15%;
+  top:5%;
+  right:1%;
+  height: 30%;
+  z-index: 999999;
+  padding:5px;
+  opacity: 0.9;
+}
+
 
 .feather {
   width: 16px;
