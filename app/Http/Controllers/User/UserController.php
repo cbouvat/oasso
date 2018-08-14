@@ -67,6 +67,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $user->load('role');
+
         return view('user.edit', ['user' => $user]);
     }
 
