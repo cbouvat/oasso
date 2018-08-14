@@ -72,6 +72,8 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/gift/{gift}', 'Admin\GiftController@edit')->name('admin.gift.edit');
     Route::post('/gift/{gift}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/{gift}/destroy', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
+
+
     Route::get('/gift/{gift}/before-delete','Admin\GiftController@beforeDelete')->name('admin.gift.beforeDelete');
 
 
