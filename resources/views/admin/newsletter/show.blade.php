@@ -18,7 +18,7 @@
                 <div class="row justify-content-around ">
                     <a class="btn btn-primary"
                        href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}">{{__('Update')  }}</a>
-                    <a class="btn btn-success" href="{{route('admin.newsletter.ship', ['newsletter' => $newsletter])}}">Ship</a>
+                    <a class="btn btn-success" href="{{route('admin.newsletter.send', ['newsletter' => $newsletter])}}">Ship</a>
                     <a class="btn btn-danger" href="{{route('admin.newsletter.index')}}">Annuler</a>
                 </div>
             </div>

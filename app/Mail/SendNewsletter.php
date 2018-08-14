@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ShipNewsletter extends Mailable
+class SendNewsletter extends Mailable
 {
     use Queueable, SerializesModels;
     public $newsletter;

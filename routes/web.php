@@ -81,7 +81,7 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/newsletter/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('newsletter.beforedelete');
     Route::get('/newsletter/{newsletter}/delete', 'NewsletterController@delete')->name('newsletter.delete');
     Route::get('/newsletter/{newsletter}/show', 'NewsletterController@show')->name('newsletter.show');
-    Route::get('/newsletter/{newsletter}/ship', 'NewsletterController@ship')->name('newsletter.ship');
+    Route::get('/newsletter/{newsletter}/send', 'NewsletterController@send')->name('newsletter.send');
     // Mailing
     Route::get('/mailing', 'MailingController@index')->name('mailing.index');
     Route::get('/mailing/{id}', 'MailingController@edit')->name('mailing.edit');

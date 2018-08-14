@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Mail\ShipNewsletter;
+use App\Jobs\SendNewsletterJob;
 use App\Newsletter;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 
 class NewsletterController extends Controller
 {
@@ -51,16 +49,11 @@ class NewsletterController extends Controller
      * @param Newsletter $newsletter
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function ship(Newsletter $newsletter)
+    public function send(Newsletter $newsletter)
     {
         $newsletter->status = 'sending';
         $newsletter->save();
-        $users = User::where('newsletter', '1')->get();
-
-        foreach ($users as $user) {
-            Mail::to($user)->send(new ShipNewsletter($newsletter)); //add in queue with ShipNewsletter Model
-        }
-
+        SendNewsletterJob::dispatch($newsletter);
 
         return redirect()->route('admin.newsletter.index');
     }
