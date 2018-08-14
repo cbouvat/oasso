@@ -51,8 +51,7 @@ class NewsletterController extends Controller
      */
     public function send(Newsletter $newsletter)
     {
-        $newsletter->status = 'sending';
-        $newsletter->save();
+
         SendNewsletterJob::dispatch($newsletter);
 
         return redirect()->route('admin.newsletter.index');

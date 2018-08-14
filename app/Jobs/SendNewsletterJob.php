@@ -31,14 +31,19 @@ class SendNewsletterJob implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @param Newsletter $newsletter
      * @return void
      */
     public function handle()
     {
+        $this->newsletter->status = 'sending';
+        $this->newsletter->save();
+
         $users = User::where('newsletter', '1')->get();
         foreach ($users as $user) {
             Mail::to($user)->send(new SendNewsletter($this->newsletter));
         }
+
+        $this->newsletter->status = 'sent';
+        $this->newsletter->save();
     }
 }
