@@ -46,7 +46,6 @@ class RelaunchDay extends Command
             ->get();
 
         foreach ($subscriptions as $subscription) {
-
             Mail::to($subscription->user)->send(new MembershipRelaunchDay($subscription));
         }
     }

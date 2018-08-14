@@ -35,5 +35,3 @@ class Welcome extends Mailable
             ->text('emails.welcome');
     }
 }
-
-

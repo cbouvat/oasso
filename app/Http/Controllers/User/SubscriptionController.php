@@ -34,7 +34,6 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-
         $user = Auth::user();
         $subscriptionTypes = SubscriptionType::all();
 
@@ -52,11 +51,9 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-
         $type = $request->input('type');
 
         $subscriptionType = SubscriptionType::findOrFail($type);
-
 
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
@@ -78,7 +75,6 @@ class SubscriptionController extends Controller
         $subType = SubscriptionType::where('id', $type)->first();
 
         return view('user.user.index', ['user' => Auth::user()]);
-
     }
 
     /**
@@ -104,7 +100,6 @@ class SubscriptionController extends Controller
         $subscription_type = SubscriptionType::all();
         $subscription = Subscription::with('payment')->findOrFail($id);
 
-
         return view('admin.subscription.edit', ['subscription' => $subscription,
             'payments_methods' => $payments_methods,
             'subscription_type' => $subscription_type,
@@ -128,7 +123,6 @@ class SubscriptionController extends Controller
             'subscription_date' => 'required|date|after_or_equal:today',
         ]);
 
-
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 
@@ -146,7 +140,6 @@ class SubscriptionController extends Controller
         ]);
 
         $payment->update($validator);
-
 
         return back()->with('message', 'Mise a jour effectuée');
     }
@@ -177,7 +170,6 @@ class SubscriptionController extends Controller
         }
     }
 
-
     /**
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
@@ -187,6 +179,7 @@ class SubscriptionController extends Controller
     {
         $subscriptionToDelete = Subscription::findOrFail($id);
         $subscriptionToDelete->delete();
+
         return redirect()->route('admin.subscription.index')->with('message', 'Adhésion supprimée');
     }
 }
