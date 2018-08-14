@@ -41,7 +41,7 @@ Route::prefix('user')->middleware('auth')->namespace('User')->name('user.')->gro
     });
 });
 
-Route::prefix('admin')->middleware('auth','role')->namespace('Admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('admin.')->group(function () {
     // User
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', 'UserController@index')->name('index');
