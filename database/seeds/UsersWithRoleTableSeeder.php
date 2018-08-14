@@ -32,9 +32,7 @@ class UsersWithRoleTableSeeder extends Seeder
         $member->comment = 'Je suis un member';
         $member->save();
 
-        $roleMember = new Role();
-        $roleMember->role_type_id = 1;
-        $roleMember->user_id = $member->id;
+        $member->role()->update(['role_type_id' => 1]);
 
         //Admin
 
@@ -54,10 +52,7 @@ class UsersWithRoleTableSeeder extends Seeder
         $admin->comment = 'Je suis un admin';
         $admin->save();
 
-        $roleAdmin = new Role();
-        $roleAdmin->role_type_id = 2;
-        $roleAdmin->user_id = $admin->id;
-        $roleAdmin->save();
+        $admin->role()->update(['role_type_id' => 2]);
 
         //SuperAdmin
 
@@ -77,9 +72,6 @@ class UsersWithRoleTableSeeder extends Seeder
         $superadmin->comment = 'Je suis un superAdmin';
         $superadmin->save();
 
-        $roleSuperAdmin = new Role();
-        $roleSuperAdmin->role_type_id = 3;
-        $roleSuperAdmin->user_id = $superadmin->id;
-        $roleSuperAdmin->save();
+        $superadmin->role()->update(['role_type_id' => 3]);
     }
 }
