@@ -143,7 +143,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
     }
 
     /**
