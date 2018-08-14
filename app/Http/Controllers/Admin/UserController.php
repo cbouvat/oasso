@@ -140,7 +140,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
     }
 
     /**
@@ -152,12 +152,13 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->id != \Auth::user()->id) {
-            \DB::statement("SET foreign_key_checks=0");
-            \DB::delete('delete from users where id=' . $user->id);
-            \DB::statement("SET foreign_key_checks=1");
+            \DB::statement('SET foreign_key_checks=0');
+            \DB::delete('delete from users where id='.$user->id);
+            \DB::statement('SET foreign_key_checks=1');
         } else {
-            return redirect()->route('admin.user.index')->with('message', $user->firstname . ' can not be deleted !');
+            return redirect()->route('admin.user.index')->with('message', $user->firstname.' can not be deleted !');
         }
-        return redirect()->route('admin.user.index')->with('message', $user->firstname . ' deleted !');
+
+        return redirect()->route('admin.user.index')->with('message', $user->firstname.' deleted !');
     }
 }
