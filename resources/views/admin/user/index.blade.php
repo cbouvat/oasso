@@ -2,13 +2,13 @@
 
 @section('content')
     <h1>Liste des membres</h1>
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Id</th>
             <th>Nom</th>
             <th>Prénom</th>
-            <th>Action</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -17,10 +17,11 @@
                 <th>{{ $user->id }}</th>
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
-                <td>
-                    <button type="button" class="btn btn-primary">Modifier</button>
-                    <a type="button" class="btn btn-danger"
-                       href="{{ route('admin.user.beforedelete', ['user' => $user->id]) }}">Supprimer</a>
+                <td class="text-right">
+                    <a href="{{route('admin.user.show', $user)}}" class="btn btn-sm btn-primary"><span class="fas fa-pencil-alt"></span></a>
+                    <a class="btn btn-sm btn-danger"
+                       href="{{ route('admin.user.beforedelete', ['user' => $user->id]) }}"><span
+                                class="far fa-trash-alt"></span></a>
                 </td>
             </tr>
         @endforeach

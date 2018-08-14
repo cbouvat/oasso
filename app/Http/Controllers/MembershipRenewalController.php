@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Payment;
 use App\Subscription;
 use App\SubscriptionType;
-use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class membershipRenewalController extends Controller
+class MembershipRenewalController extends Controller
 {
     public function display()
     {
@@ -25,7 +24,6 @@ class membershipRenewalController extends Controller
         $type = $request->input('type');
 
         $subscriptionType = SubscriptionType::findOrFail($type);
-
 
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
@@ -48,5 +46,4 @@ class membershipRenewalController extends Controller
 
         return view('membershipRenewalConfirm', ['subType' => $subType], ['sub' => $sub]);
     }
-
 }

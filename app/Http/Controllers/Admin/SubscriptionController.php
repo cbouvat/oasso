@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Payment;
-use App\PaymentMethod;
 use App\Subscription;
+use App\PaymentMethod;
 use App\SubscriptionType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
@@ -18,12 +18,9 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = Subscription::with('subscriptionType')
-            ->with('user')
-            ->with('payment')
+        $subscriptions = Subscription::with(['subscriptionType', 'user', 'payment.paymentMethod'])
             ->orderBy('subscription_date', 'desc')
             ->paginate();
-
 
         return view('admin.subscription.index', ['subscriptions' => $subscriptions]);
     }
@@ -36,11 +33,11 @@ class SubscriptionController extends Controller
     public function create()
     {
         $payments_methods = PaymentMethod::all();
-        $subscription_type = SubscriptionType::all();
+        $subscription_types = SubscriptionType::all();
 
         return view('admin.subscription.create', [
             'payments_methods' => $payments_methods,
-            'subscription_type' => $subscription_type
+            'subscription_types' => $subscription_types,
         ]);
     }
 
@@ -57,9 +54,8 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date|after_or_equal:today'
+            'subscription_date' => 'required|date',
         ]);
-
 
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
@@ -67,11 +63,10 @@ class SubscriptionController extends Controller
         $subscription = Subscription::create($validator);
 
         $validator['payment_id'] = $subscription->id;
-        $validator['payment_type'] = "App\Subscription";
-        $validator['payment_method_id'] = $request->payment_methods;
+        $validator['payment_type'] = 'App\Subscription';
+        $validator['payment_method_id'] = $validator['payment_methods'];
 
         Payment::create($validator);
-
 
         return redirect()->route('admin.subscription.index');
     }
@@ -80,7 +75,7 @@ class SubscriptionController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function show($id)
     {
@@ -90,19 +85,20 @@ class SubscriptionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param Subscription $subscription
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Subscription $subscription)
     {
         $payments_methods = PaymentMethod::all();
-        $subscription_type = SubscriptionType::all();
-        $subscription = Subscription::with('payment')->findOrFail($id);
+        $subscription_types = SubscriptionType::all();
 
+        $subscription->load('payment');
 
-        return view('admin.subscription.edit', ['subscription' => $subscription,
+        return view('admin.subscription.edit', [
+            'subscription' => $subscription,
             'payments_methods' => $payments_methods,
-            'subscription_type' => $subscription_type
+            'subscription_types' => $subscription_types,
         ]);
     }
 
@@ -110,43 +106,38 @@ class SubscriptionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param Subscription $subscription
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Subscription $subscription)
     {
         $validator = $request->validate([
             'user_id' => 'required|numeric',
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date|after_or_equal:today'
+            'subscription_date' => 'required|date',
         ]);
-
 
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 
-        $subscription = Subscription::findOrFail($id);
-
         $subscription->update($validator);
 
-
         $validator['payment_id'] = $subscription->id;
-        $validator['payment_type'] = "App\Subscription";
-        $validator['payment_method_id'] = $request->payment_methods;
+        $validator['payment_type'] = 'App\Subscription';
+        $validator['payment_method_id'] = $validator['payment_methods'];
 
         $payment = Payment::where([
             ['payment_id', $subscription->id],
-            ['payment_type', 'App\Subscription']
+            ['payment_type', 'App\Subscription'],
         ]);
 
         $payment->update([
             'amount' => $validator['amount'],
             'user_id' => $validator['user_id'],
-            'payment_method_id' => $validator['payment_method_id']
+            'payment_method_id' => $validator['payment_method_id'],
         ]);
-
 
         return back()->with('message', 'Mise a jour effectuée');
     }
@@ -159,13 +150,14 @@ class SubscriptionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param Subscription $subscription
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Subscription $subscription)
     {
-        $subscriptionToDelete = Subscription::findOrFail($id);
-        $subscriptionToDelete->delete();
+        $subscription->delete();
+
         return redirect()->route('admin.subscription.index')->with('message', 'Adhésion supprimée');
     }
 }

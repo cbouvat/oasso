@@ -7,10 +7,8 @@ use App\Mail\ShipNewsletter;
 use App\Newsletter;
 use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Queue;
 
 class NewsletterController extends Controller
 {
@@ -63,10 +61,6 @@ class NewsletterController extends Controller
             Mail::to($user)->send(new ShipNewsletter($newsletter)); //add in queue with ShipNewsletter Model
         }
 
-        Queue::after(function (JobProcessed $event) {
-            $newsletter->status = 'sent';
-            $newsletter->save();
-        });
 
         return redirect()->route('admin.newsletter.index');
     }
@@ -80,7 +74,7 @@ class NewsletterController extends Controller
         $validateRequest = $request->validate([
             'title' => 'string|max:150|required',
             'html_content' => 'required',
-            'text_content' => 'required'
+            'text_content' => 'required',
         ]);
 
         $validateRequest['user_id'] = Auth::user()->id;
@@ -89,7 +83,6 @@ class NewsletterController extends Controller
 
         return redirect(route('admin.newsletter.index'));
     }
-
 
     /**
      * @param Newsletter $newsletter
@@ -110,7 +103,7 @@ class NewsletterController extends Controller
         $validateRequest = $request->validate([
             'title' => 'string|max:150|required',
             'html_content' => 'required',
-            'text_content' => 'required'
+            'text_content' => 'required',
         ]);
 
         $validateRequest['user_id'] = Auth::user()->id;

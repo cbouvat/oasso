@@ -34,7 +34,7 @@
                        href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}">Display</a>
                     <button type="button" class="btn btn-info btn-sm ml-2 mr-2"
                        href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}">
-                        Sent <span class="badge badge-light">{{counter}}</span>
+                        {{ $newsletter->status }} <span class="badge badge-light">{{'toto counter'}}</span>
                     </button>
                 </td>
             </tr>
