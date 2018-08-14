@@ -14,4 +14,3 @@ class GiftsTableSeeder extends Seeder
         factory(App\Gift::class, 20)->create();
     }
 }
-

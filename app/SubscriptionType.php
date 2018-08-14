@@ -12,7 +12,7 @@ class SubscriptionType extends Model
      * @var array
      */
     protected $fillable = [
-        'name','amount'
+        'name', 'amount',
     ];
 
     /**
