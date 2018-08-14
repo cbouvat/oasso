@@ -33,7 +33,6 @@ Route::prefix('user')->name('user.')->namespace('User')->group(function () {
         Route::post('/', 'SubscriptionController@store')->name('store');
         Route::get('/create', 'SubscriptionController@create')->name('create');
         Route::get('/optOut/{subscription}/{user}', 'SubscriptionController@optOut')->name('user.subscription.optOut');
-
     });
 
     // Gift
