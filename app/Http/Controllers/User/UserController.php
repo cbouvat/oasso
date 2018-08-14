@@ -98,7 +98,7 @@ class UserController extends Controller
             'birthdate_joint' => 'date|before:today-13years|after:today-120years|nullable',
             'email_joint' => 'email|max:45|nullable',
         ]);
-        if ($request->has('role_type_id')){
+        if ($request->has('role_type_id')) {
             $role_type_id = $request->validate([
                 'role_type_id' => 'integer',
             ]);
