@@ -6,9 +6,8 @@ use App\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MembershipRelaunchDay extends Mailable implements ShouldQueue
+class MembershipRelaunchDay extends Mailable
 {
     use Queueable, SerializesModels;
 

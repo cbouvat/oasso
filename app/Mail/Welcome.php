@@ -2,14 +2,12 @@
 
 namespace App\Mail;
 
-use App\TemplateMail;
 use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Welcome extends Mailable implements ShouldQueue
+class Welcome extends Mailable
 {
     use Queueable, SerializesModels;
 
