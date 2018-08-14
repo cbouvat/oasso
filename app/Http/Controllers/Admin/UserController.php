@@ -92,8 +92,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('subscriptions.subscriptionType')
-            ->load(['gifts' => function($query){
-                $query->with(['payment' => function ($query){
+            ->load(['gifts' => function ($query) {
+                $query->with(['payment' => function ($query) {
                     $query->with('paymentMethod');
                 }]);
             }]);
