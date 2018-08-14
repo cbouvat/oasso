@@ -20,7 +20,7 @@ class CreateNewslettersTable extends Migration
             $table->longText('text_content');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->enum('status',['notSent', 'sending', 'sent'])->default('notSent');
+            $table->enum('status', ['notSent', 'sending', 'sent'])->default('notSent');
 
             $table->timestamps();
         });
