@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
+use App\SubscriptionType;
 use App\Exports\GiftsExport;
 use App\Exports\UsersExport;
-use App\SubscriptionType;
-use App\User;
 use Illuminate\Http\Request;
 use App\Exports\PaymentsExport;
 use App\Exports\SubscriptionsExport;
@@ -50,13 +50,9 @@ class ExportController extends Controller
         ]);
 
         //Get extension for file
-        $extension = $validate['exportFile'] . '.' . $validate['exportFormat'];
+        $extension = $validate['exportFile'].'.'.$validate['exportFormat'];
 
         //Build $settings for Query Builder in UsersExport
-
-
-
-
 
         switch ($validate['exportFile']) {
             case 'users':
