@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Historique</li>
+            </ol>
+        </nav>
+    </div>
     <div>
         <h1>Historique</h1>
     </div>
