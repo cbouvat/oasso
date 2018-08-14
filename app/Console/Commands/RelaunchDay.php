@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\MembershipRelaunchDay;
-use App\Subscription;
 use Carbon\Carbon;
+use App\Subscription;
 use Illuminate\Console\Command;
+use App\Mail\MembershipRelaunchDay;
 use Illuminate\Support\Facades\Mail;
 
 class RelaunchDay extends Command

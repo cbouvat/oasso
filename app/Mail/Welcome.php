@@ -31,7 +31,7 @@ class Welcome extends Mailable
     public function build()
     {
         return $this->markdown('emails.welcome')
-            ->subject('Inscription sur ' . config('app.name'))
+            ->subject('Inscription sur '.config('app.name'))
             ->text('emails.welcome');
     }
 }

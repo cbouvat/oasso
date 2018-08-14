@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-      // Schedule Relaunch subscriptions
+        // Schedule Relaunch subscriptions
         $schedule->command('relaunch:month')->dailyAt('10:00');
         $schedule->command('relaunch:week')->dailyAt('12:00');
         $schedule->command('relaunch:day')->dailyAt('8:00');
@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

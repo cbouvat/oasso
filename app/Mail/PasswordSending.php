@@ -11,7 +11,8 @@ class PasswordSending extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user, $password;
+    public $user;
+    public $password;
 
     /**
      * Create a new message instance.
@@ -33,7 +34,7 @@ class PasswordSending extends Mailable
     public function build()
     {
         return $this->markdown('emails.password.sending')
-            ->subject('Votre mot de passe pour ' . config('app.name'))
+            ->subject('Votre mot de passe pour '.config('app.name'))
           ->text('emails.password.sending');
     }
 }

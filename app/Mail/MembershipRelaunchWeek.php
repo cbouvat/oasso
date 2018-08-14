@@ -31,7 +31,7 @@ class MembershipRelaunchWeek extends Mailable
     public function build()
     {
         return $this->markdown('emails.membership.relaunch.week')
-            ->subject('Votre adhésion chez ' . config("app.name") . ' expire dans 1 semaine')
+            ->subject('Votre adhésion chez ' . config("app.name").' expire dans 1 semaine')
           ->text('emails.membership.relaunch.week');
     }
 }

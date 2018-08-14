@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Payment;
-use App\PaymentMethod;
-use App\Subscription;
-use App\SubscriptionType;
-use App\User;
 use Auth;
+use App\User;
+use App\Payment;
+use App\Subscription;
+use App\PaymentMethod;
+use App\SubscriptionType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
@@ -40,7 +40,7 @@ class SubscriptionController extends Controller
 
         return view('user.subscription.create', [
             'user' => $user,
-            'subscriptionTypes' => $subscriptionTypes
+            'subscriptionTypes' => $subscriptionTypes,
         ]);
     }
 
@@ -61,7 +61,7 @@ class SubscriptionController extends Controller
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
             'opt_out_mail' => 0,
-            'subscription_date' => date('Y') . '-12-31',
+            'subscription_date' => date('Y').'-12-31',
             'subscription_source' => 1,
             'user_id' => Auth::id(),
             'subscription_type_id' => $subscriptionType->id,
@@ -107,7 +107,7 @@ class SubscriptionController extends Controller
 
         return view('admin.subscription.edit', ['subscription' => $subscription,
             'payments_methods' => $payments_methods,
-            'subscription_type' => $subscription_type
+            'subscription_type' => $subscription_type,
         ]);
     }
 
@@ -125,7 +125,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date|after_or_equal:today'
+            'subscription_date' => 'required|date|after_or_equal:today',
         ]);
 
 
@@ -142,7 +142,7 @@ class SubscriptionController extends Controller
 
         $payment = Payment::where([
             ['payment_id', $subscription->id],
-            ['payment_type', 'App\Subscription']
+            ['payment_type', 'App\Subscription'],
         ]);
 
         $payment->update($validator);

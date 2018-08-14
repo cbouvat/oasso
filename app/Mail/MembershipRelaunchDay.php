@@ -31,7 +31,7 @@ class MembershipRelaunchDay extends Mailable
     public function build()
     {
         return $this->markdown('emails.membership.relaunch.day')
-            ->subject('Votre adhésion chez ' . config("app.name") . ' expire aujourd\'hui !')
+            ->subject('Votre adhésion chez ' . config("app.name").' expire aujourd\'hui !')
             ->text('emails.membership.relaunch.day');
     }
 }
