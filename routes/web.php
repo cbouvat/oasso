@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,7 +25,7 @@ Route::get('/membershipRenewal', 'MembershipRenewalController@display')->name('m
 Route::post('/membershipRenewalConfirm', 'MembershipRenewalController@create')->name('renewalConfirmation');
 
 Route::prefix('user')->group(function () {
-//User edit / update
+    //User edit / update
     Route::get('/edit/{user}', 'UserController@edit')->name('user.edit');
     Route::post('/update/{user}', 'UserController@update')->name('user.update');
 });
@@ -63,5 +62,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
     Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
     Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
-
 });

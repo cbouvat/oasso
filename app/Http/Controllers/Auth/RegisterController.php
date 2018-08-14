@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,7 +65,7 @@ class RegisterController extends Controller
             'firstname_joint' => 'string|max:45|nullable',
             'lastname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
-            'email_joint' => 'email|max:255|nullable'
+            'email_joint' => 'email|max:255|nullable',
         ]);
     }
 

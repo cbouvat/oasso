@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\Gift;
-use App\Http\Controllers\Controller;
+use App\User;
 use App\Payment;
 use App\PaymentMethod;
-use App\User;
-use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GiftController extends Controller
 {
-
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -41,10 +40,9 @@ class GiftController extends Controller
             'amount' => 'required|numeric|min:0|max:999999',
             'from_user_id' => 'nullable|numeric',
             'from_me' => 'nullable|numeric',
-            'payment_methods' => 'required'
+            'payment_methods' => 'required',
 
         ]);
-
 
         if ($request->has('from_me')) {
             if ($request['from_me'] === Auth::user()->id) {
@@ -52,16 +50,12 @@ class GiftController extends Controller
             } else {
                 $inputs['user_id'] = Auth::user()->id;
             }
-
         } elseif ($request['from_user_id'] != null) {
-
             if (User::find($request['from_user_id']) != null) {
                 $inputs['user_id'] = $request['from_user_id'];
             } else {
                 return back()->with('error_message', 'Erreur, identifiant incorrect !');
             }
-
-
         } else {
             return back()->with('error_message', 'Erreur, identifiant incorrect !');
         }
@@ -73,7 +67,6 @@ class GiftController extends Controller
         $inputs['payment_method_id'] = $request->payment_methods;
 
         Payment::create($inputs);
-
 
         return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
     }
@@ -95,7 +88,6 @@ class GiftController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-
     public function show()
     {
         $user = Auth::user();
@@ -104,7 +96,6 @@ class GiftController extends Controller
         $payments_methods = PaymentMethod::all();
 
         return view('admin.gift.show', ['user' => $user, 'payments_methods' => $payments_methods]);
-
     }
 
     /**
@@ -119,7 +110,6 @@ class GiftController extends Controller
         $gift->load('user');
 
         return view('admin.gift.edit', ['gift' => $gift]);
-
     }
 
     /**
@@ -141,14 +131,11 @@ class GiftController extends Controller
         $inputs = $request->all();
 
         if ($request['from_user_id'] != null) {
-
             if (User::find($request['from_user_id']) != null) {
                 $inputs['user_id'] = $request['from_user_id'];
             } else {
                 return back()->with('error_message', 'Erreur, identifiant incorrect !');
             }
-
-
         } else {
             return back()->with('error_message', 'Erreur, identifiant incorrect !');
         }
@@ -156,7 +143,6 @@ class GiftController extends Controller
         $gift->update($inputs);
 
         return redirect()->route('admin.gift.index')->with('message', 'Modification confirmée');
-
     }
 
     /**
@@ -169,7 +155,7 @@ class GiftController extends Controller
     {
         $giftToDelete = Gift::findOrFail($id);
         $giftToDelete->delete();
-        return back()->with('message', 'Don supprimé');
 
+        return back()->with('message', 'Don supprimé');
     }
 }

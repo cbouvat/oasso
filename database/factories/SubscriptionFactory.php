@@ -9,7 +9,7 @@ $factory->define(App\Subscription::class, function (Faker $faker) {
         'user_id' =>$faker->randomNumber(),
         'subscription_date' =>$faker->date(),
         'subscription_source' =>$faker->numberBetween(0, 1),
-        'subscription_type_id' =>$faker->numberBetween(1, 4)
+        'subscription_type_id' =>$faker->numberBetween(1, 4),
 
     ];
 });

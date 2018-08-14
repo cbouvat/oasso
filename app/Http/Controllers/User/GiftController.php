@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers\User;
 
+use Auth;
 use App\Gift;
-use App\Http\Controllers\Controller;
 use App\Payment;
 use App\PaymentMethod;
-
-use Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class GiftController extends Controller
 {
-
-    function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
-
 
     /**
      * Display a listing of the resource.
@@ -31,7 +28,6 @@ class GiftController extends Controller
         $payments_methods = PaymentMethod::all();
 
         return view('users.gift', ['user' => $user, 'payments_methods' => $payments_methods]);
-
     }
 
     /**
@@ -41,12 +37,10 @@ class GiftController extends Controller
      */
     public function create(Request $request)
     {
-
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'payment_methods' => 'required'
+            'payment_methods' => 'required',
         ]);
-
 
         $inputs['user_id'] = Auth::user()->id;
 
@@ -80,7 +74,6 @@ class GiftController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
@@ -91,7 +84,6 @@ class GiftController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -103,7 +95,6 @@ class GiftController extends Controller
      */
     public function update(Request $request, $id)
     {
-
     }
 
     /**
@@ -114,7 +105,5 @@ class GiftController extends Controller
      */
     public function destroy($id)
     {
-
-
     }
 }

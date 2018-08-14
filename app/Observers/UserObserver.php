@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Notifications\Welcome;
 use App\Role;
 use App\User;
+use App\Notifications\Welcome;
 
 class UserObserver
 {
@@ -18,10 +18,10 @@ class UserObserver
     {
         Role::create([
             'user_id' => $user->id,
-            'role_type_id' => 1
+            'role_type_id' => 1,
         ]);
 
-      //$user->notify(new Welcome());
+        //$user->notify(new Welcome());
     }
 
     /**

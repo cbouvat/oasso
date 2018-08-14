@@ -15,7 +15,6 @@ class UsersTableSeeder extends Seeder
             ->create()
             ->each(function ($user) {
                 $user->subscription()->save(factory(App\Subscription::class)->make());
-
             });
     }
 }

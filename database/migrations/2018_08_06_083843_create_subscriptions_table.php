@@ -15,7 +15,7 @@ class CreateSubscriptionsTable extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('amount',8,2);
+            $table->decimal('amount', 8, 2);
             $table->boolean('opt_out_mail')->default(0); // 0 = opt_out OFF // 1 = opt_out ON
             $table->date('subscription_date');
             $table->tinyInteger('subscription_source'); // 0 = Admin // 1 = web

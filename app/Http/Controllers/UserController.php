@@ -15,12 +15,12 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('lastname', 'asc')->paginate(10);
+
         return view('admin.user.index', ['users' => $users]);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
      */
     public function create()
     {
@@ -53,7 +53,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
         return view('user.edit', ['user' => $user]);
     }
 
@@ -66,12 +65,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
             'lastname' => 'required|alpha|string|max:45|min:2',
-            'email' => 'string|required|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'string|required|email|max:255|unique:users,email,'.$user->id,
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => '|string|max:32|',
             'address_line2' => '|string|max:32|nullable',
@@ -88,7 +86,7 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-        if ($request['newspaper'] == null ) {
+        if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }
         if ($request['newsletter'] == null) {
@@ -96,12 +94,12 @@ class UserController extends Controller
         }
 
         $user->update($validateData);
+
         return redirect()->route('user.edit', ['user'=>$user]);
     }
 
     /**
      * Remove the specified resource from storage.
-     *
      */
     public function destroy()
     {
@@ -131,5 +129,4 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index');
     }
-
 }

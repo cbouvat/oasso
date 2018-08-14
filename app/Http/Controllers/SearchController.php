@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
@@ -11,18 +10,16 @@ class SearchController extends Controller
 {
     public function index()
     {
-
     }
 
     public function search(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'q' => 'min:2'
+            'q' => 'min:2',
         ]);
 
-        $members = User::where('lastname','LIKE','%'.$request->q.'%')
-                        ->orwhere('firstname', 'LIKE','%'.$request->q.'%')
+        $members = User::where('lastname', 'LIKE', '%'.$request->q.'%')
+                        ->orwhere('firstname', 'LIKE', '%'.$request->q.'%')
                         ->get();
         // dd($members);
         if ($validator->fails()) {
