@@ -2,11 +2,11 @@
 
 
 @section('content')
-    <div class="col-md-12">
+    <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ '/home' }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ '/admin/gift' }}">Gestion des dons</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.gift.index') }}">Gestion des dons</a></li>
                 <li class="breadcrumb-item">Modification du dons</li>
             </ol>
         </nav>
