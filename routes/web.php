@@ -39,7 +39,6 @@ Route::prefix('user')->name('User')->namespace('user.')->group(function () {
         Route::post('/', 'GiftController@store')->name('store');
         Route::get('/create', 'GiftController@create')->name('create');
     });
-
 });
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
