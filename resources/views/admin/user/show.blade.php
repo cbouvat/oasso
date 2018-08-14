@@ -74,8 +74,8 @@
                         <h1>Adhésions</h1>
                     </div>
                     <div class="text-center">
-                        <table class="table">
-                            <thead class="bg-success text-white">
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
                                 <th>Depuis</th>
                                 <th>Jusqu'au</th>
@@ -94,9 +94,6 @@
                                         <td>{{$subscription->subscriptionType->name}}</td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                    </tr>
-
                                 @endforelse
                             @endif
                             </tbody>
@@ -109,11 +106,12 @@
                         <h1>Dons</h1>
                     </div>
                     <div class="text-center">
-                        <table class="table">
-                            <thead class="bg-success text-white">
+                        <table class="table table-hover">
+                            <thea>
                             <tr>
                                 <th>Date</th>
                                 <th>Montant</th>
+                                <th>Methode de paiement</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -122,10 +120,9 @@
                                     <tr>
                                         <td>{{$gift->created_at->format('d/m/Y')}}</td>
                                         <td>{{$gift->amount}}</td>
+                                        <td>{{$gift->payment->paymentMethod->name}}</td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                    </tr>
                                 @endforelse
                             @endif
                             </tbody>

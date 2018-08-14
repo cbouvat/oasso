@@ -92,7 +92,11 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('subscriptions.subscriptionType')
-            ->load('gifts');
+            ->load(['gifts' => function($query){
+                $query->with(['payment' => function ($query){
+                    $query->with('paymentMethod');
+                }]);
+            }]);
 
         return view('admin.user.show', ['user' => $user]);
     }
