@@ -62,8 +62,8 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/subscription/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('subscription.beforedelete');
     Route::get('/subscription/{subscription}/destroy/', 'SubscriptionController@destroy')->name('subscription.destroy');
 
-Route::get('/payment', 'CheckoutController@payment')->name('payment');
-Route::post('/charge', 'CheckoutController@charge')->name('charge');
+    Route::get('/payment', 'CheckoutController@payment')->name('payment');
+    Route::post('/charge', 'CheckoutController@charge')->name('charge');
 
     //Admin gift Crud
     Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
