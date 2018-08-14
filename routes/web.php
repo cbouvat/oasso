@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('user')->name('User')->namespace('user.')->group(function () {
+Route::prefix('user')->name('user.')->namespace('User')->group(function () {
     // User
     Route::get('/', 'UserController@index')->name('user.index');
     Route::get('/history', 'UserController@history')->name('history');
