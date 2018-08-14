@@ -46,11 +46,15 @@ class NewsletterController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param Newsletter $newsletter
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function send(Newsletter $newsletter)
+    public function send(Request $request, Newsletter $newsletter)
     {
+        $newsletter->sendTo = $request['sendTo'];
+        $newsletter->save();
+
         SendNewsletterJob::dispatch($newsletter);
 
         return redirect()->route('admin.newsletter.index');
