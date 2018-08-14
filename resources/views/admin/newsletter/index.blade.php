@@ -1,8 +1,14 @@
 @extends('layouts.app')
 @section('content')
-
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Newletter</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row justify-content-center">
-
         <div class="col-lg-10">
             <h1>{{__('Newsletter page title')}}</h1>
         </div>

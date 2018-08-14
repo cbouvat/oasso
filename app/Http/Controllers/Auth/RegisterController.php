@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -58,15 +57,15 @@ class RegisterController extends Controller
             'address_line2' => 'string|max:32|nullable',
             'zipcode' => 'required|string|max:5',
             'city' => 'required|string|max:45',
-            'phone_number_1' => 'required|string|max:10',
-            'phone_number_2' => 'string|max:10|nullable',
-            'newspaper' => 'integer',
-            'newsletter' => 'integer',
+            'phone_1' => 'string|digits:10',
+            'phone_2' => 'string|digits:10|nullable',
+            'newspaper' => 'integer|nullable',
+            'newsletter' => 'integer|nullable',
             'gender_joint' => 'integer|min:1|max:2|nullable',
             'firstname_joint' => 'string|max:45|nullable',
             'lastname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
-            'email_joint' => 'email|max:255|nullable'
+            'email_joint' => 'email|max:255|nullable',
         ]);
     }
 
@@ -89,8 +88,8 @@ class RegisterController extends Controller
             'address_line2' => $data['address_line2'],
             'zipcode' => $data['zipcode'],
             'city' => $data['city'],
-            'phone_number_1' => $data['phone_number_1'],
-            'phone_number_2' => $data['phone_number_2'],
+            'phone_1' => $data['phone_1'],
+            'phone_2' => $data['phone_2'],
             'newspaper' => $data['newspaper'],
             'newsletter' => $data['newsletter'],
             'gender_joint' => $data['gender_joint'],

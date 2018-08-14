@@ -1,14 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Membres</li>
+            </ol>
+        </nav>
+    </div>
     <h1>Liste des membres</h1>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col"></th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
