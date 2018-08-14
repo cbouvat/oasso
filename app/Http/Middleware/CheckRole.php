@@ -19,11 +19,8 @@ class CheckRole
 
         if ($role->role_type_id == 1) {
             abort('404', 'Vous n\'avez pas accès a cette partie du site');
-
         } else {
             return $next($request);
-
         }
-
     }
 }
