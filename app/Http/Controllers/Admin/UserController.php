@@ -92,8 +92,8 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user->load('subscriptions.subscriptionType')
-            ->load(['gifts' => function($query){
-                $query->with(['payment' => function ($query){
+            ->load(['gifts' => function ($query) {
+                $query->with(['payment' => function ($query) {
                     $query->with('paymentMethod');
                 }]);
             }]);
@@ -143,7 +143,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
     }
 
     /**
