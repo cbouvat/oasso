@@ -85,6 +85,12 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
     Route::get('/mailing', 'MailingController@index')->name('mailing.index');
     Route::get('/mailing/{id}', 'MailingController@edit')->name('mailing.edit');
     Route::post('/mailing/{id}', 'MailingController@update')->name('mailing.update');
+
+    // Export
+    Route::prefix('export')->name('export.')->group(function () {
+        Route::get('/', 'ExportController@index')->name('index');
+        Route::post('/', 'ExportController@export')->name('export');
+    });
 });
 
 // Auth
