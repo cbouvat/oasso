@@ -41,13 +41,13 @@ class RelaunchDay extends Command
      */
     public function handle()
     {
-      $subscriptions = Subscription::where('date_end', Carbon::now()->toDateString())
-        ->with('user')
-        ->get();
+        $subscriptions = Subscription::where('date_end', Carbon::now()->toDateString())
+            ->with('user')
+            ->get();
 
-      foreach ($subscriptions as $subscription) {
+        foreach ($subscriptions as $subscription) {
 
-        Mail::to($subscription->user)->send(new MembershipRelaunchDay($subscription));
-      }
+            Mail::to($subscription->user)->send(new MembershipRelaunchDay($subscription));
+        }
     }
 }
