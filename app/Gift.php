@@ -12,7 +12,7 @@ class Gift extends Model
      * @var array
      */
     protected $fillable = [
-        'amount', 'user_id'
+        'amount', 'user_id',
     ];
 
     /**
@@ -22,7 +22,6 @@ class Gift extends Model
     {
         return $this->belongsTo('App\User');
     }
-
 
     public function payment()
     {

@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Mail\Welcome;
 use App\Role;
 use App\User;
+use App\Mail\Welcome;
 use Illuminate\Support\Facades\Mail;
 
 class UserObserver
@@ -19,7 +19,7 @@ class UserObserver
     {
         Role::create([
             'user_id' => $user->id,
-            'role_type_id' => 1
+            'role_type_id' => 1,
         ]);
 
         //Mail::to($user)->send(new Welcome($user));

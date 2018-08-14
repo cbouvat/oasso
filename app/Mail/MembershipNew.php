@@ -31,7 +31,7 @@ class MembershipNew extends Mailable
     public function build()
     {
         return $this->markdown('emails.membership.new')
-            ->subject('Bienvenue chez ' . config('app.name'))
+            ->subject('Bienvenue chez '.config('app.name'))
           ->text('emails.membership.new');
     }
 }

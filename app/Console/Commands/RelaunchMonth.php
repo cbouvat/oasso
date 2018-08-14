@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands;
 
-use App\Mail\MembershipRelaunchMonth;
-use App\Subscription;
 use Carbon\Carbon;
+use App\Subscription;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\MembershipRelaunchMonth;
 
 class RelaunchMonth extends Command
 {
@@ -46,7 +46,6 @@ class RelaunchMonth extends Command
             ->get();
 
         foreach ($subscriptions as $subscription) {
-
             Mail::to($subscription->user)->send(new MembershipRelaunchMonth($subscription));
         }
     }

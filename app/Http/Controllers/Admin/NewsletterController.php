@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Newsletter;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class NewsletterController extends Controller
@@ -44,7 +44,7 @@ class NewsletterController extends Controller
         $validateRequest = $request->validate([
             'title' => 'string|max:150|required',
             'html_content' => 'required',
-            'text_content' => 'required'
+            'text_content' => 'required',
         ]);
 
         $validateRequest['user_id'] = Auth::user()->id;
@@ -53,7 +53,6 @@ class NewsletterController extends Controller
 
         return redirect(route('admin.newsletter.index'));
     }
-
 
     /**
      * @param Newsletter $newsletter
@@ -74,7 +73,7 @@ class NewsletterController extends Controller
         $validateRequest = $request->validate([
             'title' => 'string|max:150|required',
             'html_content' => 'required',
-            'text_content' => 'required'
+            'text_content' => 'required',
         ]);
 
         $validateRequest['user_id'] = Auth::user()->id;

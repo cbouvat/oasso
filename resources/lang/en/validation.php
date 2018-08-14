@@ -148,5 +148,4 @@ return [
         'q' => 'search',
     ],
 
-
 ];
