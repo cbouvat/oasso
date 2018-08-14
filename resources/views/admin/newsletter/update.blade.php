@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.newsletter.index') }}">Newletter</a></li>
+                <li class="breadcrumb-item">Modification newsletter</li>
+            </ol>
+        </nav>
+    </div>
     <form method="post" action="{{ route('admin.newsletter.update', ['newsletter'=> $newsletter]) }}">
         @csrf
         <h1>{{__('Newsletter page title')}}</h1>
