@@ -101,4 +101,3 @@ Route::middleware('auth')->group(function () {
 
 // Auth
 Auth::routes();
-
