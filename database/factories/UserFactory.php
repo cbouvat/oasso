@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Hash;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
-        'gender' => $faker->numberBetween(0, 1),
+        'gender' => $faker->numberBetween(0, 1, 2),
         'lastname' => $faker->lastName,
         'firstname' => $faker->firstName,
         'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),

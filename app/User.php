@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     public function payments()
     {
-        return $this->hasMany('App\Payment')->latest();
+        return $this->hasMany('App\Payment')->orderBy('date_start', 'desc');
     }
 
     /**
@@ -76,11 +76,6 @@ class User extends Authenticatable
      */
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription')->latest();
-    }
-
-    public function subscription()
-    {
-        return $this->hasMany('App\Subscription')->latest()->first();
+        return $this->hasMany('App\Subscription')->orderBy('date_start', 'desc');
     }
 }

@@ -67,15 +67,15 @@
                 <div class="col-sm-3">
                     <input id="startDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
                            class="form-control" name="startDate" placeholder="Date de début (incluse)">
-                    <input id="endDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                    <input style="margin-top: 5px" id="endDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
                            class="form-control" name="endDate" placeholder="Date de fin (incluse)">
                 </div>
                 <label class="col-sm-2 offset-2 col-form-label" for="volonteer">{{__('Volonteer')}}</label>
                 <div class="col-sm-3">
                     <select class="custom-select" id="volonteer" name="volonteer">
                         <option selected value="">Tous</option>
-                        <option value="0">Volontaires</option>
-                        <option value="1">Non volontaires</option>
+                        <option value="1">Volontaires</option>
+                        <option value="0">Non volontaires</option>
                     </select>
                 </div>
             </div>
@@ -84,8 +84,8 @@
                 <div class="col-sm-3">
                     <select class="custom-select" id="delivery" name="delivery">
                         <option selected value="">Tous</option>
-                        <option value="0">Livreurs</option>
-                        <option value="1">Non livreurs</option>
+                        <option value="1">Livreurs</option>
+                        <option value="0">Non livreurs</option>
                     </select>
                 </div>
 
@@ -94,8 +94,8 @@
                 <div class="col-sm-3">
                     <select class="custom-select" id="newspaper" name="newspaper">
                         <option selected value="">Tous</option>
-                        <option value="0">Abonnés journal</option>
-                        <option value="1">Non abonnés</option>
+                        <option value="1">Abonnés journal</option>
+                        <option value="0">Non abonnés</option>
                     </select>
                 </div>
             </div>
@@ -104,8 +104,8 @@
                 <div class="col-sm-3">
                     <select class="custom-select" id="newsletter" name="newsletter">
                         <option selected value="">Tous</option>
-                        <option value="0">Abonnés newsletter</option>
-                        <option value="1">Non abonnés</option>
+                        <option value="1">Abonnés newsletter</option>
+                        <option value="0">Non abonnés</option>
                     </select>
                 </div>
                 <label class="col-sm-2 offset-2 col-form-label" for="city">{{__('City')}}</label>
@@ -124,8 +124,8 @@
                 <div class="col-sm-2">
                     <select class="custom-select" id="ageOperator" name="ageOperator">
                         <option selected value="=">Egal à</option>
-                        <option value=">">Supérieur à</option>
-                        <option value="<">Inférieur à</option>
+                        <option value=">=">Supérieur à</option>
+                        <option value="<=">Inférieur à</option>
                     </select>
                 </div>
                 <div class="col-sm-1">
@@ -136,7 +136,7 @@
                 <div class="col-sm-3">
                     <select class="custom-select" id="gender" name="gender">
                         <option selected value="">Tous</option>
-                        <option value="0">Femme</option>
+                        <option value="2">Femme</option>
                         <option value="1">Homme</option>
                     </select>
                 </div>

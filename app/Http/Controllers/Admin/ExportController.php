@@ -22,9 +22,7 @@ class ExportController extends Controller
     public function index()
     {
         $subTypes = SubscriptionType::all();
-
         $cities = User::pluck('city', 'zipcode')->all();
-
         return view('admin.export.index', ['subTypes' => $subTypes, 'cities' => $cities]);
     }
 
@@ -35,8 +33,8 @@ class ExportController extends Controller
             'exportFormat' => 'required',
             'state' => 'string|nullable',
             'type' => 'integer|nullable',
-            'startDate' => 'date|before:today-13years|after:today-120years|nullable',
-            'endDate' => 'date|before:today-13years|after:today-120years|nullable',
+            'startDate' => 'date|nullable',
+            'endDate' => 'date|nullable',
             'volonteer' => 'integer|nullable',
             'delivery' => 'integer|nullable',
             'newspaper' => 'integer|nullable',
@@ -51,12 +49,6 @@ class ExportController extends Controller
 
         //Get extension for file
         $extension = $validate['exportFile'] . '.' . $validate['exportFormat'];
-
-        //Build $settings for Query Builder in UsersExport
-
-
-
-
 
         switch ($validate['exportFile']) {
             case 'users':
