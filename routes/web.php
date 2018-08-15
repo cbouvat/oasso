@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/payment', 'CheckoutController@payment')->name('payment');
+Route::post('/charge', 'CheckoutController@charge')->name('charge');
+
 Route::prefix('user')->middleware('auth')->namespace('User')->name('user.')->group(function () {
     // User
     Route::get('/', 'UserController@index')->name('user.index');
@@ -93,8 +96,6 @@ Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('ad
         Route::get('/{id}', 'MailingController@edit')->name('edit');
         Route::post('/{id}', 'MailingController@update')->name('update');
     });
-    Route::get('/payment', 'CheckoutController@payment')->name('payment');
-    Route::post('/charge', 'CheckoutController@charge')->name('charge');
 
     // Search
     Route::get('/search', 'SearchController@search')->name('search');
