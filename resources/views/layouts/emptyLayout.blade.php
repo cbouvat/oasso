@@ -10,7 +10,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="container">
-<div class="text-center m-5 p-5">
+<div class="text-center p-5">
     <h1 class="display-1">{{ config('app.name') }}</h1>
 </div>
 <div class="text-center">

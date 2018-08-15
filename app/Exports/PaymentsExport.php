@@ -34,6 +34,7 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
     public function map($payment): array
     {
         $payments = $payment->toArray();
+
         foreach ($payments as $key => $value) {
             if (is_string($value) && $key == 'payment_type') {
                 if ($value == 'App\Subscription') {
@@ -46,11 +47,11 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
                 if ($value === 1) {
                     $payments[$key] = 'Paypal';
                 } elseif ($value === 2) {
-                    $payments[$key] = 'Carte de credit';
+                    $payments[$key] = 'Carte de crédit';
                 } elseif ($value === 3) {
-                    $payments[$key] = 'Especes';
+                    $payments[$key] = 'Espèces';
                 } elseif ($value === 4) {
-                    $payments[$key] = 'Cheque';
+                    $payments[$key] = 'Chèque';
                 } elseif ($value === 5) {
                     $payments[$key] = 'Virement';
                 }

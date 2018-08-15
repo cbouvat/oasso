@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>{{ __('Export') }}</h1>
+    </div>
+
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -9,17 +13,15 @@
             </ol>
         </nav>
     </div>
-    <h1>{{ __('Export') }}</h1>
-
 
     <form method="post" action="{{ route('admin.export.export') }}">
         @csrf
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="inputGroupSelect01">Quoi exporter ?</label>
-            <div class="col-sm-10">
-                <select class="custom-select" id="inputGroupSelect01" name="export_file" required>
+            <label class="col-sm-4 col-form-label" for="export_file">Quoi exporter ?</label>
+            <div class="col-sm-8">
+                <select class="custom-select" id="export_file" name="export_file" required>
                     <option selected disabled>Choisir...</option>
-                    <option value="users">{{ __('Users') }}</option>
+                    <option value="users">{{ __('Members') }}</option>
                     <option value="gifts">{{ __('Gifts') }}</option>
                     <option value="payments">{{ __('Payments') }}</option>
                     <option value="subscriptions">{{ __('Subscriptions') }}</option>
@@ -27,17 +29,20 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="inputGroupSelect01">Format d'export</label>
-            <div class="col-sm-10">
-                <select class="custom-select" id="inputGroupSelect01" name="export_format" required>
+            <label class="col-sm-4 col-form-label" for="export_format">Format d'export</label>
+            <div class="col-sm-8">
+                <select class="custom-select" id="export_format" name="export_format" required>
                     <option selected disabled>Choisir...</option>
-                    <option value="xlsx">.XLSX</option>
-                    <option value="csv">.CSV</option>
+                    <option value="xlsx">Excel (.xlsx)</option>
+                    <option value="csv">Excel (.csv)</option>
                 </select>
             </div>
         </div>
-        <input type="submit" value="Exporter" class="btn btn-primary">
+        <div class="form-group row">
+            <div class="col-sm-8 offset-sm-4">
+                <input type="submit" value="Exporter" class="btn btn-primary">
+            </div>
+        </div>
     </form>
-
 
 @endsection

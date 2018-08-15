@@ -36,6 +36,7 @@ class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
     public function map($sub): array
     {
         $subs = $sub->toArray();
+
         foreach ($subs as $key => $value) {
             if (is_int($value) && $key == 'subscription_source') {
                 if ($value === 0) {

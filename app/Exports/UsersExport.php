@@ -46,14 +46,14 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
             'Commentaire',
             'Alerte',
             'Date de création',
-            'Date de mise à jour',
-            'Date de suppression',
+            'Date de mise à jour'
         ];
     }
 
     public function map($user): array
     {
         $users = $user->toArray();
+
         foreach ($users as $key => $value) {
             if (is_int($value) && ($key == 'gender' || $key == 'gender_joint')) {
                 if ($value === 1) {
