@@ -1,4 +1,4 @@
-@extends('layouts.emptyLayout')
+@extends('layouts.app')
 
 @section('content')
     <img src="https://http.cat/401" class="img-fluid rounded mx-auto d-block" alt="">
