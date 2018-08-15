@@ -28,10 +28,12 @@
     <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name"
        href="{{route('home')}}">{{config('app.name')}} - {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
 
-    <form class="w-100" action={{route('search')}} method="get">
-        <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search"
-               aria-label="Search" name="q">
-    </form>
+    @if(Auth::user()->role()->first()->role_type_id != 1)
+        <form class="w-100" action="{{route('admin.search')}}" method="get">
+            <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search"
+                   aria-label="Search" name="q">
+        </form>
+    @endif
 
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">

@@ -49,7 +49,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|max:191|confirmed',
-            'gender' => 'required|integer|min:1|max:2',
+            'gender' => 'required|integer',
             'lastname' => 'required|string|max:45',
             'firstname' => 'required|string|max:45',
             'birthdate' => 'required|date',
@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'phone_2' => 'string|digits:10|nullable',
             'newspaper' => 'integer|nullable',
             'newsletter' => 'integer|nullable',
-            'gender_joint' => 'integer|min:1|max:2|nullable',
+            'gender_joint' => 'integer|nullable',
             'firstname_joint' => 'string|max:45|nullable',
             'lastname_joint' => 'string|max:45|nullable',
             'birthdate_joint' => 'date|nullable',
@@ -77,6 +77,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (! array_key_exists('newsletter', $data)) {
+            $data['newsletter'] = 0;
+        }
+
+        if (! array_key_exists('newspaper', $data)) {
+            $data['newspaper'] = 0;
+        }
+
         return User::create([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
