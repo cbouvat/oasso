@@ -52,7 +52,7 @@
                         <option value="withTrashed">Tous</option>
                     </select>
                 </div>
-                <label class="col-sm-2  offset-2 col-form-label" for="type">{{__('Type')}}</label>
+                <label class="col-sm-2  offset-2 col-form-label" for="type">{{__('Type (only active subscription)')}}</label>
                 <div class="col-sm-3">
                     <select class="custom-select" id="type" name="type">
                         <option selected value="">Tous</option>
@@ -184,6 +184,10 @@
                     $('#paymentsParams').css('display', 'block');
                 }
             });
+
+            // $('#startDate').on('blur', function () {
+            //     if ($(this).val() === null)
+            // })
 
         </script>
     @endpush

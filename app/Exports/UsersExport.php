@@ -45,38 +45,36 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 default;
             }
         }
+
+        /*todo
+        *Mettre softdelete sur subs plus facile avec request sur subs
+         * Que les comptes actifs sont pris dans le requete
+         * sinon trouvé un moyen de check que latest
+         *
+         */
+
         //Type of last membership
         if (!is_null($this->settings['type'])) {
             $type = $this->settings['type'];
-            $query = $query->has('subscriptions', function ($sub) use ($type) {
-                $sub->where('subscription_type_id', '=', $type)->limit(1);
+            $query = $query->whereHas('subscriptions', function ($sub) use ($type) {
+                $sub->where('subscription_type_id', '=', $type)
+                    ->where('date_end', '>', Carbon::now()->toDateString());
             });
         };
-//                ->first()
-//                ->where('subscriptions.subscription_type_id', '=', $this->settings['type']);
-//            $query = $query->join('subscriptions as subType', 'users.id', '=', 'subscriptions.user_id')
-//                ->orderBy('date_end', 'desc')
-//                ->where('subscriptions.subscription_type_id', '=', $this->settings['type']);
+        //Start and End date
+        if (!is_null($this->settings['startDate'])) {
+            $date = $this->settings['startDate'];
+            $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
+                $sub->where('date_end', '>=', $date);
+            });
+        };
 
-//        //start of last membership
-//        if (!is_null($this->settings['startDate'])) {
-//            $query = $query->join('subscriptions', 'users.id', '=', 'subscriptions.user_id')
-//                ->orderBy('date_end', 'desc')
-//                ->where('subscriptions.date_start', '=', $this->settings['startDate']);
-//        };
-//        //End of last membership
-//        if (!is_null($this->settings['endDate'])) {
-//            $query = $query->join('subscriptions', 'users.id', '=', 'subscriptions.user_id')
-//                ->orderBy('date_end', 'desc')
-//                ->where('subscriptions.date_end', '<=', $this->settings['endDate']);
-//        };
-////
-//        if ($this->settings['startDate']) {
-//            $query = $query->where('subscription.startDate', '>=', $this->settings['startDate']);
-//        }
-//        if ($this->settings['endDate']) {
-//            $query = $query->where('subscription.endDate', '<=', $this->settings['endDate']);
-//        }
+        if (!is_null($this->settings['endDate'])) {
+            $date = $this->settings['endDate'];
+            $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
+                $sub->where('date_start', '<=', $date);
+            });
+        };
 
         //Where Clause array
         $queries = array();
@@ -98,6 +96,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
             $this->settings['ageOperator'], $this->settings['ageNumber'], $this->settings['phone'],
             $this->settings['gift']);
 
+        //Build last queries
         foreach ($this->settings as $key => $value) {
             if (!is_null($value)) {
 
