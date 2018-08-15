@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('user')->name('user.')->namespace('User')->group(function () {
+Route::get('/payment', 'CheckoutController@payment')->name('payment');
+Route::post('/charge', 'CheckoutController@charge')->name('charge');
+
+Route::prefix('user')->middleware('auth')->namespace('User')->name('user.')->group(function () {
     // User
     Route::get('/', 'UserController@index')->name('user.index');
     Route::get('/history', 'UserController@history')->name('history');
@@ -32,6 +35,7 @@ Route::prefix('user')->name('user.')->namespace('User')->group(function () {
     Route::prefix('/subscription')->name('subscription.')->group(function () {
         Route::post('/', 'SubscriptionController@store')->name('store');
         Route::get('/create', 'SubscriptionController@create')->name('create');
+        Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optOut')->name('optout');
     });
 
     // Gift
@@ -41,7 +45,7 @@ Route::prefix('user')->name('user.')->namespace('User')->group(function () {
     });
 });
 
-Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function () {
+Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('admin.')->group(function () {
     // User
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/', 'UserController@index')->name('index');

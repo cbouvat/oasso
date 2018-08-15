@@ -5,24 +5,24 @@ namespace App\Console\Commands;
 use Carbon\Carbon;
 use App\Subscription;
 use Illuminate\Console\Command;
+use App\Mail\MembershipRelaunchDay;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\MembershipRelaunchMonth;
 
-class RelaunchMonth extends Command
+class RelaunchDay extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'relaunch:month';
+    protected $signature = 'relaunch:day';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send an email to users the end month of subscription';
+    protected $description = 'Send an email to users the end day of subscription';
 
     /**
      * Create a new command instance.
@@ -41,12 +41,12 @@ class RelaunchMonth extends Command
      */
     public function handle()
     {
-        $subscriptions = Subscription::where('date_end', Carbon::now()->addMonth()->toDateString())
+        $subscriptions = Subscription::where('date_end', Carbon::now()->toDateString())
             ->with('user')
             ->get();
 
         foreach ($subscriptions as $subscription) {
-            Mail::to($subscription->user)->send(new MembershipRelaunchMonth($subscription));
+            Mail::to($subscription->user)->send(new MembershipRelaunchDay($subscription));
         }
     }
 }
