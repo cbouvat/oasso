@@ -7,7 +7,6 @@ use App\User;
 use App\Payment;
 use Carbon\Carbon;
 use App\Subscription;
-use App\PaymentMethod;
 use App\SubscriptionType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
