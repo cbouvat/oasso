@@ -3,7 +3,7 @@
     <div class="appName">
         <h2>Bonjour {{ $subscription->user->firstname }}</h2>
         <p><br></p>
-        <h3>Votre adhésion à <strong>{{config('app.name')}}</strong> arrive à son terme dans 1 mois. Vous pouvez dès à
+        <h3>Votre adhésion à <strong>{{config('app.name')}}</strong> se termine aujourd'hui ! Vous pouvez dès à
             présent la renouveler. Je renouvèle ma souscription sur mon compte {{config('app.name')}}</h3>
 
         @component('mail::button', ['url' => config('app.url'), 'color' => 'green'])
