@@ -102,7 +102,6 @@ class UserController extends Controller
         return redirect()->route('home');
     }
 
-
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

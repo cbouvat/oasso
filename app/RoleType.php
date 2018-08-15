@@ -15,7 +15,6 @@ class RoleType extends Model
         'name',
     ];
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
