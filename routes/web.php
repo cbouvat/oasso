@@ -97,6 +97,12 @@ Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('ad
         Route::post('/{id}', 'MailingController@update')->name('update');
     });
 
+    // Export
+    Route::prefix('export')->name('export.')->group(function () {
+        Route::get('/', 'ExportController@index')->name('index');
+        Route::post('/', 'ExportController@export')->name('export');
+    });
+
     // Search
     Route::get('/search', 'SearchController@search')->name('search');
 });
