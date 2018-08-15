@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Auth;
+use App\User;
 use App\Payment;
 use Carbon\Carbon;
 use App\Subscription;
@@ -194,10 +195,30 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @todo
      *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * Use Hashids
+     *
+     **/
+    public function optOut($subId, $userId)
+    {
+        $subscription = Subscription::findOrFail($subId);
+        $user = User::findOrFail($userId);
+
+        if ($subscription->user_id === $user->id) {
+            $subscription->opt_out_mail = 1;
+            $subscription->save();
+
+            return view('optOutMail');
+        } else {
+            return abort(404);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {

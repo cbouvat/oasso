@@ -6,9 +6,8 @@ use App\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MembershipRelaunchWeek extends Mailable implements ShouldQueue
+class MembershipRelaunchWeek extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,6 +31,7 @@ class MembershipRelaunchWeek extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.membership.relaunch.week')
-            ->subject('Votre adhésion chez '.config('app.name').'expire dans 1 semaine');
+            ->subject('Votre adhésion chez '.config('app.name').' expire dans 1 semaine')
+          ->text('emails.membership.relaunch.week');
     }
 }

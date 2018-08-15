@@ -6,9 +6,8 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PasswordSending extends Mailable implements ShouldQueue
+class PasswordSending extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -35,6 +34,7 @@ class PasswordSending extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.password.sending')
-            ->subject('Votre mot de passe pour '.config('app.name'));
+            ->subject('Votre mot de passe pour '.config('app.name'))
+          ->text('emails.password.sending');
     }
 }

@@ -6,9 +6,8 @@ use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Welcome extends Mailable implements ShouldQueue
+class Welcome extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -33,6 +32,6 @@ class Welcome extends Mailable implements ShouldQueue
     {
         return $this->markdown('emails.welcome')
             ->subject('Inscription sur '.config('app.name'))
-            ->text('emails.welcome_plain');
+            ->text('emails.welcome');
     }
 }
