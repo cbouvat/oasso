@@ -32,9 +32,9 @@
                 <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
                 <td class="text-right">
                     <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"
-                       class="btn btn-sm btn-outline-primary"><span class="fas fa-edit"></span> Modifier</a>
+                       class="btn btn-sm btn-outline-primary"><span data-feather="edit"></span> Modifier</a>
                     <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
-                       class="btn btn-sm btn-outline-danger"><span class="fas fa-trash-alt"></span> Supprimer</a>
+                       class="btn btn-sm btn-outline-danger"><span data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>
         @empty

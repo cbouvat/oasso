@@ -31,9 +31,9 @@
                     <td> {{ $subscription->payment ? $subscription->payment->paymentMethod->name : '' }}</td>
                     <td class="text-right">
                         <a href="{{ route('admin.subscription.edit', $subscription) }}"
-                           class="btn btn-sm btn-warning"><span class="fas fa-edit"></span></a>
+                           class="btn btn-sm btn-warning"><span data-feather="edit"></span> Modifier</a>
                         <a href="{{ route('admin.subscription.beforedelete', $subscription) }}"
-                           class="btn btn-sm btn-danger"><span class="fas fa-trash-alt"></span></a>
+                           class="btn btn-sm btn-danger"><span data-feather="trash"></span> Supprimer</a>
                     </td>
                 </tr>
             @empty
