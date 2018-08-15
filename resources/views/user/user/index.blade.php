@@ -58,10 +58,8 @@
         </table>
     </div>
     <div class="row d-flex justify-content-end mb-3">
-        <a href="{{route('user.subscription.create')}}" class="mr-auto btn btn-outline-success">Ajouter une Adhésion</a>
-
-        <a href="{{route('user.edit', ['user' => $user]) }}" class="btn btn-outline-primary">Modifer</a>
-        <a href="{{route('user.user.beforedelete', ['user' => $user])}}" class="btn btn-outline-danger">Supprimer</a>
+        <a href="{{ route('user.edit') }}" class="btn btn-outline-primary">Modifer</a>
+        <a href="{{ route('user.delete') }}" class="btn btn-outline-danger">Supprimer</a>
     </div>
 
 @endsection

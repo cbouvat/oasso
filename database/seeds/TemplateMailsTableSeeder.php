@@ -3,7 +3,7 @@
 use App\TemplateMail;
 use Illuminate\Database\Seeder;
 
-class Template_mailsTableSeeder extends Seeder
+class TemplateMailsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

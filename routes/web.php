@@ -14,31 +14,29 @@
 Route::middleware('auth')->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/payment', 'CheckoutController@payment')->name('payment');
-    Route::post('/charge', 'CheckoutController@charge')->name('charge');
-
     Route::prefix('user')->namespace('User')->name('user.')->group(function () {
         // User
-        Route::get('/', 'UserController@index')->name('user.index');
-        Route::get('/history', 'UserController@history')->name('history');
-        Route::get('/{user}/edit', 'UserController@edit')->name('edit');
-        Route::post('/{user}/update/', 'UserController@update')->name('update');
+        Route::get('/', 'UserController@index')->name('index');
+        Route::post('/', 'UserController@update')->name('update');
+        Route::get('/edit', 'UserController@edit')->name('edit');
         Route::get('/password', 'UserController@passwordEdit')->name('password.edit');
         Route::post('/password', 'UserController@passwordUpdate')->name('password.update');
-        Route::get('/{id}/beforedelete', 'UserController@beforeDelete')->name('user.beforedelete');
-        Route::get('/{id}/softdelete', 'UserController@softDelete')->name('user.softdelete');
+        Route::get('/delete', 'UserController@delete')->name('delete');
+        Route::post('/delete', 'UserController@destroy')->name('destroy');
+        Route::get('/payment', 'CheckoutController@payment')->name('payment');
+        Route::post('/payment', 'CheckoutController@charge')->name('payment.charge');
+        Route::get('/history', 'UserController@history')->name('history');
 
         // Subscription
         Route::prefix('/subscription')->name('subscription.')->group(function () {
+            Route::get('/', 'SubscriptionController@create')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
-            Route::get('/create', 'SubscriptionController@create')->name('create');
-            Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optOut')->name('optout');
         });
 
         // Gift
         Route::prefix('/gift')->name('gift.')->group(function () {
+            Route::get('/', 'GiftController@create')->name('index');
             Route::post('/', 'GiftController@store')->name('store');
-            Route::get('/create', 'GiftController@create')->name('create');
         });
     });
 
@@ -90,14 +88,17 @@ Route::middleware('auth')->group(function () {
         // Mailing
         Route::prefix('mailing')->name('mailing.')->group(function () {
             Route::get('/', 'MailingController@index')->name('index');
-            Route::get('/{id}', 'MailingController@edit')->name('edit');
-            Route::post('/{id}', 'MailingController@update')->name('update');
+            Route::get('/{mailing}', 'MailingController@edit')->name('edit');
+            Route::post('/{mailing}', 'MailingController@update')->name('update');
         });
 
         // Search
         Route::get('/search', 'SearchController@search')->name('search');
     });
 });
+
+// Output
+Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optout')->name('optout');
 
 // Auth
 Auth::routes();

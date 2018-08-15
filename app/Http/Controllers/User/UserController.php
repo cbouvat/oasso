@@ -23,40 +23,15 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     * @param User $user
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        return view('user.edit', ['user' => $user]);
+        $user = Auth::user();
+
+        return view('user.user.edit', ['user' => $user]);
     }
 
     /**
@@ -66,8 +41,10 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
+        $user = Auth::user();
+
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
@@ -102,37 +79,33 @@ class UserController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function delete()
+    {
+        $user = Auth::user();
+
+        return view('user.user.delete', ['user' => $user]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy()
     {
-        //
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function beforeDelete($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
-
-    /**
-     * @throws
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function softDelete($id)
-    {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         $user->delete();
+
+        Auth::logout();
 
         return redirect()->route('home');
     }
 
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function history()
     {
         $user = Auth::user();
@@ -147,7 +120,7 @@ class UserController extends Controller
      */
     public function passwordEdit()
     {
-        return view('users.password');
+        return view('user.user.password');
     }
 
     /**
