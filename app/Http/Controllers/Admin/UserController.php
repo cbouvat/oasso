@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
+        $users = User::orderBy('lastname', 'asc')->paginate();
 
         return view('admin.user.index', ['users' => $users]);
     }
@@ -91,12 +91,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('subscriptions.subscriptionType')
-            ->load(['gifts' => function ($query) {
-                $query->with(['payment' => function ($query) {
-                    $query->with('paymentMethod');
-                }]);
-            }]);
+        $user->load('subscriptions.type')
+            ->load('gifts.payment.paymentMethod');
 
         return view('admin.user.show', ['user' => $user]);
     }
