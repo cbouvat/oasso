@@ -46,7 +46,7 @@ class UsersExport implements FromCollection, WithHeadings, WithMapping
             'Commentaire',
             'Alerte',
             'Date de création',
-            'Date de mise à jour'
+            'Date de mise à jour',
         ];
     }
 
