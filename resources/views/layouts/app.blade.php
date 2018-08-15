@@ -29,7 +29,7 @@
        href="{{route('home')}}">{{config('app.name')}} - {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
 
     @if(Auth::user()->role()->first()->role_type_id != 1)
-        <form class="w-100" action="{{route('admin.search')}}" method="get">
+        <form class="w-100" action={{ route('admin.search') }} method="get">
             <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search"
                    aria-label="Search" name="q">
         </form>
