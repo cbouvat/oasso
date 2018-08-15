@@ -4,9 +4,8 @@ namespace App\Exports;
 
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -34,7 +33,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 $query = User::query();
         }
         //Check gifts relationship
-        if (!is_null($this->settings['gift'])) {
+        if (! is_null($this->settings['gift'])) {
             switch ($this->settings['gift']) {
                 case 0:
                     $query = $query->has('gifts');
@@ -42,7 +41,8 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 case 1:
                     $query = $query->doesntHave('gifts');
                     break;
-                default;
+                default:
+                    break;
             }
         }
 
@@ -54,7 +54,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
          */
 
         //Type of last membership
-        if (!is_null($this->settings['type'])) {
+        if (! is_null($this->settings['type'])) {
             $type = $this->settings['type'];
             $query = $query->whereHas('subscriptions', function ($sub) use ($type) {
                 $sub->where('subscription_type_id', '=', $type)
@@ -77,18 +77,18 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
         };
 
         //Where Clause array
-        $queries = array();
+        $queries = [];
 
         //Regex cellphone and phone
-        if (!is_null($this->settings['phone'])) {
+        if (! is_null($this->settings['phone'])) {
             $query = $query->where('phone_1', 'REGEXP', $this->settings['phone']);
             $query = $query->orWhere('phone_2', 'REGEXP', $this->settings['phone']);
         }
 
         //Age query
-        if (!is_null($this->settings['ageNumber'])) {
+        if (! is_null($this->settings['ageNumber'])) {
             array_push($queries, ['birthdate', $this->settings['ageOperator'], Carbon::now()
-                ->subYear($this->settings['ageNumber'])]);
+                ->subYear($this->settings['ageNumber']), ]);
         }
         //unset bad $key in array settings for foreach
         unset($this->settings['exportFile'], $this->settings['exportFormat'], $this->settings['state'],
@@ -98,25 +98,21 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
 
         //Build last queries
         foreach ($this->settings as $key => $value) {
-            if (!is_null($value)) {
-
+            if (! is_null($value)) {
                 array_push($queries, [$key, '=', $value]);
             }
         }
 
         //Add where clause in query
-        if (!empty($queries)) {
-
+        if (! empty($queries)) {
             return $query = $query->where($queries);
-
         } else {
             return $query;
         }
     }
 
-//Set labels first row of table
-    public
-    function headings(): array
+    //Set labels first row of table
+    public function headings(): array
     {
         return [
             '#',
@@ -150,9 +146,8 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
         ];
     }
 
-//Map value 0/1 to Female/Male
-    public
-    function map($users): array
+    //Map value 0/1 to Female/Male
+    public function map($users): array
     {
         $users = $users->toArray();
         foreach ($users as $key => $value) {
