@@ -60,21 +60,21 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 $sub->where('subscription_type_id', '=', $type)
                     ->where('date_end', '>', Carbon::now()->toDateString());
             });
-        };
+        }
         //Start and End date
-        if (!is_null($this->settings['startDate'])) {
+        if (! is_null($this->settings['startDate'])) {
             $date = $this->settings['startDate'];
             $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
                 $sub->where('date_end', '>=', $date);
             });
-        };
+        }
 
-        if (!is_null($this->settings['endDate'])) {
+        if (! is_null($this->settings['endDate'])) {
             $date = $this->settings['endDate'];
             $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
                 $sub->where('date_start', '<=', $date);
             });
-        };
+        }
 
         //Where Clause array
         $queries = [];
