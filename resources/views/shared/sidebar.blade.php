@@ -6,27 +6,27 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.user.index') }}">
+            <a class="nav-link {{ Request::is('user') ? 'active' : '' }}" href="{{ route('user.index') }}">
                 <span data-feather="user"></span> Informations personnelles
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.password.edit') }}">
+            <a class="nav-link {{ Request::is('user/password') ? 'active' : '' }}" href="{{ route('user.password.edit') }}">
                 <span data-feather="lock"></span> Mot de passe
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('user/subscription*') ? 'active' : '' }}" href="{{ route('user.subscription.index') }}" href="#">
                 <span data-feather="award"></span> Adhésions
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.gift.create') }}">
+            <a class="nav-link {{ Request::is('user/gift*') ? 'active' : '' }}" href="{{ route('user.gift.index') }}">
                 <span data-feather="gift"></span> Dons
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('user.history') }}">
+            <a class="nav-link {{ Request::is('user/history') ? 'active' : '' }}" href="{{ route('user.history') }}">
                 <span data-feather="activity"></span> Historique
             </a>
         </li>
@@ -39,27 +39,27 @@
     </h6>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.user.index') }}">
+            <a class="nav-link {{ Request::is('admin/user*') ? 'active' : '' }}" href="{{ route('admin.user.index') }}">
                 <span data-feather="users"></span> Membres
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.subscription.index') }}">
+            <a class="nav-link {{ Request::is('admin/subscription*') ? 'active' : '' }}" href="{{ route('admin.subscription.index') }}">
                 <span data-feather="award"></span> Adhésions
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.gift.index') }}">
+            <a class="nav-link {{ Request::is('admin/gift*') ? 'active' : '' }}" href="{{ route('admin.gift.index') }}">
                 <span data-feather="gift"></span> Dons
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.mailing.index') }}">
+            <a class="nav-link {{ Request::is('admin/mailing*') ? 'active' : '' }}" href="{{ route('admin.mailing.index') }}">
                 <span data-feather="mail"></span> Mailing
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.newsletter.index') }}">
+            <a class="nav-link {{ Request::is('admin/newsletter*') ? 'active' : '' }}" href="{{ route('admin.newsletter.index') }}">
                 <span data-feather="send"></span> NewsLetter
             </a>
         </li>

@@ -18,7 +18,7 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $subscriptions = Subscription::with(['subscriptionType', 'user', 'payment.paymentMethod'])
+        $subscriptions = Subscription::with(['type', 'user', 'payment.paymentMethod'])
             ->orderBy('subscription_date', 'desc')
             ->paginate();
 

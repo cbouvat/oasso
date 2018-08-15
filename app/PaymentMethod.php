@@ -12,9 +12,12 @@ class PaymentMethod extends Model
      * @var array
      */
     protected $fillable = [
-        'name', ];
+        'name',
+    ];
 
-    /** RELATIONS */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function payment()
     {
         return $this->hasMany('App\Payment');

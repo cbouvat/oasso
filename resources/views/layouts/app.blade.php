@@ -56,7 +56,7 @@
     @endauth
 
     @guest
-        <main role="main" class="px-4">
+        <main role="main">
             <!-- Include message Alert -->
             @include('shared.alert')
             <!-- Main content -->

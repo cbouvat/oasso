@@ -8,8 +8,8 @@
     <title>Payment</title>
 </head>
 <body>
-<form action="/charge" method="POST">
-    {{ csrf_field() }}
+<form action="{{ route('user.payment.charge') }}" method="POST">
+    @csrf
     <script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="{{ env('STRIPE_PUB_KEY') }}"

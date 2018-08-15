@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Membre {{ $user->id }}</h1>
+        <h1>Membre {{ $user->id }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{ route('admin.subscription.create') }}" class="btn btn-sm btn-outline-success mr-2">Ajouter une
+            <a href="{{ route('admin.subscription.create') }}" class="btn btn-success mr-2">Ajouter une
                 Adhésion</a>
-            <a href="#" class="btn btn-sm btn-outline-primary mr-2">Modifer</a>
-            <a href="{{route('admin.user.beforedelete', ['user' => $user])}}" class="btn btn-sm btn-outline-danger">Supprimer</a>
+            <a href="#" class="btn btn-primary mr-2">Modifer</a>
+            <a href="{{route('admin.user.beforedelete', ['user' => $user])}}" class="btn btn-danger">Supprimer</a>
         </div>
     </div>
 
