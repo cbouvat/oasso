@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <label for="amount" class="col-sm-4 col-form-label">Montant</label>
                         <div class="input-group col-sm-8">
-                            <input type="text" name="amount" class="form-control text-right"
+                            <input type="text" id="amount" name="amount" class="form-control text-right"
                                    value="{{ $gift->amount }}">
                             <div class="input-group-append">
                                 <span class="input-group-text">€</span>
