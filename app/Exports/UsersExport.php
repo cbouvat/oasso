@@ -4,8 +4,8 @@ namespace App\Exports;
 
 use App\User;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -13,15 +13,13 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
 {
     use Exportable;
     private $settings;
+    private $query;
 
     public function __construct($validate)
     {
         $this->settings = $validate;
-    }
 
-    public function query()
-    {
-        //init Query Builder
+        //init Query Builder with $query
         switch ($this->settings['state']) {
             case 'withTrashed':
                 $query = User::query()->withTrashed();
@@ -33,7 +31,8 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 $query = User::query();
         }
         //Check gifts relationship
-        if (! is_null($this->settings['gift'])) {
+        if (!is_null($this->settings['gift'])) {
+
             switch ($this->settings['gift']) {
                 case 0:
                     $query = $query->has('gifts');
@@ -42,10 +41,9 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                     $query = $query->doesntHave('gifts');
                     break;
                 default:
-                    break;
+                    ;
             }
         }
-
         /*todo
         *Mettre softdelete sur subs plus facile avec request sur subs
          * Que les comptes actifs sont pris dans le requete
@@ -54,61 +52,82 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
          */
 
         //Type of last membership
-        if (! is_null($this->settings['type'])) {
-            $type = $this->settings['type'];
-            $query = $query->whereHas('subscriptions', function ($sub) use ($type) {
-                $sub->where('subscription_type_id', '=', $type)
-                    ->where('date_end', '>', Carbon::now()->toDateString());
-            });
+        if (!is_null($this->settings['status'])) {
+            switch ($this->settings['status']) {
+                case 0:
+                    $query = $query->whereHas('subscriptions', function ($sub) {
+                        $sub->where('date_end', '>=', Carbon::now()->toDateString());
+                    });
+                    break;
+                case 1:
+                    $query = $query->whereHas('subscriptions', function ($sub) {
+                        $sub->where('date_end', '<', Carbon::now()->toDateString());
+                    });
+                default;
+            }
+
         };
         //Start and End date
-        if (!is_null($this->settings['startDate'])) {
-            $date = $this->settings['startDate'];
-            $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
-                $sub->where('date_end', '>=', $date);
-            });
+        if (is_null($this->settings['status'])) {
+            if (!is_null($this->settings['startDate'])) {
+                $date = $this->settings['startDate'];
+                $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
+                    $sub->where('date_end', '>=', $date);
+                });
+            }
+            if (!is_null($this->settings['endDate'])) {
+                $date = $this->settings['endDate'];
+                $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
+                    $sub->where('date_start', '<=', $date);
+                });
+            };
         };
 
-        if (!is_null($this->settings['endDate'])) {
-            $date = $this->settings['endDate'];
-            $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
-                $sub->where('date_start', '<=', $date);
-            });
-        };
 
         //Where Clause array
         $queries = [];
 
         //Regex cellphone and phone
-        if (! is_null($this->settings['phone'])) {
+        if (!is_null($this->settings['phone'])) {
             $query = $query->where('phone_1', 'REGEXP', $this->settings['phone']);
             $query = $query->orWhere('phone_2', 'REGEXP', $this->settings['phone']);
         }
 
         //Age query
-        if (! is_null($this->settings['ageNumber'])) {
+        if (!is_null($this->settings['ageNumber'])) {
             array_push($queries, ['birthdate', $this->settings['ageOperator'], Carbon::now()
-                ->subYear($this->settings['ageNumber']), ]);
+                ->subYear($this->settings['ageNumber']),]);
         }
         //unset bad $key in array settings for foreach
         unset($this->settings['exportFile'], $this->settings['exportFormat'], $this->settings['state'],
-            $this->settings['type'], $this->settings['startDate'], $this->settings['endDate'],
+            $this->settings['status'], $this->settings['startDate'], $this->settings['endDate'],
             $this->settings['ageOperator'], $this->settings['ageNumber'], $this->settings['phone'],
             $this->settings['gift']);
 
         //Build last queries
         foreach ($this->settings as $key => $value) {
-            if (! is_null($value)) {
+            if (!is_null($value)) {
                 array_push($queries, [$key, '=', $value]);
             }
         }
 
         //Add where clause in query
-        if (! empty($queries)) {
-            return $query = $query->where($queries);
+        if (!empty($queries)) {
+            $this->query = $query->where($queries);
         } else {
-            return $query;
+            $this->query = $query;
         }
+    }
+
+    public function display()
+    {
+        return $this->query;
+
+    }
+
+    public function query()
+    {
+        return $this->query;
     }
 
     //Set labels first row of table

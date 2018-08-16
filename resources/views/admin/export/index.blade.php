@@ -12,7 +12,7 @@
     <h1>{{ __('Export') }}</h1>
 
 
-    <form method="post" action="{{ route('admin.export.export') }}">
+    <form id="formExport" method="post" action="{{ route('admin.export.export') }}">
         @csrf
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="exportFile">Quoi exporter ?</label>
@@ -47,36 +47,38 @@
                 <label class="col-sm-2 col-form-label" for="state">{{__('State')}}</label>
                 <div class="col-sm-3">
                     <select class="custom-select" id="state" name="state">
-                        <option selected value="">Comptes actifs</option>
+                        <option selected value="">Comptes enregistrés</option>
                         <option value="onlyTrashed">Comptes supprimés</option>
                         <option value="withTrashed">Tous</option>
                     </select>
                 </div>
-                <label class="col-sm-2  offset-2 col-form-label" for="type">{{__('Type (only active subscription)')}}</label>
+                <label class="col-sm-2  offset-2 col-form-label" for="status">{{__('Membership status')}}</label>
                 <div class="col-sm-3">
-                    <select class="custom-select" id="type" name="type">
+                    <select class="custom-select" id="status" name="status">
                         <option selected value="">Tous</option>
-                        @foreach($subTypes as $subType)
-                            <option value="{{$subType->id}}">{{$subType->name}}</option>
-                        @endforeach
+                        <option value="1">Adhésions en cours</option>
+                        <option value="2">Adhésions périmées</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="type">{{__('Period')}}</label>
-                <div class="col-sm-3">
-                    <input id="startDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
-                           class="form-control" name="startDate" placeholder="Date de début (incluse)">
-                    <input style="margin-top: 5px" id="endDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
-                           class="form-control" name="endDate" placeholder="Date de fin (incluse)">
-                </div>
-                <label class="col-sm-2 offset-2 col-form-label" for="volonteer">{{__('Volonteer')}}</label>
+                <label class="col-sm-2 col-form-label" for="volonteer">{{__('Volonteer')}}</label>
                 <div class="col-sm-3">
                     <select class="custom-select" id="volonteer" name="volonteer">
                         <option selected value="">Tous</option>
                         <option value="1">Volontaires</option>
                         <option value="0">Non volontaires</option>
                     </select>
+                </div>
+                <label class="col-sm-2 offset-2 col-form-label" for="type">{{__('Period')}}</label>
+                <div class="col-sm-3">
+                    <div id="inputDate">
+                        <input id="startDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+                               class="form-control" name="startDate" placeholder="Date de début (incluse)">
+                        <input style="margin-top: 5px" id="endDate" type="text" onfocus="(this.type='date')"
+                               onblur="(this.type='text')"
+                               class="form-control" name="endDate" placeholder="Date de fin (incluse)">
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
@@ -163,7 +165,12 @@
         <br>
         <br>
         <div class="row justify-content-center">
-            <input type="submit" value="Exporter" class="btn btn-primary">
+            <div class="col-sm-3 offset-2">
+                <input id="display" type="submit" value="Voir" class="btn btn-success">
+            </div>
+            <div class="col-sm-3">
+                <input type="submit" value="Exporter" class="btn btn-primary">
+            </div>
         </div>
         </div>
     </form>
@@ -185,10 +192,32 @@
                 }
             });
 
-            // $('#startDate').on('blur', function () {
-            //     if ($(this).val() === null)
-            // })
+            $('#status').change(function () {
+                switch ($(this).val()) {
+                    case "":
+                        $('#inputDate').css('visibility', 'visible');
+                        break;
+                    default:
+                        $('#inputDate').css('visibility', 'hidden');
+                }
+            });
 
+            //Display result with Ajax vaisselle
+            $('#display').click(function (event) {
+                event.preventDefault();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        method: 'post',
+                        url: '127.0.0.1:projet_de_revv.test/',
+                        data: $('#formExport').serialize(),
+                        dataType: 'Json',
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    }
+                });
+            });
         </script>
     @endpush
 

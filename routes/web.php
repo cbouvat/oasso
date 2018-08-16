@@ -95,9 +95,10 @@ Route::prefix('admin')->middleware('auth', 'role')->namespace('Admin')->name('ad
     });
 
     // Export
-    Route::prefix('export')->name('export.')->group(function () {
+    Route::prefix('export')->namespace('Export')->name('export.')->group(function () {
         Route::get('/', 'ExportController@index')->name('index');
-        Route::post('/', 'ExportController@export')->name('export');
+        Route::post('/', 'UserController@export')->name('export');
+        Route::post('/display', 'Admin\Export\UserController@display')->name('display');
     });
 
     // Search

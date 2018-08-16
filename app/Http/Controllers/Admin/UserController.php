@@ -97,28 +97,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return void
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -139,15 +117,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
