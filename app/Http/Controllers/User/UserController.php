@@ -30,6 +30,7 @@ class UserController extends Controller
     public function edit()
     {
         $user = Auth::user();
+        $user->load('role');
 
         return view('user.user.edit', ['user' => $user]);
     }
@@ -55,8 +56,8 @@ class UserController extends Controller
             'address_line2' => '|string|max:32|nullable',
             'city' => 'required|string|max:45|',
             'zipcode' => 'digits:5|numeric',
-            'phone_number_1' => 'numeric|nullable',
-            'phone_number_2' => 'numeric|nullable',
+            'phone_1' => 'numeric|nullable',
+            'phone_2' => 'numeric|nullable',
             'newspaper' => 'boolean',
             'newsletter' => 'boolean',
             'gender_joint' => 'max:2|nullable',
@@ -69,6 +70,7 @@ class UserController extends Controller
         if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }
+
         if ($request['newsletter'] == null) {
             $validateData['newsletter'] = 0;
         }
