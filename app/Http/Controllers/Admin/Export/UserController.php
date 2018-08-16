@@ -37,35 +37,9 @@ class UserController extends Controller
         ]);
 
         //Get extension for file
-        $extension = $validate['exportFile'].Carbon::now()->toDateString().'.'.$validate['exportFormat'];
+        $extension = $validate['exportFile'] . Carbon::now()->toDateString() . '.' . $validate['exportFormat'];
 
         //Build $settings for Query Builder in UsersExport
         return (new UsersExport($validate))->download($extension);
-    }
-
-    public function display(Request $request)
-    {
-        dd('toto');
-        $validate = $request->validate([
-            'exportFile' => 'required',
-            'exportFormat' => 'required',
-            'state' => 'string|nullable',
-            'status' => 'integer|nullable',
-            'startDate' => 'date|nullable',
-            'endDate' => 'date|nullable',
-            'volonteer' => 'integer|nullable',
-            'delivery' => 'integer|nullable',
-            'newspaper' => 'integer|nullable',
-            'newsletter' => 'integer|nullable',
-            'city' => 'string|nullable',
-            'ageOperator' => 'string|nullable',
-            'ageNumber' => 'integer|nullable',
-            'phone' => 'string|nullable',
-            'gift' => 'integer|nullable',
-            'gender' => 'integer|nullable',
-        ]);
-
-        //Build $settings for Query Builder in UsersExport
-        return (new UsersExport($validate))->display();
     }
 }

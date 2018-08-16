@@ -165,13 +165,7 @@
         <br>
         <br>
         <div class="row justify-content-center">
-            <div class="col-sm-3 offset-2">
-                <input id="display" type="submit" value="Voir" class="btn btn-success">
-            </div>
-            <div class="col-sm-3">
-                <input type="submit" value="Exporter" class="btn btn-primary">
-            </div>
-        </div>
+            <input type="submit" value="Exporter" class="btn btn-primary">
         </div>
     </form>
     @push('scripts')
@@ -200,23 +194,6 @@
                     default:
                         $('#inputDate').css('visibility', 'hidden');
                 }
-            });
-
-            //Display result with Ajax vaisselle
-            $('#display').click(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                        method: 'post',
-                        url: 'http://projet_de_revv.test/admin/export/display',
-                        data: $('#formExport').serialize(),
-                        dataType: 'Json',
-                        success: function (response) {
-                            console.log(response)
-                        }
-                    }
-                });
             });
         </script>
     @endpush

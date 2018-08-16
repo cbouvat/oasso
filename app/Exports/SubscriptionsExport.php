@@ -14,7 +14,7 @@ class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
      */
     public function collection()
     {
-        return Subscription::all();
+        return Subscription::with('type')->get();
     }
 
     public function headings(): array
@@ -45,17 +45,28 @@ class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
                 }
             } elseif (is_int($value) && $key == 'subscription_type_id') {
                 if ($value === 1) {
-                    $subs[$key] = 'Chomeur';
+                    $subs[$key] = $sub->type->name;
                 } elseif ($value === 2) {
-                    $subs[$key] = 'Famille';
+                    $subs[$key] = $sub->type->name;
                 } elseif ($value === 3) {
-                    $subs[$key] = 'Individuel';
+                    $subs[$key] = $sub->type->name;
                 } elseif ($value === 4) {
-                    $subs[$key] = 'Etudiant';
+                    $subs[$key] = $sub->type->name;
                 }
             }
         }
 
-        return $subs;
+        return [
+            $subs['id'],
+            $subs['amount'],
+            $subs['opt_out_mail'],
+            $subs['date_start'],
+            $subs['date_end'],
+            $subs['subscription_source'],
+            $subs['user_id'],
+            $subs['subscription_type_id'],
+            $subs['created_at'],
+            $subs['updated_at'],
+        ];
     }
 }

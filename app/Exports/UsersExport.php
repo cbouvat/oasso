@@ -19,6 +19,10 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
     {
         $this->settings = $validate;
 
+    }
+
+    public function query()
+    {
         //init Query Builder with $query
         switch ($this->settings['state']) {
             case 'withTrashed':
@@ -113,15 +117,6 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
         } else {
             $this->query = $query;
         }
-    }
-
-    public function display()
-    {
-        return $this->query;
-    }
-
-    public function query()
-    {
         return $this->query;
     }
 
@@ -156,7 +151,6 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
             'Alerte',
             'Date de création',
             'Date de mise à jour',
-            'Date de suppression',
         ];
     }
 

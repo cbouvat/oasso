@@ -14,7 +14,7 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
      */
     public function collection()
     {
-        return Payment::all();
+        return Payment::with('paymentMethod')->get();
     }
 
     public function headings(): array
@@ -43,20 +43,28 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
                 }
             }
             if (is_int($value) && $key == 'payment_method_id') {
-                if ($value === 1) {
-                    $payments[$key] = 'Paypal';
-                } elseif ($value === 2) {
-                    $payments[$key] = 'Carte de credit';
-                } elseif ($value === 3) {
-                    $payments[$key] = 'Especes';
-                } elseif ($value === 4) {
-                    $payments[$key] = 'Cheque';
-                } elseif ($value === 5) {
-                    $payments[$key] = 'Virement';
+                if ($value == 1) {
+                    $payments[$key] = $payment->paymentMethod->name;
+                } elseif ($value == 2) {
+                    $payments[$key] = $payment->paymentMethod->name;
+                } elseif ($value == 3) {
+                    $payments[$key] = $payment->paymentMethod->name;
+                } elseif ($value == 4) {
+                    $payments[$key] = $payment->paymentMethod->name;
+                } elseif ($value == 5) {
+                    $payments[$key] = $payment->paymentMethod->name;
                 }
             }
         }
-
-        return $payments;
+        return [
+            $payments['id'],
+            $payments['payment_type'],
+            $payments['payment_id'],
+            $payments['amount'],
+            $payments['user_id'],
+            $payments['payment_method_id'],
+            $payments['created_at'],
+            $payments['updated_at'],
+        ];
     }
 }
