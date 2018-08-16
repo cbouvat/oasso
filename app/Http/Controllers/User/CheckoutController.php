@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use Stripe\Charge;
-use Stripe\Customer;
 use Stripe\Stripe;
+use Stripe\Customer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -20,10 +20,10 @@ class CheckoutController extends Controller
         try {
             Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
-            $customer = Customer::create(array(
+            $customer = Customer::create([
                 'email' => $request->stripeEmail,
-                'source' => $request->stripeToken
-            ));
+                'source' => $request->stripeToken,
+            ]);
 
             $charge = Charge::create([
                 'customer' => $customer->id,
