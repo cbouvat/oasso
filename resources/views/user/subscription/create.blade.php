@@ -25,7 +25,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="selected-type" class="col-sm-4 col-form-label text-md-right">{{ __('Subscription type') }}</label>
+                        <label for="selected-type"
+                               class="col-sm-4 col-form-label text-md-right">{{ __('Subscription type') }}</label>
 
                         <div class="col-md-6">
 
@@ -50,11 +51,15 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-3">
-                            <input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">
-
-                            <a href="{{route('user.user.index')}}" type="button" class="btn btn-primary">Cancel</a>
-
-                            <a href="{{route('user.subscription.generatePdf')}}" type="button" class="btn btn-success">PDF de l'adhésion</a>
+                            <input type="submit" class="btn btn-primary" value="{{ __('Online Payment') }}">
+                        </div>
+                    </div>
+                    <br/>
+                    <p> Si vous souhaitez payer par chèque, veuillez récupérer le pdf</p>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-8 offset-md-3">
+                            <a href="{{route('user.subscription.generatePdf')}}" class="btn btn-success"
+                               target="_blank">{{__('Membership PDF')}}</a>
                         </div>
                     </div>
                 </form>
