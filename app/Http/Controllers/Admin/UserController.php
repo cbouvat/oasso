@@ -137,25 +137,31 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(User $user)
     {
         if ($user->id != \Auth::user()->id) {
-            \DB::statement('SET foreign_key_checks=0');
-            \DB::delete('delete from users where id='.$user->id);
-            \DB::statement('SET foreign_key_checks=1');
+            if ($user->subscriptions()->first() || $user->gifts()->first()) {
+                $user->delete();
+                return redirect()->route('admin.user.index')
+                    ->with('message', $user->firstname . ' supprimé, mais ' . $user->firstname . ' a un don ou une adhésion et ne peut pas etre retiré de la base de donnée');
+            } else {
+                \DB::delete('delete from users where id=' . $user->id);
+                return redirect()->route('admin.user.index')
+                    ->with('message', $user->firstname . ' est totalement supprimé');
+            }
         } else {
-            return redirect()->route('admin.user.index')->with('message', $user->firstname.' can not be deleted !');
+            return redirect()->route('admin.user.index')
+                ->with('message', $user->firstname . ' ne peut pas etre supprimé');
         }
-
-        return redirect()->route('admin.user.index')->with('message', $user->firstname.' deleted !');
     }
 }

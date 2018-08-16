@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'UserController@create')->name('create');
             Route::get('/{user}', 'UserController@show')->name('show');
             Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
+            Route::get('/{user}/destroy', 'UserController@destroy')->name('destroy');
             Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
         });
 
