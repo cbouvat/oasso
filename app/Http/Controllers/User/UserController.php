@@ -68,19 +68,6 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-        /**
-         * @TODO
-         * changer en admin
-         */
-        if ($request->has('role_type_id')) {
-            $role_type_id = $request->validate([
-                'role_type_id' => 'integer',
-            ]);
-
-            $role = $user->role();
-            $role->update($role_type_id);
-        }
-
         if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }
