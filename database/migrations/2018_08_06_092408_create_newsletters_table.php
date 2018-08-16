@@ -19,9 +19,9 @@ class CreateNewslettersTable extends Migration
             $table->longText('html_content');
             $table->longText('text_content');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

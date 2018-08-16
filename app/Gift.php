@@ -23,6 +23,9 @@ class Gift extends Model
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
     public function payment()
     {
         return $this->morphOne('App\Payment', 'payment');

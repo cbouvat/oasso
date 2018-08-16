@@ -1,45 +1,47 @@
 @extends('layouts.app')
+
 @section('content')
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Newletter</li>
-            </ol>
-        </nav>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <h1>{{__('Newsletter page title')}}</h1>
-        </div>
-        <div class="col-lg-2 mt-4">
-            <a href="{{route('admin.newsletter.create')}}" class="btn btn-success mb-1">New newsletter</a>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>{{__('Newsletter')}}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{route('admin.newsletter.create')}}" class="btn btn-success">Nouvelle newsletter</a>
         </div>
     </div>
-    <table class="table table-striped">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item">Newletter</li>
+        </ol>
+    </nav>
+
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>Date</th>
             <th>Title</th>
-            <th>Action</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         @foreach($newsletters as $newsletter)
             <tr>
-                <th scope="col">{{$newsletter->created_at}}</th>
-                <td scope="col">{{$newsletter->title}}</td>
-                <td scope="col">
-                    <a type="button-primary" class="btn btn-primary btn-sm"
-                       href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}">Modifier</a>
-                    <a type="button-primary" class="btn btn-danger ml-2 mr-2 btn-sm"
-                       href="{{route('admin.newsletter.beforedelete', ['id' => $newsletter->id])}}">Supprimer</a>
-                    <a type="button-primary" class="btn btn-info btn-sm"
-                       href="{{route('admin.newsletter.duplicate', ['id' => $newsletter->id])}}">Dupliquer</a>
+                <th scope="row">{{ $newsletter->created_at }}</th>
+                <td>{{ $newsletter->title }}</td>
+                <td class="text-right">
+                    <a type="button-primary" class="btn btn-sm btn-outline-primary"
+                       href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}"><span
+                                data-feather="edit"></span> Modifier</a>
+                    <a type="button-primary" class="btn btn-sm btn-sm btn-outline-danger"
+                       href="{{route('admin.newsletter.beforedelete', ['newsletter' => $newsletter])}}"><span
+                                data-feather="trash"></span> Supprimer</a>
+                    <a type="button-primary" class="btn btn-sm btn-outline-secondary btn-sm"
+                       href="{{route('admin.newsletter.duplicate', ['newsletter' => $newsletter])}}"><span
+                                data-feather="copy"></span> Dupliquer</a>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <nav class="pagination justify-content-center">{{$newsletters->links()}}</nav>
+    {{$newsletters->links()}}
 @endsection

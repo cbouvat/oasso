@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,49 +15,59 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 
-<!-- Include message Alert -->
-@include('layouts.message');
-
-<nav class="navbar navbar-light fixed-top bg-secondary flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand bg-secondary col-sm-3 col-md-2 mr-0" id="app-link-name"
-       href="{{route('home')}}">{{config('app.name')}} - {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
-
-    @if(Auth::user()->role()->first()->role_type_id != 1)
-        <form class="w-100" action={{route('search')}} method="get">
-            <input class="form-control form-control-light w-100" id="search-bar" type="search" placeholder="Search"
-                   aria-label="Search" name="q">
-        </form>
-    @endif
-
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            @auth
-                <a class="nav-link" id="logout-form" href="{{ route('logout') }}">
-                    Déconnexion
-                </a>
-            @endauth
-        </li>
-    </ul>
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    @auth
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('home') }}">{{config('app.name')}}</a>
+        @if(Auth::user()->role()->first()->role_type_id != 1)
+            <form class="w-100" action={{ route('admin.search') }} method="get">
+                <input class="form-control form-control-dark" id="search-bar" type="search" placeholder="Rechercher"
+                       aria-label="Search" name="q">
+            </form>
+        @endif
+        <div class="navbar-nav px-3">
+            <form action="{{ route('logout') }}" method="post" class="form-inline">
+                @csrf
+                <button type="submit" class="btn btn-link nav-link"><span data-feather="log-out"></span> Déconnexion</button>
+            </form>
+        </div>
+    @endauth
+    @guest
+        <a class="navbar-brand col-12 mr-0" href="{{ route('home') }}">{{config('app.name')}}</a>
+    @endguest
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2 d-none d-md-block bg-light sidebar">
-            @include('layouts.menu')
+    @auth
+
+        <div class="row">
+            <div class="col-md-2 d-none d-md-block bg-light sidebar">
+                @include('shared.sidebar')
+            </div>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <!-- Include message Alert -->
+                @include('shared.alert')
+                <!-- Main content -->
+                @yield('content')
+            </main>
         </div>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    @endauth
+
+    @guest
+        <main role="main">
+            <!-- Include message Alert -->
+            @include('shared.alert')
+            <!-- Main content -->
             @yield('content')
         </main>
-    </div>
+    @endguest
 </div>
+
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('scripts')
+
 </body>
 </html>
