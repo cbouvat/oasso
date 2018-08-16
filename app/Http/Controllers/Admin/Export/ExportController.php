@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Export;
 use App\User;
 use App\Http\Controllers\Controller;
 
-
 class ExportController extends Controller
 {
     /**
