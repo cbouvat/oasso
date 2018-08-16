@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
-                <form action="{{ URL::route('user.update', ['user'=> $user]) }}" method="post">
+                <form action="{{ URL::route('admin.user.update', $user) }}" method="post">
                     @csrf
                     {{--@method('PUT')--}}
 
