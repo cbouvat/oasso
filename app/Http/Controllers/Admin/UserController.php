@@ -156,7 +156,7 @@ class UserController extends Controller
 
         $user->update($validateData);
 
-        return redirect()->route('admin.user.edit', ['user' => $user]);
+        return redirect()->route('admin.user.edit', ['user' => $user])->with('message', 'Modification effectuée');
     }
 
     /**
