@@ -32,8 +32,8 @@
 
                             @forelse($user->subscriptions as $subscription)
                                 <tr>
-                                    <td>{{date('d/m/Y', strtotime($subscription->subscription_date))}}</td>
-                                    <td>{{date('d/m/Y', strtotime($subscription->subscription_date."+1 year"))}}</td>
+                                    <td>{{$subscription->date_start->format('d/m/Y')}}</td>
+                                    <td>{{$subscription->date_end->format('d/m/Y')}}</td>
                                     <td>{{$subscription->amount}}</td>
                                     <td>{{$subscription->subscriptionType->name}}</td>
                                 </tr>
