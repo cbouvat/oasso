@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Modification informations personnelles</li>
-            </ol>
-        </nav>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Modification de {{ $user->firstname }} {{ $user->lastname }}</h1>
     </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">Membres</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.user.show', $user) }}">Membre {{ $user->id }}</a></li>
+            <li class="breadcrumb-item">Modification de Membre {{ $user->id }}</li>
+        </ol>
+    </nav>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
@@ -22,7 +26,7 @@
 
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
 
-                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Mes Infos</h4></div>
+                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Les Infos de {{ $user->firstname }} {{ $user->lastname }}</h4></div>
                         @if(Auth::user()->role()->first()->role_type_id === 3)
                             <div class="form-group">
                                 <label for="role_type" class="text-danger font-weight-bold">Role</label>
