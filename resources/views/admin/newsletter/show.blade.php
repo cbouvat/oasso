@@ -1,5 +1,4 @@
 @extends('layouts.app')
-<script src="https://unpkg.com/feather-icons"></script>
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -19,6 +18,7 @@
 
             <select class="custom-select" name="sendTo">
                 <option selected value="subscribers">{{__('Newsletter subscribers')  }}</option>
+                <option value="admin">{{__('Admin')  }}</option>
                 <option value="all">{{__('All members')  }}</option>
             </select>
         </div>
