@@ -8,5 +8,7 @@ $factory->define(App\Newsletter::class, function (Faker $faker) {
         'html_content' => $faker->randomHtml(2, 3),
         'text_content' => $faker->text(150),
         'user_id' => $faker->unique()->numberBetween(1, 50),
+        'sendTo' => $faker->randomElement($array = ["", 'subscribers', 'all']),
+        'counter' => $faker->numberBetween(0, 5000),
     ];
 });

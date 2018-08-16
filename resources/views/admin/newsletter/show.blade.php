@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<script src="https://unpkg.com/feather-icons"></script>
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -13,16 +14,16 @@
     </nav>
     <form method="post" action="{{ route('admin.newsletter.send', ['newsletter'=> $newsletter]) }}">
         @csrf
+        <div class="col-sm-3">
         <h3>{{__('Sent to :')}}</h3>
-        <label>
-            <select class="custom-select" name="sendTo" required>
-                <option value="" disabled selected>{{__('Send to :')  }}</option>
-                <option value="0">{{__('Newsletter subscribers')  }}</option>
-                <option value="1">{{__('All members')  }}</option>
-            </select>
-        </label>
 
-        <div class="card bg-light mb-3" style="max-width: 1200px;">
+            <select class="custom-select" name="sendTo">
+                <option selected value="subscribers">{{__('Newsletter subscribers')  }}</option>
+                <option value="all">{{__('All members')  }}</option>
+            </select>
+        </div>
+
+        <div class="card bg-light mt-3 mb-3">
             <div class="card-header">
                 {{__('Subject : ')  }} {{ $newsletter->title }}
             </div>
@@ -39,6 +40,8 @@
                     @if($newsletter->status == 'notSent')
                         <button type="submit" class="btn btn btn-success"><span
                                     data-feather="send"></span> {{__('Send')  }}</button>
+                    @elseif($newsletter->status == 'sending')
+                        <p style="color: #1a7e75;">Sending...</p>
                     @else
                         <a class="btn btn-secondary" href="#">{{__('Already sent')  }}</a>
                     @endif

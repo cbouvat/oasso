@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Newsletter;
+use App\User;
 use Illuminate\Http\Request;
 use App\Jobs\SendNewsletterJob;
 use App\Http\Controllers\Controller;
@@ -129,4 +130,16 @@ class NewsletterController extends Controller
 
         return redirect()->route('admin.newsletter.index');
     }
+
+    public function optout($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $user->newsletter = 1;
+        $user->save();
+
+        return view('user.subscription.optout');
+    }
+
+
 }

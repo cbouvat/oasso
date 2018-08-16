@@ -20,16 +20,18 @@
         <tr>
             <th>{{__('Date')  }}</th>
             <th>{{__('Title')  }}</th>
-            <th>{{__('Status')  }}</th>
+            <th>{{__('Sent to')  }}</th>
+            <th>{{__('Number')  }}</th>
             <th></th>
         </tr>
         </thead>
         <tbody>
         @foreach($newsletters as $newsletter)
             <tr>
-                <th>{{ $newsletter->created_at->format('h:m d/m/Y') }}</th>
+                <th>{{ $newsletter->created_at}}</th>
                 <td>{{ $newsletter->title }}</td>
-                <td>{{ $newsletter->status }} : {{ $newsletter->counter }}</td>
+                <td>{{ $newsletter->sendTo }}</td>
+                <td>@if($newsletter->counter > 0){{ $newsletter->counter }}@endif</td>
                 <td class="text-right">
                     <a type="button-primary" class="btn btn-sm btn-outline-primary"
                        href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}"><span

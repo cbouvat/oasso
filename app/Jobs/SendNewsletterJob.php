@@ -38,14 +38,14 @@ class SendNewsletterJob implements ShouldQueue
         $this->newsletter->status = 'sending';
         $this->newsletter->save();
 
-        if ($this->newsletter->sendTo == 1) {
+        if ($this->newsletter->sendTo === 'all') {
             $users = User::all();
         } else {
             $users = User::newsletter()->get();
         }
 
         foreach ($users as $user) {
-            Mail::to($user)->send(new SendNewsletter($this->newsletter));
+            Mail::to($user)->send(new SendNewsletter($this->newsletter, $user));
 
             $this->newsletter->increment('counter'); // update live counter in index page
             $this->newsletter->save();
