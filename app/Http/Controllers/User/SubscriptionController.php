@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use PDF;
 use Auth;
 use App\User;
 use App\Payment;
@@ -163,6 +164,15 @@ class SubscriptionController extends Controller
         } else {
             return abort(404);
         }
+    }
+
+    public function generatePdf()
+    {
+        $user = Auth::user();
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('/user/subscription/subscriptionPdf', compact('user'));
+        $name = 'Adhésion_'.$user->firstname.'_'.$user->lastname.'.pdf';
+
+        return $pdf->stream($name);
     }
 
     /**
