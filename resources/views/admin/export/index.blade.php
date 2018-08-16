@@ -174,15 +174,8 @@
             $('#exportFile').change(function () {
                 if ($('#exportFile option:selected').val() === 'users') {
                     $('#usersParams').css('display', 'block');
-                    $('#giftsParams').css('display', 'none');
-                    $('#subsParams').css('display', 'block');
-                    $('#paymentsParams').css('display', 'block');
-                } else if ($(this).val() === 'gifts') {
-                    $('#giftsParams').css('display', 'block');
-                } else if ($(this).val() === 'subscriptions') {
-                    $('#subsParams').css('display', 'block');
-                } else if ($(this).val() === 'payments') {
-                    $('#paymentsParams').css('display', 'block');
+                } else {
+                    $('#usersParams').css('display', 'none');
                 }
             });
 

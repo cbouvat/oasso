@@ -3,11 +3,12 @@
 namespace App\Exports;
 
 use App\Subscription;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping
+class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize
 {
     /**
      * @return \Illuminate\Support\Collection

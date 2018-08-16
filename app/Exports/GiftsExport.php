@@ -3,10 +3,11 @@
 namespace App\Exports;
 
 use App\Gift;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class GiftsExport implements FromCollection, WithHeadings
+class GiftsExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
      * @return \Illuminate\Support\Collection
