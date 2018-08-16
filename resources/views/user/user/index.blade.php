@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Mon Compte</h1>
+    </div>
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -11,9 +14,6 @@
     </div>
     <div class="row ">
         <div class="col-12">
-            <div>
-                <h1>Mon Compte</h1>
-            </div>
             <form action="{{ route('user.update') }}" method="post">
                 @csrf
                 <div class="form-group row">
