@@ -98,7 +98,7 @@ Route::middleware('auth')->group(function () {
         // Session
         Route::prefix('session')->name('session.')->group(function () {
             Route::get('/', 'SessionController@index')->name('index');
-            Route::post('/{session}', 'SessionController@destroy')->name('delete');
+            Route::delete('/{session}', 'SessionController@destroy')->name('delete');
         });
     });
 });
