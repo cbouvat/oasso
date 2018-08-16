@@ -96,6 +96,12 @@ Route::middleware('auth')->group(function () {
 
         // Search
         Route::get('/search', 'SearchController@search')->name('search');
+
+        // Session
+        Route::prefix('session')->name('session.')->group(function () {
+            Route::get('/', 'SessionController@index')->name('index');
+            Route::delete('/{session}', 'SessionController@destroy')->name('delete');
+        });
     });
 });
 
