@@ -1,21 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Dons</li>
-            </ol>
-        </nav>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Effectuer un Don</h1>
     </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item">Dons</li>
+        </ol>
+    </nav>
     <div>
         <div class="row">
             <div class="col-12">
-                <div>
-                    <h1>Faire un Don</h1>
-                </div>
-                <div class="text-center p-5 border border-success rounded">
+                <div class="text-center ">
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
@@ -26,15 +25,11 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text">€</span>
                                 </div>
-                                <select class="form-control text-center ml-3" name="payment_methods">
-                                    @foreach($payments_methods as $payment_method)
-                                        <option value="{{ $payment_method->id }}">
-                                            {{ $payment_method->name}}
-                                        </option>
-                                    @endforeach
-                                </select>
                             </div>
-                            <input value="Donner" type="submit" class="btn btn-outline-success btn-block pt-2 mt-2">
+                            <div class="text-center">
+                                <input value="Valider" type="submit" class="btn btn-outline-success btn-lg mt-2">
+
+                            </div>
                         </form>
                     </div>
 
@@ -43,40 +38,34 @@
             </div>
 
         </div>
-        <div class="row pt-5">
-            <div class="col-12">
-                <div>
-                    <h1>Votre Historique de don</h1>
-                </div>
-                <div class="text-center p-5 border border-success rounded">
-                    <table class="table">
-                        <thead class="bg-success text-white">
+        <div>
+            <h2>Votre Historique de don</h2>
+        </div>
+        <div class="pt-5">
+            <div class="text-center">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @forelse($user->gifts as $gift)
                         <tr>
-                            <th scope="col">Donateur</th>
-                            <th scope="col">Montant</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Methode de paiement</th>
+                            <th>{{ $gift->amount }} €</th>
+                            <td>{{ $gift->created_at->format('d/m/Y') }}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @forelse($user->gifts as $gift)
-                            <tr>
-                                <td scope="row">{{$user->firstname}} {{$user->lastname}}</td>
-                                <th>{{ $gift->amount }} €</th>
-                                <td>{{ $gift->created_at->format('d/m/Y') }}</td>
-                                <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="4">Vous n'avez réalisé aucun don pour le moment ...</td>
-                            </tr>
-                        @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
+                    @empty
+                        <tr>
+                            <td colspan="2">Vous n'avez réalisé aucun don pour le moment ...</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
+                </table>
             </div>
 
         </div>
+
     </div>
 @endsection
