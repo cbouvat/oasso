@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{user}', 'UserController@show')->name('show');
             Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
             Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+            Route::get('/{user}/gift/create', 'GiftController@create')->name('gift.create');
+            Route::post('/{user}/gift', 'GiftController@store')->name('gift.store');
         });
 
         // Subscription
@@ -66,8 +68,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
             Route::post('/', 'GiftController@create')->name('create');
-            Route::get('/{user}', 'GiftController@create')->name('create');
-            Route::post('/{user}', 'GiftController@store')->name('store');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
             Route::get('/{gift}/destroy', 'GiftController@destroy')->name('destroy');

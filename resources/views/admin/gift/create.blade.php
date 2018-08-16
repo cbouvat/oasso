@@ -15,7 +15,7 @@
     </nav>
     <h2>Creer un Don de {{ $user->firstname }} {{ $user->lastname }}</h2>
     <div class="col-12 col-md-4 offset-md-4 mt-5">
-        <form action="{{route('admin.gift.store', $user)}}" method="post">
+        <form action="{{route('admin.user.gift.store', $user)}}" method="post">
             @csrf
             <label class="col-form-label" for="amount">Montant</label>
             <div class="input-group">
