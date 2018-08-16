@@ -3,7 +3,7 @@
 use App\PaymentMethod;
 use Illuminate\Database\Seeder;
 
-class Payment_methodsTableSeeder extends Seeder
+class PaymentMethodsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

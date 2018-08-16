@@ -12,9 +12,12 @@ class RoleType extends Model
      * @var array
      */
     protected $fillable = [
-        'name', ];
+        'name',
+    ];
 
-    /** RELATIONS */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function role()
     {
         return $this->belongsTo('App\Role');

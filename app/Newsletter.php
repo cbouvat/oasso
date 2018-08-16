@@ -12,8 +12,12 @@ class Newsletter extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'html_content', 'text_content', 'user_id', ];
+        'title', 'html_content', 'text_content', 'user_id',
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo('App\User');
