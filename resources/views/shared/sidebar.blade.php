@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('user/subscription*') ? 'active' : '' }}" href="{{ route('user.subscription.index') }}" href="#">
+            <a class="nav-link {{ Request::is('user/subscription*') ? 'active' : '' }}" href="{{ route('user.subscription.index') }}">
                 <span data-feather="award"></span> Adhésions
             </a>
         </li>

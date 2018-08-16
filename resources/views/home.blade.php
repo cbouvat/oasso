@@ -8,26 +8,30 @@
         @if($user->role->role_type_id != 1)
             <div class="col-sm-8">
 
-                <div class="text-center">
-                    <h2>{{ $subCount }} personnes ont adhéré durant ces 12 derniers mois</h2>
-                    <h2>La dernière newsletter date du {{ $newsletter->created_at->format('d/m/Y') }}</h2>
+                <div class="pb-3">
+                    <h3>{{ $subCount }} personnes ont adhéré durant ces 12 derniers mois.</h3>
+                    <h3>La dernière newsletter date du {{ $newsletter->created_at->format('d/m/Y') }}.</h3>
 
-                    <div>
-                        <a class="btn btn-primary pt-2 mt-2"
-                           href="{{ route('admin.user.create') }}">Ajouter un membre</a>
-                    </div>
-                    <div>
-                        <a class="btn btn-primary pt-2 mt-2"
-                           href="{{ route('admin.subscription.create') }}">Nouvelle adhésion</a>
-                    </div>
-                    <div>
-                        <a class="btn btn-primary pt-2 mt-2"
-                           href="{{ route('admin.newsletter.create') }}">Nouvelle newsletter</a>
-                    </div>
-                    <div>
-                        <a class="btn btn-primary pt-2 mt-2"
-                           href="{{ route('admin.gift.create') }}">Faire un don</a>
-                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-primary btn-block btn-lg pt-2 mt-2"
+                       href="{{ route('admin.user.create') }}"><span data-feather="users"></span> Ajouter un
+                        membre</a>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-primary btn-block btn-lg pt-2 mt-2"
+                       href="{{ route('admin.subscription.create') }}"><span data-feather="award"></span>
+                        Nouvelle adhésion</a>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-primary btn-block btn-lg pt-2 mt-2"
+                       href="{{ route('admin.newsletter.create') }}"><span data-feather="send"></span> Nouvelle
+                        newsletter</a>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-outline-primary btn-block btn-lg pt-2 mt-2"
+                       href="{{ route('admin.gift.create') }}"><span data-feather="gift"></span> Faire un
+                        don</a>
                 </div>
             </div>
         @endif
@@ -37,8 +41,8 @@
                 @if($user->subscriptions->first())
                     @if($user->subscriptions->first()->date_end > date('Y-m-d'))
                         <div>
-                           <h3> Vous êtes adhérent jusqu'au
-                               le {{ $user->subscriptions->first()->date_start->format('d/m/Y') }} </h3>
+                            <h3> Vous êtes adhérent jusqu'au
+                                le {{ $user->subscriptions->first()->date_start->format('d/m/Y') }} </h3>
                         </div>
                     @else
                         <div>
@@ -52,7 +56,7 @@
                     <h3> Vous n'êtes pas encore adhérent. </h3>
                     <div>
                         <a class="btn btn-success pt-2 mt-2"
-                           href="{{ route('user.subscription.index') }}">Adhérer</a>
+                           href="{{ route('user.subscription.index') }}"><span data-feather="plus"></span> Adhérer</a>
                     </div>
                 @endif
             </div>
