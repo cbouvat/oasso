@@ -31,7 +31,6 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/subscription')->name('subscription.')->group(function () {
             Route::get('/', 'SubscriptionController@create')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
-            Route::get('/pdf', 'SubscriptionController@generatePdf')->name('generatePdf');
         });
 
         // Gift
@@ -96,10 +95,10 @@ Route::middleware('auth')->group(function () {
         // Search
         Route::get('/search', 'SearchController@search')->name('search');
     });
-
-    // Output
-    Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optout')->name('optout');
-
-    // Auth
-    Auth::routes();
 });
+
+// Output
+Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optout')->name('optout');
+
+// Auth
+Auth::routes();
