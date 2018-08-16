@@ -5,8 +5,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('user.user.index') }}">Mon Compte</a></li>
-                <li class="breadcrumb-item">Nouvelle adhésion</li>
+                <li class="breadcrumb-item">Adhésion</li>
             </ol>
         </nav>
     </div>
@@ -52,9 +51,6 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-3">
                             <input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">
-
-                            <a href="{{route('user.user.index')}}" type="button" class="btn btn-primary">Cancel</a>
-
                         </div>
                     </div>
                 </form>

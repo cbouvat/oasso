@@ -19,7 +19,7 @@
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
-                        <form action="{{route('user.gift.create')}}" method="post">
+                        <form action="{{route('user.gift.store')}}" method="post">
                             @csrf
                             <div class="input-group">
                                 <input type="text" name="amount" class="form-control text-right">
@@ -68,13 +68,9 @@
                             </tr>
                         @empty
                             <tr>
-                                <th></th>
-                                <th>Vous n'avez réalisé aucun don pour le moment ...</th>
-                                <td></td>
-                                <td></td>
+                                <td colspan="4">Vous n'avez réalisé aucun don pour le moment ...</td>
                             </tr>
                         @endforelse
-
                         </tbody>
                     </table>
                 </div>

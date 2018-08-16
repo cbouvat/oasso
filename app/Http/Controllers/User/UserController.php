@@ -11,16 +11,6 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -33,42 +23,17 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     * @param User $user
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
+        $user = Auth::user();
         $user->load('role');
 
-        return view('user.edit', ['user' => $user]);
+        return view('user.user.edit', ['user' => $user]);
+
     }
 
     /**
@@ -78,13 +43,15 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
+        $user = Auth::user();
+
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
             'lastname' => 'required|alpha|string|max:45|min:2',
-            'email' => 'string|required|email|max:255|unique:users,email',
+            'email' => 'string|required|email|max:255|unique:users,email,'.$user->id,
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => '|string|max:32|',
             'address_line2' => '|string|max:32|nullable',
@@ -101,6 +68,10 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
+        /**
+         * @TODO
+         * changer en admin
+         */
         if ($request->has('role_type_id')) {
             $role_type_id = $request->validate([
                 'role_type_id' => 'integer',
@@ -124,37 +95,32 @@ class UserController extends Controller
     }
 
     /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function delete()
+    {
+        $user = Auth::user();
+
+        return view('user.user.delete', ['user' => $user]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy()
     {
-        //
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function beforeDelete($id)
-    {
-        $user = User::findOrFail($id);
-
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
-
-    /**
-     * @throws
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function softDelete($id)
-    {
-        $user = User::findOrFail($id);
+        $user = Auth::user();
         $user->delete();
+
+        Auth::logout();
 
         return redirect()->route('home');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function history()
     {
         $user = Auth::user();
@@ -169,7 +135,7 @@ class UserController extends Controller
      */
     public function passwordEdit()
     {
-        return view('users.password');
+        return view('user.user.password');
     }
 
     /**

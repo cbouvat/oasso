@@ -5,7 +5,6 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('user.user.index') }}">Mon compte</a></li>
                 <li class="breadcrumb-item">Modification informations personnelles</li>
             </ol>
         </nav>
@@ -15,8 +14,6 @@
             <div class="col-md-8 mt-3">
                 <form action="{{ URL::route('user.update', ['user'=> $user]) }}" method="post">
                     @csrf
-
-
                     {{--@method('PUT')--}}
 
                     {{--@foreach ($errors->all() as $error)--}}
