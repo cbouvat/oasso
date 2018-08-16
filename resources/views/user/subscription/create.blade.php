@@ -8,8 +8,8 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('user.user.index') }}">Mon Compte</a></li>
-            <li class="breadcrumb-item">Nouvelle adhésion</li>
+            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Mon Compte</a></li>
+            <li class="breadcrumb-item">{{ __('New Subscription') }}</li>
         </ol>
     </nav>
 
@@ -64,7 +64,10 @@
 
         <div class="form-group row">
             <div class="col-md-8 offset-md-4">
-                <input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">
+                {{--<input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">--}}
+                @include('user.payment.payment')
+                <a href="{{route('user.subscription.generatePdf')}}" class="btn btn-success"
+                   target="_blank">{{__('Membership PDF')}}</a>
             </div>
         </div>
     </form>
@@ -90,7 +93,7 @@
             </tr>
         @empty
             <tr>
-                <td colspan="4">Vous n'avez réalisé aucun don pour le moment ...</td>
+                <td colspan="4">{{ __('No subscription yet') }}</td>
             </tr>
         @endforelse
 

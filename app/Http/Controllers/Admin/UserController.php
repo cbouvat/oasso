@@ -120,23 +120,21 @@ class UserController extends Controller
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function beforeDelete($id)
+    public function beforeDelete(User $user)
     {
-        $user = User::findOrFail($id);
-
         return view('admin.user.beforedelete', ['user' => $user]);
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function softDelete($id)
+    public function softDelete(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('home')->with('message', $user->firstname.' supprimé !');

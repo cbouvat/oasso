@@ -16,6 +16,7 @@
 <div class="text-center">
 @yield('content')
 </div>
+<script src="{{ asset('js/app.js') }}" defer></script>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 @stack('scripts')

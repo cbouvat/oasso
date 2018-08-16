@@ -72,14 +72,13 @@
                                 <th>{{$gift->amount}} €</th>
                                 <td>{{$gift->created_at->format('d/m/Y')}}</td>
                                 <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
-
                                 <td>
                                     <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}" class="btn btn-warning"><span
-                                                class="fas fa-edit"></span></a>
+                                                data-feather="edit"></span> Modifier</a>
                                 </td>
                                 <td>
                                     <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
-                                       class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
+                                       class="btn btn-danger"><span data-feather="trash"></span> Supprimer</a>
                                 </td>
                             </tr>
                         @empty

@@ -23,6 +23,7 @@ class CreateSubscriptionsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('subscription_type_id');
             $table->timestamps();
+
             $table->foreign('subscription_type_id')->references('id')->on('subscription_types');
             $table->foreign('user_id')->references('id')->on('users');
         });

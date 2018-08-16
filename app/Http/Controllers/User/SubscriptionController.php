@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use PDF;
 use Auth;
 use App\User;
 use App\Payment;
@@ -99,6 +100,73 @@ class SubscriptionController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $payments_methods = PaymentMethod::all();
+        $subscription_type = SubscriptionType::all();
+        $subscription = Subscription::with('payment')->findOrFail($id);
+
+        return view('admin.subscription.edit', ['subscription' => $subscription,
+            'payments_methods' => $payments_methods,
+            'subscription_type' => $subscription_type,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $validator = $request->validate([
+            'user_id' => 'required|numeric',
+            'subscription_type_id' => 'required|integer',
+            'amount' => 'required|numeric',
+            'payment_methods' => 'required|numeric',
+            'subscription_date' => 'required|date|after_or_equal:today',
+        ]);
+
+        $validator['opt_out_mail'] = 0;
+        $validator['subscription_source'] = 0;
+
+        $subscription = Subscription::findOrFail($id);
+
+        $subscription->update($validator);
+
+        $validator['payment_id'] = $subscription->id;
+        $validator['payment_type'] = "App\Subscription";
+        $validator['payment_method_id'] = $request->payment_methods;
+
+        $payment = Payment::where([
+            ['payment_id', $subscription->id],
+            ['payment_type', 'App\Subscription'],
+        ]);
+
+        $payment->update($validator);
+
+        return back()->with('message', 'Mise a jour effectuée');
+    }
+
+    /**
      * @todo
      *
      * Use Hashids
@@ -107,18 +175,40 @@ class SubscriptionController extends Controller
      * @param $userId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
      */
-    public function optOut($subscriptionId, $userId)
+    public function optout($subId, $userId)
     {
-        $subscription = Subscription::findOrFail($subscriptionId);
+        $subscription = Subscription::findOrFail($subId);
         $user = User::findOrFail($userId);
 
         if ($subscription->user_id === $user->id) {
             $subscription->opt_out_mail = 1;
             $subscription->save();
 
-            return view('optOutMail');
+            return view('user.subscription.optout');
         } else {
             return abort(403);
         }
+    }
+
+    public function generatePdf()
+    {
+        $user = Auth::user();
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('/user/subscription/subscriptionPdf', compact('user'));
+        $name = 'Adhésion_'.$user->firstname.'_'.$user->lastname.'.pdf';
+
+        return $pdf->stream($name);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $subscriptionToDelete = Subscription::findOrFail($id);
+        $subscriptionToDelete->delete();
+
+        return redirect()->route('admin.subscription.index')->with('message', 'Adhésion supprimée');
     }
 }

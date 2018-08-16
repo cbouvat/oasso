@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Membres</h1>
+        <h1>Membres</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="{{ route('admin.user.create') }}" class="btn btn-sm btn-outline-success">Ajouter un membre</a>
+            <a href="{{ route('admin.user.create') }}" class="btn btn-success">Ajouter un membre</a>
         </div>
     </div>
 
@@ -33,10 +33,10 @@
                 <td>{{ $user->firstname }}</td>
                 <td class="text-right">
                     <a href="{{ route('admin.user.show', $user) }}" class="btn btn-sm btn-outline-primary"><span
-                                class="fas fa-pencil-alt"></span> Modifier</a>
+                                data-feather="edit"></span> Modifier</a>
                     <a class="btn btn-sm btn-outline-danger"
                        href="{{ route('admin.user.beforedelete', $user) }}"><span
-                                class="far fa-trash-alt"></span> Supprimer</a>
+                                data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>
         @endforeach
