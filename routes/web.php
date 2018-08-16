@@ -97,9 +97,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/search', 'SearchController@search')->name('search');
     });
 
-// Output
+    // Output
     Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optout')->name('optout');
 
-// Auth
+    // Auth
     Auth::routes();
 });
