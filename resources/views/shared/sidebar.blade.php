@@ -73,6 +73,11 @@
                 <span data-feather="bar-chart"></span> Statistiques
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('admin/session*') ? 'active' : '' }}" href="{{ route('admin.session.index') }}">
+                <span data-feather="user-x"></span> Connexions
+            </a>
+        </li>
     </ul>
     @endif
 </div>
