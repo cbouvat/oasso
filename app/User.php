@@ -82,7 +82,8 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
      */
-    public function sessions(){
+    public function sessions()
+    {
         return $this->hasMany('App\Session')->latest();
     }
 }
