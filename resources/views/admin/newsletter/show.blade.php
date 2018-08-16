@@ -43,7 +43,7 @@
                     @elseif($newsletter->status == 'sending')
                         <p style="color: #1a7e75;">Sending...</p>
                     @else
-                        <a class="btn btn-secondary" href="#">{{__('Already sent')  }}</a>
+                        <p style="color: #57554e;">Already sent</p>
                     @endif
                 </div>
             </div>
