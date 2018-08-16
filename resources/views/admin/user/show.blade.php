@@ -4,6 +4,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1>Membre {{ $user->id }}</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ route('admin.gift.create', $user) }}" class="btn btn-success mr-2">Ajouter un Don</a>
             <a href="{{ route('admin.subscription.create') }}" class="btn btn-success mr-2">Ajouter une
                 Adhésion</a>
             <a href="#" class="btn btn-primary mr-2">Modifer</a>
