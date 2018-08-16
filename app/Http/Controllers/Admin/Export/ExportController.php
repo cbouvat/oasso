@@ -2,14 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Export;
 
-use App\Exports\GiftsExport;
-use App\Exports\PaymentsExport;
-use App\Exports\SubscriptionsExport;
 use App\User;
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ExportController extends UserController
 {

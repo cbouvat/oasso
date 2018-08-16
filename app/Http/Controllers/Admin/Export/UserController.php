@@ -37,7 +37,7 @@ class UserController extends Controller
         ]);
 
         //Get extension for file
-        $extension = $validate['exportFile'] . Carbon::now()->toDateString() . '.' . $validate['exportFormat'];
+        $extension = $validate['exportFile'].Carbon::now()->toDateString().'.'.$validate['exportFormat'];
 
         //Build $settings for Query Builder in UsersExport
         return (new UsersExport($validate))->download($extension);

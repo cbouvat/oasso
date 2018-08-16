@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Export;
 
-use App\Exports\GiftsExport;
 use Carbon\Carbon;
+use App\Exports\GiftsExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
@@ -24,7 +24,7 @@ class GiftController extends Controller
         ]);
 
         //Get extension for file
-        $extension = $validate['exportFile'] . Carbon::now()->toDateString() . '.' . $validate['exportFormat'];
+        $extension = $validate['exportFile'].Carbon::now()->toDateString().'.'.$validate['exportFormat'];
 
         return Excel::download(new GiftsExport(), $extension);
     }

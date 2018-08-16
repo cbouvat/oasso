@@ -18,7 +18,6 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
     public function __construct($validate)
     {
         $this->settings = $validate;
-
     }
 
     public function query()
@@ -117,6 +116,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
         } else {
             $this->query = $query;
         }
+
         return $this->query;
     }
 

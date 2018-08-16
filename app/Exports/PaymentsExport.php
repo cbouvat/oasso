@@ -56,6 +56,7 @@ class PaymentsExport implements FromCollection, WithMapping, WithHeadings
                 }
             }
         }
+
         return [
             $payments['id'],
             $payments['payment_type'],
