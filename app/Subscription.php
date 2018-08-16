@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
+    protected $dates = [
+        'date_start',
+        'date_end',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

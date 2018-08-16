@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Subscription')->latest();
     }
+
+    public function lastSubscription()
+    {
+        return $this->hasOne('App\Subscription')->orderBy('date_end', 'desc')->first();
+    }
 }
