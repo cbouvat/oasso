@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Newsletter;
 use App\User;
+use App\Newsletter;
 use Illuminate\Http\Request;
 use App\Jobs\SendNewsletterJob;
 use App\Http\Controllers\Controller;
@@ -140,6 +140,4 @@ class NewsletterController extends Controller
 
         return view('user.subscription.optout');
     }
-
-
 }
