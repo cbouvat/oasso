@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-12">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Mot de passe</li>
-            </ol>
-        </nav>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Change your password</h1>
     </div>
-    <h1>{{ __('Change your password') }}</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item">Mot de passe</li>
+        </ol>
+    </nav>
 
     <div class="row justify-content-center m-5">
         <div class="card-body">
@@ -40,7 +40,7 @@
                                name="new_password" required>
                         @if ($errors->has('new_password'))
                             <div class="invalid-feedback" role="alert">
-                                 <strong>{{ $errors->first('new_password') }}</strong>
+                                <strong>{{ $errors->first('new_password') }}</strong>
                             </div>
                         @endif
                     </div>
