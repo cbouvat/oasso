@@ -20,7 +20,6 @@
 
         <div class="row justify-content-around">
             <input type="submit" class="btn btn-primary mt-2" value="Enregistrer">
-            <a class="btn btn-danger mt-2" href="{{route('admin.newsletter.index')}}">Annuler</a>
         </div>
     </form>
 @endsection

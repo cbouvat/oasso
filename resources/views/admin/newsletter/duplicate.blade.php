@@ -19,9 +19,7 @@
         @include('admin.newsletter.wysiwyg')
 
         <div class="row justify-content-around">
-            <input type="submit" class="btn btn-sm btn-primary mt-2" value="Enregistrer">
-            <a type="button-primary" class="btn btn-sm btn-danger mt-2" href="{{route('admin.newsletter.index')}}"><span
-                        data-feather="x"></span> {{__('Cancel')  }}</a>
+            <input type="submit" class="btn btn btn-primary mt-2" value="Enregistrer">
         </div>
     </form>
 @endsection

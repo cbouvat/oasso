@@ -18,7 +18,8 @@
 
         <div class="row justify-content-around">
             <input type="submit" class="btn-sm btn-primary m-2" value="Enregistrer">
-            <a class="btn-sm btn-danger m-2" href="{{route('admin.newsletter.index')}}">Annuler</a>
+            <a class="btn-sm btn-danger m-2" href="{{route('admin.newsletter.index')}}"><span
+                        data-feather="x"></span> {{__('Cancel')}}</a>
         </div>
     </form>
 @endsection

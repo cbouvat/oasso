@@ -37,7 +37,7 @@
             <div class="card-footer bg-light">
                 <div class="row justify-content-around ">
                     @if($newsletter->status == 'notSent')
-                        <button type="submit" class="btn btn-sm btn-success"><span
+                        <button type="submit" class="btn btn btn-success"><span
                                     data-feather="send"></span> {{__('Send')  }}</button>
                     @else
                         <a class="btn btn-secondary" href="#">{{__('Already sent')  }}</a>
