@@ -18,6 +18,7 @@
             <select class="custom-select" name="sendTo" required>
                 <option value="" disabled selected>{{__('Send to :')  }}</option>
                 <option value="0">{{__('Newsletter subscribers')  }}</option>
+                <option value="2">{{__('Admin members')  }}</option>
                 <option value="1">{{__('All members')  }}</option>
             </select>
         </label>

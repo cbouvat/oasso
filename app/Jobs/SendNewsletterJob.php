@@ -40,6 +40,10 @@ class SendNewsletterJob implements ShouldQueue
 
         if ($this->newsletter->sendTo == 1) {
             $users = User::all();
+        } elseif ($this->newsletter->sendTo == 2) {
+            $users = User::whereHas('role', function ($query) {
+                $query->where('role_type_id', '2');
+            })->get();
         } else {
             $users = User::newsletter()->get();
         }
