@@ -29,7 +29,9 @@ class SendNewsletterJob implements ShouldQueue
     }
 
     /**
-     * Execute the Job
+     * Execute the job.
+     *
+     * @return void
      */
     public function handle()
     {
