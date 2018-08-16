@@ -4,8 +4,8 @@ namespace App\Exports;
 
 use App\User;
 use Carbon\Carbon;
-use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -31,8 +31,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 $query = User::query();
         }
         //Check gifts relationship
-        if (!is_null($this->settings['gift'])) {
-
+        if (! is_null($this->settings['gift'])) {
             switch ($this->settings['gift']) {
                 case 0:
                     $query = $query->has('gifts');
@@ -40,8 +39,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                 case 1:
                     $query = $query->doesntHave('gifts');
                     break;
-                default:
-                    ;
+                default:;
             }
         }
         /*todo
@@ -52,7 +50,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
          */
 
         //Type of last membership
-        if (!is_null($this->settings['status'])) {
+        if (! is_null($this->settings['status'])) {
             switch ($this->settings['status']) {
                 case 0:
                     $query = $query->whereHas('subscriptions', function ($sub) {
@@ -63,40 +61,38 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
                     $query = $query->whereHas('subscriptions', function ($sub) {
                         $sub->where('date_end', '<', Carbon::now()->toDateString());
                     });
-                default;
+                default:
             }
-
-        };
+        }
         //Start and End date
         if (is_null($this->settings['status'])) {
-            if (!is_null($this->settings['startDate'])) {
+            if (! is_null($this->settings['startDate'])) {
                 $date = $this->settings['startDate'];
                 $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
                     $sub->where('date_end', '>=', $date);
                 });
             }
-            if (!is_null($this->settings['endDate'])) {
+            if (! is_null($this->settings['endDate'])) {
                 $date = $this->settings['endDate'];
                 $query = $query->whereHas('subscriptions', function ($sub) use ($date) {
                     $sub->where('date_start', '<=', $date);
                 });
-            };
-        };
-
+            }
+        }
 
         //Where Clause array
         $queries = [];
 
         //Regex cellphone and phone
-        if (!is_null($this->settings['phone'])) {
+        if (! is_null($this->settings['phone'])) {
             $query = $query->where('phone_1', 'REGEXP', $this->settings['phone']);
             $query = $query->orWhere('phone_2', 'REGEXP', $this->settings['phone']);
         }
 
         //Age query
-        if (!is_null($this->settings['ageNumber'])) {
+        if (! is_null($this->settings['ageNumber'])) {
             array_push($queries, ['birthdate', $this->settings['ageOperator'], Carbon::now()
-                ->subYear($this->settings['ageNumber']),]);
+                ->subYear($this->settings['ageNumber']), ]);
         }
         //unset bad $key in array settings for foreach
         unset($this->settings['exportFile'], $this->settings['exportFormat'], $this->settings['state'],
@@ -106,13 +102,13 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
 
         //Build last queries
         foreach ($this->settings as $key => $value) {
-            if (!is_null($value)) {
+            if (! is_null($value)) {
                 array_push($queries, [$key, '=', $value]);
             }
         }
 
         //Add where clause in query
-        if (!empty($queries)) {
+        if (! empty($queries)) {
             $this->query = $query->where($queries);
         } else {
             $this->query = $query;
@@ -122,7 +118,6 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping
     public function display()
     {
         return $this->query;
-
     }
 
     public function query()
