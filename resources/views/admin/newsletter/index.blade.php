@@ -27,21 +27,22 @@
         <tbody>
         @foreach($newsletters as $newsletter)
             <tr>
-                <th scope="row">{{ $newsletter->created_at }}</th>
+                <th>{{ $newsletter->created_at->format('h:m d/m/Y') }}</th>
                 <td>{{ $newsletter->title }}</td>
+                <td>{{ $newsletter->status }} : {{ $newsletter->counter }}</td>
                 <td class="text-right">
                     <a type="button-primary" class="btn btn-sm btn-outline-primary"
                        href="{{route('admin.newsletter.edit', ['newsletter' => $newsletter])}}"><span
                                 data-feather="edit"></span> Modifier</a>
-                    <a type="button-primary" class="btn btn-sm btn-sm btn-outline-danger"
-                       href="{{route('admin.newsletter.beforedelete', ['newsletter' => $newsletter])}}"><span
-                                data-feather="trash"></span> Supprimer</a>
                     <a type="button-primary" class="btn btn-sm btn-outline-secondary btn-sm"
                        href="{{route('admin.newsletter.duplicate', ['newsletter' => $newsletter])}}"><span
                                 data-feather="copy"></span> Dupliquer</a>
-                    <a type="button-primary" class="btn btn-sm btn-outline-secondary btn-sm"
+                    <a type="button-primary" class="btn btn-sm btn-outline-info btn-sm"
                        href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}"><span
-                                data-feather="display"></span> {{__('Display')  }}</a>
+                                data-feather="send"></span> {{__('Send')  }}</a>
+                    <a type="button-primary" class="btn btn-sm btn-sm btn-outline-danger"
+                       href="{{route('admin.newsletter.beforedelete', ['newsletter' => $newsletter])}}"><span
+                                data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>
         @endforeach

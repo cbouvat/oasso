@@ -29,34 +29,27 @@ class SendNewsletterJob implements ShouldQueue
     }
 
     /**
-     * Execute the job.
-     *
-     * @return void
+     * Execute the Job
      */
     public function handle()
     {
-        $counter = 0;
         $this->newsletter->status = 'sending';
         $this->newsletter->save();
 
-        if ($this->newsletter->sendTo === 1) {
+        if ($this->newsletter->sendTo == 1) {
             $users = User::all();
-        } elseif ($this->newsletter->sendTo === 2) {
-            $users = User::where('role.role_type_id', '2')->get();
         } else {
-            $users = User::where('newsletter', '1')->get();
-        };
+            $users = User::newsletter()->get();
+        }
 
         foreach ($users as $user) {
             Mail::to($user)->send(new SendNewsletter($this->newsletter));
-            $counter += 1;
 
-            $this->newsletter->counter = $counter; // update live counter in index page
+            $this->newsletter->increment('counter'); // update live counter in index page
             $this->newsletter->save();
         }
 
         $this->newsletter->status = 'sent';
-        $this->newsletter->counter = $counter;
         $this->newsletter->save();
     }
 }
