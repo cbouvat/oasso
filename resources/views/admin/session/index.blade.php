@@ -31,9 +31,13 @@
                 <td>{{ $session->ip_address }}</td>
                 <td>{{ $session->last_activity }}</td>
                 <td class="text-right">
-                    <a class="btn btn-sm btn-outline-danger"
-                       href="{{ route('admin.session.delete', $session) }}"><span
-                                data-feather="trash"></span> Déconnecter ce membre</a>
+                    <form action="{{ route('admin.session.delete', $session) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger"><span data-feather="trash"></span>
+                            Déconnecter
+                        </button>
+                    </form>
                 </td>
             </tr>
         @endforeach
