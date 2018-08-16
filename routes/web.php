@@ -67,7 +67,8 @@ Route::middleware('auth')->group(function () {
         // Gift
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
-            Route::post('/', 'GiftController@create')->name('create');
+            Route::get('/{user}', 'GiftController@create')->name('create');
+            Route::post('/{user}', 'GiftController@store')->name('store');
             Route::get('/create', 'GiftController@show')->name('show');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
