@@ -145,18 +145,13 @@ class SubscriptionController extends Controller
         return back()->with('message', 'Mise a jour effectuée');
     }
 
-    public function beforeDelete(Subscription $subscription)
-    {
-        return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
-    }
-
     /**
      * @todo
      *
      * Use Hashids
      *
      **/
-    public function optOut($subId, $userId)
+    public function optout($subId, $userId)
     {
         $subscription = Subscription::findOrFail($subId);
         $user = User::findOrFail($userId);
@@ -165,7 +160,7 @@ class SubscriptionController extends Controller
             $subscription->opt_out_mail = 1;
             $subscription->save();
 
-            return view('optOutMail');
+            return view('user.subscription.optout');
         } else {
             return abort(404);
         }

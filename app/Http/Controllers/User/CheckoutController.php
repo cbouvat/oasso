@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
 use Stripe\Charge;
 use Stripe\Stripe;
 use Stripe\Customer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CheckoutController extends Controller
 {

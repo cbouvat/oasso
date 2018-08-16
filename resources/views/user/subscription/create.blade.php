@@ -5,8 +5,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('user.user.index') }}">Mon Compte</a></li>
-                <li class="breadcrumb-item">Nouvelle adhésion</li>
+                <li class="breadcrumb-item">Adhésion</li>
             </ol>
         </nav>
     </div>
