@@ -2,6 +2,14 @@
 
 @section('content')
     <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Dons</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
         <div class="row">
             <div class="col-12">
                 <div>
@@ -11,7 +19,7 @@
                     <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
-                        <form action="{{route('user.gift.create')}}" method="post">
+                        <form action="{{route('user.gift.store')}}" method="post">
                             @csrf
                             <div class="input-group">
                                 <input type="text" name="amount" class="form-control text-right">
@@ -60,13 +68,9 @@
                             </tr>
                         @empty
                             <tr>
-                                <th></th>
-                                <th>Vous n'avez réalisé aucun don pour le moment ...</th>
-                                <td></td>
-                                <td></td>
+                                <td colspan="4">Vous n'avez réalisé aucun don pour le moment ...</td>
                             </tr>
                         @endforelse
-
                         </tbody>
                     </table>
                 </div>

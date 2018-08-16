@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class SearchController extends Controller
 {
-    public function index()
-    {
-    }
-
     public function search(Request $request)
     {
         $validator = Validator::make($request->all(), [

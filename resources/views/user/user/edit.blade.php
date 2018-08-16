@@ -1,17 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+                <li class="breadcrumb-item">Modification informations personnelles</li>
+            </ol>
+        </nav>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
-                <form action="{{ URL::route('user.update', ['user'=> $user]) }}" method="post">
+                <form action="{{ route('user.update') }}" method="post">
                     @csrf
-                    {{--@method('PUT')--}}
-
-                    {{--@foreach ($errors->all() as $error)--}}
-                    {{--<li>{{ $error }}</li>--}}
-                    {{--@endforeach--}}
-
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
 
                         <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Mes Infos</h4></div>

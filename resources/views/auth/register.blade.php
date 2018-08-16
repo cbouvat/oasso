@@ -1,9 +1,9 @@
-@extends('layouts.emptyLayout')
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 py-4">
                 <div class="card">
                     <div class="card-header">{{ __('Register') }}</div>
                     <div class="card-body">
@@ -54,13 +54,22 @@
                                 <label for="gender"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
-                                    <select id="gender" name="gender" class="custom-select">
-                                        <option value="0" @if(old('gender') == 0) selected @endif>{{ __('Gender') }}</option>
-                                        <option value="1" @if(old('gender') == 1) selected @endif>{{ __('Mr') }}</option>
-                                        <option value="2" @if(old('gender') == 2) selected @endif>{{ __('Ms') }}</option>
+                                    <select id="gender" name="gender"
+                                            class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
+                                        <option value="0">  {{ __('Choose gender') }}</option>
+                                        <option value="1"
+                                                @if(old('gender') ==1)selected @endif> {{ __('Male') }}</option>
+                                        <option value="2"
+                                                @if(old('gender') ==2)selected @endif>{{ __('Female') }}</option>
                                     </select>
+                                    @if ($errors->has('gender'))
+                                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('gender') }}</strong>
+                        </span>
+                                    @endif
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="lastname"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
@@ -167,6 +176,7 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group row">
                                 <label for="phone_2"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Phone 2') }}</label>
@@ -181,39 +191,26 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="newspaper"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('NewsPaper') }}</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper" id="newspaper1"
-                                           value="1" @if(old('newspaper') == 1) checked @endif>
-                                    <label class="form-check-label" for="newspaper1">
-                                        {{ __('Yes') }}
-                                    </label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newspaper" id="newspaper2"
-                                           value="0" checked @if(old('newspaper') == 0) checked @endif>
-                                    <label class="form-check-label" for="newspaper2">
-                                        {{ __('No') }}
-                                    </label>
+                                <div class="col-md-8 offset-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1"
+                                               @if(old('newsletter') == 1) checked @endif>
+                                        <label for="newsletter"
+                                               class="col-form-label text-md-right">{{ __('Subscribe to the newsletter') }}</label>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="newsletter"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter" id="newsletter1"
-                                           value="1" @if(old('newsletter') == 1) checked @endif>
-                                    <label class="form-check-label" for="newsletter1">{{ __('Yes') }}</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="newsletter"
-                                           id="newsletter2" value="0" checked
-                                           @if(old('newsletter') == 0) checked @endif>
-                                    <label class="form-check-label" for="newsletter2">
-                                        {{ __('No') }}
-                                    </label>
+                                <div class="col-md-8 offset-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
+                                               @if(old('newspaper') == 1) checked @endif>
+                                        <label for="newspaper"
+                                               class="col-form-label text-md-right">{{ __('Subscribe to the newspaper') }}</label>
+                                    </div>
                                 </div>
                             </div>
 
@@ -223,9 +220,12 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
                                 <div class="col-md-6">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
-                                        <option value="0" @if(old('gender_joint') == 0) selected @endif>{{ __('Partner Gender') }}</option>
-                                        <option value="1" @if(old('gender_joint') == 1) selected @endif>{{ __('Mr') }}</option>
-                                        <option value="2" @if(old('gender_joint') == 2) selected @endif>{{ __('Ms') }}</option>
+                                        <option value="0"
+                                                @if(old('gender_joint') == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                        <option value="1"
+                                                @if(old('gender_joint') == 1) selected @endif>{{ __('Mr') }}</option>
+                                        <option value="2"
+                                                @if(old('gender_joint') == 2) selected @endif>{{ __('Ms') }}</option>
                                     </select>
                                 </div>
                             </div>

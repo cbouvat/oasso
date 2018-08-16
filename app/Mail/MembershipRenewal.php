@@ -6,9 +6,8 @@ use App\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MembershipRenewal extends Mailable implements ShouldQueue
+class MembershipRenewal extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -32,6 +31,7 @@ class MembershipRenewal extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->markdown('emails.membership.renewal')
-            ->subject('Un an de plus chez '.config('app.name').' !');
+            ->subject('Un an de plus chez '.config('app.name').' !')
+          ->text('emails.membership.renewal');
     }
 }

@@ -11,19 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class NewsletterController extends Controller
 {
     /**
-     * NewsletterController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-        $newsletters = Newsletter::latest()->paginate(20);
+        $newsletters = Newsletter::latest()->paginate();
 
         return view('admin.newsletter.index', ['newsletters' => $newsletters]);
     }

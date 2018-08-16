@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Auth;
+use App\User;
 use App\Payment;
 use App\Subscription;
 use App\PaymentMethod;
@@ -143,16 +144,31 @@ class SubscriptionController extends Controller
         return back()->with('message', 'Mise a jour effectuée');
     }
 
-    public function beforeDelete(Subscription $subscription)
+    /**
+     * @todo
+     *
+     * Use Hashids
+     *
+     **/
+    public function optout($subId, $userId)
     {
-        return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
+        $subscription = Subscription::findOrFail($subId);
+        $user = User::findOrFail($userId);
+
+        if ($subscription->user_id === $user->id) {
+            $subscription->opt_out_mail = 1;
+            $subscription->save();
+
+            return view('user.subscription.optout');
+        } else {
+            return abort(404);
+        }
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {

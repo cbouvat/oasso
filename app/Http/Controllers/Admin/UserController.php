@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
+        $users = User::orderBy('lastname', 'asc')->paginate();
 
         return view('admin.user.index', ['users' => $users]);
     }
@@ -49,8 +49,8 @@ class UserController extends Controller
             'birthdate' => 'required|date|before:today-13years|after:today-120years',
             'address_line1' => 'required|string|max:32',
             'address_line2' => 'string|max:32|nullable',
-            'zipcode' => 'required|string|max:20 |regex:/^\d{5}(?:[-\s]\d{4})?$/',
-            'city' => 'required|string|alpha|max:45 |min:2',
+            'zipcode' => 'required|string|max:20|regex:/^\d{5}(?:[-\s]\d{4})?$/',
+            'city' => 'required|string|alpha|max:45|min:2',
             'email' => 'email|max:255|unique:users|nullable',
             'gender_joint' => 'nullable|integer',
             'lastname_joint' => 'string |max:45|min:2|alpha|nullable',
@@ -91,8 +91,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('subscriptions.subscriptionType')
-            ->load('gifts');
+        $user->load('subscriptions.type')
+            ->load('gifts.payment.paymentMethod');
 
         return view('admin.user.show', ['user' => $user]);
     }
@@ -120,23 +120,21 @@ class UserController extends Controller
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function beforeDelete($id)
+    public function beforeDelete(User $user)
     {
-        $user = User::findOrFail($id);
-
         return view('admin.user.beforedelete', ['user' => $user]);
     }
 
     /**
-     * @param $id
+     * @param User $user
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function softDelete($id)
+    public function softDelete(User $user)
     {
-        $user = User::findOrFail($id);
         $user->delete();
 
         return redirect()->route('home')->with('message', $user->firstname.' supprimé !');

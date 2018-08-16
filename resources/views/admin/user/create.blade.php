@@ -211,20 +211,27 @@
             </div>
 
             <div class="form-group row">
-                <label for="newspaper"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Newspaper') }}</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
-                           @if(old('newspaper') == 1) checked @endif>
+                <div class="col-md-8 offset-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="newsletter"
+                               id="newsletter"
+                               value="1"
+                               @if(old('newsletter') == 1) checked @endif>
+                        <label for="newsletter"
+                               class="col-form-label text-md-right">{{ __('Subscribe to the newsletter') }}</label>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="newsletter"
-                       class="col-md-4 col-form-label text-md-right">{{ __('Newsletter') }}</label>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1"
-                           @if(old('newsletter') == 1) checked @endif>
+                <div class="col-md-8 offset-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper"
+                               value="1"
+                               @if(old('newspaper') == 1) checked @endif>
+                        <label for="newspaper"
+                               class="col-form-label text-md-right">{{ __('Subscribe to the newspaper') }}</label>
+                    </div>
                 </div>
             </div>
 
