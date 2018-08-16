@@ -209,7 +209,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         method: 'post',
-                        url: '127.0.0.1:projet_de_revv.test/',
+                        url: 'http://projet_de_revv.test/admin/export/display',
                         data: $('#formExport').serialize(),
                         dataType: 'Json',
                         success: function (response) {
