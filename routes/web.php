@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'UserController@store')->name('store');
             Route::get('/create', 'UserController@create')->name('create');
             Route::get('/{user}', 'UserController@show')->name('show');
+            Route::post('/{user}', 'UserController@update')->name('update');
+            Route::get('/{user}/edit', 'UserController@edit')->name('edit');
             Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
             Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
         });
