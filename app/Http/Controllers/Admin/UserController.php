@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
     }
 
     /**
@@ -152,16 +152,18 @@ class UserController extends Controller
         if ($user->id != \Auth::user()->id) {
             if ($user->subscriptions()->first() || $user->gifts()->first()) {
                 $user->delete();
+
                 return redirect()->route('admin.user.index')
-                    ->with('message', $user->firstname . ' supprimé, mais ' . $user->firstname . ' a un don ou une adhésion et ne peut pas etre retiré de la base de donnée');
+                    ->with('message', $user->firstname.' supprimé, mais '.$user->firstname.' a un don ou une adhésion et ne peut pas etre retiré de la base de donnée');
             } else {
-                \DB::delete('delete from users where id=' . $user->id);
+                \DB::delete('delete from users where id='.$user->id);
+
                 return redirect()->route('admin.user.index')
-                    ->with('message', $user->firstname . ' est totalement supprimé');
+                    ->with('message', $user->firstname.' est totalement supprimé');
             }
         } else {
             return redirect()->route('admin.user.index')
-                ->with('message', $user->firstname . ' ne peut pas etre supprimé');
+                ->with('message', $user->firstname.' ne peut pas etre supprimé');
         }
     }
 }
