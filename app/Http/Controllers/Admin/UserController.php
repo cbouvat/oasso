@@ -117,12 +117,11 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-
         $validateData = $request->validate([
             'gender' => 'integer|max:2|nullable',
             'firstname' => 'required|alpha|string|max:45|min:2',
             'lastname' => 'required|alpha|string|max:45|min:2',
-            'email' => 'string|required|email|max:255|unique:users,email,' . $user->id,
+            'email' => 'string|required|email|max:255|unique:users,email,'.$user->id,
             'birthdate' => '|date|before:today-13years|after:today-120years',
             'address_line1' => '|string|max:32|',
             'address_line2' => '|string|max:32|nullable',
@@ -177,7 +176,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('home')->with('message', $user->firstname . ' supprimé !');
+        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
     }
 
     /**
