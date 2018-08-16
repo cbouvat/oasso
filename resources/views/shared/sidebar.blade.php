@@ -75,7 +75,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/session*') ? 'active' : '' }}" href="{{ route('admin.session.index') }}">
-                <span data-feather="cloud"></span> Connexions
+                <span data-feather="user-x"></span> Connexions
             </a>
         </li>
     </ul>
