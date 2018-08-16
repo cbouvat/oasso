@@ -15,6 +15,8 @@ class Subscription extends Model
         'amount', 'opt_out_mail', 'user_id', 'subscription_type_id', 'date_start', 'date_end', 'subscription_source',
     ];
 
+    protected $dates = ['date_start'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
