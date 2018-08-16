@@ -113,7 +113,7 @@ class SubscriptionController extends Controller
             'date_start' => 'required|date',
         ]);
 
-        $validator['date_end'] = date('Y-m-d', strtotime($subscription->date_start . ' +1 year'));;
+        $validator['date_end'] = date('Y-m-d', strtotime($subscription->date_start.' +1 year'));
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 
