@@ -33,7 +33,6 @@ class UserController extends Controller
         $user->load('role');
 
         return view('user.user.edit', ['user' => $user]);
-
     }
 
     /**
