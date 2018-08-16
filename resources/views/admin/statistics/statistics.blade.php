@@ -64,7 +64,7 @@
                                 response +=
                                     '<tr>' +
                                     '<td>' + data.data.labels[j] + '</td>' +
-                                    '<td>' + percentage + '</td>' +
+                                    '<td>' + percentage+ '%' + '</td>' +
                                     '<td>' + data.data.datasets[0].data[j] + '</td>' +
                                     '</tr>';
                             }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -10,36 +11,88 @@ class StatisticController extends Controller
 {
     public function index(Request $request)
     {
-        $months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
-
         $type = $request->input('type');
         $dateStart = $request->input('date_start');
         $dateEnd = $request->input('date_end');
-
-        $dataArray = [];
+        $range = $request->input('range');
 
         switch ($type) {
             case 'general':
                 $chartTitle = "Nombre d'adhésions";
                 $chartType = "line";
 
-                $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                    DB::raw('MONTH(subscription_date) as month'))
-                    ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                    ->groupBy('month')
-                    ->get();
+                $dataRange=[];
+                switch ($range) {
+                    case 'days':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-\', DAY(subscription_date)) as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
 
-                $dataArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addDay()) {
+                            $tableDate[$dateStartCarb->format('Y-n-j')] = 0;
+                            array_push($dataRange, $dateStartCarb->toDateString());
+                        }
+                        break;
+
+                    case 'months':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-1\') as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addMonth()) {
+                            $tableDate[$dateStartCarb->format('Y-n-1')] = 0;
+                            array_push($dataRange, $dateStartCarb->format('F-y'));
+                        }
+                        break;
+
+                    case 'years':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-1-1\') as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addYear()) {
+                            $tableDate[$dateStartCarb->format('Y-1-1')] = 0;
+                            array_push($dataRange, $dateStartCarb->format('Y'));
+                        }
+                        break;
+                    default:
+                        return response()->json(['message' => 'Not Found !'], 404);
+                }
+
                 foreach ($datas as $data) {
-                    $dataArray[$data->month - 1] = $data->subscription_count;
+                    $tableDate[$data->date] = $data->subscription_count;
                 };
 
+                $dataFinals = array_values($tableDate);
+
+
                 $chartData = [
-                    "labels" => $months,
+                    "labels" => $dataRange,
                     "datasets" => [
                         [
                             "label" => [$chartTitle],
-                            "data" => $dataArray,
+                            "data" => $dataFinals,
                             "borderColor" => [
                                 "rgba(250,0,0,1)"
                             ],
@@ -47,13 +100,14 @@ class StatisticController extends Controller
                                 "rgba(0,0,0,0)"
                             ],
                             "borderWidth" => 2
+
                         ]
                     ]
                 ];
                 break;
             case 'subscriptions':
                 $chartType = "pie";
-                $chartTitle = "Adhésion par type";
+                $chartTitle = "Adhésions par type";
 
                 $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscriptionType_count'))
                     ->whereBetween('subscription_date', [$dateStart, $dateEnd])
@@ -119,45 +173,144 @@ class StatisticController extends Controller
                 ];
                 break;
             case 'receipts':
-                $chartType = "doughnut";
-                $chartTitle = "Répartition des recettes";
+                $chartType = "line";
+                $chartTitle = ["Adhésions", "Dons"];
 
-                /*$datas = DB::table('subscriptions')
-                    ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                    ->select(DB::raw('sum(amount) as amountSum'))
-                    ->get();*/
-
-                $datasSubs = DB::table('payments')
+                /*$datasSubs = DB::table('payments')
                     ->where('payment_type', '=', 'App\Subscription')
                     ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
-                    ->select(DB::raw('sum(payments.amount) as amountSum'))
+                    ->select(DB::raw('sum(payments.amount) as amountSum'), DB::raw('MONTH(subscription_date) as month'))
                     ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
+                    ->groupBy('month')
                     ->get();
 
                 $datasGifts = DB::table('payments')
                     ->where('payment_type', '=', 'App\Gift')
                     ->join('gifts', 'payment_id', '=', 'gifts.id')
-                    ->select(DB::raw('sum(payments.amount) as amountSum'))
+                    ->select(DB::raw('sum(payments.amount) as amountSum'), DB::raw('MONTH(gifts.created_at) as month'))
                     ->whereBetween('gifts.created_at', [$dateStart, $dateEnd])
+                    ->groupBy('month')
                     ->get();
 
+                $dataArray1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                foreach ($datasSubs as $data) {
+                    $dataArray1[$data->month - 1] = (int)$data->amountSum;
+                };
 
-                $dataArray = [$datasSubs->get(0)->amountSum, $datasGifts->get(0)->amountSum];
+                $dataArray2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                foreach ($datasGifts as $data) {
+                    $dataArray2[$data->month - 1] = (int)$data->amountSum;
+                };*/
+                $dataRange=[];
+                switch ($range) {
+                    case 'days':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-\', DAY(subscription_date)) as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
 
-                $chartData = [
-                    "labels" => [
-                        'Adhésions',
-                        'Dons'
-                    ],
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addDay()) {
+                            $tableDate[$dateStartCarb->format('Y-n-j')] = 0;
+                            array_push($dataRange, $dateStartCarb->toDateString());
+                        }
+                        break;
+
+                    case 'months':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-1\') as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addMonth()) {
+                            $tableDate[$dateStartCarb->format('Y-n-1')] = 0;
+                            array_push($dataRange, $dateStartCarb->format('F-y'));
+                        }
+                        break;
+
+                    case 'years':
+                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
+                            DB::raw('CONCAT(YEAR(subscription_date), \'-1-1\') as date'))
+                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscription_date')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDate = [];
+                        $dateStartCarb = Carbon::parse($dateStart);
+                        $dateEndCarb = Carbon::parse($dateEnd);
+
+                        for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addYear()) {
+                            $tableDate[$dateStartCarb->format('Y-1-1')] = 0;
+                            array_push($dataRange, $dateStartCarb->format('Y'));
+                        }
+                        break;
+                    default:
+                        return response()->json(['message' => 'Not Found !'], 404);
+                }
+
+                foreach ($datas as $data) {
+                    $tableDate[$data->date] = $data->subscription_count;
+                };
+
+                $dataFinals = array_values($tableDate);
+
+
+                /*$chartData = [
+                    "labels" => $dataRange,
                     "datasets" => [
                         [
-                            "data" => $dataArray,
-                            "backgroundColor" => [
-                                "#FF6384",
-                                "#36A2EB",
-                                "#FFCE56",
-                                "#69D76B"
+                            "label" => [$chartTitle],
+                            "data" => $dataFinals,
+                            "borderColor" => [
+                                "rgba(250,0,0,1)"
                             ],
+                            "backgroundColor" => [
+                                "rgba(0,0,0,0)"
+                            ],
+                            "borderWidth" => 2
+
+                        ]
+                    ]
+                ];*/
+
+                $chartData = [
+                    "labels" => $dataRange,
+                    "datasets" => [
+                        [
+                            "label" => [$chartTitle[0]],
+                            "data" => $dataFinals1,
+                            "borderColor" => [
+                                "rgba(250,0,0,1)"
+                            ],
+                            "backgroundColor" => [
+                                "rgba(0,0,0,0)"
+                            ],
+                            "borderWidth" => 2
+
+                        ],
+                        [
+                            "label" => [$chartTitle[1]],
+                            "data" => $dataFinals2,
+                            "borderColor" => [
+                                "rgba(0,250,0,1)"
+                            ],
+                            "backgroundColor" => [
+                                "rgba(0,0,0,0)"
+                            ],
+                            "borderWidth" => 2
+
                         ]
                     ]
                 ];
