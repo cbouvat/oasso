@@ -11,7 +11,7 @@
             <p>Prénom : {{$user->firstname}}</p>
             <p>Adresse : {{$user->address_line1}}</p>
             <p>Complément d'adresse : {{$user->address_line2}}</p>
-            <p>date de naissance : {{$user->birthdate}}</p>
+            <p>date de naissance : {{\Carbon\Carbon::parse($user->birthdate)->format('d/m/Y')}}</p>
             <p>Téléphone 1 : {{$user->phone_number_1}}</p>
             <p>Téléphone 2 : {{$user->phone_number_2}}</p>
         </div>
