@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-sm-6">
-            <form action="{{ route('user.update') }}" method="post">
+            <form action="{{ route('admin.user.update', $user) }}" method="post">
                 @csrf
                 <h2>{{ $user->firstname }} {{ $user->lastname }}</h2>
 
