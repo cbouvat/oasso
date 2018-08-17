@@ -4,8 +4,8 @@
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Dons</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+                <li class="breadcrumb-item">{{ __('app.Gifts') }}</li>
             </ol>
         </nav>
     </div>
@@ -13,10 +13,10 @@
         <div class="row">
             <div class="col-12">
                 <div>
-                    <h1>Faire un Don</h1>
+                    <h1>{{ __('app.Make a gift') }}</h1>
                 </div>
                 <div class="text-center p-5 border border-success rounded">
-                    <h5>Participer d'avantage à l'Association {{config('app.name')}}</h5>
+                    <h5>{{config('app.name')}}</h5>
 
                     <div class="col-12 col-md-4 offset-md-4 mt-5">
                         <form action="{{route('user.gift.store')}}" method="post">
@@ -34,7 +34,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <input value="Donner" type="submit" class="btn btn-outline-success btn-block pt-2 mt-2">
+                            <input value="{{ __('app.Give') }}" type="submit" class="btn btn-outline-success btn-block pt-2 mt-2">
                         </form>
                     </div>
 
@@ -46,16 +46,16 @@
         <div class="row pt-5">
             <div class="col-12">
                 <div>
-                    <h1>Votre Historique de don</h1>
+                    <h1>{{ __('app.History of your donation(s)') }}</h1>
                 </div>
                 <div class="text-center p-5 border border-success rounded">
                     <table class="table">
                         <thead class="bg-success text-white">
                         <tr>
-                            <th scope="col">Donateur</th>
-                            <th scope="col">Montant</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Methode de paiement</th>
+                            <th scope="col">{{ __('app.Donor') }}</th>
+                            <th scope="col">{{ __('app.Amount') }}</th>
+                            <th scope="col">{{ __('app.Date') }}</th>
+                            <th scope="col">{{ __('app.Payment method') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -68,7 +68,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">Vous n'avez réalisé aucun don pour le moment ...</td>
+                                <td colspan="4">{{ __('app.No gift') }}</td>
                             </tr>
                         @endforelse
                         </tbody>
