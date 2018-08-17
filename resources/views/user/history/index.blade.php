@@ -2,26 +2,26 @@
 
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1>Historique</h1>
+        <h1>{{ __('app.Historical') }}</h1>
     </div>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item">Historique</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+            <li class="breadcrumb-item">{{ __('app.Historical') }}</li>
         </ol>
     </nav>
 
     <div class="row">
         <div class="col-md-6">
-            <h4>Adhésions</h4>
+            <h4>{{ __('app.Subscriptions') }}</h4>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Depuis</th>
-                    <th>Jusqu'au</th>
-                    <th>Montant</th>
-                    <th>Status</th>
+                    <th>{{ __('app.Since') }}</th>
+                    <th>{{ __('app.Until') }}</th>
+                    <th>{{ __('app.Amount') }}</th>
+                    <th>{{ __('app.Status') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">Aucune adhésion</td>
+                            <td colspan="4">{{ __('app.No subscription') }}</td>
                         </tr>
                     @endforelse
                 @endif
@@ -43,12 +43,12 @@
             </table>
         </div>
         <div class="col-md-6">
-            <h4>Dons</h4>
+            <h4>{{ __('app.Gifts') }}</h4>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Montant</th>
+                    <th>{{ __('app.Date') }}</th>
+                    <th>{{ __('app.Amount') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -60,7 +60,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4">Aucun don</td>
+                            <td colspan="4">{{ __('app.No gift') }}</td>
                         </tr>
                     @endforelse
                 @endif
