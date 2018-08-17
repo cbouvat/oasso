@@ -22,6 +22,56 @@ class User extends Authenticatable
     ];
 
     /**
+     * Set the user's first name.
+     * @param  string $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['firstname'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user's last name.
+     * @param  string $value
+     * @return void
+     */
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['lastname'] = strtoupper($value);
+    }
+
+    /**
+     * Set the users city
+     * @param $value
+     * @return void
+     */
+    public function setCityAttribute($value)
+    {
+        $this->attributes['city'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user joint first name.
+     * @param  string $value
+     * @return void
+     */
+    public function setFirstNameJointAttribute($value)
+    {
+        $this->attributes['firstname_joint'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user joint last name.
+     * @param  string $value
+     * @return void
+     */
+    public function setLastNameJointAttribute($value)
+    {
+        $this->attributes['lastname_joint'] = strtoupper($value);
+    }
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
