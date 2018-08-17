@@ -15,6 +15,7 @@ class StatisticController extends Controller
         $dateStart = $request->input('date_start');
         $dateEnd = $request->input('date_end');
         $range = $request->input('range');
+        $optionsChart=[];
 
         switch ($type) {
             case 'general':
@@ -86,6 +87,8 @@ class StatisticController extends Controller
 
                 $dataFinals = array_values($tableDate);
 
+                $stepSize = round((max($dataFinals) - min($dataFinals))/10);
+
                 $chartData = [
                     'labels' => $dataRange,
                     'datasets' => [
@@ -93,15 +96,29 @@ class StatisticController extends Controller
                             'label' => [$chartTitle],
                             'data' => $dataFinals,
                             'borderColor' => [
-                                'rgba(250,0,0,1)',
+                                'rgba(77,136,255,1)',
                             ],
                             'backgroundColor' => [
                                 'rgba(0,0,0,0)',
                             ],
                             'borderWidth' => 2,
-
+                            'lineTension' => 0
                         ],
                     ],
+                ];
+
+                $optionsChart= [
+                    'scales' => [
+                        'yAxes' => [
+                            [
+                                'ticks' => [
+                                    'beginAtZero' => true,
+                                    'stepSize' => $stepSize!=0 ? $stepSize : 1
+                                ]
+                            ]
+
+                        ]
+                    ]
                 ];
                 break;
             case 'subscriptions':
@@ -303,6 +320,12 @@ class StatisticController extends Controller
                 $dataFinals1 = array_values($tableDateSubs);
                 $dataFinals2 = array_values($tableDateGifts);
 
+                $stepSize1 = round((max($dataFinals1) - min($dataFinals1))/10);
+                $stepSize2 = round((max($dataFinals2) - min($dataFinals2))/10);
+
+                $stepSize = max($stepSize1, $stepSize2);
+
+               // dd($stepSize);
                 $chartData = [
                     'labels' => $dataRange,
                     'datasets' => [
@@ -310,27 +333,41 @@ class StatisticController extends Controller
                             'label' => [$chartTitle[0]],
                             'data' => $dataFinals1,
                             'borderColor' => [
-                                'rgba(250,0,0,1)',
+                                'rgba(77,136,255,1)',
                             ],
                             'backgroundColor' => [
                                 'rgba(0,0,0,0)',
                             ],
-                            'borderWidth' => 2,
+                            'borderWidth' => 2
 
                         ],
                         [
                             'label' => [$chartTitle[1]],
                             'data' => $dataFinals2,
                             'borderColor' => [
-                                'rgba(0,250,0,1)',
+                                'rgba(45,190,40,1)',
                             ],
                             'backgroundColor' => [
                                 'rgba(0,0,0,0)',
                             ],
-                            'borderWidth' => 2,
+                            'borderWidth' => 2
 
                         ],
                     ],
+                ];
+
+                $optionsChart= [
+                    'scales' => [
+                        'yAxes' => [
+                            [
+                                'ticks' => [
+                                    'beginAtZero' => true,
+                                    'stepSize' => $stepSize!=0 ? $stepSize : 1
+                                ]
+                            ]
+
+                        ]
+                    ]
                 ];
                 break;
             default:
@@ -340,6 +377,7 @@ class StatisticController extends Controller
         $json = [
             'type' => $chartType,
             'data' => $chartData,
+            'options' => $optionsChart
         ];
 
         return $json;
