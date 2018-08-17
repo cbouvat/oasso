@@ -28,7 +28,7 @@ class User extends Authenticatable
      */
     public function setFirstNameAttribute($value)
     {
-        $this->attributes['firstname'] = ucfirst($value);
+        $this->attributes['firstname'] = ucfirst(strtolower($value));
     }
 
     /**
@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     public function setCityAttribute($value)
     {
-        $this->attributes['city'] = ucfirst($value);
+        $this->attributes['city'] = ucfirst(strtolower($value));
     }
 
     /**
@@ -58,7 +58,7 @@ class User extends Authenticatable
      */
     public function setFirstNameJointAttribute($value)
     {
-        $this->attributes['firstname_joint'] = ucfirst($value);
+        $this->attributes['firstname_joint'] = ucfirst(strtolower($value));
     }
 
     /**
