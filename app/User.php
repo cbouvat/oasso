@@ -79,11 +79,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Subscription')->latest();
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
-     */
-    public function sessions()
+    public function lastSubscription()
     {
-        return $this->hasMany('App\Session')->latest();
+        return $this->hasOne('App\Subscription')->orderBy('date_end', 'desc')->first();
     }
 }

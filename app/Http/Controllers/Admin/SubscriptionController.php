@@ -32,12 +32,12 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        $payments_methods = PaymentMethod::all();
-        $subscription_types = SubscriptionType::all();
+        $paymentsMethods = PaymentMethod::all();
+        $subscriptionTypes = SubscriptionType::all();
 
         return view('admin.subscription.create', [
-            'payments_methods' => $payments_methods,
-            'subscription_types' => $subscription_types,
+            'paymentsMethods' => $paymentsMethods,
+            'subscriptionTypes' => $subscriptionTypes,
         ]);
     }
 

@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/subscription')->name('subscription.')->group(function () {
             Route::get('/', 'SubscriptionController@create')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
+            Route::get('/generatePdf', 'SubscriptionController@generatePdf')->name('generatePdf');
         });
 
         // Gift
