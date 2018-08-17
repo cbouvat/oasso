@@ -41,6 +41,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('admin')->middleware('role')->namespace('Admin')->name('admin.')->group(function () {
+        // Search
+        Route::get('/search', 'SearchController@search')->name('search');
+
         // User
         Route::prefix('user')->name('user.')->group(function () {
             Route::get('/', 'UserController@index')->name('index');
@@ -70,8 +73,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'GiftController@show')->name('show');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
-            Route::get('/{gift}/destroy', 'GiftController@destroy')->name('destroy');
-            Route::get('/{gift}/before-delete', 'GiftController@beforeDelete')->name('beforeDelete');
+            Route::get('/{gift}/delete', 'GiftController@delete')->name('delete');
+            Route::delete('/{gift}/delete', 'GiftController@destroy')->name('destroy');
         });
 
         // Newsletter
@@ -93,13 +96,16 @@ Route::middleware('auth')->group(function () {
             Route::post('/{mailing}', 'MailingController@update')->name('update');
         });
 
-        // Search
-        Route::get('/search', 'SearchController@search')->name('search');
+        // Session
+        Route::prefix('session')->name('session.')->group(function () {
+            Route::get('/', 'SessionController@index')->name('index');
+            Route::delete('/{session}', 'SessionController@destroy')->name('delete');
+        });
     });
 });
 
 // Output
-Route::get('/optout/{subscription}/{user}', 'SubscriptionController@optout')->name('optout');
+Route::get('/optout/{subscription}/{user}', 'User\SubscriptionController@optout')->name('optout');
 
 // Auth
 Auth::routes();
