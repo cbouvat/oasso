@@ -30,9 +30,9 @@
         <tbody>
         @forelse($subscriptions as $subscription)
             <tr>
-                <td>{{ $subscription->date_start->format('d/m/Y') }}</td>
+                <td scope="row">{{ $subscription->date_start->format('d/m/Y') }}</td>
                 <td>{{ $subscription->date_end->format('d/m/Y') }}</td>
-                <td scope="row">{{ $subscription->user->firstname }} {{ $subscription->user->lastname }}</td>
+                <td>{{ $subscription->user->firstname }} {{ $subscription->user->lastname }}</td>
                 <td>{{ $subscription->type->name }}</td>
                 <th>{{ $subscription->amount }} € ({{ $subscription->type->amount }} €)</th>
                 <td>{{ $subscription->payment ? $subscription->payment->paymentMethod->name : '' }}</td>

@@ -13,72 +13,68 @@
         </ol>
     </nav>
 
-    <div class="row">
-        <div class="col-12 col-md-8 offset-md-2 mt-5">
-            <form action="{{route('admin.subscription.update', $subscription)}}" method="post">
-                @csrf
-                <div class="form-group row">
-                    <label for="subscription_type"
-                           class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
-                    <div class="col-md-6">
-                        <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
-                            @foreach($subscription_types as $subscription_type)
-                                <option value="{{ $subscription_type->id }}" {{ $subscription_type->id == $subscription->subscription_type_id ? 'selected' : ''}}>
-                                    {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="payment_method_id"
-                           class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
-                    <div class="col-md-6">
-                        <select id="payment_method_id" name="payment_method_id" class="custom-select">
-                            @foreach($payments_methods as $payment_method)
-                                <option value="{{ $payment_method->id }}" {{$payment_method->id == $subscription->payment->payment_method_id ? 'selected' : ''}}>
-                                    {{ $payment_method->name}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="amount"
-                           class="col-md-4 col-form-label text-md-right">Montant</label>
-                    <div class="col-md-6">
-                        <div class="input-group">
-                            <input id="amount" type="text"
-                                   class="form-control text-right {{ $errors->has('amount') ? 'is-invalid' : '' }}"
-                                   name="amount"
-                                   value="{{ old('amount') ? old('amount') : $subscription->amount }}">
-                            <div class="input-group-append">
-                                <span class="input-group-text">€</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="date_start"
-                           class="col-md-4 col-form-label text-md-right">Date de départ</label>
-                    <div class="col-md-6">
-                        <input id="date_start" type="date"
-                               class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}"
-                               name="date_start"
-                               value="{{  old('date_start') ?  old('date_start') : $subscription->date_start}}">
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <input type="submit" class="btn btn-primary" value="Editer">
-
-                </div>
-            </form>
+    <form class="col-md-8 offset-md-2" action="{{route('admin.subscription.update', $subscription)}}"
+          method="post">
+        @csrf
+        <div class="form-group row">
+            <label for="subscription_type"
+                   class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
+            <div class="col-md-6">
+                <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
+                    @foreach($subscription_types as $subscription_type)
+                        <option value="{{ $subscription_type->id }}" {{ $subscription_type->id == $subscription->subscription_type_id ? 'selected' : ''}}>
+                            {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
 
+        <div class="form-group row">
+            <label for="payment_method_id"
+                   class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
+            <div class="col-md-6">
+                <select id="payment_method_id" name="payment_method_id" class="custom-select">
+                    @foreach($payments_methods as $payment_method)
+                        <option value="{{ $payment_method->id }}" {{$payment_method->id == $subscription->payment->payment_method_id ? 'selected' : ''}}>
+                            {{ $payment_method->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="amount"
+                   class="col-md-4 col-form-label text-md-right">Montant</label>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input id="amount" type="text"
+                           class="form-control text-right {{ $errors->has('amount') ? 'is-invalid' : '' }}"
+                           name="amount"
+                           value="{{ old('amount') ? old('amount') : $subscription->amount }}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">€</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="date_start"
+                   class="col-md-4 col-form-label text-md-right">Date de départ</label>
+            <div class="col-md-6">
+                <input id="date_start" type="date"
+                       class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}"
+                       name="date_start"
+                       value="{{  old('date_start') ?  old('date_start') : $subscription->date_start->format('Y-m-d')}}">
+            </div>
+        </div>
+
+        <div class="col-md-8 offset-md-4">
+            <input type="submit" class="btn btn-primary" value="Editer">
+
+        </div>
+    </form>
 
 @endsection

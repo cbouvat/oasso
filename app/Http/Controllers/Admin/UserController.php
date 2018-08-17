@@ -123,21 +123,11 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function beforeDelete(User $user)
+    public function delete(User $user)
     {
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
-
-    /**
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
-    public function softDelete(User $user)
-    {
-        $user->delete();
-
-        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
+        $user->load('subscriptions')
+            ->load('gifts');
+        return view('admin.user.delete', ['user' => $user]);
     }
 
     /**
@@ -149,21 +139,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->id != \Auth::user()->id) {
-            if ($user->subscriptions()->first() || $user->gifts()->first()) {
-                $user->delete();
 
-                return redirect()->route('admin.user.index')
-                    ->with('message', $user->firstname.' supprimé, mais '.$user->firstname.' a un don ou une adhésion et ne peut pas etre retiré de la base de donnée');
-            } else {
-                \DB::delete('delete from users where id='.$user->id);
+        if ($user->subscriptions()->count() > 0 || $user->gifts()->count() > 0) {
+            $user->delete();
 
-                return redirect()->route('admin.user.index')
-                    ->with('message', $user->firstname.' est totalement supprimé');
-            }
-        } else {
             return redirect()->route('admin.user.index')
-                ->with('message', $user->firstname.' ne peut pas etre supprimé');
+                ->with('message', $user->firstname . ' supprimé, mais n\'est pas retiré de la base de donnée');
+        } else {
+            $user->forceDelete();
+            return redirect()->route('admin.user.index')
+                ->with('message', $user->firstname . ' est totalement supprimé');
         }
     }
 }
