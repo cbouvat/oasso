@@ -26,17 +26,17 @@ class SubscriptionController extends Controller
 
         $newStartDate = Carbon::now();
         $actualSubscriptionTypeId = 0;
-        $subscriptionValide = "noSubscrYet";
+        $subscriptionValide = 'noSubscrYet';
 
         $lastSubscription = $user->lastSubscription();
 
         if ($lastSubscription) {
             $actualSubscriptionTypeId = $lastSubscription->subscription_type_id;
-            $subscriptionValide = "subscrOutdated";
+            $subscriptionValide = 'subscrOutdated';
             $lastSubscriptionDate = Carbon::parse($lastSubscription->date_end);
 
             if ($lastSubscriptionDate >= Carbon::now()) {
-                $subscriptionValide = "subscrValide";
+                $subscriptionValide = 'subscrValide';
                 $newStartDate = $lastSubscriptionDate->addDay();
             }
         }
