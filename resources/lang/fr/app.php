@@ -107,4 +107,5 @@ return [
     'Remove this gift ?'                    => 'Supprimer ce don ?',
     'Manage gifts'                          => 'Gestion des dons',
     'Update gift'                           => 'Modification du don',
+    'Search'                                => 'Rechercher',
 ];
