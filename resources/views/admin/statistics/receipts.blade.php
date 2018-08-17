@@ -84,7 +84,6 @@
                         percentage[1] = 100 - percentage[0];
 
                         for (var j = 0; j < data.data.datasets.length; j++) {
-                            console.log(j);
                             response +=
                                 '<tr>' +
                                 '<td>'+ data.data.datasets[j].label + '</td>' +
@@ -94,8 +93,6 @@
                         }
                         return response;
                     }
-
-                    console.log(arrayStat());
 
                     $('#tabStat').html("");
                     $('#tabStat').append(
