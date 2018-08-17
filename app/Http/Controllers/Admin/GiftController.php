@@ -105,6 +105,15 @@ class GiftController extends Controller
     }
 
     /**
+     * @param Gift $gift
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function delete(Gift $gift)
+    {
+        return view('admin.gift.delete', ['gift' => $gift]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Gift $gift
@@ -116,10 +125,5 @@ class GiftController extends Controller
         $gift->delete();
 
         return redirect()->route('admin.gift.index')->with('message', 'Don supprimé');
-    }
-
-    public function beforeDelete(Gift $gift)
-    {
-        return view('admin.giftBeforeDelete', ['gift' => $gift]);
     }
 }

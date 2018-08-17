@@ -14,7 +14,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <link rel="icon" type="image/ico" href="{{asset('img/favicon.ico')}}"/>
+    <link rel="icon" type="image/ico" href="{{asset('/favicon.ico')}}"/>
 </head>
 <body>
 
