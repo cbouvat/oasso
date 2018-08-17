@@ -42,6 +42,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Set the user adressline.
+     * @param  string $value
+     * @return void
+     */
+    public function setAddressLineOneAttribute($value)
+    {
+        $this->attributes['address_line1'] = strtolower($value);
+    }
+
+    /**
+     * Set the user adressline.
+     * @param  string $value
+     * @return void
+     */
+    public function setAddressLineTwoAttribute($value)
+    {
+        $this->attributes['address_line2'] = strtolower($value);
+    }
+
+    /**
      * Set the users city.
      * @param $value
      * @return void
@@ -49,6 +69,16 @@ class User extends Authenticatable
     public function setCityAttribute($value)
     {
         $this->attributes['city'] = ucfirst(strtolower($value));
+    }
+
+    /**
+     * Set the user email font.
+     * @param  string $value
+     * @return void
+     */
+    public function setEmailttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
     }
 
     /**
@@ -69,6 +99,16 @@ class User extends Authenticatable
     public function setLastNameJointAttribute($value)
     {
         $this->attributes['lastname_joint'] = strtoupper($value);
+    }
+
+    /**
+     * Set the user joint email.
+     * @param  string $value
+     * @return void
+     */
+    public function setEmailJointAttribute($value)
+    {
+        $this->attributes['email_joint'] = strtolower($value);
     }
 
     /**
