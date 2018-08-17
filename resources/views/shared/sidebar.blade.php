@@ -68,7 +68,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('admin/statistic*') ? 'active' : '' }}" href="#">
+            <a class="nav-link {{ Request::is('admin/statistic*') ? 'active' : '' }}" href="{{ route('admin.statistic.index') }}">
                 <span data-feather="bar-chart"></span> Statistiques
             </a>
         </li>

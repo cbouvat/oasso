@@ -102,8 +102,11 @@ Route::middleware('auth')->group(function () {
         });
 
         //Statistics
-        Route::prefix('statistics')->name('statistics.')->group(function () {
-            Route::get('/{option}', 'StatisticsController@select')->name('select');
+        Route::prefix('statistic')->name('statistic.')->group(function () {
+            Route::get('/', 'StatisticController@index')->name('index');
+            Route::get('/subscription', 'StatisticController@subscription')->name('subscription');
+            Route::get('/city', 'StatisticController@city')->name('city');
+            Route::get('/receipt', 'StatisticController@receipt')->name('receipt');
         });
     });
 });

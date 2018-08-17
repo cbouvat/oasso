@@ -4,16 +4,16 @@
     <h1>Statistiques</h1>
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" href={{route('admin.statistics.select', ['option' => 'general'])}}>Général</a>
+            <a class="nav-link" href={{route('admin.statistic.index')}}>Général</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href={{route('admin.statistics.select', ['option' => 'subscriptions'])}}>Adhésions</a>
+            <a class="nav-link active" href={{route('admin.statistic.subscription')}}>Adhésions</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href={{route('admin.statistics.select', ['option' => 'cities'])}}>Villes</a>
+            <a class="nav-link" href={{route('admin.statistic.city')}}>Villes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href={{route('admin.statistics.select', ['option' => 'receipts'])}}>Recettes</a>
+            <a class="nav-link" href={{route('admin.statistic.receipt')}}>Recettes</a>
         </li>
     </ul>
 
