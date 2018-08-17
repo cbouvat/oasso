@@ -7,6 +7,7 @@ use App\Mail\SendPwdByEmail;
 use Illuminate\Http\Request;
 use App\Mail\PasswordSending;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -138,7 +139,7 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-        if ($request->has('role_type_id')) {
+        if ($request->has('role_type_id') && Auth::user()->role()->first()->role_type_id == 3) {
             $role_type_id = $request->validate([
                 'role_type_id' => 'integer',
             ]);

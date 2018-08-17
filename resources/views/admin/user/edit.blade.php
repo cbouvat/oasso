@@ -22,7 +22,7 @@
 
                         <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Les Infos
                                 de {{ $user->firstname }} {{ $user->lastname }}</h4></div>
-                        @if(Auth::user()->role()->first()->role_type_id === 3)
+                        @if(Auth::user()->role()->first()->role_type_id == 3)
                             <div class="form-group">
                                 <label for="role_type" class="text-danger font-weight-bold">Role</label>
                                 <select name="role_type_id" id="role_type" class="form-control">
