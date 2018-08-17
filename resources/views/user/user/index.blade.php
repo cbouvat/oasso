@@ -311,7 +311,7 @@
         </div>
         <div class="col-md-8 offset-5">
             <div class="btn-group-vertical">
-            <input class="btn btn-primary mb-4" type="submit" value="Modifier">
+            <input class="btn btn-primary mb-4 rounded" type="submit" value="Modifier">
             <input href="{{ route('user.delete') }}" class="btn btn-link" value="Supprimer compte">
             </div>
         </div>
