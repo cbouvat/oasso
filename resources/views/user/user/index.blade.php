@@ -8,8 +8,8 @@
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item">Mon compte</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+            <li class="breadcrumb-item">{{ __('app.My account') }}</li>
         </ol>
     </nav>
 
@@ -59,8 +59,8 @@
         </table>
     </div>
     <div class="row d-flex justify-content-end mb-3">
-        <a href="{{ route('user.edit') }}" class="btn btn-outline-primary">Modifer</a>
-        <a href="{{ route('user.delete') }}" class="btn btn-outline-danger">Supprimer</a>
+        <a href="{{ route('user.edit') }}" class="btn btn-outline-primary">{{ __('app.Update') }}</a>
+        <a href="{{ route('user.delete') }}" class="btn btn-outline-danger">{{ __('app.Remove') }}</a>
     </div>
 
 @endsection
