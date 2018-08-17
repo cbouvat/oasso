@@ -14,7 +14,7 @@
             @csrf
             @method('DELETE')
             <input type="submit" class="btn btn-danger" value="Oui">
-            <a type="button" class="btn btn-secondary ml-2" href="{{ route('user.index') }}">Non</a>
+            <a type="button" class="btn btn-secondary ml-2" href="{{ url()->previous() }}">Non</a>
         </form>
     </div>
 @endsection
