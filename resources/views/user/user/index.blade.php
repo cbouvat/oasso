@@ -1,57 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Mon compte</li>
-            </ol>
-        </nav>
+        <h1>{{ __('app.My account') }}</h1>
     </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item">Mon compte</li>
+        </ol>
+    </nav>
+
     <div class="row ">
-        <div>
-            <h1>Mon Compte</h1>
-        </div>
         <table class="table">
             <tbody>
             <tr>
-                <td class="font-weight-bold text-right">Prenom</td>
-                <td>{{ $user->firstname }}</td>
-            </tr>
-            <tr>
-                <td class="font-weight-bold text-right">Nom</td>
+                <td class="font-weight-bold text-right">{{ __('app.Lastname') }}</td>
                 <td>{{ $user->lastname }}</td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Email</td>
+                <td class="font-weight-bold text-right">{{ __('app.Firstname') }}</td>
+                <td>{{ $user->firstname }}</td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold text-right">{{ __('app.E-Mail Address') }}</td>
                 <td>{{ $user->email }}</td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Adresse</td>
+                <td class="font-weight-bold text-right">{{ __('app.Address') }}</td>
                 <td>{{ $user->address_line1 }} @if($user->addres_line2) <br>{{ $user->addres_line2 }} @endif
                 </td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Code Postal</td>
+                <td class="font-weight-bold text-right">{{ __('app.Zipcode') }}</td>
                 <td>{{ $user->zipcode }}</td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Ville</td>
+                <td class="font-weight-bold text-right">{{ __('app.City') }}</td>
                 <td>{{ $user->city }}</td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Telephone</td>
+                <td class="font-weight-bold text-right">{{ __('app.Phone number') }}</td>
                 <td>{{ $user->phone_number_1 }} @if( $user->phone_number_2 )
                         <br>{{ $user->phone_number_1 }} @endif
                 </td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Newsletter</td>
+                <td class="font-weight-bold text-right">{{ __('app.Newsletter') }}</td>
                 <td>{{ $user->newsletter ? 'Oui' : 'Non' }}</td>
             </tr>
             <tr>
-                <td class="font-weight-bold text-right">Newspaper</td>
+                <td class="font-weight-bold text-right">{{ __('app.Newspaper') }}</td>
                 <td>{{ $user->newspaper ? 'Oui' : 'Non'}}</td>
             </tr>
             </tbody>
