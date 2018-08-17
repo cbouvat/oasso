@@ -19,10 +19,11 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $user->load('role')
-            ->load('subscriptions');
+              ->load('subscriptions');
         $newletter = Newsletter::latest()->first();
-        $subCount = Subscription::all()->where('date_start', '>', Carbon::now()->subYear()
-            ->format('Y-m-d'))->count();
+        $subCount = Subscription::where('date_start', '>', Carbon::now()->subYear()
+                    ->format('Y-m-d'))->get();
+        $subCount = count($subCount);
 
         return view('home', ['user' => $user, 'newsletter' => $newletter, 'subCount' => $subCount]);
     }
