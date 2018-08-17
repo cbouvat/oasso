@@ -49,13 +49,18 @@
 
     @push('scripts')
         <script>
+            var myLineChart;
+
             $('#formstat').on('submit', function (event) {
                 event.preventDefault();
                 var param = $(this).serialize();
+                if (myLineChart) {
+                    myLineChart.destroy();
+                }
 
                 $.getJSON('/api/stat?' + param, function (data) {
                     var ctx = document.getElementById("myChartGeneral").getContext('2d');
-                    var myLineChart = new Chart(ctx, data);
+                    myLineChart = new Chart(ctx, data);
 
                     function arrayStat() {
                         var response = "";
