@@ -1,6 +1,6 @@
 <div class="row col-md-6 mb-3">
 
-    <label>Title</label>
+    <label>{{ __('app.Title') }}</label>
     @isset($newsletter)
         <input id="newsletterTitle" class="input-group mb-2" type="text" name="title"
                value="{{ $newsletter->title }}">

@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('admin.newsletter.index') }}">Newletter</a></li>
-                <li class="breadcrumb-item">Modification newsletter</li>
-            </ol>
-        </nav>
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>{{ __('app.Update newsletter') }}</h1>
     </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.newsletter.index') }}">{{ __('app.Newsletter') }}</a></li>
+            <li class="breadcrumb-item">{{ __('app.Update newsletter') }}</li>
+        </ol>
+    </nav>
     <form method="post" action="{{ route('admin.newsletter.update', ['newsletter'=> $newsletter]) }}">
         @csrf
-        <h1>{{__('Newsletter page title')}}</h1>
-        <h2>{{__('Update newsletter')  }}</h2>
 
         @include('admin.newsletter.wysiwyg')
 
