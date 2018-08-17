@@ -28,15 +28,6 @@
             <label for="daterange2"> Date de fin </label>
             <input type="date" name="date_end" value="" class="form-control"/>
         </div>
-        <div class="col-2">
-            <label for="range"> Visibilité </label>
-            <select class="custom-select mr-sm-2" name="range">
-                <option selected disabled>Choisir...</option>
-                <option value="days">Jour</option>
-                <option value="months">Mois</option>
-                <option value="years">Année</option>
-            </select>
-        </div>
         <div class="col-2 mt-4 pt-1">
             <input class="btn btn-primary" id="btnGeneralPersonalized" type="submit" value="Envoyer">
         </div>

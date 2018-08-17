@@ -175,84 +175,114 @@ class StatisticController extends Controller
             case 'receipts':
                 $chartType = "line";
                 $chartTitle = ["Adhésions", "Dons"];
-
-                /*$datasSubs = DB::table('payments')
-                    ->where('payment_type', '=', 'App\Subscription')
-                    ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
-                    ->select(DB::raw('sum(payments.amount) as amountSum'), DB::raw('MONTH(subscription_date) as month'))
-                    ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
-                    ->groupBy('month')
-                    ->get();
-
-                $datasGifts = DB::table('payments')
-                    ->where('payment_type', '=', 'App\Gift')
-                    ->join('gifts', 'payment_id', '=', 'gifts.id')
-                    ->select(DB::raw('sum(payments.amount) as amountSum'), DB::raw('MONTH(gifts.created_at) as month'))
-                    ->whereBetween('gifts.created_at', [$dateStart, $dateEnd])
-                    ->groupBy('month')
-                    ->get();
-
-                $dataArray1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                foreach ($datasSubs as $data) {
-                    $dataArray1[$data->month - 1] = (int)$data->amountSum;
-                };
-
-                $dataArray2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                foreach ($datasGifts as $data) {
-                    $dataArray2[$data->month - 1] = (int)$data->amountSum;
-                };*/
                 $dataRange=[];
+
                 switch ($range) {
                     case 'days':
-                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-\', DAY(subscription_date)) as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                        $datasSubs = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Subscription')
+                            ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                            DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-\', MONTH(subscriptions.subscription_date),
+                             \'-\', DAY(subscriptions.subscription_date)) as date'))
+                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.subscription_date')
                             ->groupBy('date')
                             ->get();
 
-                        $tableDate = [];
+
+                        $datasGifts = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Gift')
+                            ->join('gifts', 'payment_id', '=', 'gifts.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                                DB::raw('CONCAT(YEAR(gifts.created_at), \'-\', MONTH(gifts.created_at),
+                             \'-\', DAY(gifts.created_at)) as date'))
+                            ->whereBetween('gifts.created_at', [$dateStart, $dateEnd])
+                            ->orderBy('gifts.created_at')
+                            ->groupBy('date')
+                            ->get();
+
+
+                        $tableDateSubs = [];
+                        $tableDateGifts = [];
+
                         $dateStartCarb = Carbon::parse($dateStart);
                         $dateEndCarb = Carbon::parse($dateEnd);
 
                         for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addDay()) {
-                            $tableDate[$dateStartCarb->format('Y-n-j')] = 0;
+                            $tableDateSubs[$dateStartCarb->format('Y-n-j')] = 0;
+                            $tableDateGifts[$dateStartCarb->format('Y-n-j')] = 0;
                             array_push($dataRange, $dateStartCarb->toDateString());
                         }
                         break;
 
                     case 'months':
-                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-1\') as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                        $datasSubs = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Subscription')
+                            ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                                DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-\', MONTH(subscriptions.subscription_date),
+                             \'-1\') as date'))
+                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.subscription_date')
                             ->groupBy('date')
                             ->get();
 
-                        $tableDate = [];
+
+                        $datasGifts = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Gift')
+                            ->join('gifts', 'payment_id', '=', 'gifts.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                                DB::raw('CONCAT(YEAR(gifts.created_at), \'-\', MONTH(gifts.created_at),
+                             \'-1\') as date'))
+                            ->whereBetween('gifts.created_at', [$dateStart, $dateEnd])
+                            ->orderBy('gifts.created_at')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDateSubs = [];
+                        $tableDateGifts = [];
                         $dateStartCarb = Carbon::parse($dateStart);
                         $dateEndCarb = Carbon::parse($dateEnd);
 
                         for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addMonth()) {
-                            $tableDate[$dateStartCarb->format('Y-n-1')] = 0;
+                            $tableDateSubs[$dateStartCarb->format('Y-n-1')] = 0;
+                            $tableDateGifts[$dateStartCarb->format('Y-n-1')] = 0;
                             array_push($dataRange, $dateStartCarb->format('F-y'));
                         }
+
                         break;
 
                     case 'years':
-                        $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-1-1\') as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                        $datasSubs = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Subscription')
+                            ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                                DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-1-1\') as date'))
+                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.subscription_date')
                             ->groupBy('date')
                             ->get();
 
-                        $tableDate = [];
+
+                        $datasGifts = DB::table('payments')
+                            ->where('payment_type', '=', 'App\Gift')
+                            ->join('gifts', 'payment_id', '=', 'gifts.id')
+                            ->select(DB::raw('sum(payments.amount) as amountSum'),
+                                DB::raw('CONCAT(YEAR(gifts.created_at), \'-1-1\') as date'))
+                            ->whereBetween('gifts.created_at', [$dateStart, $dateEnd])
+                            ->orderBy('gifts.created_at')
+                            ->groupBy('date')
+                            ->get();
+
+                        $tableDateSubs = [];
+                        $tableDateGifts = [];
                         $dateStartCarb = Carbon::parse($dateStart);
                         $dateEndCarb = Carbon::parse($dateEnd);
 
                         for ($dateStartCarb; $dateStartCarb <= $dateEndCarb; $dateStartCarb->addYear()) {
-                            $tableDate[$dateStartCarb->format('Y-1-1')] = 0;
+                            $tableDateSubs[$dateStartCarb->format('Y-1-1')] = 0;
+                            $tableDateGifts[$dateStartCarb->format('Y-1-1')] = 0;
                             array_push($dataRange, $dateStartCarb->format('Y'));
                         }
                         break;
@@ -260,30 +290,17 @@ class StatisticController extends Controller
                         return response()->json(['message' => 'Not Found !'], 404);
                 }
 
-                foreach ($datas as $data) {
-                    $tableDate[$data->date] = $data->subscription_count;
+                foreach ($datasSubs as $data) {
+                    $tableDateSubs[$data->date] = (int)$data->amountSum;
                 };
 
-                $dataFinals = array_values($tableDate);
+                foreach ($datasGifts as $data) {
+                    $tableDateGifts[$data->date] = (int)$data->amountSum;
+                };
 
+                $dataFinals1 = array_values($tableDateSubs);
+                $dataFinals2 = array_values($tableDateGifts);
 
-                /*$chartData = [
-                    "labels" => $dataRange,
-                    "datasets" => [
-                        [
-                            "label" => [$chartTitle],
-                            "data" => $dataFinals,
-                            "borderColor" => [
-                                "rgba(250,0,0,1)"
-                            ],
-                            "backgroundColor" => [
-                                "rgba(0,0,0,0)"
-                            ],
-                            "borderWidth" => 2
-
-                        ]
-                    ]
-                ];*/
 
                 $chartData = [
                     "labels" => $dataRange,
