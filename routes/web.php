@@ -60,10 +60,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'SubscriptionController@index')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
             Route::get('/create', 'SubscriptionController@create')->name('create');
-            Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
+            Route::get('/{subscription}/edit', 'SubscriptionController@edit')->name('edit');
             Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
-            Route::get('/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('beforedelete');
-            Route::get('/{subscription}/destroy/', 'SubscriptionController@destroy')->name('destroy');
+            Route::get('/{subscription}/delete', 'SubscriptionController@delete')->name('delete');
+            Route::post('/{subscription}', 'SubscriptionController@destroy')->name('destroy');
         });
 
         // Gift

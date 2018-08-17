@@ -341,9 +341,9 @@
                 </div>
 
 
-                <div class="text-center">
+                <div class="col-md-8 offset-md-4">
                     <input type="submit" value="Modifier"
-                           class="btn btn-outline-success btn-lg">
+                           class="btn btn-primary">
                 </div>
             </form>
         </div>
@@ -364,8 +364,8 @@
 
                     @forelse($user->subscriptions as $subscription)
                         <tr>
-                            <td>{{ $subscription->subscription_date }}</td>
-                            <td>{{ $subscription->subscription_date }}</td>
+                            <td>{{ $subscription->date_start }}</td>
+                            <td>{{ $subscription->date_end }}</td>
                             <td>{{ $subscription->amount }}</td>
                             <td>{{ $subscription->type->name }}</td>
                             <td class="text-right">
@@ -373,7 +373,7 @@
                                    class="btn btn-sm btn-outline-primary"><span
                                             data-feather="edit"></span></a>
                                 <a class="btn btn-sm btn-outline-danger"
-                                   href="{{ route('admin.subscritpion.beforedelete', $subscription) }}"><span
+                                   href="{{ route('admin.subscription.delete', $subscription) }}"><span
                                             data-feather="trash"></span> Supprimer</a>
                             </td>
                         </tr>
@@ -409,7 +409,7 @@
                                    class="btn btn-sm btn-outline-primary"><span
                                             data-feather="edit"></span> Modifier</a>
                                 <a class="btn btn-sm btn-outline-danger"
-                                   href="{{ route('admin.gift.beforeDelete', $gift) }}"><span
+                                   href="{{ route('admin.gift.delete', $gift) }}"><span
                                             data-feather="trash"></span> Supprimer</a>
                             </td>
                         </tr>
