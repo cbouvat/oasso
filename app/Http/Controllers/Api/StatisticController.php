@@ -15,7 +15,7 @@ class StatisticController extends Controller
         $dateStart = $request->input('date_start');
         $dateEnd = $request->input('date_end');
         $range = $request->input('range');
-        $optionsChart=[];
+        $optionsChart = [];
 
         switch ($type) {
             case 'general':
@@ -87,7 +87,7 @@ class StatisticController extends Controller
 
                 $dataFinals = array_values($tableDate);
 
-                $stepSize = round((max($dataFinals) - min($dataFinals))/10);
+                $stepSize = round((max($dataFinals) - min($dataFinals)) / 10);
 
                 $chartData = [
                     'labels' => $dataRange,
@@ -102,23 +102,23 @@ class StatisticController extends Controller
                                 'rgba(0,0,0,0)',
                             ],
                             'borderWidth' => 2,
-                            'lineTension' => 0
+                            'lineTension' => 0,
                         ],
                     ],
                 ];
 
-                $optionsChart= [
+                $optionsChart = [
                     'scales' => [
                         'yAxes' => [
                             [
                                 'ticks' => [
                                     'beginAtZero' => true,
-                                    'stepSize' => $stepSize!=0 ? $stepSize : 1
-                                ]
-                            ]
+                                    'stepSize' => $stepSize != 0 ? $stepSize : 1,
+                                ],
+                            ],
 
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 break;
             case 'subscriptions':
@@ -320,8 +320,8 @@ class StatisticController extends Controller
                 $dataFinals1 = array_values($tableDateSubs);
                 $dataFinals2 = array_values($tableDateGifts);
 
-                $stepSize1 = round((max($dataFinals1) - min($dataFinals1))/10);
-                $stepSize2 = round((max($dataFinals2) - min($dataFinals2))/10);
+                $stepSize1 = round((max($dataFinals1) - min($dataFinals1)) / 10);
+                $stepSize2 = round((max($dataFinals2) - min($dataFinals2)) / 10);
 
                 $stepSize = max($stepSize1, $stepSize2);
 
@@ -338,7 +338,7 @@ class StatisticController extends Controller
                             'backgroundColor' => [
                                 'rgba(0,0,0,0)',
                             ],
-                            'borderWidth' => 2
+                            'borderWidth' => 2,
 
                         ],
                         [
@@ -350,24 +350,24 @@ class StatisticController extends Controller
                             'backgroundColor' => [
                                 'rgba(0,0,0,0)',
                             ],
-                            'borderWidth' => 2
+                            'borderWidth' => 2,
 
                         ],
                     ],
                 ];
 
-                $optionsChart= [
+                $optionsChart = [
                     'scales' => [
                         'yAxes' => [
                             [
                                 'ticks' => [
                                     'beginAtZero' => true,
-                                    'stepSize' => $stepSize!=0 ? $stepSize : 1
-                                ]
-                            ]
+                                    'stepSize' => $stepSize != 0 ? $stepSize : 1,
+                                ],
+                            ],
 
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 break;
             default:
@@ -377,7 +377,7 @@ class StatisticController extends Controller
         $json = [
             'type' => $chartType,
             'data' => $chartData,
-            'options' => $optionsChart
+            'options' => $optionsChart,
         ];
 
         return $json;
