@@ -4,8 +4,8 @@
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Modification informations personnelles</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+                <li class="breadcrumb-item">{{ __('app.Update personal informations') }}</li>
             </ol>
         </nav>
     </div>
@@ -16,14 +16,14 @@
                     @csrf
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
 
-                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Mes Infos</h4></div>
+                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">{{ __('app.Personal informations') }}</h4></div>
 
                         <div class="form-group">
-                            <label for="gender">Civilité</label>
+                            <label for="gender">{{ __('app.Gender') }}</label>
                             <select class="form-control" name="gender" id="gender">
-                                <option value="0" @if($user->gender == 0) selected @endif>{{ __('Gender') }}</option>
-                                <option value="1" @if($user->gender == 1) selected @endif>{{ __('Mr') }}</option>
-                                <option value="2" @if($user->gender == 2) selected @endif>{{ __('Ms') }}</option>
+                                <option value="0" @if($user->gender == 0) selected @endif>{{ __('app.Gender') }}</option>
+                                <option value="1" @if($user->gender == 1) selected @endif>{{ __('app.Mr') }}</option>
+                                <option value="2" @if($user->gender == 2) selected @endif>{{ __('app.Ms') }}</option>
                             </select>
                         </div>
 
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="firstname">Prénom</label>
+                            <label for="firstname">{{ __('app.Firstname') }}</label>
                             <input type="text" name="firstname"
                                    class="form-control {{$errors->has('firstname') ? 'is-invalid':''}}" id="firstname"
                                    value="{{ old('firstname') ? old('firstname')  : $user->firstname}}">
@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Adresse Email</label>
+                            <label for="email">{{ __('app.E-Mail Address') }}</label>
                             <input type="email"
                                    name="email"
                                    id="email"
@@ -71,7 +71,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="birthdate">Date de naissance</label>
+                            <label for="birthdate">{{ __('app.Birthdate') }}</label>
                             <input type="date"
                                    name="birthdate"
                                    class="form-control {{$errors->has('birthdate') ? 'is-invalid':''}}"
@@ -87,7 +87,7 @@
 
 
                         <div class="form-group">
-                            <label for="address_line1">Adresse</label>
+                            <label for="address_line1">{{ __('app.Address_line1') }}</label>
                             <input type="text" name="address_line1"
                                    class="form-control {{$errors->has('address_line1') ? 'is-invalid':''}}"
                                    id="address_line1"
@@ -102,7 +102,7 @@
 
 
                         <div class="form-group">
-                            <label for="address_line2">Adresse 2</label>
+                            <label for="address_line2">{{ __('app.Address_line2') }}</label>
                             <input type="text"
                                    name="address_line2"
                                    class="form-control {{$errors->has('address_line2') ? 'is-invalid':''}}"
@@ -118,7 +118,7 @@
 
 
                         <div class="form-group">
-                            <label for="city">Ville</label>
+                            <label for="city">{{ __('app.City') }}</label>
                             <input type="text"
                                    name="city"
                                    class="form-control {{$errors->has('city') ? 'is-invalid':''}}"
@@ -134,7 +134,7 @@
 
 
                         <div class="form-group">
-                            <label for="zipcode">Code Postal</label>
+                            <label for="zipcode">{{ __('app.Zipcode') }}</label>
                             <input type="text"
                                    name="zipcode"
                                    class="form-control {{$errors->has('zipcode') ? 'is-invalid':''}}"
@@ -150,7 +150,7 @@
 
 
                         <div class="form-group">
-                            <label for="phone_number_1">Téléphone 1</label>
+                            <label for="phone_number_1">{{ __('app.Phone 1') }}</label>
                             <input type="text"
                                    name="phone_number_1"
                                    class="form-control {{$errors->has('phone_number_1') ? 'is-invalid':''}}"
@@ -166,7 +166,7 @@
 
 
                         <div class="form-group">
-                            <label for="phone_number_2">Téléphone 2</label>
+                            <label for="phone_number_2">{{ __('app.Phone 2') }}</label>
                             <input type="text"
                                    name="phone_number_2"
                                    class="form-control {{$errors->has('phone_number_2') ? 'is-invalid':''}}"
@@ -188,7 +188,7 @@
                                    id="newspaper" {{$user->newspaper == 1 ? "checked" : ""}}
                                    value="1"
                             >
-                            <label class="form-check-label" for="newspaper">Newspaper</label>
+                            <label class="form-check-label" for="newspaper">{{ __('app.Newspaper') }}</label>
 
                         </div>
 
@@ -199,32 +199,32 @@
                                    id="newsletter" {{$user->newsletter == 1 ? "checked" : ""}}
                                    value="1"
                             >
-                            <label class="form-check-label" for="newsletter">Newsletter</label>
+                            <label class="form-check-label" for="newsletter">{{ __('app.Newsletter') }}</label>
                         </div>
 
 
                         <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Edit') }}</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('app.Update') }}</button>
                         </div>
 
                     </div>
 
 
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
-                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Infos Conjoint</h4>
+                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">{{ __('app.Partner informations (if family)') }}</h4>
                         </div>
 
                         <div class="form-group">
-                            <label for="gender_joint">Civilité conjoint</label>
+                            <label for="gender_joint">{{ __('app.Partner Gender') }}</label>
                             <select class="form-control" name="gender_joint" id="gender_joint">
-                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('Partner Gender') }}</option>
-                                <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('Mr') }}</option>
-                                <option value="2" @if($user->gender_joint == 2) selected @endif>{{ __('Ms') }}</option>
+                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('app.Partner Gender') }}</option>
+                                <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('app.Mr') }}</option>
+                                <option value="2" @if($user->gender_joint == 2) selected @endif>{{ __('app.Ms') }}</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="lastname_joint">Nom</label>
+                            <label for="lastname_joint">{{ __('app.Partner Lastname') }}</label>
                             <input type="text"
                                    name="lastname_joint"
                                    class="form-control {{$errors->has('lastname_joint') ? 'is-invalid' : ''}}"
@@ -241,7 +241,7 @@
 
 
                         <div class="form-group">
-                            <label for="firstname_joint">Prénom</label>
+                            <label for="firstname_joint">{{ __('app.Partner Firstname') }}</label>
                             <input type="text"
                                    name="firstname_joint"
                                    class="form-control {{$errors->has('firstname_joint') ? 'is-invalid' : ''}}"
@@ -258,7 +258,7 @@
 
 
                         <div class="form-group">
-                            <label for="birthdate_joint">Date de naissance</label>
+                            <label for="birthdate_joint">{{ __('app.Partner Birthdate') }}</label>
                             <input type="date"
                                    name="birthdate_joint"
                                    class="form-control  {{$errors->has('birthdate_joint') ? 'is-invalid' : ''}}"
@@ -275,7 +275,7 @@
 
 
                         <div class="form-group">
-                            <label for="email_joint">Email conjoint</label>
+                            <label for="email_joint">{{ __('app.Partner E-Mail Address') }}</label>
                             <input type="email"
                                    name="email_joint"
                                    class="form-control {{$errors->has('email_joint') ? 'is-invalid' : ''}}"
@@ -292,7 +292,7 @@
 
 
                         <div class="form-group mt-3">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Edit') }}</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('app.Update') }}</button>
                         </div>
                     </div>
 
