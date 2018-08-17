@@ -57,7 +57,7 @@
                     function arrayStat() {
                         var response = "";
                         for (var j = 0; j < data.data.labels.length; j++) {
-                            var percentage = (data.data.datasets[0].data[j] / sumSubscribers) * 100;
+                            var percentage = Math.round((data.data.datasets[0].data[j] / sumSubscribers) * 100 *100)/100;
                             response +=
                                 '<tr>' +
                                 '<td>' + data.data.labels[j] + '</td>' +

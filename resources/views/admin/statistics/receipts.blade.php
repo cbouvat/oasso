@@ -75,7 +75,7 @@
                         }
                         var percentage = [0,0];
 
-                        percentage[0] = (sum[0] /(sum[0]+sum[1])) * 100;
+                        percentage[0] = Math.round(sum[0] /(sum[0]+sum[1]) * 100 * 100)/100;
                         percentage[1] = 100 - percentage[0];
 
                         for (var j = 0; j < data.data.datasets.length; j++) {
