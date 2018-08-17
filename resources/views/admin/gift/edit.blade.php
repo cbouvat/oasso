@@ -28,6 +28,7 @@
             </div>
             <div class="col-md-8 offset-md-2">
                 <input type="submit" class="btn btn-primary" value="Modifier">
+                <a href="{{ route('admin.gift.delete', $gift) }}" class="btn btn-outline-danger ml-2">Supprimer</a>
             </div>
 
         </form>
