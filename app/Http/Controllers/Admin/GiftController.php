@@ -27,12 +27,17 @@ class GiftController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Request $request
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function create(User $user)
     {
-        return view('admin.gift.create', ['user' => $user]);
+
+        $paymentsMethod = PaymentMethod::all();
+        return view('admin.gift.create', [
+            'user' => $user,
+            'payments_methods' => $paymentsMethod,
+                ]);
     }
 
     /**
@@ -45,12 +50,14 @@ class GiftController extends Controller
     {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
+            'payment_method_id' => 'required|integer'
         ]);
         $inputs['user_id'] = $user->id;
         $gift = Gift::create($inputs);
+
         $inputs['payment_id'] = $gift->id;
         $inputs['payment_type'] = 'App\Gift';
-        $inputs['payment_method_id'] = 2;
+        $inputs['payment_method_id'] = $request['payment_method_id'];
 
         Payment::create($inputs);
 

@@ -24,6 +24,18 @@
                 <div class="input-group-append">
                     <span class="input-group-text">€</span>
                 </div>
+
+            </div>
+            <label for="payment_method_id" class="col-form-label">Methode de paiement</label>
+            <div class="input-group">
+                <select class="custom-select form-control{{ $errors->has('amount') ? ' is-invalid' : '' }} text-center"
+                        name="payment_method_id">
+                    @foreach($payments_methods as $payment_method)
+                        <option value="{{ $payment_method->id }}">
+                            {{ $payment_method->name}}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <input value="Valider" type="submit" class="btn btn-outline-success btn-block pt-2 mt-2">
         </form>
@@ -35,13 +47,15 @@
             <tr>
                 <th scope="col">Montant</th>
                 <th scope="col">Date</th>
+                <th scope="col">Methode de paiement</th>
             </tr>
             </thead>
             <tbody>
             @forelse($user->gifts as $gift)
                 <tr>
-                    <th>{{ $gift->amount }} €</th>
+                    <th scope="row">{{ $gift->amount }} €</th>
                     <td>{{ $gift->created_at->format('d/m/Y') }}</td>
+                    <td>{{ $gift->payment->paymentMethod->name }}</td>
                 </tr>
             @empty
                 <tr>
