@@ -19,13 +19,14 @@ class SubscriptionController extends Controller
     public function index()
     {
         $subscriptions = Subscription::with(['type', 'user', 'payment.paymentMethod'])
-            ->orderBy('subscription_date', 'desc')
+            ->orderBy('date_start', 'desc')
             ->paginate();
 
         return view('admin.subscription.index', ['subscriptions' => $subscriptions]);
     }
 
     /**
+     * Show the form for creating a new resource.
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -54,7 +55,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date',
+            'date_start' => 'required|date',
         ]);
 
         $validator['opt_out_mail'] = 0;
@@ -116,7 +117,7 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date',
+            'date_start' => 'required|date',
         ]);
 
         $validator['opt_out_mail'] = 0;

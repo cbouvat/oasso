@@ -64,7 +64,6 @@
 
         <div class="form-group row">
             <div class="col-md-8 offset-md-4">
-                {{--<input type="submit" class="btn btn-primary" value="{{ __('Accept') }}">--}}
                 @include('user.payment.payment')
                 <a href="{{route('user.subscription.generatePdf')}}" class="btn btn-success"
                    target="_blank">{{__('Membership PDF')}}</a>

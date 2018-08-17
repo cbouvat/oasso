@@ -22,7 +22,7 @@
                        class="col-md-4 col-form-label text-md-right">Type d'Adhésion</label>
                 <div class="col-md-6">
                     <select id="subscription_type_id" name="subscription_type_id" class="custom-select">
-                        @foreach($subscriptionTypes as $subscription_type)
+                        @foreach($subscription_types as $subscription_type)
                             <option value="{{ $subscription_type->id }}" {{ $subscription_type->id == $subscription->subscription_type_id ? 'selected' : ''}}>
                                 {{ $subscription_type->name }} ({{$subscription_type->amount}} €)
                             </option>
@@ -52,7 +52,7 @@
                        class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
                 <div class="col-md-6">
                     <select id="payment_methods" name="payment_methods" class="custom-select">
-                        @foreach($paymentsMethods as $payment_method)
+                        @foreach($payments_methods as $payment_method)
                             <option value="{{ $payment_method->id }}" {{$payment_method->id == $subscription->payment->payment_method_id ? 'selected' : ''}}>
 
                                 {{ $payment_method->name}}
@@ -73,8 +73,9 @@
                 </div>
             </div>
 
-
+            <div class="col offset-9">
             <input type="submit" class="btn btn-primary" value="Editer">
+            </div>
         </form>
     </div>
 @endsection
