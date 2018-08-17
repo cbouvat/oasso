@@ -7,7 +7,7 @@
             <a href="{{ route('admin.subscription.create') }}" class="btn btn-success mr-2">Ajouter une
                 Adhésion</a>
             <a href="#" class="btn btn-primary mr-2">Modifer</a>
-            <a href="{{route('admin.user.beforedelete', ['user' => $user])}}" class="btn btn-danger">Supprimer</a>
+            <a href="{{route('admin.user.delete', ['user' => $user])}}" class="btn btn-danger">Supprimer</a>
         </div>
     </div>
 
