@@ -23,16 +23,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -73,7 +63,7 @@ class UserController extends Controller
 
         $user->update($validateData);
 
-        return redirect()->route('user.index', ['user' => $user]);
+        return redirect()->route('user.index');
     }
 
     /**
