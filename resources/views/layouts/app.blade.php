@@ -30,7 +30,7 @@
         <div class="navbar-nav px-3">
             <form action="{{ route('logout') }}" method="post" class="form-inline">
                 @csrf
-                <button type="submit" class="btn btn-link nav-link"><span data-feather="log-out"></span> Déconnexion</button>
+                <button type="submit" class="btn btn-link nav-link"><span data-feather="log-out"></span> {{ __('app.Logout') }}</button>
             </form>
         </div>
     @endauth
