@@ -3,23 +3,23 @@
 @section('content')
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1>Membres connectés</h1>
+        <h1>{{ __('app.Connected members') }}</h1>
     </div>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item">Membres connectés</li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+            <li class="breadcrumb-item">{{ __('app.Connected members') }}</li>
         </ol>
     </nav>
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th scope="col">Nom.</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Adresse IP</th>
-            <th scope="col">Dernière activité</th>
+            <th scope="col">{{ __('app.Lastname') }}.</th>
+            <th scope="col">{{ __('app.Role') }}</th>
+            <th scope="col">{{ __('app.Ip address') }}</th>
+            <th scope="col">{{ __('app.Last activity') }}</th>
             <th scope="col"></th>
         </tr>
         </thead>
@@ -35,7 +35,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger"><span data-feather="trash"></span>
-                            Déconnecter
+                            {{ __('app.Logout') }}
                         </button>
                     </form>
                 </td>
