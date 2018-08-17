@@ -99,7 +99,7 @@ class SubscriptionController extends Controller
             'payment_method_id' => 2,
         ]);
 
-        return back()->with('message', 'Adhésion Confirmé !');
+        return back()->with('message', 'Adhésion Confirmée !');
     }
 
     /**
