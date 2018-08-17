@@ -33,7 +33,7 @@
                 <td>{{ $subscription->type->name }}</td>
                 <th>{{ $subscription->amount }} € ({{ $subscription->type->amount }} €)</th>
                 <td>{{ $subscription->subscription_date }}</td>
-                <td> {{ $subscription->payment ? $subscription->payment->paymentMethod->name : '' }}</td>
+                <td>{{ $subscription->payment ? $subscription->payment->paymentMethod->name : '' }}</td>
                 <td class="text-right">
                     <a href="{{ route('admin.subscription.edit', $subscription) }}"
                        class="btn btn-sm btn-outline-primary"><span data-feather="edit"></span> Modifier</a>
