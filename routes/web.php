@@ -107,7 +107,8 @@ Route::middleware('auth')->group(function () {
 
 // Output
 Route::get('/optout/mail/{subscription}/{user}', 'User\SubscriptionController@optout')->name('outmail');
-Route::get('/optout/newsletter/{user}', 'Admin\NewsletterController@optout')->name('outnewsletter');
+Route::post('/optout/newsletter/{user}', 'Admin\NewsletterController@optout')->name('outnewsletter');
+Route::get('/beforeOptout/newsletter/{user}', 'Admin\NewsletterController@beforeOptout')->name('beforeOptout');
 
 // Auth
 Auth::routes();

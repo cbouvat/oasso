@@ -50,7 +50,6 @@ class SendNewsletterJob implements ShouldQueue
 
         foreach ($users as $user) {
             Mail::to($user)->send(new SendNewsletter($this->newsletter, $user));
-
             $this->newsletter->increment('counter'); // update live counter in index page
             $this->newsletter->save();
         }

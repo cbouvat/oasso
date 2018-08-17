@@ -135,9 +135,16 @@ class NewsletterController extends Controller
     {
         $user = User::findOrFail($userId);
 
-        $user->newsletter = 1;
+        $user->newsletter = 0;
         $user->save();
 
         return view('user.subscription.optout');
+    }
+
+    public function beforeOptout($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        return view('user.subscription.beforeOptout', ['user' => $user]);
     }
 }

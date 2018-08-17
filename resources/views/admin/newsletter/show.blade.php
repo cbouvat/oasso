@@ -19,7 +19,7 @@
             <select class="custom-select" name="sendTo">
                 <option selected value="subscribers">{{__('Newsletter subscribers')  }}</option>
                 <option value="admin">{{__('Admin')  }}</option>
-                <option value="all">{{__('All members')  }}</option>
+                <option value="all">{{__('All members !!')  }}</option>
             </select>
         </div>
 
