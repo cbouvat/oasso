@@ -12,7 +12,7 @@
         </ol>
     </nav>
 
-    <table class="table table-hove">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th scope="col">Date</th>
