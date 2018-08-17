@@ -126,7 +126,8 @@ class UserController extends Controller
     public function delete(User $user)
     {
         $user->load('subscriptions')
-            ->load('gifts');
+            ->load('gifts')
+            ->load('newsletters');
 
         return view('admin.user.delete', ['user' => $user]);
     }
@@ -140,7 +141,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->subscriptions()->count() > 0 || $user->gifts()->count() > 0) {
+        if ($user->subscriptions()->count() > 0 || $user->gifts()->count() > 0 || $user->newsletters()->count() > 0) {
             $user->delete();
 
             return redirect()->route('admin.user.index')
