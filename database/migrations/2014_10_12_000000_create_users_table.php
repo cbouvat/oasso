@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('gender');
-            $table->string('lastname',45);
+            $table->string('lastname', 45);
             $table->string('firstname', 45);
             $table->date('birthdate');
             $table->string('password');
-            $table->string('address_line1',100);
+            $table->string('address_line1', 100);
             $table->string('address_line2', 100)->nullable();
             $table->string('zipcode', 20);
             $table->string('city', 45);
@@ -29,9 +29,9 @@ class CreateUsersTable extends Migration
             $table->string('lastname_joint', 45)->nullable();
             $table->string('firstname_joint', 45)->nullable();
             $table->date('birthdate_joint')->nullable();
-            $table->string('email_joint', 45)->nullable();
-            $table->string('phone_number_1', 20)->nullable();
-            $table->string('phone_number_2', 20)->nullable();
+            $table->string('email_joint')->nullable();
+            $table->string('phone_1', 10)->nullable();
+            $table->string('phone_2', 10)->nullable();
             $table->boolean('volonteer')->default(0);
             $table->text('details_volonteer', 600)->nullable();
             $table->boolean('delivery')->default(0);

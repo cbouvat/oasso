@@ -11,41 +11,105 @@
 |
 */
 
+Route::middleware('auth')->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::prefix('user')->namespace('User')->name('user.')->group(function () {
+        // User
+        Route::get('/', 'UserController@index')->name('index');
+        Route::post('/', 'UserController@update')->name('update');
+        Route::get('/edit', 'UserController@edit')->name('edit');
+        Route::get('/password', 'UserController@passwordEdit')->name('password.edit');
+        Route::post('/password', 'UserController@passwordUpdate')->name('password.update');
+        Route::get('/delete', 'UserController@delete')->name('delete');
+        Route::post('/delete', 'UserController@destroy')->name('destroy');
+        Route::get('/payment', 'CheckoutController@payment')->name('payment');
+        Route::post('/payment', 'CheckoutController@charge')->name('payment.charge');
+        Route::get('/history', 'UserController@history')->name('history');
 
-Auth::routes();
+        // Subscription
+        Route::prefix('/subscription')->name('subscription.')->group(function () {
+            Route::get('/', 'SubscriptionController@create')->name('index');
+            Route::post('/', 'SubscriptionController@store')->name('store');
+        });
 
-Route::get('/home', 'HomeController@index')->name('home');
+        // Gift
+        Route::prefix('/gift')->name('gift.')->group(function () {
+            Route::get('/', 'GiftController@create')->name('index');
+            Route::post('/', 'GiftController@store')->name('store');
+        });
+    });
 
-Route::get('/search', 'SearchController@search')->name('search');
+    Route::prefix('admin')->middleware('role')->namespace('Admin')->name('admin.')->group(function () {
+        // Search
+        Route::get('/search', 'SearchController@search')->name('search');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/user', 'UserController@index')->name('admin.user.index');
-    Route::get('/user/create', 'Admin\UserController@create')->name('admin.user.create');
-    Route::post('/user/store', 'Admin\UserController@store')->name('admin.user.store');
-    Route::get('/user/{user}/delete', 'UserController@softDelete')->name('admin.user.softdelete');
-    Route::get('/user/{user}/before', 'UserController@beforeDelete')->name('admin.user.beforedelete');
+        // User
+        Route::prefix('user')->name('user.')->group(function () {
+            Route::get('/', 'UserController@index')->name('index');
+            Route::post('/', 'UserController@store')->name('store');
+            Route::get('/create', 'UserController@create')->name('create');
+            Route::get('/{user}', 'UserController@show')->name('show');
+            Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
+            Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+        });
 
-    //Admin gift Crud
-    Route::get('/gift', 'Admin\GiftController@index')->name('admin.gift.index');
-    Route::post('/gift', 'Admin\GiftController@create')->name('admin.gift.create');
-    Route::get('/gift/add', 'Admin\GiftController@show')->name('admin.gift.show');
-    Route::get('/gift/edit/{id}', 'Admin\GiftController@edit')->name('admin.gift.edit');
-    Route::post('/gift/update/{id}', 'Admin\GiftController@update')->name('admin.gift.update');
-    Route::get('/gift/destroy/{id}', 'Admin\GiftController@destroy')->name('admin.gift.destroy');
+        // Subscription
+        Route::prefix('subscription')->name('subscription.')->group(function () {
+            Route::get('/', 'SubscriptionController@index')->name('index');
+            Route::post('/', 'SubscriptionController@store')->name('store');
+            Route::get('/create', 'SubscriptionController@create')->name('create');
+            Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
+            Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
+            Route::get('/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('beforedelete');
+            Route::get('/{subscription}/destroy/', 'SubscriptionController@destroy')->name('destroy');
+        });
 
-    //Statistics
-    Route::prefix('statistics')->group(function () {
-        Route::get('/', 'Admin\StatisticsController@index')->name('admin.statistics.index');
-        Route::get('/{option}', 'Admin\StatisticsController@select')->name('admin.statistics.select');
+        // Gift
+        Route::prefix('gift')->name('gift.')->group(function () {
+            Route::get('/', 'GiftController@index')->name('index');
+            Route::post('/', 'GiftController@create')->name('create');
+            Route::get('/create', 'GiftController@show')->name('show');
+            Route::get('/{gift}', 'GiftController@edit')->name('edit');
+            Route::post('/{gift}', 'GiftController@update')->name('update');
+            Route::get('/{gift}/delete', 'GiftController@delete')->name('delete');
+            Route::delete('/{gift}/delete', 'GiftController@destroy')->name('destroy');
+        });
+
+        // Newsletter
+        Route::prefix('newsletter')->name('newsletter.')->group(function () {
+            Route::get('/', 'NewsletterController@index')->name('index');
+            Route::post('/', 'NewsletterController@store')->name('store');
+            Route::get('/create', 'NewsletterController@create')->name('create');
+            Route::get('/{newsletter}', 'NewsletterController@edit')->name('edit');
+            Route::post('/{newsletter}', 'NewsletterController@update')->name('update');
+            Route::get('/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('duplicate');
+            Route::get('/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('beforedelete');
+            Route::get('/{newsletter}/delete', 'NewsletterController@delete')->name('delete');
+        });
+
+        // Mailing
+        Route::prefix('mailing')->name('mailing.')->group(function () {
+            Route::get('/', 'MailingController@index')->name('index');
+            Route::get('/{mailing}', 'MailingController@edit')->name('edit');
+            Route::post('/{mailing}', 'MailingController@update')->name('update');
+        });
+
+        // Session
+        Route::prefix('session')->name('session.')->group(function () {
+            Route::get('/', 'SessionController@index')->name('index');
+            Route::delete('/{session}', 'SessionController@destroy')->name('delete');
+        });
+
+        //Statistics
+        Route::prefix('statistics')->name('statistics.')->group(function () {
+            Route::get('/{option}', 'StatisticsController@select')->name('select');
+        });
     });
 });
 
-//User Gift Route
-Route::get('/gift', 'User\GiftController@index')->name('user.gift.index');
-Route::post('/gift', 'User\GiftController@create')->name('user.gift.create');
+// Output
+Route::get('/optout/{subscription}/{user}', 'User\SubscriptionController@optout')->name('optout');
 
-
+// Auth
+Auth::routes();

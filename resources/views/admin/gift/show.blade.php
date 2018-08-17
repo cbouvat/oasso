@@ -20,9 +20,9 @@
                                 </div>
 
                                 <select class="form-control text-center ml-3" name="payment_methods">
-                                    @foreach($payments_methods as $payment_method)
-                                        <option value="{{ $payment_method->id }}">
-                                            {{ $payment_method->name}}
+                                    @foreach($paymentsMethods as $paymentMethod)
+                                        <option value="{{ $paymentMethod->id }}">
+                                            {{ $paymentMethod->name}}
                                         </option>
                                     @endforeach
                                 </select>
@@ -72,14 +72,13 @@
                                 <th>{{$gift->amount}} €</th>
                                 <td>{{$gift->created_at->format('d/m/Y')}}</td>
                                 <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
-
                                 <td>
                                     <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}" class="btn btn-warning"><span
-                                                class="fas fa-edit"></span></a>
+                                                data-feather="edit"></span> Modifier</a>
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.gift.destroy', ['id' => $gift->id])}}"
-                                       class="btn btn-danger"><span class="fas fa-trash-alt"></span></a>
+                                    <a href="{{route('admin.gift.beforeDelete', ['id' => $gift->id])}}"
+                                       class="btn btn-danger"><span data-feather="trash"></span> Supprimer</a>
                                 </td>
                             </tr>
                         @empty

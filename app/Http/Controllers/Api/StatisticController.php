@@ -25,9 +25,9 @@ class StatisticController extends Controller
                 switch ($range) {
                     case 'days':
                         $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-\', DAY(subscription_date)) as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                            DB::raw('CONCAT(YEAR(date_start), \'-\', MONTH(date_start), \'-\', DAY(date_start)) as date'))
+                            ->whereBetween('date_start', [$dateStart, $dateEnd])
+                            ->orderBy('date_start')
                             ->groupBy('date')
                             ->get();
 
@@ -43,9 +43,9 @@ class StatisticController extends Controller
 
                     case 'months':
                         $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-\', MONTH(subscription_date), \'-1\') as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                            DB::raw('CONCAT(YEAR(date_start), \'-\', MONTH(date_start), \'-1\') as date'))
+                            ->whereBetween('date_start', [$dateStart, $dateEnd])
+                            ->orderBy('date_start')
                             ->groupBy('date')
                             ->get();
 
@@ -61,9 +61,9 @@ class StatisticController extends Controller
 
                     case 'years':
                         $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
-                            DB::raw('CONCAT(YEAR(subscription_date), \'-1-1\') as date'))
-                            ->whereBetween('subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscription_date')
+                            DB::raw('CONCAT(YEAR(date_start), \'-1-1\') as date'))
+                            ->whereBetween('date_start', [$dateStart, $dateEnd])
+                            ->orderBy('date_start')
                             ->groupBy('date')
                             ->get();
 
@@ -110,7 +110,7 @@ class StatisticController extends Controller
                 $chartTitle = "Adhésions par type";
 
                 $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscriptionType_count'))
-                    ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                    ->whereBetween('date_start', [$dateStart, $dateEnd])
                     ->groupBy('subscription_type_id')
                     ->get();
 
@@ -147,7 +147,7 @@ class StatisticController extends Controller
                 $cities = [];
                 $datas = DB::table('subscriptions')
                     ->join('users', 'user_id', '=', 'users.id')
-                    ->whereBetween('subscription_date', [$dateStart, $dateEnd])
+                    ->whereBetween('date_start', [$dateStart, $dateEnd])
                     ->select(DB::raw('count(*) as subscribersByCity_count'), DB::raw('users.city as city'))
                     ->groupBy('users.city')
                     ->get();
@@ -190,10 +190,10 @@ class StatisticController extends Controller
                             ->where('payment_type', '=', 'App\Subscription')
                             ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
                             ->select(DB::raw('sum(payments.amount) as amountSum'),
-                            DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-\', MONTH(subscriptions.subscription_date),
-                             \'-\', DAY(subscriptions.subscription_date)) as date'))
-                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscriptions.subscription_date')
+                            DB::raw('CONCAT(YEAR(subscriptions.date_start), \'-\', MONTH(subscriptions.date_start),
+                             \'-\', DAY(subscriptions.date_start)) as date'))
+                            ->whereBetween('subscriptions.date_start', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.date_start')
                             ->groupBy('date')
                             ->get();
 
@@ -228,10 +228,10 @@ class StatisticController extends Controller
                             ->where('payment_type', '=', 'App\Subscription')
                             ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
                             ->select(DB::raw('sum(payments.amount) as amountSum'),
-                                DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-\', MONTH(subscriptions.subscription_date),
+                                DB::raw('CONCAT(YEAR(subscriptions.date_start), \'-\', MONTH(subscriptions.date_start),
                              \'-1\') as date'))
-                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscriptions.subscription_date')
+                            ->whereBetween('subscriptions.date_start', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.date_start')
                             ->groupBy('date')
                             ->get();
 
@@ -265,9 +265,9 @@ class StatisticController extends Controller
                             ->where('payment_type', '=', 'App\Subscription')
                             ->join('subscriptions', 'payment_id', '=', 'subscriptions.id')
                             ->select(DB::raw('sum(payments.amount) as amountSum'),
-                                DB::raw('CONCAT(YEAR(subscriptions.subscription_date), \'-1-1\') as date'))
-                            ->whereBetween('subscriptions.subscription_date', [$dateStart, $dateEnd])
-                            ->orderBy('subscriptions.subscription_date')
+                                DB::raw('CONCAT(YEAR(subscriptions.date_start), \'-1-1\') as date'))
+                            ->whereBetween('subscriptions.date_start', [$dateStart, $dateEnd])
+                            ->orderBy('subscriptions.date_start')
                             ->groupBy('date')
                             ->get();
 
