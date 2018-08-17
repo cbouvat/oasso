@@ -7,6 +7,7 @@ use App\Mail\SendPwdByEmail;
 use Illuminate\Http\Request;
 use App\Mail\PasswordSending;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -100,23 +101,62 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     * @return void
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $validateData = $request->validate([
+            'gender' => 'integer|max:2|nullable',
+            'firstname' => 'required|alpha|string|max:45|min:2',
+            'lastname' => 'required|alpha|string|max:45|min:2',
+            'email' => 'string|required|email|max:255|unique:users,email,'.$user->id,
+            'birthdate' => '|date|before:today-13years|after:today-120years',
+            'address_line1' => '|string|max:32|',
+            'address_line2' => '|string|max:32|nullable',
+            'city' => 'required|string|max:45|',
+            'zipcode' => 'digits:5|numeric',
+            'phone_1' => 'numeric|nullable',
+            'phone_2' => 'numeric|nullable',
+            'newspaper' => 'boolean',
+            'newsletter' => 'boolean',
+            'gender_joint' => 'max:2|nullable',
+            'firstname_joint' => 'alpha|max:45|nullable',
+            'lastname_joint' => 'alpha|max:45|nullable',
+            'birthdate_joint' => 'date|before:today-13years|after:today-120years|nullable',
+            'email_joint' => 'email|max:45|nullable',
+        ]);
+
+        if ($request->has('role_type_id') && Auth::user()->role()->first()->role_type_id == 3) {
+            $role_type_id = $request->validate([
+                'role_type_id' => 'integer',
+            ]);
+            $role = $user->role();
+            $role->update($role_type_id);
+        }
+
+        if ($request['newspaper'] == null) {
+            $validateData['newspaper'] = 0;
+        }
+        if ($request['newsletter'] == null) {
+            $validateData['newsletter'] = 0;
+        }
+
+        $user->update($validateData);
+
+        return redirect()->route('admin.user.edit', ['user' => $user])->with('message', 'Modification effectuée');
     }
 
     /**

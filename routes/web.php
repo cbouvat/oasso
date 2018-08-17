@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'UserController@index')->name('index');
             Route::post('/', 'UserController@store')->name('store');
             Route::get('/create', 'UserController@create')->name('create');
+            Route::post('/{user}', 'UserController@update')->name('update');
             Route::get('/{user}', 'UserController@show')->name('show');
             Route::delete('/{user}', 'UserController@destroy')->name('destroy');
             Route::get('/{user}/delete', 'UserController@delete')->name('delete');
@@ -68,7 +69,8 @@ Route::middleware('auth')->group(function () {
         // Gift
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
-            Route::post('/', 'GiftController@create')->name('create');
+            Route::get('/{user}', 'GiftController@create')->name('create');
+            Route::post('/{user}', 'GiftController@store')->name('store');
             Route::get('/create', 'GiftController@show')->name('show');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
