@@ -64,7 +64,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('admin/export*') ? 'active' : '' }}" href="{{ route('admin.export.index') }}">
                 <span data-feather="download"></span> Export
             </a>
         </li>

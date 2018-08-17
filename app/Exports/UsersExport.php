@@ -161,9 +161,9 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSiz
         $users = $users->toArray();
         foreach ($users as $key => $value) {
             if (is_int($value) && ($key == 'gender' || $key == 'gender_joint')) {
-                if ($value === 1) {
+                if ($value == 1) {
                     $users[$key] = 'Masculin';
-                } elseif ($value === 2) {
+                } elseif ($value == 2) {
                     $users[$key] = 'Feminin';
                 } else {
                     $users[$key] = 'Indéfini';

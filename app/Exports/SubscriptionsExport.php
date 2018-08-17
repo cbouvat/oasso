@@ -39,19 +39,19 @@ class SubscriptionsExport implements FromCollection, WithHeadings, WithMapping, 
         $subs = $sub->toArray();
         foreach ($subs as $key => $value) {
             if (is_int($value) && $key == 'subscription_source') {
-                if ($value === 0) {
+                if ($value == 0) {
                     $subs[$key] = 'Agence';
                 } else {
                     $subs[$key] = 'Application Web';
                 }
             } elseif (is_int($value) && $key == 'subscription_type_id') {
-                if ($value === 1) {
+                if ($value == 1) {
                     $subs[$key] = $sub->type->name;
-                } elseif ($value === 2) {
+                } elseif ($value == 2) {
                     $subs[$key] = $sub->type->name;
-                } elseif ($value === 3) {
+                } elseif ($value == 3) {
                     $subs[$key] = $sub->type->name;
-                } elseif ($value === 4) {
+                } elseif ($value == 4) {
                     $subs[$key] = $sub->type->name;
                 }
             }
