@@ -101,7 +101,7 @@ class UserController extends Controller
 
         return redirect()->route('home');
     }
-    
+
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
