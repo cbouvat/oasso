@@ -101,19 +101,7 @@ class UserController extends Controller
 
         return redirect()->route('home');
     }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function history()
-    {
-        $user = Auth::user();
-        $user->load('gifts');
-        $user->load('subscriptions');
-
-        return view('user.history.index', ['user' => $user]);
-    }
-
+    
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
