@@ -214,7 +214,7 @@
                                 </div>
                             </div>
 
-                            <h4>{{__('app.Our Partner (if family)')}}</h4>
+                            <h4>{{__('app.Partner informations (if family)')}}</h4>
                             <div class="form-group row">
                                 <label for="gender_joint"
                                        class="col-md-4 col-form-label text-md-right">{{ __('app.Partner Gender') }}</label>
