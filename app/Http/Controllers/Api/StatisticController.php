@@ -166,7 +166,14 @@ class StatisticController extends Controller
                                 "#FF6384",
                                 "#36A2EB",
                                 "#FFCE56",
-                                "#69D76B"
+                                "#69D76B",
+                                "#ff33bb",
+                                "#b982ee",
+                                "#c40012",
+                                "#d2ceda",
+                                "#9ca4f1",
+                                "#b2f19c"
+
                             ],
                         ]
                     ]
