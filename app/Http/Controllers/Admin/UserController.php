@@ -127,6 +127,7 @@ class UserController extends Controller
     {
         $user->load('subscriptions')
             ->load('gifts');
+
         return view('admin.user.delete', ['user' => $user]);
     }
 
@@ -139,16 +140,16 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-
         if ($user->subscriptions()->count() > 0 || $user->gifts()->count() > 0) {
             $user->delete();
 
             return redirect()->route('admin.user.index')
-                ->with('message', $user->firstname . ' supprimé, mais n\'est pas retiré de la base de donnée');
+                ->with('message', $user->firstname.' supprimé, mais n\'est pas retiré de la base de donnée');
         } else {
             $user->forceDelete();
+
             return redirect()->route('admin.user.index')
-                ->with('message', $user->firstname . ' est totalement supprimé');
+                ->with('message', $user->firstname.' est totalement supprimé');
         }
     }
 }
