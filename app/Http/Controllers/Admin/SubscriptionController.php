@@ -6,6 +6,7 @@ use App\Payment;
 use App\Subscription;
 use App\PaymentMethod;
 use App\SubscriptionType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -88,13 +89,14 @@ class SubscriptionController extends Controller
      */
     public function edit(Subscription $subscription)
     {
+        $payments_methods = PaymentMethod::all();
         $subscription_types = SubscriptionType::all();
-
         $subscription->load('payment');
 
         return view('admin.subscription.edit', [
             'subscription' => $subscription,
             'subscription_types' => $subscription_types,
+            'payments_methods' => $payments_methods,
         ]);
     }
 
@@ -111,9 +113,12 @@ class SubscriptionController extends Controller
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
             'date_start' => 'required|date',
+            'payment_method_id' => 'required|numeric',
         ]);
 
-        $validator['date_end'] = date('Y-m-d', strtotime($subscription->date_start.' +1 year'));
+        $dateStart = new Carbon($validator['date_start']);
+
+        $validator['date_end'] = $dateStart->addYear()->format('Y-m-d');
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 
@@ -129,7 +134,7 @@ class SubscriptionController extends Controller
 
         $payment->update([
             'amount' => $validator['amount'],
-            'payment_method_id' => '2',
+            'payment_method_id' => $validator['payment_method_id'],
         ]);
 
         return back()->with('message', 'Mise a jour effectuée');

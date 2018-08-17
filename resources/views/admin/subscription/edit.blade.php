@@ -32,6 +32,20 @@
                 </div>
 
                 <div class="form-group row">
+                    <label for="payment_method_id"
+                           class="col-md-4 col-form-label text-md-right">Moyen de paiement</label>
+                    <div class="col-md-6">
+                        <select id="payment_method_id" name="payment_method_id" class="custom-select">
+                            @foreach($payments_methods as $payment_method)
+                                <option value="{{ $payment_method->id }}" {{$payment_method->id == $subscription->payment->payment_method_id ? 'selected' : ''}}>
+                                    {{ $payment_method->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label for="amount"
                            class="col-md-4 col-form-label text-md-right">Montant</label>
                     <div class="col-md-6">
