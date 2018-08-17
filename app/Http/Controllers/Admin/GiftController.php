@@ -32,8 +32,8 @@ class GiftController extends Controller
      */
     public function create(User $user)
     {
-
         $paymentsMethod = PaymentMethod::all();
+
         return view('admin.gift.create', [
             'user' => $user,
             'payments_methods' => $paymentsMethod,
@@ -50,7 +50,7 @@ class GiftController extends Controller
     {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'payment_method_id' => 'required|integer'
+            'payment_method_id' => 'required|integer',
         ]);
         $inputs['user_id'] = $user->id;
         $gift = Gift::create($inputs);
