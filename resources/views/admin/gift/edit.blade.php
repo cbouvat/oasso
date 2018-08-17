@@ -13,29 +13,24 @@
             </li>
         </ol>
     </nav>
-
-    <div class="row">
-        <div class="col-12">
-            <div class="col-12 col-md-4 offset-md-4 mt-5">
-                <form action="{{route('admin.gift.update', ['id' => $gift->id])}}" method="post">
-                    @csrf
-                    <div class="form-group row">
-                        <label for="amount" class="col-sm-4 col-form-label">Montant</label>
-                        <div class="input-group col-sm-8">
-                            <input type="text" id="amount" name="amount" class="form-control text-right"
-                                   value="{{ $gift->amount }}">
-                            <div class="input-group-append">
-                                <span class="input-group-text">€</span>
-                            </div>
-
-                        </div>
+    <div class="col-md-8 offset-md-2">
+        <form action="{{route('admin.gift.update', ['id' => $gift->id])}}" method="post">
+            @csrf
+            <div class="form-group row">
+                <label for="amount" class="col-md-2 col-form-label">Montant</label>
+                <div class="input-group col-md-4">
+                    <input type="text" id="amount" name="amount" class="form-control text-right"
+                           value="{{ $gift->amount }}">
+                    <div class="input-group-append">
+                        <span class="input-group-text">€</span>
                     </div>
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-outline-primary btn-lg " value="Modifier">
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <div class="col-md-8 offset-md-2">
+                <input type="submit" class="btn btn-primary" value="Modifier">
+            </div>
+
+        </form>
     </div>
 
 @endsection
