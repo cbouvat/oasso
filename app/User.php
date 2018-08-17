@@ -42,7 +42,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Set the users city
+     * Set the users city.
      * @param $value
      * @return void
      */
