@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class StatisticController extends Controller
 {
@@ -19,9 +19,9 @@ class StatisticController extends Controller
         switch ($type) {
             case 'general':
                 $chartTitle = "Nombre d'adhésions";
-                $chartType = "line";
+                $chartType = 'line';
 
-                $dataRange=[];
+                $dataRange = [];
                 switch ($range) {
                     case 'days':
                         $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscription_count'),
@@ -82,32 +82,31 @@ class StatisticController extends Controller
 
                 foreach ($datas as $data) {
                     $tableDate[$data->date] = $data->subscription_count;
-                };
+                }
 
                 $dataFinals = array_values($tableDate);
 
-
                 $chartData = [
-                    "labels" => $dataRange,
-                    "datasets" => [
+                    'labels' => $dataRange,
+                    'datasets' => [
                         [
-                            "label" => [$chartTitle],
-                            "data" => $dataFinals,
-                            "borderColor" => [
-                                "rgba(250,0,0,1)"
+                            'label' => [$chartTitle],
+                            'data' => $dataFinals,
+                            'borderColor' => [
+                                'rgba(250,0,0,1)',
                             ],
-                            "backgroundColor" => [
-                                "rgba(0,0,0,0)"
+                            'backgroundColor' => [
+                                'rgba(0,0,0,0)',
                             ],
-                            "borderWidth" => 2
+                            'borderWidth' => 2,
 
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 break;
             case 'subscriptions':
-                $chartType = "pie";
-                $chartTitle = "Adhésions par type";
+                $chartType = 'pie';
+                $chartTitle = 'Adhésions par type';
 
                 $datas = DB::table('subscriptions')->select(DB::raw('count(*) as subscriptionType_count'))
                     ->whereBetween('date_start', [$dateStart, $dateEnd])
@@ -119,30 +118,30 @@ class StatisticController extends Controller
                 }
 
                 $chartData = [
-                    "labels" => [
+                    'labels' => [
                         'Sans emploi',
                         'Famille',
                         'Individuel',
-                        'Etudiant'
+                        'Etudiant',
                     ],
-                    "datasets" => [
+                    'datasets' => [
                         [
-                            "label" => $chartTitle,
-                            "data" => $dataArray,
-                            "backgroundColor" => [
-                                "#FF6384",
-                                "#36A2EB",
-                                "#FFCE56",
-                                "#69D76B"
+                            'label' => $chartTitle,
+                            'data' => $dataArray,
+                            'backgroundColor' => [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56',
+                                '#69D76B',
                             ],
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
 
                 break;
             case 'cities':
-                $chartType = "pie";
-                $chartTitle = "Adhérents par villes";
+                $chartType = 'pie';
+                $chartTitle = 'Adhérents par villes';
 
                 $cities = [];
                 $datas = DB::table('subscriptions')
@@ -158,31 +157,31 @@ class StatisticController extends Controller
                 }
 
                 $chartData = [
-                    "labels" => $cities,
-                    "datasets" => [
+                    'labels' => $cities,
+                    'datasets' => [
                         [
-                            "data" => $dataArray,
-                            "backgroundColor" => [
-                                "#FF6384",
-                                "#36A2EB",
-                                "#FFCE56",
-                                "#69D76B",
-                                "#ff33bb",
-                                "#b982ee",
-                                "#c40012",
-                                "#d2ceda",
-                                "#9ca4f1",
-                                "#b2f19c"
+                            'data' => $dataArray,
+                            'backgroundColor' => [
+                                '#FF6384',
+                                '#36A2EB',
+                                '#FFCE56',
+                                '#69D76B',
+                                '#ff33bb',
+                                '#b982ee',
+                                '#c40012',
+                                '#d2ceda',
+                                '#9ca4f1',
+                                '#b2f19c',
 
                             ],
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 break;
             case 'receipts':
-                $chartType = "line";
-                $chartTitle = ["Adhésions", "Dons"];
-                $dataRange=[];
+                $chartType = 'line';
+                $chartTitle = ['Adhésions', 'Dons'];
+                $dataRange = [];
 
                 switch ($range) {
                     case 'days':
@@ -197,7 +196,6 @@ class StatisticController extends Controller
                             ->groupBy('date')
                             ->get();
 
-
                         $datasGifts = DB::table('payments')
                             ->where('payment_type', '=', 'App\Gift')
                             ->join('gifts', 'payment_id', '=', 'gifts.id')
@@ -208,7 +206,6 @@ class StatisticController extends Controller
                             ->orderBy('gifts.created_at')
                             ->groupBy('date')
                             ->get();
-
 
                         $tableDateSubs = [];
                         $tableDateGifts = [];
@@ -234,7 +231,6 @@ class StatisticController extends Controller
                             ->orderBy('subscriptions.date_start')
                             ->groupBy('date')
                             ->get();
-
 
                         $datasGifts = DB::table('payments')
                             ->where('payment_type', '=', 'App\Gift')
@@ -271,7 +267,6 @@ class StatisticController extends Controller
                             ->groupBy('date')
                             ->get();
 
-
                         $datasGifts = DB::table('payments')
                             ->where('payment_type', '=', 'App\Gift')
                             ->join('gifts', 'payment_id', '=', 'gifts.id')
@@ -298,56 +293,54 @@ class StatisticController extends Controller
                 }
 
                 foreach ($datasSubs as $data) {
-                    $tableDateSubs[$data->date] = (int)$data->amountSum;
-                };
+                    $tableDateSubs[$data->date] = (int) $data->amountSum;
+                }
 
                 foreach ($datasGifts as $data) {
-                    $tableDateGifts[$data->date] = (int)$data->amountSum;
-                };
+                    $tableDateGifts[$data->date] = (int) $data->amountSum;
+                }
 
                 $dataFinals1 = array_values($tableDateSubs);
                 $dataFinals2 = array_values($tableDateGifts);
 
-
                 $chartData = [
-                    "labels" => $dataRange,
-                    "datasets" => [
+                    'labels' => $dataRange,
+                    'datasets' => [
                         [
-                            "label" => [$chartTitle[0]],
-                            "data" => $dataFinals1,
-                            "borderColor" => [
-                                "rgba(250,0,0,1)"
+                            'label' => [$chartTitle[0]],
+                            'data' => $dataFinals1,
+                            'borderColor' => [
+                                'rgba(250,0,0,1)',
                             ],
-                            "backgroundColor" => [
-                                "rgba(0,0,0,0)"
+                            'backgroundColor' => [
+                                'rgba(0,0,0,0)',
                             ],
-                            "borderWidth" => 2
+                            'borderWidth' => 2,
 
                         ],
                         [
-                            "label" => [$chartTitle[1]],
-                            "data" => $dataFinals2,
-                            "borderColor" => [
-                                "rgba(0,250,0,1)"
+                            'label' => [$chartTitle[1]],
+                            'data' => $dataFinals2,
+                            'borderColor' => [
+                                'rgba(0,250,0,1)',
                             ],
-                            "backgroundColor" => [
-                                "rgba(0,0,0,0)"
+                            'backgroundColor' => [
+                                'rgba(0,0,0,0)',
                             ],
-                            "borderWidth" => 2
+                            'borderWidth' => 2,
 
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 break;
-            default :
+            default:
                 return response()->json(['message' => 'Not Found !'], 404);
         }
 
         $json = [
-            "type" => $chartType,
-            "data" => $chartData
+            'type' => $chartType,
+            'data' => $chartData,
         ];
-
 
         return $json;
     }

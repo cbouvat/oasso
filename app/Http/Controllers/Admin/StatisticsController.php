@@ -19,7 +19,7 @@ class StatisticsController extends Controller
 
     public function select($option)
     {
-        return view('admin.statistics.'. $option);
+        return view('admin.statistics.'.$option);
     }
 
     /**
