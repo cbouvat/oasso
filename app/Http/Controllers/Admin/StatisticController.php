@@ -16,15 +16,18 @@ class StatisticController extends Controller
         return view('admin.statistics.general');
     }
 
-    public function subscription(){
+    public function subscription()
+    {
         return view('admin.statistics.subscriptions');
     }
 
-    public function city(){
+    public function city()
+    {
         return view('admin.statistics.cities');
     }
 
-    public function receipt(){
+    public function receipt()
+    {
         return view('admin.statistics.receipts');
     }
 }
