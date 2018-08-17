@@ -4,8 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -46,8 +46,8 @@ class PostController extends Controller
         ]);
 
         $title = $validateRequest['title'];
-        $content=$validateRequest['text_content'];
-        $status=$validateRequest['status'];
+        $content = $validateRequest['text_content'];
+        $status = $validateRequest['status'];
         $user = Auth::user()->id;
         $validateRequest['user_id'] = $user;
 

@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
             Route::get('/show', 'PostController@show')->name('show');
             Route::get('/edit', 'PostController@edit')->name('edit');
             Route::get('/delete', 'PostController@softDelete')->name('beforedelete');
-
         });
     });
 
