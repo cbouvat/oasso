@@ -32,7 +32,7 @@ class SendNewsletter extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.newsletter.sending')
+        return $this->markdown('emails.newsletter.sending')
             ->text('emails.newsletter.sending_plain')
             ->subject($this->newsletter->title);
     }
