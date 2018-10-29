@@ -51,8 +51,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'UserController@create')->name('create');
             Route::post('/{user}', 'UserController@update')->name('update');
             Route::get('/{user}', 'UserController@show')->name('show');
-            Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
-            Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+            Route::delete('/{user}', 'UserController@destroy')->name('destroy');
+            Route::get('/{user}/delete', 'UserController@delete')->name('delete');
         });
 
         // Subscription
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'SubscriptionController@index')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
             Route::get('/create', 'SubscriptionController@create')->name('create');
-            Route::get('/{subscription}/edit', 'SubscriptionController@edit')->name('edit');
+            Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
             Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
             Route::get('/{subscription}/delete', 'SubscriptionController@delete')->name('delete');
             Route::post('/{subscription}', 'SubscriptionController@destroy')->name('destroy');
@@ -69,7 +69,8 @@ Route::middleware('auth')->group(function () {
         // Gift
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
-            Route::post('/', 'GiftController@create')->name('create');
+            Route::get('/{user}', 'GiftController@create')->name('create');
+            Route::post('/{user}', 'GiftController@store')->name('store');
             Route::get('/create', 'GiftController@show')->name('show');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');

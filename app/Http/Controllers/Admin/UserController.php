@@ -100,12 +100,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
-     * @return void
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('admin.user.edit', ['user' => $user]);
     }
 
     /**
@@ -154,30 +154,34 @@ class UserController extends Controller
      * @param User $user
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function beforeDelete(User $user)
+    public function delete(User $user)
     {
-        return view('admin.user.beforedelete', ['user' => $user]);
-    }
+        $user->load('subscriptions')
+            ->load('gifts')
+            ->load('newsletters');
 
-    /**
-     * @param User $user
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
-    public function softDelete(User $user)
-    {
-        $user->delete();
-
-        return redirect()->route('home')->with('message', $user->firstname.' supprimé !');
+        return view('admin.user.delete', ['user' => $user]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if ($user->subscriptions()->count() > 0 || $user->gifts()->count() > 0 || $user->newsletters()->count() > 0) {
+            $user->delete();
+
+            return redirect()->route('admin.user.index')
+                ->with('message', $user->firstname.' supprimé, mais n\'est pas retiré de la base de donnée');
+        } else {
+            $user->forceDelete();
+
+            return redirect()->route('admin.user.index')
+                ->with('message', $user->firstname.' est totalement supprimé');
+        }
     }
 }
