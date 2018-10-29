@@ -1,12 +1,11 @@
 <div class="row col-md-6 mb-3">
 
-    <label>Title</label>
     @isset($newsletter)
-        <input id="newsletterTitle" class="input-group mb-2" type="text" name="title"
-               value="{{ $newsletter->title }}">
+        <input id="newsletterTitle" class="col mb-2" type="text" name="title"
+               value="{{ $newsletter->title }}" placeholder="{{__('Email subject')}}">
     @endisset
     @empty($newsletter)
-        <input id="newsletterTitle" class="input-group mb-2" type="text" name="title">
+        <input id="newsletterTitle" class="input-group mb-2" type="text" name="title" placeholder="{{__('Email subject')}}">
     @endempty
 
     @if ($errors->has('newsletterTitle'))

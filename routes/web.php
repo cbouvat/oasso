@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('duplicate');
             Route::get('/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('beforedelete');
             Route::get('/{newsletter}/delete', 'NewsletterController@delete')->name('delete');
+            Route::get('/{newsletter}/show', 'NewsletterController@show')->name('show');
+            Route::post('/{newsletter}/send', 'NewsletterController@send')->name('send');
         });
 
         // Mailing
@@ -112,7 +114,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Output
-Route::get('/optout/{subscription}/{user}', 'User\SubscriptionController@optout')->name('optout');
+Route::get('/optout/mail/{subscription}/{user}', 'User\SubscriptionController@optout')->name('outmail');
+Route::post('/optout/newsletter/{user}', 'Admin\NewsletterController@optout')->name('outnewsletter');
+Route::get('/beforeOptout/newsletter/{user}', 'Admin\NewsletterController@beforeOptout')->name('beforeOptout');
 
 // Auth
 Auth::routes();
