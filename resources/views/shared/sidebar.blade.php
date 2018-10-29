@@ -32,7 +32,6 @@
         </li>
     </ul>
 
-
     @if(Auth::user()->role->role_type_id == 2 || Auth::user()->role->role_type_id == 3)
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
         <span>Administration</span>
@@ -64,13 +63,18 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('admin/export*') ? 'active' : '' }}" href="#">
                 <span data-feather="download"></span> Export
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('admin/statistic*') ? 'active' : '' }}" href="#">
                 <span data-feather="bar-chart"></span> Statistiques
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Request::is('admin/session*') ? 'active' : '' }}" href="{{ route('admin.session.index') }}">
+                <span data-feather="user-x"></span> Connexions
             </a>
         </li>
     </ul>

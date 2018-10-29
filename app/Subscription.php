@@ -18,6 +18,16 @@ class Subscription extends Model
     protected $dates = ['date_start'];
 
     /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'date_end',
+        'date_start',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

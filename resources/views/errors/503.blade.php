@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <img src="https://http.cat/503" class="img-fluid rounded mx-auto d-block" alt="">
-    
+    <img src="https://http.cat/503" style="max-width: 400px" class="img-fluid rounded mx-auto mt-3 d-block" alt="">
 @endsection
