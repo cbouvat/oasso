@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Payment;
+use Carbon\Carbon;
 use App\Subscription;
 use App\PaymentMethod;
 use App\SubscriptionType;
@@ -19,7 +20,7 @@ class SubscriptionController extends Controller
     public function index()
     {
         $subscriptions = Subscription::with(['type', 'user', 'payment.paymentMethod'])
-            ->orderBy('subscription_date', 'desc')
+            ->orderBy('date_start', 'desc')
             ->paginate();
 
         return view('admin.subscription.index', ['subscriptions' => $subscriptions]);
@@ -92,13 +93,12 @@ class SubscriptionController extends Controller
     {
         $payments_methods = PaymentMethod::all();
         $subscription_types = SubscriptionType::all();
-
         $subscription->load('payment');
 
         return view('admin.subscription.edit', [
             'subscription' => $subscription,
-            'payments_methods' => $payments_methods,
             'subscription_types' => $subscription_types,
+            'payments_methods' => $payments_methods,
         ]);
     }
 
@@ -112,13 +112,15 @@ class SubscriptionController extends Controller
     public function update(Request $request, Subscription $subscription)
     {
         $validator = $request->validate([
-            'user_id' => 'required|numeric',
             'subscription_type_id' => 'required|integer',
             'amount' => 'required|numeric',
-            'payment_methods' => 'required|numeric',
-            'subscription_date' => 'required|date',
+            'date_start' => 'required|date',
+            'payment_method_id' => 'required|numeric',
         ]);
 
+        $dateStart = new Carbon($validator['date_start']);
+
+        $validator['date_end'] = $dateStart->addYear()->format('Y-m-d');
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 
@@ -126,7 +128,6 @@ class SubscriptionController extends Controller
 
         $validator['payment_id'] = $subscription->id;
         $validator['payment_type'] = 'App\Subscription';
-        $validator['payment_method_id'] = $validator['payment_methods'];
 
         $payment = Payment::where([
             ['payment_id', $subscription->id],
@@ -135,14 +136,13 @@ class SubscriptionController extends Controller
 
         $payment->update([
             'amount' => $validator['amount'],
-            'user_id' => $validator['user_id'],
             'payment_method_id' => $validator['payment_method_id'],
         ]);
 
         return back()->with('message', 'Mise a jour effectuée');
     }
 
-    public function beforeDelete(Subscription $subscription)
+    public function delete(Subscription $subscription)
     {
         return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
     }

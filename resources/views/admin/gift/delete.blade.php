@@ -6,8 +6,8 @@
         <form action="{{ route('admin.gift.destroy', $gift) }}" method="post">
             @method('DELETE')
             @csrf
-            <button type="submit" class="btn btn-danger btn-lg mr-2">Oui</button>
-            <a class="btn btn-secondary btn-lg ml-2" href="{{route('admin.gift.index')}}">Non</a>
+            <input type="submit" value="Oui" class="btn btn-danger mr-2">
+            <a class="btn btn-secondary ml-2" href="{{route('admin.gift.index')}}">Non</a>
         </form>
     </div>
 @endsection

@@ -17,14 +17,14 @@ class SubscriptionObserver
      */
     public function created(Subscription $subscription)
     {
-//        $subscription->load('user', 'type');
-//        $user = $subscription->user;
-//
-//        if (Subscription::where('user_id', $user->id)->count() === 1) {
-//            Mail::to($user)->send(new MembershipNew($subscription));
-//        } else {
-//            Mail::to($user)->send(new MembershipRenewal($subscription));
-//        }
+        $subscription->load('user', 'type');
+        $user = $subscription->user;
+
+        if (Subscription::where('user_id', $user->id)->count() === 1) {
+            Mail::to($user)->send(new MembershipNew($subscription));
+        } else {
+            Mail::to($user)->send(new MembershipRenewal($subscription));
+        }
     }
 
     /**
