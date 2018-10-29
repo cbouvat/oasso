@@ -95,6 +95,14 @@ Route::middleware('auth')->group(function () {
             Route::post('/{mailing}', 'MailingController@update')->name('update');
         });
 
+        // Export
+        Route::prefix('export')->namespace('Export')->name('export.')->group(function () {
+            Route::get('/', 'ExportController@index')->name('index');
+            Route::post('/', 'ExportController@export')->name('export');
+        });
+
+        // Search
+        Route::get('/search', 'SearchController@search')->name('search');
         // Session
         Route::prefix('session')->name('session.')->group(function () {
             Route::get('/', 'SessionController@index')->name('index');

@@ -10,7 +10,8 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
-        "stripe/stripe-php": "^6.15"
+        "stripe/stripe-php": "^6.15",
+        "maatwebsite/excel": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",
