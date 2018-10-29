@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete', 'UserController@destroy')->name('destroy');
         Route::get('/payment', 'CheckoutController@payment')->name('payment');
         Route::post('/payment', 'CheckoutController@charge')->name('payment.charge');
-        Route::get('/history', 'UserController@history')->name('history');
 
         // Subscription
         Route::prefix('/subscription')->name('subscription.')->group(function () {

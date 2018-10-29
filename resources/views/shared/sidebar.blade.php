@@ -25,11 +25,6 @@
                 <span data-feather="gift"></span> Dons
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link {{ Request::is('user/history') ? 'active' : '' }}" href="{{ route('user.history') }}">
-                <span data-feather="activity"></span> Historique
-            </a>
-        </li>
     </ul>
 
     @if(Auth::user()->role->role_type_id == 2 || Auth::user()->role->role_type_id == 3)
