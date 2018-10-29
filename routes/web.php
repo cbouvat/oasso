@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
         // Gift
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
+            Route::post('/', 'GiftController@create')->name('create');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
             Route::get('/{gift}/delete', 'GiftController@delete')->name('delete');
