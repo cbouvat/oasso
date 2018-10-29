@@ -18,19 +18,18 @@ Route::middleware('auth')->group(function () {
         // User
         Route::get('/', 'UserController@index')->name('index');
         Route::post('/', 'UserController@update')->name('update');
-        Route::get('/edit', 'UserController@edit')->name('edit');
         Route::get('/password', 'UserController@passwordEdit')->name('password.edit');
         Route::post('/password', 'UserController@passwordUpdate')->name('password.update');
         Route::get('/delete', 'UserController@delete')->name('delete');
         Route::post('/delete', 'UserController@destroy')->name('destroy');
         Route::get('/payment', 'CheckoutController@payment')->name('payment');
         Route::post('/payment', 'CheckoutController@charge')->name('payment.charge');
-        Route::get('/history', 'UserController@history')->name('history');
 
         // Subscription
         Route::prefix('/subscription')->name('subscription.')->group(function () {
             Route::get('/', 'SubscriptionController@create')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
+            Route::get('/generatePdf', 'SubscriptionController@generatePdf')->name('generatePdf');
         });
 
         // Gift
@@ -52,6 +51,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{user}', 'UserController@show')->name('show');
             Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
             Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+            Route::get('/{user}/gift/create', 'GiftController@create')->name('gift.create');
+            Route::post('/{user}/gift', 'GiftController@store')->name('gift.store');
         });
 
         // Subscription
@@ -61,15 +62,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', 'SubscriptionController@create')->name('create');
             Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
             Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
-            Route::get('/{subscription}/beforedelete', 'SubscriptionController@beforeDelete')->name('beforedelete');
-            Route::get('/{subscription}/destroy/', 'SubscriptionController@destroy')->name('destroy');
+            Route::get('/{subscription}/delete', 'SubscriptionController@delete')->name('delete');
+            Route::post('/{subscription}', 'SubscriptionController@destroy')->name('destroy');
         });
 
         // Gift
         Route::prefix('gift')->name('gift.')->group(function () {
             Route::get('/', 'GiftController@index')->name('index');
             Route::post('/', 'GiftController@create')->name('create');
-            Route::get('/create', 'GiftController@show')->name('show');
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
             Route::get('/{gift}/delete', 'GiftController@delete')->name('delete');
@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('duplicate');
             Route::get('/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('beforedelete');
             Route::get('/{newsletter}/delete', 'NewsletterController@delete')->name('delete');
+            Route::get('/{newsletter}/show', 'NewsletterController@show')->name('show');
+            Route::post('/{newsletter}/send', 'NewsletterController@send')->name('send');
         });
 
         // Mailing
@@ -95,16 +97,34 @@ Route::middleware('auth')->group(function () {
             Route::post('/{mailing}', 'MailingController@update')->name('update');
         });
 
+        // Export
+        Route::prefix('export')->namespace('Export')->name('export.')->group(function () {
+            Route::get('/', 'ExportController@index')->name('index');
+            Route::post('/', 'ExportController@export')->name('export');
+        });
+
+        // Search
+        Route::get('/search', 'SearchController@search')->name('search');
         // Session
         Route::prefix('session')->name('session.')->group(function () {
             Route::get('/', 'SessionController@index')->name('index');
             Route::delete('/{session}', 'SessionController@destroy')->name('delete');
         });
+
+        //Statistics
+        Route::prefix('statistic')->name('statistic.')->group(function () {
+            Route::get('/', 'StatisticController@index')->name('index');
+            Route::get('/subscription', 'StatisticController@subscription')->name('subscription');
+            Route::get('/city', 'StatisticController@city')->name('city');
+            Route::get('/receipt', 'StatisticController@receipt')->name('receipt');
+        });
     });
 });
 
 // Output
-Route::get('/optout/{subscription}/{user}', 'User\SubscriptionController@optout')->name('optout');
+Route::get('/optout/mail/{subscription}/{user}', 'User\SubscriptionController@optout')->name('outmail');
+Route::post('/optout/newsletter/{user}', 'Admin\NewsletterController@optout')->name('outnewsletter');
+Route::get('/beforeOptout/newsletter/{user}', 'Admin\NewsletterController@beforeOptout')->name('beforeOptout');
 
 // Auth
 Auth::routes();

@@ -2,31 +2,18 @@
 
 namespace App\Http\Controllers\User;
 
+use PDF;
 use Auth;
 use App\User;
 use App\Payment;
+use Carbon\Carbon;
 use App\Subscription;
-use App\PaymentMethod;
 use App\SubscriptionType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $user = Auth::user();
-        $user->load('subscriptions');
-        $user->load('gifts');
-
-        return view('user.user.index', ['user' => $user]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -35,11 +22,36 @@ class SubscriptionController extends Controller
     public function create()
     {
         $user = Auth::user();
+        $user->load('subscriptions');
+
+        $newStartDate = Carbon::now();
+        $actualSubscriptionTypeId = 0;
+        $subscriptionValide = 'noSubscrYet';
+
+        $lastSubscription = $user->lastSubscription();
+
+        if ($lastSubscription) {
+            $actualSubscriptionTypeId = $lastSubscription->subscription_type_id;
+            $subscriptionValide = 'subscrOutdated';
+            $lastSubscriptionDate = Carbon::parse($lastSubscription->date_end);
+
+            if ($lastSubscriptionDate >= Carbon::now()) {
+                $subscriptionValide = 'subscrValide';
+                $newStartDate = $lastSubscriptionDate->addDay();
+            }
+        }
+
+        $newEndDate = Carbon::parse($newStartDate)->addYear();
+
         $subscriptionTypes = SubscriptionType::all();
 
         return view('user.subscription.create', [
             'user' => $user,
             'subscriptionTypes' => $subscriptionTypes,
+            'subscriptionValide' => $subscriptionValide,
+            'startDate' => $newStartDate,
+            'endDate' => $newEndDate,
+            'actualSubscriptionTypeId' => $actualSubscriptionTypeId,
         ]);
     }
 
@@ -51,30 +63,43 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $newStartDate = Carbon::now();
         $type = $request->input('type');
 
         $subscriptionType = SubscriptionType::findOrFail($type);
 
+        $lastSubscription = $user->lastSubscription();
+
+        if ($lastSubscription) {
+            $lastSubscriptionDate = Carbon::parse($lastSubscription->date_end);
+
+            if ($lastSubscriptionDate > Carbon::now()) {
+                $newStartDate = $lastSubscriptionDate->addDay();
+            }
+        }
+
+        $newEndDate = Carbon::parse($newStartDate)->addYear();
+
         $sub = Subscription::create([
             'amount' => $subscriptionType->amount,
             'opt_out_mail' => 0,
-            'subscription_date' => date('Y').'-12-31',
+            'date_start' => $newStartDate, //->format('d-m-Y'),
+            'date_end' => $newEndDate, //->format('d-m-Y'),
             'subscription_source' => 1,
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'subscription_type_id' => $subscriptionType->id,
         ]);
 
         Payment::create([
-            'payment_type' => "App\Subscription",
+            'payment_type' => 'App\Subscription',
             'payment_id' => $sub->id,
             'amount' => $sub->amount,
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'payment_method_id' => 2,
         ]);
 
-        $subType = SubscriptionType::where('id', $type)->first();
-
-        return view('user.user.index', ['user' => Auth::user()]);
+        return back()->with('message', 'Adhésion Confirmée !');
     }
 
     /**
@@ -149,7 +174,10 @@ class SubscriptionController extends Controller
      *
      * Use Hashids
      *
-     **/
+     * @param $subscriptionId
+     * @param $userId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function optout($subId, $userId)
     {
         $subscription = Subscription::findOrFail($subId);
@@ -161,8 +189,17 @@ class SubscriptionController extends Controller
 
             return view('user.subscription.optout');
         } else {
-            return abort(404);
+            return abort(403);
         }
+    }
+
+    public function generatePdf()
+    {
+        $user = Auth::user();
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('/user/subscription/subscriptionPdf', compact('user'));
+        $name = 'Adhésion_'.$user->firstname.'_'.$user->lastname.'.pdf';
+
+        return $pdf->stream($name);
     }
 
     /**
