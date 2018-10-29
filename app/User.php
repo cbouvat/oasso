@@ -28,7 +28,7 @@ class User extends Authenticatable
      */
     public function setFirstNameAttribute($value)
     {
-        $this->attributes['firstname'] = ucfirst(strtolower($value));
+        $this->attributes['firstname'] = mb_convert_case(strtolower($value), MB_CASE_TITLE);
     }
 
     /**
@@ -38,7 +38,7 @@ class User extends Authenticatable
      */
     public function setLastNameAttribute($value)
     {
-        $this->attributes['lastname'] = strtoupper($value);
+        $this->attributes['lastname'] = mb_strtoupper($value);
     }
 
     /**
@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     public function setAddressLineOneAttribute($value)
     {
-        $this->attributes['address_line1'] = strtolower($value);
+        $this->attributes['address_line1'] = mb_strtolower($value);
     }
 
     /**
@@ -58,7 +58,7 @@ class User extends Authenticatable
      */
     public function setAddressLineTwoAttribute($value)
     {
-        $this->attributes['address_line2'] = strtolower($value);
+        $this->attributes['address_line2'] = mb_strtolower($value);
     }
 
     /**
@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     public function setCityAttribute($value)
     {
-        $this->attributes['city'] = ucfirst(strtolower($value));
+        $this->attributes['city'] = mb_convert_case(mb_strtolower($value), MB_CASE_TITLE);
     }
 
     /**
@@ -78,7 +78,7 @@ class User extends Authenticatable
      */
     public function setEmailttribute($value)
     {
-        $this->attributes['email'] = strtolower($value);
+        $this->attributes['email'] = mb_strtolower($value);
     }
 
     /**
@@ -88,7 +88,7 @@ class User extends Authenticatable
      */
     public function setFirstNameJointAttribute($value)
     {
-        $this->attributes['firstname_joint'] = ucfirst(strtolower($value));
+        $this->attributes['firstname_joint'] = mb_convert_case(mb_strtolower($value), MB_CASE_TITLE);
     }
 
     /**
@@ -98,7 +98,7 @@ class User extends Authenticatable
      */
     public function setLastNameJointAttribute($value)
     {
-        $this->attributes['lastname_joint'] = strtoupper($value);
+        $this->attributes['lastname_joint'] = mb_strtoupper($value);
     }
 
     /**
@@ -108,7 +108,7 @@ class User extends Authenticatable
      */
     public function setEmailJointAttribute($value)
     {
-        $this->attributes['email_joint'] = strtolower($value);
+        $this->attributes['email_joint'] = mb_strtolower($value);
     }
 
     /**
