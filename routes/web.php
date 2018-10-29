@@ -110,6 +110,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'SessionController@index')->name('index');
             Route::delete('/{session}', 'SessionController@destroy')->name('delete');
         });
+
+        //Statistics
+        Route::prefix('statistic')->name('statistic.')->group(function () {
+            Route::get('/', 'StatisticController@index')->name('index');
+            Route::get('/subscription', 'StatisticController@subscription')->name('subscription');
+            Route::get('/city', 'StatisticController@city')->name('city');
+            Route::get('/receipt', 'StatisticController@receipt')->name('receipt');
+        });
     });
 });
 
