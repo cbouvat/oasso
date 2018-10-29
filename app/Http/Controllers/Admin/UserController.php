@@ -7,7 +7,6 @@ use App\Mail\SendPwdByEmail;
 use Illuminate\Http\Request;
 use App\Mail\PasswordSending;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -139,14 +138,6 @@ class UserController extends Controller
             'email_joint' => 'email|max:45|nullable',
         ]);
 
-        if ($request->has('role_type_id') && Auth::user()->role()->first()->role_type_id == 3) {
-            $role_type_id = $request->validate([
-                'role_type_id' => 'integer',
-            ]);
-            $role = $user->role();
-            $role->update($role_type_id);
-        }
-
         if ($request['newspaper'] == null) {
             $validateData['newspaper'] = 0;
         }
@@ -156,7 +147,7 @@ class UserController extends Controller
 
         $user->update($validateData);
 
-        return redirect()->route('admin.user.edit', ['user' => $user])->with('message', 'Modification effectuée');
+        return redirect()->route('admin.user.show', ['user' => $user])->with('message', 'Modification effectuée');
     }
 
     /**

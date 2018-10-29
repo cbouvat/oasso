@@ -140,7 +140,7 @@ class SubscriptionController extends Controller
         return back()->with('message', 'Mise a jour effectuée');
     }
 
-    public function beforeDelete(Subscription $subscription)
+    public function delete(Subscription $subscription)
     {
         return view('admin.subscription.beforedelete', ['subscription' => $subscription]);
     }
