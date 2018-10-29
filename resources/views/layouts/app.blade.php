@@ -23,14 +23,14 @@
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('home') }}">{{config('app.name')}}</a>
         @if(Auth::user()->role()->first()->role_type_id != 1)
             <form class="w-100" action={{ route('admin.search') }} method="get">
-                <input class="form-control form-control-dark" id="search-bar" type="search" placeholder="Rechercher"
+                <input class="form-control form-control-dark" id="search-bar" type="search" placeholder="{{ __('app.Search') }}"
                        aria-label="Search" name="q">
             </form>
         @endif
         <div class="navbar-nav px-3">
             <form action="{{ route('logout') }}" method="post" class="form-inline">
                 @csrf
-                <button type="submit" class="btn btn-link nav-link"><span data-feather="log-out"></span> Déconnexion</button>
+                <button type="submit" class="btn btn-link nav-link"><span data-feather="log-out"></span> {{ __('app.Logout') }}</button>
             </form>
         </div>
     @endauth

@@ -5,14 +5,14 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 py-4">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header">{{ __('app.Register') }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
+                        <form method="POST" action="{{ route('register') }}" aria-label="{{ __('app.Register') }}">
                             @csrf
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.E-Mail Address') }}</label>
                                 <div class="col-md-8">
                                     <input id="email" type="email"
                                            class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
@@ -26,7 +26,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="password"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Password') }}</label>
                                 <div class="col-md-8">
                                     <input id="password" type="password"
                                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Confirm Password') }}</label>
                                 <div class="col-md-8">
                                     <input id="password-confirm" type="password" class="form-control"
                                            name="password_confirmation" required>
@@ -48,19 +48,19 @@
                             </div>
 
 
-                            <h4>{{__('Personal Informations')}}</h4>
+                            <h4>{{__('app.Personal Informations')}}</h4>
 
                             <div class="form-group row">
                                 <label for="gender"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Gender') }}</label>
                                 <div class="col-md-8">
                                     <select id="gender" name="gender"
                                             class="custom-select{{ $errors->has('gender') ? ' is-invalid' : '' }}">
-                                        <option value="0">  {{ __('Choose gender') }}</option>
+                                        <option value="0">  {{ __('app.Choose gender') }}</option>
                                         <option value="1"
-                                                @if(old('gender') ==1)selected @endif> {{ __('Male') }}</option>
+                                                @if(old('gender') ==1)selected @endif> {{ __('app.Mr') }}</option>
                                         <option value="2"
-                                                @if(old('gender') ==2)selected @endif>{{ __('Female') }}</option>
+                                                @if(old('gender') ==2)selected @endif>{{ __('app.Ms') }}</option>
                                     </select>
                                     @if ($errors->has('gender'))
                                         <span class="invalid-feedback" role="alert">
@@ -72,7 +72,7 @@
 
                             <div class="form-group row">
                                 <label for="lastname"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Lastname') }}</label>
                                 <div class="col-md-8">
                                     <input id="lastname" type="text"
                                            class="form-control{{ $errors->has('lastname') ? ' is-invalid' : '' }}"
@@ -86,7 +86,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="firstname"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Firstname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Firstname') }}</label>
                                 <div class="col-md-8">
                                     <input id="firstname" type="text"
                                            class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}"
@@ -100,7 +100,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="birthdate"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Birthdate') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Birthdate') }}</label>
                                 <div class="col-md-8">
                                     <input id="birthdate" type="date"
                                            class="form-control{{ $errors->has('birthdate') ? ' is-invalid' : '' }}"
@@ -114,7 +114,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="address_line1"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Address_line1') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Address_line1') }}</label>
                                 <div class="col-md-8">
                                     <input id="address_line1" type="text"
                                            class="form-control{{ $errors->has('address_line1') ? ' is-invalid' : '' }}"
@@ -128,7 +128,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="address_line2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Address_line2') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Address_line2') }}</label>
                                 <div class="col-md-8">
                                     <input id="address_line2" type="text"
                                            class="form-control"
@@ -137,7 +137,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="zipcode"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Zipcode') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Zipcode') }}</label>
                                 <div class="col-md-8">
                                     <input id="zipcode" type="text"
                                            class="form-control {{ $errors->has('zipcode') ? ' is-invalid' : '' }}"
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('app.City') }}</label>
                                 <div class="col-md-8">
                                     <input id="city" type="text"
                                            class="form-control{{ $errors->has('city') ? ' is-invalid' : '' }}"
@@ -164,7 +164,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="phone_1"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone 1') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Phone 1') }}</label>
                                 <div class="col-md-8">
                                     <input id="phone_1" type="text"
                                            class="form-control {{ $errors->has('phone_1') ? ' is-invalid' : '' }}"
@@ -179,7 +179,7 @@
 
                             <div class="form-group row">
                                 <label for="phone_2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Phone 2') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Phone 2') }}</label>
                                 <div class="col-md-8">
                                     <input id="phone_2" type="text"
                                            class="form-control {{ $errors->has('phone_2') ? ' is-invalid' : '' }}"
@@ -198,7 +198,7 @@
                                         <input class="form-check-input" type="checkbox" name="newsletter" id="newsletter" value="1"
                                                @if(old('newsletter') == 1) checked @endif>
                                         <label for="newsletter"
-                                               class="col-form-label text-md-right">{{ __('Subscribe to the newsletter') }}</label>
+                                               class="col-form-label text-md-right">{{ __('app.Subscribe to the newsletter') }}</label>
                                     </div>
                                 </div>
                             </div>
@@ -209,29 +209,29 @@
                                         <input class="form-check-input" type="checkbox" name="newspaper" id="newspaper" value="1"
                                                @if(old('newspaper') == 1) checked @endif>
                                         <label for="newspaper"
-                                               class="col-form-label text-md-right">{{ __('Subscribe to the newspaper') }}</label>
+                                               class="col-form-label text-md-right">{{ __('app.Subscribe to the newspaper') }}</label>
                                     </div>
                                 </div>
                             </div>
 
-                            <h4>{{__('Our Partner (if family)')}}</h4>
+                            <h4>{{__('app.Partner informations (if family)')}}</h4>
                             <div class="form-group row">
                                 <label for="gender_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Gender') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Partner Gender') }}</label>
                                 <div class="col-md-8">
                                     <select id="gender_joint" name="gender_joint" class="custom-select">
                                         <option value="0"
-                                                @if(old('gender_joint') == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                                @if(old('gender_joint') == 0) selected @endif>{{ __('app.Partner Gender') }}</option>
                                         <option value="1"
-                                                @if(old('gender_joint') == 1) selected @endif>{{ __('Mr') }}</option>
+                                                @if(old('gender_joint') == 1) selected @endif>{{ __('app.Mr') }}</option>
                                         <option value="2"
-                                                @if(old('gender_joint') == 2) selected @endif>{{ __('Ms') }}</option>
+                                                @if(old('gender_joint') == 2) selected @endif>{{ __('app.Ms') }}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="lastname_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Lastname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Partner Lastname') }}</label>
                                 <div class="col-md-8">
                                     <input id="lastname_joint"
                                            type="text"
@@ -242,7 +242,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="firstname_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Firstname') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Partner Firstname') }}</label>
                                 <div class="col-md-8">
                                     <input id="firstname_joint" type="text"
                                            class="form-control"
@@ -251,7 +251,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="email_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner E-Mail Address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Partner E-Mail Address') }}</label>
                                 <div class="col-md-8">
                                     <input id="email_joint" type="email"
                                            class="form-control"
@@ -260,7 +260,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="birthdate_joint"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Partner Birthday') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('app.Partner Birthday') }}</label>
                                 <div class="col-md-8">
                                     <input id="birthdate_joint" type="date"
                                            class="form-control"
@@ -271,7 +271,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ __('Register') }}
+                                        {{ __('app.Register') }}
                                     </button>
                                 </div>
                             </div>
