@@ -26,15 +26,17 @@ class SubscriptionController extends Controller
 
         $newStartDate = Carbon::now();
         $actualSubscriptionTypeId = 0;
+        $subscriptionValide = 'noSubscrYet';
 
         $lastSubscription = $user->lastSubscription();
 
         if ($lastSubscription) {
             $actualSubscriptionTypeId = $lastSubscription->subscription_type_id;
-
+            $subscriptionValide = 'subscrOutdated';
             $lastSubscriptionDate = Carbon::parse($lastSubscription->date_end);
 
-            if ($lastSubscriptionDate > Carbon::now()) {
+            if ($lastSubscriptionDate >= Carbon::now()) {
+                $subscriptionValide = 'subscrValide';
                 $newStartDate = $lastSubscriptionDate->addDay();
             }
         }
@@ -46,6 +48,7 @@ class SubscriptionController extends Controller
         return view('user.subscription.create', [
             'user' => $user,
             'subscriptionTypes' => $subscriptionTypes,
+            'subscriptionValide' => $subscriptionValide,
             'startDate' => $newStartDate,
             'endDate' => $newEndDate,
             'actualSubscriptionTypeId' => $actualSubscriptionTypeId,
@@ -96,7 +99,7 @@ class SubscriptionController extends Controller
             'payment_method_id' => 2,
         ]);
 
-        return back()->with('message', 'Adhésion Confirmé !');
+        return back()->with('message', 'Adhésion Confirmée !');
     }
 
     /**

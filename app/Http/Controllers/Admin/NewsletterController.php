@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\User;
 use App\Newsletter;
 use Illuminate\Http\Request;
+use App\Jobs\SendNewsletterJob;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,6 +27,30 @@ class NewsletterController extends Controller
     public function create()
     {
         return view('admin.newsletter.create');
+    }
+
+    /**
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Newsletter $newsletter)
+    {
+        return view('admin.newsletter.show', ['newsletter' => $newsletter]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Newsletter $newsletter
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function send(Request $request, Newsletter $newsletter)
+    {
+        $newsletter->sendTo = $request['sendTo'];
+        $newsletter->save();
+
+        SendNewsletterJob::dispatch($newsletter);
+
+        return redirect()->route('admin.newsletter.index');
     }
 
     /**
@@ -102,6 +128,23 @@ class NewsletterController extends Controller
     {
         $newsletter->delete();
 
-        return redirect('admin/newsletter/index');
+        return redirect()->route('admin.newsletter.index');
+    }
+
+    public function optout($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        $user->newsletter = 0;
+        $user->save();
+
+        return view('user.subscription.optout');
+    }
+
+    public function beforeOptout($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        return view('user.subscription.beforeOptout', ['user' => $user]);
     }
 }

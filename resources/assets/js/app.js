@@ -7,6 +7,7 @@
 
 // Bootstrap + Jquery + Axios + Lodash ...
 require('./bootstrap');
+require('chart.js');
 
 // Quill
 window.Quill = require('quill');

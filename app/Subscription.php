@@ -6,11 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
-    protected $dates = [
-        'date_start',
-        'date_end',
-    ];
-
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +13,16 @@ class Subscription extends Model
      */
     protected $fillable = [
         'amount', 'opt_out_mail', 'user_id', 'subscription_type_id', 'date_start', 'date_end', 'subscription_source',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'date_end',
+        'date_start',
     ];
 
     /**

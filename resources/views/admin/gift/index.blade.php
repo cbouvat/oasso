@@ -12,12 +12,12 @@
         </ol>
     </nav>
 
-    <table class="table table-hove">
+    <table class="table table-hover">
         <thead>
         <tr>
+            <th scope="col">Date</th>
             <th scope="col">Donateur</th>
             <th scope="col">Montant</th>
-            <th scope="col">Date</th>
             <th scope="col">Methode de paiement</th>
             <th scope="col"></th>
         </tr>
@@ -25,10 +25,9 @@
         <tbody>
         @forelse($gifts as $gift)
             <tr>
-                <td scope="row">@if($gift->user){{ $gift->user->firstname.' '.$gift->user->lastname }}@else<del>Deleted
-                        User</del>@endif</td>
+                <td scope="row">{{ $gift->created_at->format('d/m/Y') }}</td>
+                <td>{{ $gift->user->firstname.' '.$gift->user->lastname }}</td>
                 <th>{{ $gift->amount }} €</th>
-                <td>{{ $gift->created_at->format('d/m/Y') }}</td>
                 <td> {{ $gift->payment ? $gift->payment->paymentMethod->name : '' }}</td>
                 <td class="text-right">
                     <a href="{{route('admin.gift.edit', ['id' => $gift->id])}}"

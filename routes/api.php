@@ -11,3 +11,5 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/stat', 'Api\StatisticController@index')->name('api.stat.index');
