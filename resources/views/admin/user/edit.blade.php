@@ -1,23 +1,39 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-                <li class="breadcrumb-item">Modification informations personnelles</li>
-            </ol>
-        </nav>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Modification de {{ $user->firstname }} {{ $user->lastname }}</h1>
     </div>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.user.index') }}">Membres</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('admin.user.show', $user) }}">Membre {{ $user->id }}</a></li>
+            <li class="breadcrumb-item">Modification de Membre {{ $user->id }}</li>
+        </ol>
+    </nav>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mt-3">
-                <form action="{{ route('user.update') }}" method="post">
+                <form action="{{ route('admin.user.update', $user) }}" method="post">
                     @csrf
                     <div class="card bg-light m-5 pb-5 pl-5 pr-5 pt-3">
 
-                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Mes Infos</h4></div>
-
+                        <div class="card-header mt-1 mb-5 font-weight-bold border"><h4 class="mb-0">Les Infos
+                                de {{ $user->firstname }} {{ $user->lastname }}</h4></div>
+                        @if(Auth::user()->role()->first()->role_type_id == 3)
+                            <div class="form-group">
+                                <label for="role_type" class="text-danger font-weight-bold">Role</label>
+                                <select name="role_type_id" id="role_type" class="form-control">
+                                    <option value="1" @if($user->role->role_type_id == 1) selected @endif>Member
+                                    </option>
+                                    <option value="2" @if($user->role->role_type_id == 2) selected @endif>Admin</option>
+                                    <option value="3" @if($user->role->role_type_id == 3) selected @endif>SuperAdmin
+                                    </option>
+                                </select>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="gender">Civilité</label>
                             <select class="form-control" name="gender" id="gender">
@@ -150,32 +166,32 @@
 
 
                         <div class="form-group">
-                            <label for="phone_number_1">Téléphone 1</label>
+                            <label for="phone_1">Téléphone 1</label>
                             <input type="text"
-                                   name="phone_number_1"
-                                   class="form-control {{$errors->has('phone_number_1') ? 'is-invalid':''}}"
-                                   id="phone_number_1"
-                                   value="{{ old('phone_number_1') ? old('phone_number_1')  : $user->phone_number_1}}">
+                                   name="phone_1"
+                                   class="form-control {{$errors->has('phone_1') ? 'is-invalid':''}}"
+                                   id="phone_1"
+                                   value="{{ old('phone_1') ? old('phone_1')  : $user->phone_1}}">
 
-                            @if ($errors->has('phone_number_1'))
+                            @if ($errors->has('phone_1'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number_1') }}</strong>
+                                        <strong>{{ $errors->first('phone_1') }}</strong>
                                 </span>
                             @endif
                         </div>
 
 
                         <div class="form-group">
-                            <label for="phone_number_2">Téléphone 2</label>
+                            <label for="phone_2">Téléphone 2</label>
                             <input type="text"
-                                   name="phone_number_2"
-                                   class="form-control {{$errors->has('phone_number_2') ? 'is-invalid':''}}"
-                                   id="phone_number_2"
-                                   value="{{ old('phone_number_2') ? old('phone_number_2')  : $user->phone_number_2}}">
+                                   name="phone_2"
+                                   class="form-control {{$errors->has('phone_2') ? 'is-invalid':''}}"
+                                   id="phone_2"
+                                   value="{{ old('phone_2') ? old('phone_2')  : $user->phone_2}}">
 
-                            @if ($errors->has('phone_number_2'))
+                            @if ($errors->has('phone_2'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone_number_2') }}</strong>
+                                        <strong>{{ $errors->first('phone_2') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -217,7 +233,8 @@
                         <div class="form-group">
                             <label for="gender_joint">Civilité conjoint</label>
                             <select class="form-control" name="gender_joint" id="gender_joint">
-                                <option value="0" @if($user->gender_joint == 0) selected @endif>{{ __('Partner Gender') }}</option>
+                                <option value="0"
+                                        @if($user->gender_joint == 0) selected @endif>{{ __('Partner Gender') }}</option>
                                 <option value="1" @if($user->gender_joint == 1) selected @endif>{{ __('Mr') }}</option>
                                 <option value="2" @if($user->gender_joint == 2) selected @endif>{{ __('Ms') }}</option>
                             </select>

@@ -17,8 +17,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'gender', 'lastname', 'firstname', 'birthdate', 'password', 'address_line1', 'address_line2',
-        'zipcode', 'city', 'email', 'gender_joint', 'lastname_joint', 'firstname_joint', 'birthdate_joint', 'email_joint', 'phone_number_1',
-        'phone_number_2', 'volonteer', 'details_volonteer', 'delivery', 'newspaper', 'newsletter', 'mailing', 'comment', 'alert',
+        'zipcode', 'city', 'email', 'gender_joint', 'lastname_joint', 'firstname_joint', 'birthdate_joint', 'email_joint', 'phone_1',
+        'phone_2', 'volonteer', 'details_volonteer', 'delivery', 'newspaper', 'newsletter', 'mailing', 'comment', 'alert',
     ];
 
     /**
@@ -77,5 +77,13 @@ class User extends Authenticatable
     public function subscriptions()
     {
         return $this->hasMany('App\Subscription')->orderBy('date_start', 'desc');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
+     */
+    public function sessions()
+    {
+        return $this->hasMany('App\Session')->latest();
     }
 }

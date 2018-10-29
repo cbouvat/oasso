@@ -35,7 +35,7 @@
                     <a href="{{ route('admin.user.show', $user) }}" class="btn btn-sm btn-outline-primary"><span
                                 data-feather="edit"></span> Modifier</a>
                     <a class="btn btn-sm btn-outline-danger"
-                       href="{{ route('admin.user.beforedelete', $user) }}"><span
+                       href="{{ route('admin.user.delete', $user) }}"><span
                                 data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>
