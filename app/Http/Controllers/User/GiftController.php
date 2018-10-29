@@ -45,7 +45,6 @@ class GiftController extends Controller
     {
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
-            'payment_methods' => 'required',
         ]);
 
         $inputs['user_id'] = Auth::user()->id;
@@ -54,7 +53,7 @@ class GiftController extends Controller
 
         $inputs['payment_id'] = $gift->id;
         $inputs['payment_type'] = "App\gift";
-        $inputs['payment_method_id'] = $request->payment_methods;
+        $inputs['payment_method_id'] = '2';
 
         Payment::create($inputs);
 
