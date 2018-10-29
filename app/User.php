@@ -22,6 +22,96 @@ class User extends Authenticatable
     ];
 
     /**
+     * Set the user's first name.
+     * @param  string $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['firstname'] = mb_convert_case(strtolower($value), MB_CASE_TITLE);
+    }
+
+    /**
+     * Set the user's last name.
+     * @param  string $value
+     * @return void
+     */
+    public function setLastNameAttribute($value)
+    {
+        $this->attributes['lastname'] = mb_strtoupper($value);
+    }
+
+    /**
+     * Set the user adressline.
+     * @param  string $value
+     * @return void
+     */
+    public function setAddressLineOneAttribute($value)
+    {
+        $this->attributes['address_line1'] = mb_strtolower($value);
+    }
+
+    /**
+     * Set the user adressline.
+     * @param  string $value
+     * @return void
+     */
+    public function setAddressLineTwoAttribute($value)
+    {
+        $this->attributes['address_line2'] = mb_strtolower($value);
+    }
+
+    /**
+     * Set the users city.
+     * @param $value
+     * @return void
+     */
+    public function setCityAttribute($value)
+    {
+        $this->attributes['city'] = mb_convert_case(mb_strtolower($value), MB_CASE_TITLE);
+    }
+
+    /**
+     * Set the user email font.
+     * @param  string $value
+     * @return void
+     */
+    public function setEmailttribute($value)
+    {
+        $this->attributes['email'] = mb_strtolower($value);
+    }
+
+    /**
+     * Set the user joint first name.
+     * @param  string $value
+     * @return void
+     */
+    public function setFirstNameJointAttribute($value)
+    {
+        $this->attributes['firstname_joint'] = mb_convert_case(mb_strtolower($value), MB_CASE_TITLE);
+    }
+
+    /**
+     * Set the user joint last name.
+     * @param  string $value
+     * @return void
+     */
+    public function setLastNameJointAttribute($value)
+    {
+        $this->attributes['lastname_joint'] = mb_strtoupper($value);
+    }
+
+    /**
+     * Set the user joint email.
+     * @param  string $value
+     * @return void
+     */
+    public function setEmailJointAttribute($value)
+    {
+        $this->attributes['email_joint'] = mb_strtolower($value);
+    }
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
