@@ -27,55 +27,41 @@ class GiftController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Request $request
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(User $user)
     {
-        $inputs = $request->validate([
-            'amount' => 'required|numeric|min:0|max:999999',
-            'from_user_id' => 'nullable|numeric',
-            'from_me' => 'nullable|numeric',
-            'payment_methods' => 'required',
+        $paymentsMethod = PaymentMethod::all();
 
-        ]);
-
-        if ($request->has('from_me')) {
-            if ($request['from_me'] === Auth::user()->id) {
-                $inputs['user_id'] = $request['from_me'];
-            } else {
-                $inputs['user_id'] = Auth::user()->id;
-            }
-        } elseif ($request['from_user_id'] != null) {
-            if (User::find($request['from_user_id']) != null) {
-                $inputs['user_id'] = $request['from_user_id'];
-            } else {
-                return back()->with('error_message', 'Erreur, identifiant incorrect !');
-            }
-        } else {
-            return back()->with('error_message', 'Erreur, identifiant incorrect !');
-        }
-
-        $gift = Gift::create($inputs);
-
-        $inputs['payment_id'] = $gift->id;
-        $inputs['payment_type'] = 'App\Gift';
-        $inputs['payment_method_id'] = $request->payment_methods;
-
-        Payment::create($inputs);
-
-        return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
+        return view('admin.gift.create', [
+            'user' => $user,
+            'payments_methods' => $paymentsMethod,
+                ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
-        //
+        $inputs = $request->validate([
+            'amount' => 'required|numeric|min:0|max:999999',
+            'payment_method_id' => 'required|integer',
+        ]);
+        $inputs['user_id'] = $user->id;
+        $gift = Gift::create($inputs);
+
+        $inputs['payment_id'] = $gift->id;
+        $inputs['payment_type'] = 'App\Gift';
+        $inputs['payment_method_id'] = $request['payment_method_id'];
+
+        Payment::create($inputs);
+
+        return back()->with('message', 'Le don a bien été ajouté pour ce membre !');
     }
 
     /**
@@ -126,6 +112,15 @@ class GiftController extends Controller
     }
 
     /**
+     * @param Gift $gift
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function delete(Gift $gift)
+    {
+        return view('admin.gift.delete', ['gift' => $gift]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Gift $gift
@@ -137,10 +132,5 @@ class GiftController extends Controller
         $gift->delete();
 
         return redirect()->route('admin.gift.index')->with('message', 'Don supprimé');
-    }
-
-    public function beforeDelete(Gift $gift)
-    {
-        return view('admin.giftBeforeDelete', ['gift' => $gift]);
     }
 }

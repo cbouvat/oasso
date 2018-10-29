@@ -19,8 +19,8 @@ class CheckRole
 
         if ($role->role_type_id == 1) {
             abort('401');
-        } else {
-            return $next($request);
         }
+
+        return $next($request);
     }
 }
