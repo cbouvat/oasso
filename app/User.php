@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +17,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'gender', 'lastname', 'firstname', 'birthdate', 'password', 'address_line1', 'address_line2',
-        'zipcode', 'city', 'email', 'gender_joint', 'lastname_joint', 'firstname_joint', 'birthdate_joint', 'email_joint', 'phone_number_1',
-        'phone_number_2', 'volonteer', 'details_volonteer', 'delivery', 'newspaper', 'newsletter', 'mailing', 'comment', 'alert',
+        'zipcode', 'city', 'email', 'gender_joint', 'lastname_joint', 'firstname_joint', 'birthdate_joint', 'email_joint', 'phone_1',
+        'phone_2', 'volonteer', 'details_volonteer', 'delivery', 'newspaper', 'newsletter', 'mailing', 'comment', 'alert',
     ];
 
     /**
@@ -30,14 +30,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    use SoftDeletes;
-
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function scopeNewsletter($query)
+    {
+        return $query->where('newsletter', 1);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -68,7 +71,7 @@ class User extends Authenticatable
      */
     public function payments()
     {
-        return $this->hasMany('App\Payment')->latest();
+        return $this->hasMany('App\Payment')->orderBy('date_start', 'desc');
     }
 
     /**
@@ -76,7 +79,12 @@ class User extends Authenticatable
      */
     public function subscriptions()
     {
-        return $this->hasMany('App\Subscription')->latest();
+        return $this->hasMany('App\Subscription')->orderBy('date_start', 'desc');
+    }
+
+    public function lastSubscription()
+    {
+        return $this->hasOne('App\Subscription')->orderBy('date_end', 'desc')->first();
     }
 
     /**
