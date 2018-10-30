@@ -25,6 +25,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'zipcode' => $faker->postcode,
         'city' => $faker->city,
         'email' => $faker->unique()->safeEmail,
+        'email_verified_at' => now(),
         'volonteer' => $faker->boolean,
         'delivery' => $faker->boolean,
         'newspaper' => $faker->boolean,

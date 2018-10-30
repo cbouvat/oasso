@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('zipcode', 20);
             $table->string('city', 45);
             $table->string('email')->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->tinyInteger('gender_joint')->nullable();
             $table->string('lastname_joint', 45)->nullable();
             $table->string('firstname_joint', 45)->nullable();
