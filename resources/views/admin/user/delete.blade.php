@@ -5,7 +5,7 @@
         <h1>Suppression du membre</h1>
     </div>
 
-    @if($user->subscriptions->count() > 0 || $user->gifts->count() > 0 || $user->newlsetter->count() > 0)
+    @if($user->subscriptions_count > 0 || $user->gifts_count > 0 || $user->newlsetter_count > 0)
         <p>Ce membre a effectué un adhésion, un don, ou une newsletter et ne peut pas etre completement supprimé de la base de donnée</p>
     @else
         <p>Ce membre n'a pas d'adhésion ou de don et sera completement supprimé de la base de donnée</p>
