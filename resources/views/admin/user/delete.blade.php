@@ -11,7 +11,7 @@
         <p>Ce membre n'a pas d'adhésion ou de don et sera completement supprimé de la base de donnée</p>
     @endif
 
-    <form action="{{ route('admin.user.destroy') }}" method="post">
+    <form action="{{ route('admin.user.destroy', $user) }}" method="post">
         <p>Souhaitez-vous supprimer {{ $user->firstname }} {{ $user->lastname }} ?</p>
         @csrf
         @method('DELETE')
