@@ -193,10 +193,10 @@ class SubscriptionController extends Controller
         }
     }
 
-    public function generatePdf()
+    public function pdf()
     {
         $user = Auth::user();
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('/user/subscription/subscriptionPdf', compact('user'));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('user.subscription.pdf', compact('user'));
         $name = 'Adhésion_'.$user->firstname.'_'.$user->lastname.'.pdf';
 
         return $pdf->stream($name);

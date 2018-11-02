@@ -8,7 +8,6 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Mon Compte</a></li>
             <li class="breadcrumb-item">{{ __('New Subscription') }}</li>
         </ol>
     </nav>
@@ -66,7 +65,7 @@
             <div class="form-group row">
                 <div class="col-md-8 offset-md-4">
                     @include('user.payment.payment')
-                    <a href="{{route('user.subscription.generatePdf')}}" class="btn btn-success"
+                    <a href="{{route('user.subscription.pdf')}}" class="btn btn-success"
                        target="_blank">{{__('Membership PDF')}}</a>
                 </div>
             </div>

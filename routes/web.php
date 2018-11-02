@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/password', 'UserController@passwordEdit')->name('password.edit');
         Route::post('/password', 'UserController@passwordUpdate')->name('password.update');
         Route::get('/delete', 'UserController@delete')->name('delete');
-        Route::post('/delete', 'UserController@destroy')->name('destroy');
+        Route::delete('/delete', 'UserController@destroy')->name('destroy');
         Route::get('/payment', 'CheckoutController@payment')->name('payment');
         Route::post('/payment', 'CheckoutController@charge')->name('payment.charge');
 
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/subscription')->name('subscription.')->group(function () {
             Route::get('/', 'SubscriptionController@create')->name('index');
             Route::post('/', 'SubscriptionController@store')->name('store');
-            Route::get('/generatePdf', 'SubscriptionController@generatePdf')->name('generatePdf');
+            Route::get('/pdf', 'SubscriptionController@pdf')->name('pdf');
         });
 
         // Gift
@@ -49,8 +49,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'UserController@store')->name('store');
             Route::get('/create', 'UserController@create')->name('create');
             Route::get('/{user}', 'UserController@show')->name('show');
-            Route::get('/{user}/delete', 'UserController@softDelete')->name('softdelete');
-            Route::get('/{user}/before', 'UserController@beforeDelete')->name('beforedelete');
+            Route::get('/{user}/delete', 'UserController@delete')->name('delete');
+            Route::delete('/{user}', 'UserController@destroy')->name('destroy');
             Route::get('/{user}/gift/create', 'GiftController@create')->name('gift.create');
             Route::post('/{user}/gift', 'GiftController@store')->name('gift.store');
         });
@@ -63,7 +63,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{subscription}', 'SubscriptionController@edit')->name('edit');
             Route::post('/{subscription}', 'SubscriptionController@update')->name('update');
             Route::get('/{subscription}/delete', 'SubscriptionController@delete')->name('delete');
-            Route::post('/{subscription}', 'SubscriptionController@destroy')->name('destroy');
+            Route::delete('/{subscription}', 'SubscriptionController@destroy')->name('destroy');
         });
 
         // Gift
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/{gift}', 'GiftController@edit')->name('edit');
             Route::post('/{gift}', 'GiftController@update')->name('update');
             Route::get('/{gift}/delete', 'GiftController@delete')->name('delete');
-            Route::delete('/{gift}/delete', 'GiftController@destroy')->name('destroy');
+            Route::delete('/{gift}', 'GiftController@destroy')->name('destroy');
         });
 
         // Newsletter
@@ -84,17 +84,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/{newsletter}', 'NewsletterController@edit')->name('edit');
             Route::post('/{newsletter}', 'NewsletterController@update')->name('update');
             Route::get('/{newsletter}/duplicate', 'NewsletterController@duplicate')->name('duplicate');
-            Route::get('/{newsletter}/before-delete', 'NewsletterController@beforeDelete')->name('beforedelete');
             Route::get('/{newsletter}/delete', 'NewsletterController@delete')->name('delete');
+            Route::delete('/{newsletter}', 'NewsletterController@destroy')->name('destroy');
             Route::get('/{newsletter}/show', 'NewsletterController@show')->name('show');
             Route::post('/{newsletter}/send', 'NewsletterController@send')->name('send');
-        });
-
-        // Mailing
-        Route::prefix('mailing')->name('mailing.')->group(function () {
-            Route::get('/', 'MailingController@index')->name('index');
-            Route::get('/{mailing}', 'MailingController@edit')->name('edit');
-            Route::post('/{mailing}', 'MailingController@update')->name('update');
         });
 
         // Export
@@ -103,15 +96,13 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'ExportController@export')->name('export');
         });
 
-        // Search
-        Route::get('/search', 'SearchController@search')->name('search');
         // Session
         Route::prefix('session')->name('session.')->group(function () {
             Route::get('/', 'SessionController@index')->name('index');
             Route::delete('/{session}', 'SessionController@destroy')->name('delete');
         });
 
-        //Statistics
+        // Statistics
         Route::prefix('statistic')->name('statistic.')->group(function () {
             Route::get('/', 'StatisticController@index')->name('index');
             Route::get('/subscription', 'StatisticController@subscription')->name('subscription');

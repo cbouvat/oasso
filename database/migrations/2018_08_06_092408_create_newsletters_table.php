@@ -19,9 +19,9 @@ class CreateNewslettersTable extends Migration
             $table->longText('html_content');
             $table->longText('text_content');
             $table->unsignedInteger('user_id');
-            $table->enum('status', ['notSent', 'sending', 'sent'])->default('notSent');
+            $table->enum('status', ['waiting', 'sending', 'sent'])->default('waiting');
             $table->integer('counter')->default(0);
-            $table->string('sendTo')->nullable();
+            $table->string('send_to')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

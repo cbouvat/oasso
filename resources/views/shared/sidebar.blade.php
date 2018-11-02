@@ -48,11 +48,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('admin/mailing*') ? 'active' : '' }}" href="{{ route('admin.mailing.index') }}">
-                <span data-feather="mail"></span> {{ __('app.Mailing') }}
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link {{ Request::is('admin/newsletter*') ? 'active' : '' }}" href="{{ route('admin.newsletter.index') }}">
                 <span data-feather="send"></span> {{ __('app.NewsLetter') }}
             </a>

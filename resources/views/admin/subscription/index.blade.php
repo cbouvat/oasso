@@ -11,7 +11,7 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Accueil</a></li>
-            <li class="breadcrumb-item">{{__('Subscription')}}</li>
+            <li class="breadcrumb-item">{{ __('Subscription') }}</li>
         </ol>
     </nav>
 
@@ -39,7 +39,7 @@
                 <td class="text-right">
                     <a href="{{ route('admin.subscription.edit', $subscription) }}"
                        class="btn btn-sm btn-outline-primary"><span data-feather="edit"></span> Modifier</a>
-                    <a href="{{ route('admin.subscription.beforedelete', $subscription) }}"
+                    <a href="{{ route('admin.subscription.delete', $subscription) }}"
                        class="btn btn-sm btn-outline-danger"><span data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>

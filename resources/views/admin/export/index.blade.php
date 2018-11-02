@@ -13,45 +13,47 @@
         </ol>
     </nav>
 
-        <form id="formExport" method="post" action="{{ route('admin.export.export') }}">
-            @csrf
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="exportFile">Quoi exporter ?</label>
-                <div class="col-sm-10">
-                    <select class="custom-select" id="exportFile" name="exportFile" required>
-                        <option selected value="">Choisir...</option>
-                        <option value="users">{{ __('Users') }}</option>
-                        <option value="gifts">{{ __('Gifts') }}</option>
-                        <option value="payments">{{ __('Payments') }}</option>
-                        <option value="subscriptions">{{ __('Subscriptions') }}</option>
-                    </select>
-                </div>
+    <form id="formExport" method="post" action="{{ route('admin.export.export') }}">
+        @csrf
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label" for="exportFile">Quoi exporter</label>
+            <div class="col-md-8">
+                <select class="custom-select" id="exportFile" name="exportFile" required>
+                    <option selected value="">Choisir...</option>
+                    <option value="users">{{ __('Users') }}</option>
+                    <option value="gifts">{{ __('Gifts') }}</option>
+                    <option value="payments">{{ __('Payments') }}</option>
+                    <option value="subscriptions">{{ __('Subscriptions') }}</option>
+                </select>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="exportFormat">Format d'export</label>
-                <div class="col-sm-10">
-                    <select class="custom-select" id="exportFormat" name="exportFormat" required>
-                        <option selected value="">Choisir...</option>
-                        <option value="xlsx">Excel (.xlsx)</option>
-                        <option value="csv">Excel (.csv)</option>
-                    </select>
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 col-form-label" for="exportFormat">Format d'export</label>
+            <div class="col-md-8">
+                <select class="custom-select" id="exportFormat" name="exportFormat" required>
+                    <option selected value="">Choisir...</option>
+                    <option value="xlsx">Excel (.xlsx)</option>
+                    <option value="csv">Excel (.csv)</option>
+                </select>
             </div>
+        </div>
 
-            <div id="usersParams" class="my-5 p-3 card" style="display: none;">
-                <h3>{{__('Parameters')}}</h3>
-
+        <div id="usersParams" class="card mb-3" style="display: none;">
+            <div class="card-header">
+                {{__('Parameters')}}
+            </div>
+            <div class="card-body">
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="state">{{__('State')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="state">{{__('State')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="state" name="state">
                             <option selected value="">Comptes enregistrés</option>
                             <option value="onlyTrashed">Comptes supprimés</option>
                             <option value="withTrashed">Tous</option>
                         </select>
                     </div>
-                    <label class="col-sm-2  offset-2 col-form-label" for="status">{{__('Membership status')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="status">{{__('Membership status')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="status" name="status">
                             <option selected value="">Tous</option>
                             <option value="1">Adhésions en cours</option>
@@ -60,16 +62,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="volonteer">{{__('Volonteer')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="volonteer">{{__('Volonteer')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="volonteer" name="volonteer">
                             <option selected value="">Tous</option>
                             <option value="1">Volontaires</option>
                             <option value="0">Non volontaires</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 offset-2 col-form-label" for="type">{{__('Period')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="type">{{__('Period')}}</label>
+                    <div class="col-md-4">
                         <div id="inputDate">
                             <input id="startDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
                                    class="form-control" name="startDate" placeholder="Date de début (incluse)">
@@ -80,8 +82,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="delivery">{{__('Delivery')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="delivery">{{__('Delivery')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="delivery" name="delivery">
                             <option selected value="">Tous</option>
                             <option value="1">Livreurs</option>
@@ -89,9 +91,8 @@
                         </select>
                     </div>
 
-                    <label class="col-sm-2 offset-2 col-form-label" for="newspaper">{{__('Newspaper')}}</label>
-
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="newspaper">{{__('Newspaper')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="newspaper" name="newspaper">
                             <option selected value="">Tous</option>
                             <option value="1">Abonnés journal</option>
@@ -100,16 +101,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="newsletter">{{__('Newsletter')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="newsletter">{{__('Newsletter')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="newsletter" name="newsletter">
                             <option selected value="">Tous</option>
                             <option value="1">Abonnés newsletter</option>
                             <option value="0">Non abonnés</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 offset-2 col-form-label" for="city">{{__('City')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="city">{{__('City')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="city" name="city">
                             <option selected value="">Tous</option>
                             @foreach($cities as $key => $value)
@@ -119,20 +120,20 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="ageOperator">{{__('Age')}}</label>
-                    <div class="col-sm-2">
+                    <label class="col-md-2 col-form-label" for="ageOperator">{{__('Age')}}</label>
+                    <div class="col-md-2">
                         <select class="custom-select" id="ageOperator" name="ageOperator">
                             <option selected value="=">Egal à</option>
                             <option value=">=">Supérieur à</option>
                             <option value="<=">Inférieur à</option>
                         </select>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-md-2">
                         <input class="form-control" type="text" name="ageNumber" id="ageNumber" value="">
                     </div>
-                    <label class="col-sm-2 offset-2 col-form-label" for="gender">{{__('Gender')}}</label>
+                    <label class="col-md-2 col-form-label" for="gender">{{__('Gender')}}</label>
 
-                    <div class="col-sm-3">
+                    <div class="col-md-4">
                         <select class="custom-select" id="gender" name="gender">
                             <option selected value="">Tous</option>
                             <option value="2">Femme</option>
@@ -141,16 +142,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label" for="phone">{{__('Phone')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="phone">{{__('Phone')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="phone" name="phone">
                             <option selected value="">Tous</option>
                             <option value="^0[67][0-9]{8}$">On un portable</option>
                             <option value="^0[1-589][0-9]{8}$">On un fixe</option>
                         </select>
                     </div>
-                    <label class="col-sm-2 offset-2 col-form-label" for="gift">{{__('Gift')}}</label>
-                    <div class="col-sm-3">
+                    <label class="col-md-2 col-form-label" for="gift">{{__('Gift')}}</label>
+                    <div class="col-md-4">
                         <select class="custom-select" id="gift" name="gift">
                             <option selected value="">Tous</option>
                             <option value="0">Donateur</option>
@@ -159,31 +160,35 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center my-3">
+        </div>
+        <div class="form-group row">
+            <div class="col-md-8 offset-md-4">
                 <input type="submit" value="Exporter" class="btn btn-primary">
             </div>
-        </form>
-        @push('scripts')
-            <script>
+        </div>
+    </form>
 
-                $('#exportFile').change(function () {
-                    if ($('#exportFile option:selected').val() === 'users') {
-                        $('#usersParams').css('display', 'block');
-                    } else {
-                        $('#usersParams').css('display', 'none');
-                    }
-                });
+@push('scripts')
+    <script>
 
-                $('#status').change(function () {
-                    switch ($(this).val()) {
-                        case "":
-                            $('#inputDate').css('visibility', 'visible');
-                            break;
-                        default:
-                            $('#inputDate').css('visibility', 'hidden');
-                    }
-                });
-            </script>
-    @endpush
+        $('#exportFile').change(function () {
+            if ($('#exportFile option:selected').val() === 'users') {
+                $('#usersParams').css('display', 'block');
+            } else {
+                $('#usersParams').css('display', 'none');
+            }
+        });
+
+        $('#status').change(function () {
+            switch ($(this).val()) {
+                case "":
+                    $('#inputDate').css('visibility', 'visible');
+                    break;
+                default:
+                    $('#inputDate').css('visibility', 'hidden');
+            }
+        });
+    </script>
+@endpush
 
 @endsection

@@ -43,7 +43,7 @@
                        href="{{route('admin.newsletter.show', ['newsletter' => $newsletter])}}"><span
                                 data-feather="send"></span> {{__('Send')  }}</a>
                     <a type="button-primary" class="btn btn-sm btn-sm btn-outline-danger"
-                       href="{{route('admin.newsletter.beforedelete', ['newsletter' => $newsletter])}}"><span
+                       href="{{route('admin.newsletter.delete', ['newsletter' => $newsletter])}}"><span
                                 data-feather="trash"></span> Supprimer</a>
                 </td>
             </tr>

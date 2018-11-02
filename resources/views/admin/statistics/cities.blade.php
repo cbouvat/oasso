@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Statistiques</h1>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1>Statistiques</h1>
+    </div>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('app.Home') }}</a></li>
+            <li class="breadcrumb-item">Statistiques</li>
+        </ol>
+    </nav>
+
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link" href={{route('admin.statistic.index')}}>Général</a>
