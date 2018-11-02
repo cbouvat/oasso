@@ -157,6 +157,7 @@ class UserController extends Controller
     public function delete(User $user)
     {
         $user = User::withCount(['subscriptions', 'gifts', 'newsletters'])->find($user->id);
+
         return view('admin.user.delete', ['user' => $user]);
     }
 
