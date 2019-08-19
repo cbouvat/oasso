@@ -20,8 +20,8 @@
             <div class="col-md-8">
                 <select class="custom-select form-control" name="gender" id="gender">
                     <option value="0" @if($user->gender == 0) selected @endif>{{ __('Gender') }}</option>
-                    <option value="1" @if($user->gender == 1) selected @endif>{{ __('Mr') }}</option>
-                    <option value="2" @if($user->gender == 2) selected @endif>{{ __('Ms') }}</option>
+                    <option value="1" @if($user->gender == 1) selected @endif>{{ __('M.') }}</option>
+                    <option value="2" @if($user->gender == 2) selected @endif>{{ __('Mme') }}</option>
                 </select>
             </div>
         </div>
