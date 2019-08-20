@@ -158,7 +158,6 @@
                     mm='0'+mm;
                 }
 
-                //alert(mm+'/'+dd+'/'+yyyy);
                 $('#date_end').val(yyyy+'-'+mm+'-'+dd)
             }
 
