@@ -56,6 +56,7 @@ class SubscriptionController extends Controller
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
             'date_start' => 'required|date',
+            'date_end' => 'required|date',
         ]);
 
         $validator['opt_out_mail'] = 0;

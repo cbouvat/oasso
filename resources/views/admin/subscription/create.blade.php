@@ -95,13 +95,27 @@
                         <label for="date_start"
                                class="col-md-4 col-form-label text-md-right">Date de début</label>
                         <div class="col-md-6">
-                            <input id="date_start" type="date"
+                            <input id="date_start" name="date_start" type="date"
                                    class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}"
-                                   name="subscription_date"
                                    value="{{  date('Y-m-d')}}">
                             @if ($errors->has('date_start'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('date_start') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="date_end"
+                               class="col-md-4 col-form-label text-md-right">Date de fin</label>
+                        <div class="col-md-6">
+                            <input id="date_end" name="date_end" type="date"
+                                   class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}"
+                                   value="{{  date('Y-m-d', strtotime("+1 year"))}}">
+                            @if ($errors->has('date_end'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('date_end') }}</strong>
                                     </span>
                             @endif
                         </div>
@@ -128,6 +142,27 @@
 
             $('#subscription_type_id').change(selectedtype);
             selectedtype();
+
+
+            function setEndDate() {
+                let startDate = new Date($('#date_start').val());
+                var dd = startDate.getDate();
+                var mm = startDate.getMonth()+1;
+                var yyyy = startDate.getFullYear()+1;
+
+                if(dd<10){
+                    dd='0'+dd;
+                }
+
+                if(mm<10){
+                    mm='0'+mm;
+                }
+
+                //alert(mm+'/'+dd+'/'+yyyy);
+                $('#date_end').val(yyyy+'-'+mm+'-'+dd)
+            }
+
+            $('#date_start').change(setEndDate);
         </script>
     @endpush
 @endsection
