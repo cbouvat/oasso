@@ -95,7 +95,7 @@
                         <label for="date_start"
                                class="col-md-4 col-form-label text-md-right">Date de début</label>
                         <div class="col-md-6">
-                            <input id="date_start" type="date"
+                            <input id="date_start" name="date_start" type="date"
                                    class="form-control{{ $errors->has('date_start') ? ' is-invalid' : '' }}"
                                    name="subscription_date"
                                    value="{{  date('Y-m-d')}}">
