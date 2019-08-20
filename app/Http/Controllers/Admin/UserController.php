@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
-use App\Mail\SendPwdByEmail;
 use Illuminate\Http\Request;
 use App\Mail\PasswordSending;
 use App\Http\Controllers\Controller;
