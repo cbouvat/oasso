@@ -56,9 +56,10 @@ class SubscriptionController extends Controller
             'amount' => 'required|numeric',
             'payment_methods' => 'required|numeric',
             'date_start' => 'required|date',
-            'date_end' => 'required|date',
         ]);
 
+        $dateStart = new Carbon($validator['date_start']);
+        $validator['date_end'] = $dateStart->addYear()->format('Y-m-d');
         $validator['opt_out_mail'] = 0;
         $validator['subscription_source'] = 0;
 

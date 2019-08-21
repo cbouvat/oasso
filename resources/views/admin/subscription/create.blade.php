@@ -106,21 +106,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="date_end"
-                               class="col-md-4 col-form-label text-md-right">Date de fin</label>
-                        <div class="col-md-6">
-                            <input id="date_end" name="date_end" type="date"
-                                   class="form-control{{ $errors->has('date_end') ? ' is-invalid' : '' }}"
-                                   value="{{  date('Y-m-d', strtotime("+1 year"))}}">
-                            @if ($errors->has('date_end'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('date_end') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
-
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
@@ -143,25 +128,6 @@
             $('#subscription_type_id').change(selectedtype);
             selectedtype();
 
-
-            function setEndDate() {
-                let startDate = new Date($('#date_start').val());
-                var dd = startDate.getDate();
-                var mm = startDate.getMonth()+1;
-                var yyyy = startDate.getFullYear()+1;
-
-                if(dd<10){
-                    dd='0'+dd;
-                }
-
-                if(mm<10){
-                    mm='0'+mm;
-                }
-
-                $('#date_end').val(yyyy+'-'+mm+'-'+dd)
-            }
-
-            $('#date_start').change(setEndDate);
         </script>
     @endpush
 @endsection
