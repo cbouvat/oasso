@@ -89,7 +89,7 @@ return [
     ],
     'not_in'               => "Le champ :attribute sélectionné n'est pas valide.",
     'not_regex'            => "Le format du champ :attribute n'est pas valide.",
-    'numeric'              => 'Le champ :attribute doit contenir un nombre.',
+    'numeric'              => "Le champ :attribute doit contenir un nombre.",
     'present'              => 'Le champ :attribute doit être présent.',
     'regex'                => 'Le format du champ :attribute est invalide.',
     'required'             => 'Le champ :attribute est obligatoire.',
@@ -185,5 +185,6 @@ return [
         'firstname_joint'       => 'prénom du conjoint',
         'email_joint'           => 'adresse email du conjoint',
         'birthdate_joint'       => 'date de naissance du conjoint',
+        'amount'                => 'montant',
     ],
 ];

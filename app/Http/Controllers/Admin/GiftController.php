@@ -48,13 +48,14 @@ class GiftController extends Controller
      */
     public function store(Request $request, User $user)
     {
+
         $inputs = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
             'payment_method_id' => 'required|integer',
         ]);
+
         $inputs['user_id'] = $user->id;
         $gift = Gift::create($inputs);
-
         $inputs['payment_id'] = $gift->id;
         $inputs['payment_type'] = 'App\Gift';
         $inputs['payment_method_id'] = $request['payment_method_id'];
