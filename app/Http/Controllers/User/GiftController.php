@@ -30,7 +30,6 @@ class GiftController extends Controller
      */
     public function create()
     {
-
         $user = Auth::user();
         $user->load('gifts.payment.paymentMethod');
         $payments_methods = PaymentMethod::all();
@@ -46,26 +45,17 @@ class GiftController extends Controller
      */
     public function store(Request $request)
     {
-
-        $validator  = $request->validate([
+        $inputs  = $request->validate([
             'amount' => 'required|numeric|min:0|max:999999',
         ]);
-
-        //dd($validator);
-
-
-
-
         $inputs['user_id'] = Auth::user()->id;
         $inputs['amount'] = $request->input('amount');
         $gift = Gift::create($inputs);
-
-        // have to put a select type paiement
         $inputs['payment_id'] = $gift->id;
         $inputs['payment_type'] = "App\gift";
         $inputs['payment_method_id'] = '2';
-
         Payment::create($inputs);
+
         return back()->with('message', 'Le don a bien été ajouté !');
     }
 
