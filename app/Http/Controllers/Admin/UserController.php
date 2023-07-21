@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Mail\PasswordSending;
 use App\User;
 use Illuminate\Http\Request;
-use App\Mail\PasswordSending;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -155,9 +155,7 @@ class UserController extends Controller
      */
     public function delete(User $user)
     {
-        $user->load('subscriptions')
-            ->load('gifts')
-            ->load('newsletters');
+        $user = User::withCount(['subscriptions', 'gifts', 'newsletters'])->find($user->id);
 
         return view('admin.user.delete', ['user' => $user]);
     }
