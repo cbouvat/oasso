@@ -8,36 +8,17 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        'App\Console\Commands\RelaunchMonth',
-        'App\Console\Commands\RelaunchWeek',
-        'App\Console\Commands\RelaunchDay',
-    ];
-
-    /**
      * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // Schedule Relaunch subscriptions
-        $schedule->command('relaunch:month')->dailyAt('10:00');
-        $schedule->command('relaunch:week')->dailyAt('12:00');
-        $schedule->command('relaunch:day')->dailyAt('8:00');
+        // $schedule->command('inspire')->hourly();
     }
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 
