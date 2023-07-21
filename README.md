@@ -1,6 +1,3 @@
-# projet_de_revv
-<a href="https://github.styleci.io/repos/143690946"><img src="https://github.styleci.io/repos/143690946/shield" alt="StyleCI"></a>
+# Socya
 
-
-Gestion des adhérents des associations.
-
+WIP, new version comming soon !
