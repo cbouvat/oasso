@@ -1,0 +1,114 @@
+name: CI
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+jobs:
+  pint:
+    name: PHP - Laravel Pint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: none
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Laravel Pint
+        run: ./vendor/bin/pint
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff-index --quiet HEAD; then
+            echo "No changes detected."
+          else
+            git commit -m "feat: 🎨 Laravel Pint by GitHub Actions [skip ci]"
+            git push
+          fi
+  larastan:
+    name: PHP - Larastan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: none
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Prepare the application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+      - name: Larastan
+        run: ./vendor/bin/phpstan analyse
+  eslint:
+    name: JS - ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Node dependencies
+        run: npm ci
+      - name: ESLint
+        run: npm run lint
+        continue-on-error: true
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff-index --quiet HEAD; then
+            echo "No changes detected."
+          else
+            git commit -m "feat: 🎨 ESLint by GitHub Actions [skip ci]"
+            git push
+          fi
+  build:
+    name: JS - Build assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: none
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Prepare the application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+      - name: Build Node assets
+        run: npm run build
