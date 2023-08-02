@@ -1,0 +1,38 @@
+name: Continuous integration
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+jobs:
+  pint:
+    name: Laravel Pint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: none
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Laravel Pint
+        run: ./vendor/bin/pint
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff-index --quiet HEAD; then
+            echo "No changes detected."
+          else
+            git commit -m "feat: 🎨 Laravel Pint by GitHub Actions [skip ci]"
+            git push
+          fi
