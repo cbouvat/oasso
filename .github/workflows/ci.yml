@@ -87,7 +87,7 @@ jobs:
             git push
           fi
   build:
-    name: JS - Build assets
+    name: JS - Test build assets
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -114,14 +114,3 @@ jobs:
           php artisan key:generate
       - name: Build Node assets
         run: npm run build
-      - name: Commit changes
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff-index --quiet HEAD; then
-            echo "No changes detected."
-          else
-            git commit -m "feat: ⚙️ Build assets by GitHub Actions [skip ci]"
-            git push
-          fi
