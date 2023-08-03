@@ -87,11 +87,13 @@ jobs:
             git push
           fi
   build:
-    name: JS - Build assets
+    name: JS - Test build assets
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -112,3 +114,68 @@ jobs:
           php artisan key:generate
       - name: Build Node assets
         run: npm run build
+  unit-tests:
+    name: App - Run tests
+    runs-on: ubuntu-latest
+    env:
+      BROADCAST_DRIVER: log
+      CACHE_DRIVER: redis
+      QUEUE_CONNECTION: redis
+      SESSION_DRIVER: redis
+      DB_CONNECTION: pgsql
+      DB_HOST: localhost
+      DB_PASSWORD: postgres
+      DB_USERNAME: postgres
+      DB_DATABASE: postgres
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432/tcp
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 3
+      redis:
+        image: redis
+        ports:
+          - 6379/tcp
+        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Node dependencies
+        run: npm ci
+      - name: Build JS assets
+        run: npm run build
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: xdebug
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Prepare the application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+      - name: Clear Laravel config
+        run: php artisan config:clear
+      - name: Run migration
+        run: php artisan migrate -v
+        env:
+          DB_PORT: ${{ job.services.postgres.ports[5432] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
+      - name: Run PHP unit test
+        run: php artisan test --coverage
+        env:
+          DB_PORT: ${{ job.services.postgres.ports[5432] }}
+          REDIS_PORT: ${{ job.services.redis.ports['6379'] }}
