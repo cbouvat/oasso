@@ -27,4 +27,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/index', 'index.blade.php');
+Route::view('/index', 'index')->name('index');
+
+Route::prefix('index.')->group(function () {
+
+    Route::get('/users', function(){
+        return view('userpage');
+    })->name('users');
+});
