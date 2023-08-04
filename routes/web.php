@@ -31,7 +31,5 @@ Route::view('/index', 'index')->name('index');
 
 Route::prefix('index.')->group(function () {
 
-    Route::get('/users', function(){
-        return view('userpage');
-    })->name('users');
+    Route::get('/users', [UserController::class, 'userpage'])->name('users');
 });
