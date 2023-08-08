@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -26,6 +25,7 @@ class UserController extends Controller
             'newspaper' => 'boolean',
             'newsletter' => 'boolean',
         ]);
+
         return redirect()->route('index');
     }
 }
