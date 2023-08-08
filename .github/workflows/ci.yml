@@ -35,7 +35,7 @@ jobs:
           if git diff-index --quiet HEAD; then
             echo "No changes detected."
           else
-            git commit -m "feat: 🎨 Laravel Pint by GitHub Actions [skip ci]"
+            git commit -m "feat: 🎨 Laravel Pint by GitHub Actions"
             git push
           fi
   larastan:
@@ -83,7 +83,7 @@ jobs:
           if git diff-index --quiet HEAD; then
             echo "No changes detected."
           else
-            git commit -m "feat: 🎨 ESLint by GitHub Actions [skip ci]"
+            git commit -m "feat: 🎨 ESLint by GitHub Actions"
             git push
           fi
   build:
