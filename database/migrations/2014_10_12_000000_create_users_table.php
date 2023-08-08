@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('birthdate');
             $table->string('address_line1', 255);
             $table->string('address_line2', 255);
-            $table->integer('zipcode', 20);
+            $table->integer('zipcode', 20)->nullable();
             $table->string('city', 45);
             $table->string('email')->unique()->nullable();
             $table->string('phone1', 10)->nullable();
