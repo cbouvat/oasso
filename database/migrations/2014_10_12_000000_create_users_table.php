@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('address_line2', 255);
             $table->integer('zipcode')->unsigned();
             $table->string('city', 45);
-            $table->string('email')->unique()->nullable();
             $table->string('phone1', 10)->nullable();
             $table->string('phone2', 10)->nullable();
             $table->boolean('volunteer')->default(0);
