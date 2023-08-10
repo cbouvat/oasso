@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('firstname', 45)->default('');
             $table->string('lastname', 45)->default('');
-            $table->tinyInteger('gender');
-            $table->date('birthdate');
-            $table->string('address_line1', 255);
-            $table->string('address_line2', 255);
+            $table->tinyInteger('gender')->nullable();
+            $table->date('birthdate')->nullable();
+            $table->string('address_line1', 255)->default('');
+            $table->string('address_line2', 255)->default('');
             $table->integer('zipcode')->unsigned();
-            $table->string('city', 45);
+            $table->string('city', 45)->default('');
             $table->string('phone1', 10)->nullable();
             $table->string('phone2', 10)->nullable();
             $table->boolean('volunteer')->default(0);
