@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->string('email')->unique();
-            $table->string('firstname', 45);
-            $table->string('lastname', 45);
+            $table->string('firstname', 45)->default('');
+            $table->string('lastname', 45)->default('');
             $table->tinyInteger('gender');
             $table->date('birthdate');
             $table->string('address_line1', 255);
