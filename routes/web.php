@@ -27,9 +27,11 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/index', 'index')->name('index');
+Route::prefix('/index')->group(function () {
 
-Route::prefix('index.')->group(function () {
+    Route::view('/', 'index');
 
-    Route::get('/users', [UserController::class, 'userpage'])->name('users');
+    Route::get('/userpage', function(){
+        return view('userpage');
+    })->name('users');
 });
