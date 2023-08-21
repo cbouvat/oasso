@@ -7,7 +7,7 @@
     <title>User Page</title>
 </head>
 <body>
-    @include('layouts.menu')
-    <div class="container">@yield('userpage')</div>
+    <x-header/>
+    @yield('userpage')
 </body>
 </html>

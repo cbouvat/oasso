@@ -29,7 +29,7 @@ Route::middleware([
 
 Route::prefix('/index')->group(function () {
 
-    Route::view('/', 'layout');
+    Route::view('/', 'layouts.layout');
 
     Route::get('/userpage', function(){
         return view('layouts.layout');

@@ -1,5 +1,4 @@
-<body class="bg-stone-200">
-    <div class="w-full bg-white h-28 flex flex-row justify-between shadow-lg">
+<div class="w-full bg-white h-28 flex flex-row justify-between shadow-lg">
         <img src="https://picsum.photos/seed/71/200/300" alt="logo" class="w-20 h-20 object-cover m-4">
         <ul class="w-3/4 h-full bg-white flex flex-row justify-end items-center p-8">
             <li><a href="" class="mx-8 text-stone-600 focus:text-stone-900 font-bold">Accueil</a></li>
@@ -13,4 +12,3 @@
             
         </ul>
     </div>
-</body>
