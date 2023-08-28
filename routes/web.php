@@ -25,9 +25,9 @@ Route::middleware([
 
 Route::prefix('/index')->group(function () {
 
-    Route::view('/', 'socya.layouts.layout');
+    Route::view('/', 'layouts.layout');
 
     Route::get('/userpage', function () {
-        return view('socya.layouts.layout');
+        return view('layouts.layout');
     })->name('users');
 });

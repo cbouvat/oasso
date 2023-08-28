@@ -8,6 +8,6 @@
 </head>
 <body>
     <x-header/>
-    @yield('userpage')
+    <x-userpage/>
 </body>
 </html>
