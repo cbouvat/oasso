@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::middleware([
     'auth:sanctum',
@@ -29,9 +26,9 @@ Route::middleware([
 
 Route::prefix('/index')->group(function () {
 
-    Route::view('/', 'layouts.layout');
+    Route::view('/', 'socya.layouts.layout');
 
     Route::get('/userpage', function(){
-        return view('layouts.layout');
+        return view('socya.layouts.layout');
     })->name('users');
 });
