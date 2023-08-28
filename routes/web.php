@@ -26,7 +26,7 @@ Route::middleware([
 Route::prefix('/index')->group(function () {
 
     Route::view('/', 'layouts.layout');
-    
+
     Route::get('/userpage', function () {
         return view('layouts.layout');
     })->name('users');
