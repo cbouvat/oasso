@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -28,7 +27,7 @@ Route::prefix('/index')->group(function () {
 
     Route::view('/', 'socya.layouts.layout');
 
-    Route::get('/userpage', function(){
+    Route::get('/userpage', function () {
         return view('socya.layouts.layout');
     })->name('users');
 });
