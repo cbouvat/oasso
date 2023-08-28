@@ -8,6 +8,11 @@
 </head>
 <body>
     <x-header/>
-    <x-userpage/>
+    @if(Request::url() === 'http://0.0.0.0/index/userpage')
+        <x-userpage/>
+    @elseif(Request::url() === "http://0.0.0.0/index")
+        <x-index/>
+    @endif
+    
 </body>
 </html>
