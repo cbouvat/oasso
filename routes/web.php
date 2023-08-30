@@ -27,7 +27,7 @@ Route::view('/login', 'auth.login');
 
 Route::view('/register', 'auth.login');
 
-Route::prefix('/index')->group(function () {
+Route::prefix('/')->group(function () {
 
     Route::view('/', 'layouts.layout');
 
