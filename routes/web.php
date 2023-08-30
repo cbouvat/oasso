@@ -23,6 +23,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::view('/login', 'auth.login');
+
+Route::view('/register', 'auth.login');
+
 Route::prefix('/index')->group(function () {
 
     Route::view('/', 'layouts.layout');
