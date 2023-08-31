@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +24,4 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::view('/login', 'auth.login');
-
-Route::view('/register', 'auth.login');
-
-Route::prefix('/')->group(function () {
-
-    Route::view('/', 'layouts.layout');
-
-    Route::get('/userpage', function () {
-        return view('layouts.layout');
-    })->name('users');
-});
+Route::get('/', HomeController::class)->name('index');
