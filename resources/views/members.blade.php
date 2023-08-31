@@ -1,8 +1,15 @@
 
 <x-app-layout>
     <x-slot name="header">
-
+        <div class="container w-full">
+            <form class="w-60 flex flex-row">
+                <input type="search" id="default-search" class="block w-48 p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="Type any name..." required>
+                <x-secondary-button class="mx-2">rechercher</x-secondary-button>
+            </form>
+        </div>
+        
     </x-slot>
+
 
 
 <div class="container">
