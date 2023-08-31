@@ -10,7 +10,7 @@ cp .env.example .env
 make build
 make composer arg=install
 make npm arg=install
-make artisan arg=key:generate
+make artisan arg="key:generate"
 make artisan arg=migrate
 make up
 ```
