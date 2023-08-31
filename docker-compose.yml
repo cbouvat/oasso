@@ -18,7 +18,6 @@ services:
         working_dir: /app/
         command: "npm run dev"
     mariadb:
-        container_name: inertia-mariadb
         image: mariadb:10.11
         ports:
             - 3306:3306
@@ -38,7 +37,6 @@ services:
             ADMINER_DEFAULT_SERVER: mariadb
             ADMINER_DEFAULT_TYPE: mysql
     mailpit:
-        container_name: inertia-mailpit
         image: axllent/mailpit:latest
         ports:
             - 1025:1025
