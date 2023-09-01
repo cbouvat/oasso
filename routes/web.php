@@ -28,3 +28,5 @@ Route::middleware([
 Route::get('/', HomeController::class)->name('index');
 
 Route::get('/members', [UserController::class, 'showAll']); 
+
+Route::get('/search', [UserController::class, 'search'])->name('search'); 
