@@ -1,6 +1,7 @@
 # Socya
 
-WIP, new version comming soon !
+> [!WARNING] 
+> New version comming soon !
 
 ## How to run
 Clone the project and run the following commands:
