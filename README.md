@@ -3,17 +3,11 @@
 > [!WARNING] 
 > New version comming soon !
 
-## How to run
+## How to run development environment
 Clone the project and run the following commands:
 
-```bash
-cp .env.example .env
-make build
-make composer arg=install
-make npm arg=install
-make artisan arg="key:generate"
-make artisan arg=migrate
-make up
-```
+- Run `make setup-dev`
+- Edit `.env` file
+- And run `make up`
 
-When the containers are up, you can access the app at http://localhost
+When the containers are up, you can access the app at http://localhost, that's all.

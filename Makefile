@@ -1,6 +1,4 @@
-.PHONY: build composer composer-install-dev composer-install-prod composer-update down git-pull help laravel-artisan up upd upgrade
-
-default: up ## Shortcut for up
+default: help
 
 build: ## Build containers
 	docker compose build
@@ -23,9 +21,20 @@ composer-install-no-dev: ## Composer install --no-dev
 composer-update: ## Composer update
 	docker compose run --rm php composer update
 
+copy-env: ## Copy .env.example to .env
+	cp .env.example .env
+
+copy-docker-compose-dev: ## Copy docker-compose-dev.yml to docker-compose.yml
+	cp docker-compose-dev.yml docker-compose.yml
+
 down: ## Stop and remove all containers
 	docker compose down --remove-orphans
-	@echo "🛑 Socya is stopped and removed"
+	@echo "🛑 Containers are stopped and removed"
+
+help: ## Display this help
+	@echo "📖 Socya help"
+	@echo "✍️ Usage: make [command]"
+	@echo "👉 Available commands open Makefile to see all commands"
 
 la: laravel-artisan ## Shortcut for laravel-artisan
 
@@ -33,6 +42,12 @@ artisan: laravel-artisan ## Shortcut for laravel-artisan
 
 laravel-artisan: ## Laravel Artisan command add a="command" to run a specific command (ex: make laravel-artisan arg="migrate")
 	docker compose exec php php artisan $(arg)
+
+laravel-artisan-migrate: ## Laravel Artisan migrate
+	docker compose run --rm php php artisan migrate
+
+laravel-artisan-key-generate: ## Laravel Artisan key:generate
+	docker compose run --rm php php artisan key:generate
 
 npm: ## Npm command add a="command" to run a specific command (ex: make npm arg="install")
 	docker compose run --rm node npm $(arg)
@@ -55,3 +70,6 @@ upgrade: pull build ## Upgrade containers (pull and build)
 
 pull: ## Pull all containers
 	docker compose pull
+
+setup-dev: copy-docker-compose-dev copy-env upgrade composer-install npm-install laravel-artisan-key-generate laravel-artisan-migrate
+	@echo "✅ Socya is installed, edit .env and you can now run 'make up' to start the containers"
