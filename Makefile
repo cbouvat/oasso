@@ -9,7 +9,7 @@ ci: composer-install ## Shortcut for composer-install
 
 cu: composer-update ## Shortcut for composer-update
 
-composer: ## Composer command add a="command" to run a specific command (ex: make composer arg="require laravel/ui")
+composer: ## Composer command add arg="command" to run a specific command (ex: make composer arg="require laravel/ui")
 	docker compose run --rm php composer $(arg)
 
 composer-install: ## Composer install
@@ -40,7 +40,7 @@ la: laravel-artisan ## Shortcut for laravel-artisan
 
 artisan: laravel-artisan ## Shortcut for laravel-artisan
 
-laravel-artisan: ## Laravel Artisan command add a="command" to run a specific command (ex: make laravel-artisan arg="migrate")
+laravel-artisan: ## Laravel Artisan command add arg="command" to run a specific command (ex: make laravel-artisan arg="migrate")
 	docker compose exec php php artisan $(arg)
 
 laravel-artisan-migrate: ## Laravel Artisan migrate
@@ -49,7 +49,7 @@ laravel-artisan-migrate: ## Laravel Artisan migrate
 laravel-artisan-key-generate: ## Laravel Artisan key:generate
 	docker compose run --rm php php artisan key:generate
 
-npm: ## Npm command add a="command" to run a specific command (ex: make npm arg="install")
+npm: ## Npm command add arg="command" to run a specific command (ex: make npm arg="install")
 	docker compose run --rm node npm $(arg)
 
 npm-install: ## Npm install
