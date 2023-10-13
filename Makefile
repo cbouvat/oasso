@@ -29,7 +29,7 @@ copy-docker-compose-dev: ## Copy docker-compose.dev.yml to docker-compose.yml
 
 down: ## Stop and remove all containers
 	docker compose down --remove-orphans
-	@echo "🛑 Containers are stopped and removed"
+	@echo "🛑 Socya are stopped and removed"
 
 help: ## Display this help
 	@echo "📖 Socya help"
