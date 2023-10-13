@@ -24,8 +24,8 @@ composer-update: ## Composer update
 copy-env: ## Copy .env.example to .env
 	cp .env.example .env
 
-copy-docker-compose-dev: ## Copy docker-compose-dev.yml to docker-compose.yml
-	cp docker-compose-dev.yml docker-compose.yml
+copy-docker-compose-dev: ## Copy docker-compose.dev.yml to docker-compose.yml
+	cp docker-compose.dev.yml docker-compose.yml
 
 down: ## Stop and remove all containers
 	docker compose down --remove-orphans
