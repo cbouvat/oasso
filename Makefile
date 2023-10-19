@@ -31,6 +31,9 @@ down: ## Stop and remove all containers
 	docker compose down --remove-orphans
 	@echo "🛑 Socya are stopped and removed"
 
+eslint: ## Run eslint
+	docker compose run --rm node npm run eslint
+
 help: ## Display this help
 	@echo "📖 Socya help"
 	@echo "✍️ Usage: make [command]"
@@ -73,6 +76,9 @@ upd: ## Create and start all containers (in background)
 	@echo "✅ Socya is up and running"
 
 upgrade: pull build ## Upgrade containers (pull and build)
+
+pint: ## Run Laravel Pint
+	docker compose run --rm php ./vendor/bin/pint
 
 pull: ## Pull all containers
 	docker compose pull

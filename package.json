@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vite build",
-        "lint": "eslint --ext .js ./resources/js --fix"
+        "eslint": "eslint --ext .js ./resources/js --fix"
     },
     "devDependencies": {
         "@alpinejs/focus": "^3.10.5",

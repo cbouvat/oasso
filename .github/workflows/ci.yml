@@ -62,7 +62,7 @@ jobs:
       - name: Install Node dependencies
         run: npm ci
       - name: ESLint
-        run: npm run lint
+        run: npm run eslint
   build:
     name: JS - Test build assets
     runs-on: ubuntu-latest
