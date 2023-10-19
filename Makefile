@@ -46,6 +46,12 @@ laravel-artisan: ## Laravel Artisan command add arg="command" to run a specific 
 laravel-artisan-migrate: ## Laravel Artisan migrate
 	docker compose run --rm php php artisan migrate
 
+laravel-artisan-migrate-fresh: ## Laravel Artisan migrate:fresh
+	docker compose run --rm php php artisan migrate:fresh
+
+laravel-artisan-migrate-seed: ## Laravel Artisan migrate:fresh --seed
+	docker compose run --rm php php artisan migrate:fresh --seed
+
 laravel-artisan-key-generate: ## Laravel Artisan key:generate
 	docker compose run --rm php php artisan key:generate
 
