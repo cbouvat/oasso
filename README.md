@@ -1,4 +1,4 @@
-# Socya
+# Oasso
 
 > [!WARNING] 
 > New version comming soon !
