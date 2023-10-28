@@ -2,11 +2,11 @@
     <x-application-logo class="block h-12 w-auto" />
 
     <h1 class="mt-8 text-2xl font-medium text-gray-900 dark:text-white">
-        Welcome to Socya
+        Welcome to Oasso
     </h1>
 
     <p class="mt-6 text-gray-500 dark:text-gray-400 leading-relaxed">
-        C'est un projet de test pour la société Socya.
+        C'est un projet de test pour la société Oasso.
     </p>
 </div>
 

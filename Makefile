@@ -29,13 +29,13 @@ copy-docker-compose-dev: ## Copy docker-compose.dev.yml to docker-compose.yml
 
 down: ## Stop and remove all containers
 	docker compose down --remove-orphans
-	@echo "🛑 Socya are stopped and removed"
+	@echo "🛑 Oasso are stopped and removed"
 
 eslint: ## Run eslint
 	docker compose run --rm node npm run eslint
 
 help: ## Display this help
-	@echo "📖 Socya help"
+	@echo "📖 Oasso help"
 	@echo "✍️ Usage: make [command]"
 	@echo "👉 Available commands open Makefile to see all commands"
 
@@ -69,11 +69,11 @@ npm-update: ## Npm update
 
 up: ## Create and start all containers
 	docker compose up
-	@echo "✅ Socya is up and running"
+	@echo "✅ Oasso is up and running"
 
 upd: ## Create and start all containers (in background)
 	docker compose up -d
-	@echo "✅ Socya is up and running"
+	@echo "✅ Oasso is up and running"
 
 upgrade: pull build ## Upgrade containers (pull and build)
 
@@ -84,4 +84,4 @@ pull: ## Pull all containers
 	docker compose pull
 
 setup-dev: copy-docker-compose-dev copy-env upgrade composer-install npm-install laravel-artisan-key-generate laravel-artisan-migrate
-	@echo "✅ Socya is installed, edit .env and you can now run 'make up' to start the containers"
+	@echo "✅ Oasso is installed, edit .env and you can now run 'make up' to start the containers"
