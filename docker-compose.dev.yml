@@ -10,7 +10,7 @@ services:
     depends_on:
       - mariadb
   node:
-    image: node:18
+    image: node:20
     ports:
       - 5173:5173
     volumes:
