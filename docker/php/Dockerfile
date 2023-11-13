@@ -19,9 +19,6 @@ RUN apt -y update \
     libzip-dev \
     zip \
     unzip \
-    curl \
-    git \
-    rsync \
     mariadb-client \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
