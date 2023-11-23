@@ -28,7 +28,6 @@ services:
       MARIADB_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - ./docker/mariadb/datas:/var/lib/mysql
-      - ./docker/mariadb:/docker-entrypoint-initdb.d
   adminer:
     image: adminer
     ports:
