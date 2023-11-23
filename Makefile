@@ -3,19 +3,13 @@ default: help
 build: ## Build containers
 	docker compose build
 
-c: composer ## Shortcut for composer
-
-ci: composer-install ## Shortcut for composer-install
-
-cu: composer-update ## Shortcut for composer-update
-
 composer: ## Composer command add arg="command" to run a specific command (ex: make composer arg="require laravel/ui")
 	docker compose run --rm php composer $(arg)
 
-composer-install: ## Composer install
+composer-install-dev: ## Composer install dev
 	docker compose run --rm php composer install
 
-composer-install-no-dev: ## Composer install --no-dev
+composer-install-prod: ## Composer install prod
 	docker compose run --rm php composer install --optimize-autoloader --no-suggest --no-dev
 
 composer-update: ## Composer update
@@ -38,8 +32,6 @@ help: ## Display this help
 	@echo "📖 Oasso help"
 	@echo "✍️ Usage: make [command]"
 	@echo "👉 Available commands open Makefile to see all commands"
-
-la: laravel-artisan ## Shortcut for laravel-artisan
 
 artisan: laravel-artisan ## Shortcut for laravel-artisan
 
@@ -68,14 +60,12 @@ npm-update: ## Npm update
 	docker compose run --rm node npm update
 
 up: ## Create and start all containers
-	docker compose up
-	@echo "✅ Oasso is up and running"
-
-upd: ## Create and start all containers (in background)
 	docker compose up -d
 	@echo "✅ Oasso is up and running"
 
 upgrade: pull build ## Upgrade containers (pull and build)
+
+upgrade-dev: down copy-docker-compose-dev upgrade up composer-install-dev npm-install ## Upgrade Oasso with docker-compose.dev.yml
 
 pint: ## Run Laravel Pint
 	docker compose run --rm php ./vendor/bin/pint
@@ -83,5 +73,5 @@ pint: ## Run Laravel Pint
 pull: ## Pull all containers
 	docker compose pull
 
-setup-dev: copy-docker-compose-dev copy-env upgrade composer-install npm-install laravel-artisan-key-generate laravel-artisan-migrate
-	@echo "✅ Oasso is installed, edit .env and you can now run 'make up' to start the containers"
+setup-dev: copy-docker-compose-dev copy-env upgrade composer-install-dev npm-install laravel-artisan-key-generate laravel-artisan-migrate
+	@echo "✅ Oasso is installed, edit .env and you can now run 'make up' to start containers"
