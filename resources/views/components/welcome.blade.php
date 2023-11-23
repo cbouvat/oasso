@@ -3,7 +3,7 @@
     <div class="p-6 lg:p-8">
         <x-application-logo class="block h-12 w-auto" />
     </div>
-    <div class="bg-gray-200 dark:bg-gray-800 bg-opacity-25 p-6 lg:p-8">
+    <div class="bg-gray-200 bg-opacity-25 p-6 dark:bg-gray-800 lg:p-8">
         <h1 class="text-2xl font-medium text-gray-900 dark:text-white">
             Welcome
         </h1>
