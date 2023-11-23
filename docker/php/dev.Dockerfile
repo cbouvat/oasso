@@ -31,7 +31,7 @@ RUN docker-php-ext-install -j$(nproc) iconv gd mysqli pdo_pgsql pdo_mysql soap b
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy PHP config
-COPY php.ini /usr/local/etc/php/conf.d/zz-custom.ini
+COPY php.dev.ini /usr/local/etc/php/conf.d/zz-custom.ini
 
 CMD php artisan serve --host=0.0.0.0 --port=80
 

@@ -2,7 +2,7 @@ services:
   php:
     build:
       context: ./docker/php/
-      dockerfile: dev.Dockerfile
+      dockerfile: prod.Dockerfile
     ports:
       - 80:80
     volumes:
@@ -16,7 +16,7 @@ services:
     volumes:
       - ./:/app/
     working_dir: /app/
-    command: "npm run dev"
+    command: "npm run build"
   mariadb:
     image: mariadb:11
     ports:
@@ -28,8 +28,3 @@ services:
       MARIADB_PASSWORD: "${DB_PASSWORD}"
     volumes:
       - ./docker/mariadb/datas:/var/lib/mysql
-  mailpit:
-    image: axllent/mailpit:latest
-    ports:
-      - 1025:1025
-      - 8025:8025
