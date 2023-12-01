@@ -47,6 +47,22 @@ jobs:
           php artisan key:generate
       - name: Larastan
         run: ./vendor/bin/phpstan analyse
+  rector:
+    name: PHP - Rector
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo
+          coverage: none
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Rector
+        run: ./vendor/bin/rector process --dry-run
   eslint:
     name: JS - ESLint
     runs-on: ubuntu-latest
