@@ -60,7 +60,7 @@ npm-update: ## Npm update
 	docker compose run --rm node npm update
 
 rector: ## Run Rector
-	docker compose run --rm php ./vendor/bin/rector process --dry-run
+	docker compose run --rm php ./vendor/bin/rector process
 
 up: ## Create and start all containers
 	docker compose up -d
