@@ -62,7 +62,7 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
       - name: Rector
-        run: ./vendor/bin/rector process
+        run: ./vendor/bin/rector process --dry-run
   eslint:
     name: JS - ESLint
     runs-on: ubuntu-latest
