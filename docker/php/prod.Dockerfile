@@ -1,4 +1,7 @@
-FROM php:8.2-fpm
+FROM php:8.3-fpm
+
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Set working directory
 WORKDIR /app/
@@ -32,7 +35,3 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Copy PHP config
 COPY php.prod.ini /usr/local/etc/php/conf.d/zz-custom.ini
-
-CMD php artisan serve --host=0.0.0.0 --port=80
-
-EXPOSE 80
