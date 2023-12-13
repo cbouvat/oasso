@@ -50,6 +50,9 @@ laravel-artisan-migrate-seed: ## Laravel Artisan migrate:fresh --seed
 laravel-artisan-key-generate: ## Laravel Artisan key:generate
 	docker compose run --rm php php artisan key:generate
 
+larastan: ## Run Laravel Stan
+	docker compose run --rm php ./vendor/bin/phpstan analyse
+
 npm: ## Npm command add arg="command" to run a specific command (ex: make npm arg="install")
 	docker compose run --rm node npm $(arg)
 
