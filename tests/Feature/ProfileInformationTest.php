@@ -31,7 +31,7 @@ class ProfileInformationTest extends TestCase
             ->set('state', [
                 'first_name' => 'First Name',
                 'last_name' => 'Last Name',
-                'email' => 'test@example.com'
+                'email' => 'test@example.com',
             ])
             ->call('updateProfileInformation');
 
