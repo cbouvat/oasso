@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\CodingStyle\Rector\ArrowFunction\StaticArrowFunctionRector;
 use Rector\CodingStyle\Rector\Plus\UseIncrementAssignRector;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
@@ -89,5 +90,6 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         UseIncrementAssignRector::class,
         PostIncDecToPreIncDecRector::class,
+        StaticArrowFunctionRector::class,
     ]);
 };
