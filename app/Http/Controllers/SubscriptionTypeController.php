@@ -11,7 +11,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -19,7 +19,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -27,7 +27,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubscriptionTypeRequest $request)
+    public function store(StoreSubscriptionTypeRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionType $subscriptionType)
+    public function show(SubscriptionType $subscriptionType): void
     {
         //
     }
@@ -43,7 +43,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubscriptionType $subscriptionType)
+    public function edit(SubscriptionType $subscriptionType): void
     {
         //
     }
@@ -51,7 +51,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubscriptionTypeRequest $request, SubscriptionType $subscriptionType)
+    public function update(UpdateSubscriptionTypeRequest $request, SubscriptionType $subscriptionType): void
     {
         //
     }
@@ -59,7 +59,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubscriptionType $subscriptionType)
+    public function destroy(SubscriptionType $subscriptionType): void
     {
         //
     }

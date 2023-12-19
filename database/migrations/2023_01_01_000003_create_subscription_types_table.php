@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_types', function (Blueprint $table) {
+        Schema::create('subscription_types', static function (Blueprint $table): void {
             $table->id();
             $table->string('name', 100);
             $table->unsignedDecimal('amount', 8, 2);

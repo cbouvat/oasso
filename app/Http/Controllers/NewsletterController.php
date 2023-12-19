@@ -11,7 +11,7 @@ class NewsletterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): void
     {
         //
     }
@@ -19,7 +19,7 @@ class NewsletterController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -27,7 +27,7 @@ class NewsletterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreNewsletterRequest $request)
+    public function store(StoreNewsletterRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class NewsletterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Newsletter $newsletter)
+    public function show(Newsletter $newsletter): void
     {
         //
     }
@@ -43,7 +43,7 @@ class NewsletterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Newsletter $newsletter)
+    public function edit(Newsletter $newsletter): void
     {
         //
     }
@@ -51,7 +51,7 @@ class NewsletterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateNewsletterRequest $request, Newsletter $newsletter)
+    public function update(UpdateNewsletterRequest $request, Newsletter $newsletter): void
     {
         //
     }
@@ -59,7 +59,7 @@ class NewsletterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Newsletter $newsletter)
+    public function destroy(Newsletter $newsletter): void
     {
         //
     }

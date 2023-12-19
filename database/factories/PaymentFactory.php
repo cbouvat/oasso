@@ -29,7 +29,7 @@ class PaymentFactory extends Factory
             'amount' => fake()->randomFloat(2, 0, 1000),
         ];
 
-        if (rand(0, 1)) {
+        if (random_int(0, 1) !== 0) {
             $seed['subscription_id'] = Subscription::inRandomOrder()->first()->id;
         } else {
             $seed['gift_id'] = Gift::inRandomOrder()->first()->id;

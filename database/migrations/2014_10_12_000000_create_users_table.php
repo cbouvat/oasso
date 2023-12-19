@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', static function (Blueprint $table): void {
             $table->id();
             $table->enum('gender', ['male', 'female', 'other']);
             $table->string('last_name', 45);
