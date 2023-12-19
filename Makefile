@@ -82,7 +82,11 @@ pull: ## Pull all containers
 setup-dev: copy-docker-compose-dev copy-env upgrade composer-install-dev npm-install laravel-artisan-key-generate laravel-artisan-migrate
 	@echo "✅ Oasso is installed, edit .env and you can now run 'make up' to start containers"
 
+test : ## Run tests
+	docker compose run --rm php php artisan config:clear
+	docker compose run --rm php php artisan test
+
 tinker: ## Laravel Tinker
 	docker compose run --rm php php artisan tinker
 
-quality: eslint rector pint larastan ## Run all quality tools
+quality: eslint rector pint larastan test ## Run all quality tools
