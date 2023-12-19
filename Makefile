@@ -85,4 +85,4 @@ setup-dev: copy-docker-compose-dev copy-env upgrade composer-install-dev npm-ins
 tinker: ## Laravel Tinker
 	docker compose run --rm php php artisan tinker
 
-quality: eslint pint larastan rector ## Run all quality tools
+quality: eslint rector pint larastan ## Run all quality tools
