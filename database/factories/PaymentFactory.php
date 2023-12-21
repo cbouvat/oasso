@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Donation;
-use App\Models\PaymentType;
 use App\Models\Membership;
+use App\Models\PaymentType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
