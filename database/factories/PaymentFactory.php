@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Donation;
+use App\Models\Membership;
 use App\Models\PaymentType;
-use App\Models\MemberShip;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -30,7 +30,7 @@ class PaymentFactory extends Factory
         ];
 
         if (random_int(0, 1) !== 0) {
-            $seed['membership_id'] = MemberShip::inRandomOrder()->first()->id;
+            $seed['membership_id'] = Membership::inRandomOrder()->first()->id;
         } else {
             $seed['donation_id'] = Donation::inRandomOrder()->first()->id;
         }

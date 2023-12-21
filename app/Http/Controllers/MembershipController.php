@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMemberShipRequest;
-use App\Http\Requests\UpdateMemberShipRequest;
-use App\Models\MemberShip;
+use App\Http\Requests\StoreMembershipRequest;
+use App\Http\Requests\UpdateMembershipRequest;
+use App\Models\Membership;
 
-class MemberShipController extends Controller
+class MembershipController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class MemberShipController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMemberShipRequest $request): void
+    public function store(StoreMembershipRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class MemberShipController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MemberShip $membership): void
+    public function show(Membership $membership): void
     {
         //
     }
@@ -43,7 +43,7 @@ class MemberShipController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MemberShip $membership): void
+    public function edit(Membership $membership): void
     {
         //
     }
@@ -51,7 +51,7 @@ class MemberShipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberShipRequest $request, MemberShip $membership): void
+    public function update(UpdateMembershipRequest $request, Membership $membership): void
     {
         //
     }
@@ -59,7 +59,7 @@ class MemberShipController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MemberShip $membership): void
+    public function destroy(Membership $membership): void
     {
         //
     }

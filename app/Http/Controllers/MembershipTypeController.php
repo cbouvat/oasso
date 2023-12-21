@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMemberShipTypeRequest;
-use App\Http\Requests\UpdateMemberShipTypeRequest;
-use App\Models\MemberShipType;
+use App\Http\Requests\StoreMembershipTypeRequest;
+use App\Http\Requests\UpdateMembershipTypeRequest;
+use App\Models\MembershipType;
 
-class MemberShipTypeController extends Controller
+class MembershipTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class MemberShipTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMemberShipTypeRequest $request): void
+    public function store(StoreMembershipTypeRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class MemberShipTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MemberShipType $membershipType): void
+    public function show(MembershipType $membershipType): void
     {
         //
     }
@@ -43,7 +43,7 @@ class MemberShipTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MemberShipType $membershipType): void
+    public function edit(MembershipType $membershipType): void
     {
         //
     }
@@ -51,7 +51,7 @@ class MemberShipTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberShipTypeRequest $request, MemberShipType $membershipType): void
+    public function update(UpdateMembershipTypeRequest $request, MembershipType $membershipType): void
     {
         //
     }
@@ -59,7 +59,7 @@ class MemberShipTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MemberShipType $membershipType): void
+    public function destroy(MembershipType $membershipType): void
     {
         //
     }
