@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MemberListController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
-Route::get('/MembersList', HomeController::class)->name('home')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
+Route::get('/memberlist', [MemberListController::class, 'index'])->name('memberlist')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
