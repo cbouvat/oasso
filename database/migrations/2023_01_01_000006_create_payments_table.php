@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('payment_type_id')->constrained();
             $table->date('date');
             $table->foreignId('donation_id')->nullable()->constrained();
-            $table->foreignId('subscription_id')->nullable()->constrained();
+            $table->foreignId('membership_id')->nullable()->constrained();
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->string('external_reference', 250);
             $table->unsignedDecimal('amount', 8, 2);

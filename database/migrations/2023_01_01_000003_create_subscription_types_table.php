@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscription_types', static function (Blueprint $table): void {
+        Schema::create('membership_types', static function (Blueprint $table): void {
             $table->id();
             $table->string('name', 100);
             $table->unsignedDecimal('amount', 8, 2);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscription_types');
+        Schema::dropIfExists('membership_types');
     }
 };

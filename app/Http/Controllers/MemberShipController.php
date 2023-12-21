@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSubscriptionTypeRequest;
-use App\Http\Requests\UpdateSubscriptionTypeRequest;
-use App\Models\SubscriptionType;
+use App\Http\Requests\StoreMemberShipRequest;
+use App\Http\Requests\UpdateMemberShipRequest;
+use App\Models\MemberShip;
 
-class SubscriptionTypeController extends Controller
+class MemberShipController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubscriptionTypeRequest $request): void
+    public function store(StoreMemberShipRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SubscriptionType $subscriptionType): void
+    public function show(MemberShip $membership): void
     {
         //
     }
@@ -43,7 +43,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubscriptionType $subscriptionType): void
+    public function edit(MemberShip $membership): void
     {
         //
     }
@@ -51,7 +51,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubscriptionTypeRequest $request, SubscriptionType $subscriptionType): void
+    public function update(UpdateMemberShipRequest $request, MemberShip $membership): void
     {
         //
     }
@@ -59,7 +59,7 @@ class SubscriptionTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubscriptionType $subscriptionType): void
+    public function destroy(MemberShip $membership): void
     {
         //
     }

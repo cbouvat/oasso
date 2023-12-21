@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subscriptions', static function (Blueprint $table): void {
+        Schema::create('memberships', static function (Blueprint $table): void {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('subscription_type_id')->constrained();
+            $table->foreignId('membership_type_id')->constrained();
             $table->unsignedDecimal('amount', 8, 2);
             $table->date('date_start');
             $table->date('date_end');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subscriptions');
+        Schema::dropIfExists('memberships');
     }
 };

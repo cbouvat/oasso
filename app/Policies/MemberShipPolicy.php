@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\SubscriptionType;
+use App\Models\MemberShip;
 use App\Models\User;
 
-class SubscriptionTypePolicy
+class MemberShipPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class SubscriptionTypePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, SubscriptionType $subscriptionType): bool
+    public function view(User $user, MemberShip $membership): bool
     {
         return true;
     }
@@ -34,7 +34,7 @@ class SubscriptionTypePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, SubscriptionType $subscriptionType): bool
+    public function update(User $user, MemberShip $membership): bool
     {
         return true;
     }
@@ -42,7 +42,7 @@ class SubscriptionTypePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, SubscriptionType $subscriptionType): bool
+    public function delete(User $user, MemberShip $membership): bool
     {
         return true;
     }
@@ -50,7 +50,7 @@ class SubscriptionTypePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, SubscriptionType $subscriptionType): bool
+    public function restore(User $user, MemberShip $membership): bool
     {
         return true;
     }
@@ -58,7 +58,7 @@ class SubscriptionTypePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, SubscriptionType $subscriptionType): bool
+    public function forceDelete(User $user, MemberShip $membership): bool
     {
         return true;
     }
