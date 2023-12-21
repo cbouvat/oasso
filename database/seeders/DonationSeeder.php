@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Gift;
+use App\Models\Donation;
 use Illuminate\Database\Seeder;
 
-class GiftSeeder extends Seeder
+class DonationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Gift::factory(10)->create();
+        Donation::factory(10)->create();
     }
 }

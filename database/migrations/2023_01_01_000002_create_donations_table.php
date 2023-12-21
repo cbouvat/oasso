@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gifts', static function (Blueprint $table): void {
+        Schema::create('donations', static function (Blueprint $table): void {
             $table->id();
             $table->unsignedDecimal('amount', 8, 2);
             $table->foreignId('user_id')->constrained();
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gifts');
+        Schema::dropIfExists('donations');
     }
 };

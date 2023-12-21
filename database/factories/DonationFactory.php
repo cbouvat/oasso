@@ -6,9 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Gift>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Donation>
  */
-class GiftFactory extends Factory
+class DonationFactory extends Factory
 {
     /**
      * Define the model's default state.

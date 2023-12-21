@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('payment_type_id')->constrained();
             $table->date('date');
-            $table->foreignId('gift_id')->nullable()->constrained();
+            $table->foreignId('donation_id')->nullable()->constrained();
             $table->foreignId('subscription_id')->nullable()->constrained();
             $table->enum('status', ['pending', 'paid', 'failed'])->default('pending');
             $table->string('external_reference', 250);

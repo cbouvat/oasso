@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Gift;
+use App\Models\Donation;
 use App\Models\PaymentType;
 use App\Models\Subscription;
 use App\Models\User;
@@ -32,7 +32,7 @@ class PaymentFactory extends Factory
         if (random_int(0, 1) !== 0) {
             $seed['subscription_id'] = Subscription::inRandomOrder()->first()->id;
         } else {
-            $seed['gift_id'] = Gift::inRandomOrder()->first()->id;
+            $seed['donation_id'] = Donation::inRandomOrder()->first()->id;
         }
 
         return $seed;

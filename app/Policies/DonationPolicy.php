@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Gift;
+use App\Models\Donation;
 use App\Models\User;
 
-class GiftPolicy
+class DonationPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class GiftPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Gift $gift): bool
+    public function view(User $user, Donation $donation): bool
     {
         return true;
     }
@@ -34,7 +34,7 @@ class GiftPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Gift $gift): bool
+    public function update(User $user, Donation $donation): bool
     {
         return true;
     }
@@ -42,7 +42,7 @@ class GiftPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Gift $gift): bool
+    public function delete(User $user, Donation $donation): bool
     {
         return true;
     }
@@ -50,7 +50,7 @@ class GiftPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Gift $gift): bool
+    public function restore(User $user, Donation $donation): bool
     {
         return true;
     }
@@ -58,7 +58,7 @@ class GiftPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Gift $gift): bool
+    public function forceDelete(User $user, Donation $donation): bool
     {
         return true;
     }

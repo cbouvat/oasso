@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreGiftRequest;
-use App\Http\Requests\UpdateGiftRequest;
-use App\Models\Gift;
+use App\Http\Requests\StoreDonationRequest;
+use App\Http\Requests\UpdateDonationRequest;
+use App\Models\Donation;
 
-class GiftController extends Controller
+class DonationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class GiftController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreGiftRequest $request): void
+    public function store(StoreDonationRequest $request): void
     {
         //
     }
@@ -35,7 +35,7 @@ class GiftController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Gift $gift): void
+    public function show(Donation $donation): void
     {
         //
     }
@@ -43,7 +43,7 @@ class GiftController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gift $gift): void
+    public function edit(Donation $donation): void
     {
         //
     }
@@ -51,7 +51,7 @@ class GiftController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateGiftRequest $request, Gift $gift): void
+    public function update(UpdateDonationRequest $request, Donation $donation): void
     {
         //
     }
@@ -59,7 +59,7 @@ class GiftController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Gift $gift): void
+    public function destroy(Donation $donation): void
     {
         //
     }
