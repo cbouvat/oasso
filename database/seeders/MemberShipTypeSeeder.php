@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\MemberShipType;
+use App\Models\MembershipType;
 use Illuminate\Database\Seeder;
 
-class MemberShipTypeSeeder extends Seeder
+class MembershipTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        MemberShipType::factory(10)->create();
+        MembershipType::factory(10)->create();
     }
 }

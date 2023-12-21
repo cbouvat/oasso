@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DonationSeeder::class,
             NewsletterSeeder::class,
-            MemberShipTypeSeeder::class,
-            MemberShipSeeder::class,
+            MembershipTypeSeeder::class,
+            MembershipSeeder::class,
             PaymentTypeSeeder::class,
             PaymentSeeder::class,
         ]);
