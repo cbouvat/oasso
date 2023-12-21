@@ -79,7 +79,7 @@ pint: ## Run Laravel Pint
 pull: ## Pull all containers
 	docker compose pull
 
-setup-dev: copy-docker-compose-dev copy-env upgrade composer-install-dev npm-install laravel-artisan-key-generate laravel-artisan-migrate
+setup-dev: copy-docker-compose-dev copy-env upgrade composer-install-dev npm-install laravel-artisan-key-generate laravel-artisan-migrate-seed
 	@echo "✅ Oasso is installed, edit .env and you can now run 'make up' to start containers"
 
 test : ## Run tests
