@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMemberShipRequest;
-use App\Http\Requests\UpdateMemberShipRequest;
-use App\Models\MemberShip;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use Illuminate\View\View ;
 
 class MemberListController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a list of all User
      */
     public function index(): View
     {
-        return view('members');
+        $User = User::all();
+        return view('members', ['users' => $User]);
     }
 }
