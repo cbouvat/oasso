@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 
                 <!-- Display the list of users -->
-                <h3 class="text-3xl font-extrabold mb-6">List of Users</h3>
+                <h3 class="text-3xl font-extrabold mb-6">Liste des membres</h3>
                 <ul>
                     @foreach ($users as $user)
                         <li class="mb-4">
