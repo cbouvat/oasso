@@ -18,6 +18,9 @@
                     <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('member')">
                         {{ __('Membres') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('member.list') }}" :active="request()->routeIs('member')">
+                        {{ __('Liste des membres') }}
+                    </x-nav-link>
                 </div>
             </div>
 

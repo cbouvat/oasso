@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
-Route::get('/memberlist', [MemberListController::class, 'index'])->name('memberlist')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
+Route::get('/member/list', [MemberListController::class, 'index'])->name('member.list')->middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']);
