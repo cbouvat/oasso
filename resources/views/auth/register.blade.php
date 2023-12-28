@@ -10,6 +10,15 @@
             @csrf
 
             <div class="mt-4">
+                <x-label for="gender" value="{{ __('Gender') }}" />
+                <x-select class="block mt-1 w-full" id="gender">
+                    <option value="male">{{ __('Male') }}</option>
+                    <option value="female">{{ __('Female') }}</option>
+                    <option value="other">{{ __('Other') }}</option>
+                </x-select>
+            </div>
+
+            <div class="mt-4">
                 <x-label for="first_name" value="{{ __('First Name') }}" />
                 <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="given-name" />
             </div>
