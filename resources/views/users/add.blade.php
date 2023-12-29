@@ -1,13 +1,11 @@
 <x-app-layout>
-<div class="flex items-center justify-center ">
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
-        <form method="POST" action="{{ route('register') }}">
+<div class="h-screen flex items-center justify-center">
+    <div class="p-8 w-2/4 bg-slate-50 flex flex-col items-center rounded-md shadow-md">
+        <form method="POST" action="{{ route('register') }}"class="w-3/4">
             @csrf
 
             <div class="mt-4">
-                <x-label for="gender" value="{{ __('Gender') }}" />
+                <x-label for="gender" value="{{ __('Sexe') }}" />
                 <x-select class="block mt-1 w-full" id="gender">
                     <option value="male">{{ __('Male') }}</option>
                     <option value="female">{{ __('Female') }}</option>
@@ -16,13 +14,13 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="first_name" value="{{ __('First Name') }}" />
-                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="given-name" />
+                <x-label for="last_name" value="{{ __('Nom') }}" />
+                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autocomplete="family-name" />
             </div>
 
             <div class="mt-4">
-                <x-label for="last_name" value="{{ __('Last Name') }}" />
-                <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autocomplete="family-name" />
+                <x-label for="first_name" value="{{ __('Prénom') }}" />
+                <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="given-name" />
             </div>
 
             <div class="mt-4">
@@ -53,15 +51,15 @@
                 </div>
             @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+            <div class="flex items-center space-x-8 justify-end mt-4">
+                <x-button class='bg-red-600'>
+                    {{ __('Annuler') }}
+                </x-button>
 
-                <x-button class="ms-4">
-                    {{ __('Register') }}
+                <x-button>
+                    {{ __('Add') }}
                 </x-button>
             </div>
         </form>
-    </div>
-</x-app-layout>
+        </div>
+    </x-app-layout>
