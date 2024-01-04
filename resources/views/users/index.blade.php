@@ -21,7 +21,7 @@
                     @foreach ($users as $user)
                         <li class="mb-4">
                             <a href="{{ route('users.show', ['user' => $user]) }}" class="text-decoration-none">
-                                <div class="bg-gray-100 p-4 rounded-md shadow-md">
+                                <div class="bg-gray-100 p-4 rounded-md shadow-md hover:bg-gray-200">
                                     <h4 class="text-lg font-semibold mb-2">{{ $user->first_name }} {{ $user->last_name }}</h4>
                                     <p class="text-gray-600">{{ $user->email }}</p>
                                 </div>
