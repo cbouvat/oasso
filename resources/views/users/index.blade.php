@@ -10,7 +10,13 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 
                 <!-- Display the list of users -->
-                <h3 class="text-3xl font-extrabold mb-6">Liste des membres</h3>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-3xl font-extrabold">Liste des membres</h3>
+                    <a href="add" class="bg-slate-500 text-white px-4 py-2 rounded-md hover:bg-slate-600 focus:outline-none focus:ring focus:border-blue-300">
+                        Ajouter un utilisateur
+                    </a>
+                </div>
+
                 <ul>
                     @foreach ($users as $user)
                         <li class="mb-4">
@@ -26,3 +32,4 @@
         </div>
     </div>
 </x-app-layout>
+
