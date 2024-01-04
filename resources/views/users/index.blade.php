@@ -20,10 +20,12 @@
                 <ul>
                     @foreach ($users as $user)
                         <li class="mb-4">
-                            <div class="bg-gray-100 p-4 rounded-md shadow-md">
-                                <h4 class="text-lg font-semibold mb-2">{{ $user->first_name }} {{ $user->last_name }}</h4>
-                                <p class="text-gray-600">{{ $user->email }}</p>
-                            </div>
+                            <a href="{{ route('users.show', ['user' => $user]) }}" class="text-decoration-none">
+                                <div class="bg-gray-100 p-4 rounded-md shadow-md">
+                                    <h4 class="text-lg font-semibold mb-2">{{ $user->first_name }} {{ $user->last_name }}</h4>
+                                    <p class="text-gray-600">{{ $user->email }}</p>
+                                </div>
+                            </a>    
                         </li>
                     @endforeach
                 </ul>
