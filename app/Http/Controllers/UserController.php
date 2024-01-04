@@ -46,9 +46,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user): void
+    public function show(User $user)
     {
-        //
+        return view('users.profile', ['users' => $users]);
     }
 
     /**
