@@ -25,7 +25,7 @@
 
             <!-- Additional Profile Details -->
             <div class="mt-6">
-                <h4 class="text-2xl font-semibold mb-2">Additional Information</h4>
+                <h4 class="text-2xl font-semibold mb-2">{{__('Additional Information')}}</h4>
                 <p class="text-gray-600 text-lg">{{__('Location')}}: {{ $user->address }}, {{ $user->city }}</p>
                 <p class="text-gray-600 text-lg">{{__('Bio')}}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
