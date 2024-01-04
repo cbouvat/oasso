@@ -19,6 +19,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('', HomeController::class)->name('home');
     Route::resource('users', UserController::class);
     Route::view('add', 'users.add')->name('add');
-    Route::get('profile', [UserController::class, 'show']);
     Route::post('/create', [UserController::class, 'create'])->name('create');
 });
