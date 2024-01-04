@@ -1,12 +1,12 @@
 <x-app-layout>
 <div class="h-screen flex items-center justify-center">
     <div class="p-8 w-2/4 bg-slate-50 flex flex-col items-center rounded-md shadow-md">
-        <form method="POST" action="{{ route('register') }}"class="w-3/4">
+        <form method="POST" action="{{ route('create') }}"class="w-3/4">
             @csrf
 
             <div class="mt-4">
                 <x-label for="gender" value="{{ __('Sexe') }}" />
-                <x-select class="block mt-1 w-full" id="gender">
+                <x-select class="block mt-1 w-full" id="gender" name="gender">
                     <option value="male">{{ __('Male') }}</option>
                     <option value="female">{{ __('Female') }}</option>
                     <option value="other">{{ __('Other') }}</option>
