@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::query()->paginate(10); 
+        $users = User::query()->paginate(10);
 
         return view('users.index', ['users' => $users]);
     }
@@ -24,7 +24,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $user=User::create([
+        User::create([
             'gender' => $request->input('gender'),
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
@@ -32,7 +32,7 @@ class UserController extends Controller
             'password' => bcrypt($request->input('password')),
         ]);
 
-        return redirect()->route('home')->with('success', 'Registration successful!');
+        return to_route('home')->with('success', 'Registration successful!');
     }
 
     /**
