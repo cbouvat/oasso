@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::query()->paginate(10);
+        $users = User::paginate(10);
 
         return view('users.index', ['users' => $users]);
     }
@@ -22,25 +23,25 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(): View
+    {
+        return view('users.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreUserRequest $request)
     {
         User::create([
             'gender' => $request->input('gender'),
             'last_name' => $request->input('last_name'),
             'first_name' => $request->input('first_name'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
+            'password' => Hash::make($request->input('password')),
         ]);
 
-        return to_route('home')->with('success', 'Registration successful!');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request): void
-    {
-        //
+        return to_route('users.index')->with('success', 'Registration successful!');
     }
 
     /**
@@ -48,7 +49,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.profile', ['user' => $user]);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
