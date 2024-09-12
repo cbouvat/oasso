@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('contact_name')->nullable();
             $table->string('contact_phone')->nullable();
             $table->integer('nb_children')->nullable();
-            $table->foreignId('parent_id')->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
