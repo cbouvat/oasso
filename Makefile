@@ -65,6 +65,8 @@ npm-update: ## Npm update
 rector: ## Run Rector
 	docker compose run --rm php ./vendor/bin/rector process
 
+restart: down up ## Restart all containers
+
 up: ## Create and start all containers
 	docker compose up -d
 	@echo "✅ Oasso is up and running"
