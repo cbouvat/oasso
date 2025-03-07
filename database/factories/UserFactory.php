@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -11,6 +12,11 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -18,22 +24,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'gender' => fake()->randomElement(['male', 'female', 'other']),
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'date_of_birth' => fake()->dateTime(),
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'newsletter' => fake()->boolean(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
+            'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'address' => fake()->streetAddress(),
-            'postal_code' => fake()->postcode(),
-            'city' => fake()->city(),
-            'phone' => fake()->e164PhoneNumber(),
-            'profile_photo_path' => null,
         ];
     }
 
@@ -42,7 +37,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes): array => [
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
