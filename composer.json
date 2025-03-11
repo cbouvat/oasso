@@ -1,32 +1,31 @@
 {
-    "name": "cbouvat/oasso",
-    "version": "1.0.0",
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/livewire-starter-kit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The official Laravel starter kit for Livewire.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "filament/filament": "^3.2",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^10.10",
-        "laravel/jetstream": "^4.0",
-        "laravel/sanctum": "^3.2",
-        "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0"
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1",
+        "livewire/flux": "^2.0",
+        "livewire/volt": "^1.6.7"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.13",
-        "driftingly/rector-laravel": "^1.1",
-        "fakerphp/faker": "^1.9.1",
-        "larastan/larastan": "^2.9",
-        "laravel-lang/common": "^5.4",
-        "laravel/pint": "^1.15",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.1",
-        "rector/rector": "^1.0",
-        "spatie/laravel-ignition": "^2.0"
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.18",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-laravel": "^3.1",
+        "larastan/larastan": "^3.0",
+        "rector/rector": "^2.0"
     },
     "autoload": {
         "psr-4": {
@@ -43,8 +42,7 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan filament:upgrade"
+            "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -53,7 +51,13 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
         ]
     },
     "extra": {

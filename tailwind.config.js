@@ -1,14 +1,11 @@
-import forms from '@tailwindcss/forms'
-import typography from '@tailwindcss/typography'
+import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
-    './vendor/laravel/jetstream/**/*.blade.php',
-    './storage/framework/views/*.php',
-    './resources/views/**/*.blade.php'
-  ],
-
-  plugins: [forms, typography]
-}
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+    ],
+    plugins: [forms],
+};
